@@ -1,0 +1,18 @@
+name: SurvivalClasicBasis
+version: '${project.version}'
+main: net.eternaln.survivalclasicbasis.SurvivalClasicBasis
+api-version: 1.13
+authors: [ Aitooor, EternalTeam ]
+description: Simple basis plugin for Eternal Network Survival Clasic
+
+softdepend:
+  - PlaceholderAPI
+
+commands:
+  basis:
+    aliases:
+      - survivalclasicbasis
+      - basics
+  itemc:
+    aliases:
+      - itemsclasic

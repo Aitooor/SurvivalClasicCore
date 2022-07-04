@@ -1,0 +1,7 @@
+# DON'T MODIFY Spawn Location
+LOCATION:
+  SPAWN:
+
+## Messages
+NOPERMISSIONS:
+  PREFIX: "&b&lETERNAL &cNo tienes permisos para hacer eso"
