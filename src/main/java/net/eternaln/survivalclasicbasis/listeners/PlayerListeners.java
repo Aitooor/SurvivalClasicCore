@@ -94,11 +94,11 @@ public class PlayerListeners implements Listener {
     }
     
     private void tpSpawn(Player player) {
-        if(config.getString("LOCATION.SPAWN") == null) {
+        if(config.getString("spawn-location") == null) {
             return;
         }
 
-        player.teleport(LocationUtil.parseToLocation(config.getString("LOCATION.SPAWN")));
+        player.teleport(LocationUtil.parseToLocation(config.getString("spawn-location")));
     }
 
 }

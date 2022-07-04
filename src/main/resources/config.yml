@@ -1,7 +1,16 @@
 # DON'T MODIFY Spawn Location
-LOCATION:
-  SPAWN:
+spawn-location:
 
 ## Messages
-NOPERMISSIONS:
-  PREFIX: "&b&lETERNAL &cNo tienes permisos para hacer eso"
+prefix: "&6&lETERNAL &r"
+no-permissions: "&cNo tienes permisos para hacer eso"
+reload: "&aConfig recargada"
+set-spawn: "&a"
+item:
+  help:
+    - "&6&lETERNAL &7Ayuda Items"
+    - ""
+    - "&b/itemc give &7(gold/plate) (coin/fragment)"
+    - "&b/objetoc dar &7(oro/plata) (moneda/fragmento)"
+    - ""
+  gived: "&aObjeto entregado"

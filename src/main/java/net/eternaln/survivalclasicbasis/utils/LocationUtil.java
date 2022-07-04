@@ -1,13 +1,11 @@
 package net.eternaln.survivalclasicbasis.utils;
 
-import lombok.experimental.UtilityClass;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 
-@UtilityClass
 public class LocationUtil {
 
-    public String parseToString(Location location) {
+    public static String parseToString(Location location) {
         return location.getX() + ", "
                 + location.getY() + ", "
                 + location.getZ() + ", "
@@ -16,7 +14,7 @@ public class LocationUtil {
                 + location.getWorld().getName();
     }
 
-    public Location parseToLocation(String string) {
+    public static Location parseToLocation(String string) {
         String[] data = string.split(", ");
         try {
             double x = Double.parseDouble(data[0]);

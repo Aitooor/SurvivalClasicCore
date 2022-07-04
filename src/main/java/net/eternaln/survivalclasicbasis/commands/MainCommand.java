@@ -7,6 +7,7 @@ import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
 public class MainCommand implements CommandExecutor {
@@ -19,6 +20,8 @@ public class MainCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        FileConfiguration config = plugin.getConfig();
+        
         if (!(sender instanceof Player)) {
             if (args.length == 0) return false;
             if (args[0].equalsIgnoreCase("reload")) {
@@ -27,7 +30,7 @@ public class MainCommand implements CommandExecutor {
                 return true;
             }
             if(args[0].equalsIgnoreCase("setspawn")) {
-                Utils.log("Necesitas ser un jugador para hacer eso.");
+                Utils.log("&cDebes ser un jugador para hacer eso");
                 return true;
             }
             return false;
@@ -36,28 +39,29 @@ public class MainCommand implements CommandExecutor {
         Player player = (Player) sender;
 
         if (!player.hasPermission("survivalclasicbasis.reload")) {
-            Utils.send(player, "&cNo puedes hacer eso.");
+            Utils.send(player, config.getString("no-permissions"));
             return true;
         }
 
         if (args.length == 0) return false;
 
         if (args[0].equalsIgnoreCase("reload")) {
-            Utils.send(player, "&cConfig recargada.");
+            Utils.send(player, config.getString("reload"));
             plugin.reloadConfig();
             return true;
         }
 
         if (!player.hasPermission("survivalclasicbasis.setspawn")) {
+            Utils.send(player, config.getString("no-permissions"));
             return true;
         }
 
         if(args[0].equalsIgnoreCase("setspawn")) {
-            plugin.getInstance().getConfig().set("LOCATION.SPAWN", LocationUtil.parseToString(player.getLocation()));
+            plugin.getInstance().getConfig().set("spawn-location", LocationUtil.parseToString(player.getLocation()));
             plugin.getInstance().saveConfig();
             plugin.getInstance().reloadConfig();
 
-            player.sendMessage(Utils.ct(Utils.getPrefixGame() + "&aEl spawn ha sido establecido."));
+            Utils.send(player, config.getString("set-spawn"));
             player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1.0f, 1.0f);
             return true;
         }

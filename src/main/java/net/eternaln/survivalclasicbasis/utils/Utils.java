@@ -4,9 +4,11 @@ import net.eternaln.survivalclasicbasis.SurvivalClasicBasis;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
-import org.jetbrains.annotations.NotNull;
+import org.bukkit.configuration.file.FileConfiguration;
 
 public interface Utils {
+
+    FileConfiguration config = SurvivalClasicBasis.getInstance().getConfig();
 
     static void log(String... args){
         for(String str : args)
@@ -19,7 +21,7 @@ public interface Utils {
         }
     }
 
-    static @NotNull String ct(String source){
+    static String ct(String source){
         return ChatColor.translateAlternateColorCodes('&', source);
     }
 
@@ -30,7 +32,7 @@ public interface Utils {
     }
 
     static String getPrefixGame(){
-        return  ct("&6&lETERNAL &r");
+        return  ct(config.getString("prefix"));
     }
 
     static String getPrefix(){

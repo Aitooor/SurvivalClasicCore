@@ -16,3 +16,4 @@ commands:
   itemc:
     aliases:
       - itemsclasic
+      - objetoc

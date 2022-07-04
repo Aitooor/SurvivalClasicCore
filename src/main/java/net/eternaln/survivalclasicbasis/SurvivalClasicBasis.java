@@ -1,17 +1,18 @@
 package net.eternaln.survivalclasicbasis;
 
-import lombok.Getter;
 import net.eternaln.survivalclasicbasis.commands.ItemCommand;
 import net.eternaln.survivalclasicbasis.commands.MainCommand;
 import net.eternaln.survivalclasicbasis.listeners.PlayerListeners;
 import net.eternaln.survivalclasicbasis.utils.Utils;
 import org.bukkit.Bukkit;
-import org.bukkit.entity.Item;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class SurvivalClasicBasis extends JavaPlugin {
 
-    @Getter private static SurvivalClasicBasis instance;
+    private static SurvivalClasicBasis instance;
+    public static SurvivalClasicBasis getInstance() {
+        return instance;
+    }
 
     @Override
     public void onEnable() {
@@ -30,6 +31,8 @@ public final class SurvivalClasicBasis extends JavaPlugin {
 
         this.getCommand("basis").setExecutor(new MainCommand(this));
         this.getCommand("itemc").setExecutor(new ItemCommand(this));
+
+        Utils.log("&aENABLED CORRECTLY");
 
     }
 
