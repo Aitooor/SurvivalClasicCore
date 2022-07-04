@@ -6,6 +6,10 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public interface Utils {
 
     FileConfiguration config = SurvivalClasicBasis.getInstance().getConfig();
@@ -25,9 +29,18 @@ public interface Utils {
         return ChatColor.translateAlternateColorCodes('&', source);
     }
 
+    public static List<String> formatList(List<String> s) {
+        return s.stream().map(Utils::ct).collect(Collectors.toList());
+    }
+
     static String send(CommandSender sender, String... args){
         for(String str : args)
             sender.sendMessage(ct(getPrefixGame() + str));
+        return "";
+    }
+    static String sendNoPrefix(CommandSender sender, String... args){
+        for(String str : args)
+            sender.sendMessage(ct(str));
         return "";
     }
 

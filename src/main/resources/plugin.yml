@@ -17,3 +17,4 @@ commands:
     aliases:
       - itemsclasic
       - objetoc
+  spawn:

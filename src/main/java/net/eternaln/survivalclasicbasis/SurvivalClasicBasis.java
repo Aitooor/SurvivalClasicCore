@@ -2,6 +2,7 @@ package net.eternaln.survivalclasicbasis;
 
 import net.eternaln.survivalclasicbasis.commands.ItemCommand;
 import net.eternaln.survivalclasicbasis.commands.MainCommand;
+import net.eternaln.survivalclasicbasis.commands.SpawnCommand;
 import net.eternaln.survivalclasicbasis.listeners.PlayerListeners;
 import net.eternaln.survivalclasicbasis.utils.Utils;
 import org.bukkit.Bukkit;
@@ -31,6 +32,7 @@ public final class SurvivalClasicBasis extends JavaPlugin {
 
         this.getCommand("basis").setExecutor(new MainCommand(this));
         this.getCommand("itemc").setExecutor(new ItemCommand(this));
+        this.getCommand("spawn").setExecutor(new SpawnCommand(this));
 
         Utils.log("&aENABLED CORRECTLY");
 

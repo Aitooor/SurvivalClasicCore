@@ -11,8 +11,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.util.ArrayList;
-
 public class ItemCommand implements CommandExecutor {
 
     private final SurvivalClasicBasis plugin;
@@ -44,7 +42,7 @@ public class ItemCommand implements CommandExecutor {
         }
 
         if (args.length == 0) {
-            Utils.send(player, String.valueOf(config.getStringList("item.help")));
+            Utils.sendNoPrefix(player, config.getString("item.help"));
             return false;
         }
 
@@ -55,10 +53,8 @@ public class ItemCommand implements CommandExecutor {
 
                     ItemStack item = new ItemStack(Material.RAW_GOLD, 1);
                     ItemMeta itemmeta = item.getItemMeta();
-                    itemmeta.setDisplayName(Utils.ct("&f&lMoneda de &6&lORO"));
-                    ArrayList<String> lore = new ArrayList<String>();
-                    lore.add("Test");
-                    itemmeta.setLore(lore);
+                    itemmeta.setDisplayName(Utils.ct(config.getString("item.gold.coin.name")));
+                    itemmeta.setLore(Utils.formatList(config.getStringList("item.gold.coin.lore")));
                     item.setItemMeta(itemmeta);
 
                     player.getInventory().addItem(new ItemStack(item));
@@ -68,10 +64,8 @@ public class ItemCommand implements CommandExecutor {
 
                     ItemStack item = new ItemStack(Material.GOLD_NUGGET, 1);
                     ItemMeta itemmeta = item.getItemMeta();
-                    itemmeta.setDisplayName(Utils.ct("&f&lFragmento de &6&lORO"));
-                    ArrayList<String> lore = new ArrayList<String>();
-                    lore.add("Test");
-                    itemmeta.setLore(lore);
+                    itemmeta.setDisplayName(Utils.ct(config.getString("item.gold.fragment.name")));
+                    itemmeta.setLore(Utils.formatList(config.getStringList("item.gold.fragment.lore")));
                     item.setItemMeta(itemmeta);
 
                     player.getInventory().addItem(new ItemStack(item));
@@ -83,10 +77,8 @@ public class ItemCommand implements CommandExecutor {
 
                     ItemStack item = new ItemStack(Material.RAW_IRON, 1);
                     ItemMeta itemmeta = item.getItemMeta();
-                    itemmeta.setDisplayName(Utils.ct("&f&lMoneda de &7&lPLATA"));
-                    ArrayList<String> lore = new ArrayList<String>();
-                    lore.add(Utils.ct("&f&lMoneda de &6&lORO"));
-                    itemmeta.setLore(lore);
+                    itemmeta.setDisplayName(Utils.ct(config.getString("item.plate.coin.name")));
+                    itemmeta.setLore(Utils.formatList(config.getStringList("item.plate.coin.lore")));
                     item.setItemMeta(itemmeta);
 
                     player.getInventory().addItem(new ItemStack(item));
@@ -96,10 +88,8 @@ public class ItemCommand implements CommandExecutor {
 
                     ItemStack item = new ItemStack(Material.IRON_NUGGET, 1);
                     ItemMeta itemmeta = item.getItemMeta();
-                    itemmeta.setDisplayName(Utils.ct("&f&lFragmento de &7&lPLATA"));
-                    ArrayList<String> lore = new ArrayList<String>();
-                    lore.add("Test");
-                    itemmeta.setLore(lore);
+                    itemmeta.setDisplayName(Utils.ct(config.getString("item.plate.coin.name")));
+                    itemmeta.setLore(Utils.formatList(config.getStringList("item.plate.fragment.lore")));
                     item.setItemMeta(itemmeta);
 
                     player.getInventory().addItem(new ItemStack(item));
