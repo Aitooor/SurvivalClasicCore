@@ -1,6 +1,7 @@
 package net.eternaln.survivalclasicbasis.commands;
 
 import co.aikar.commands.BaseCommand;
+import co.aikar.commands.annotation.CommandAlias;
 import co.aikar.commands.annotation.Default;
 import net.eternaln.survivalclasicbasis.SurvivalClasicBasis;
 import net.eternaln.survivalclasicbasis.utils.Cooldown;
@@ -9,6 +10,7 @@ import org.bukkit.entity.Player;
 
 import java.util.UUID;
 
+@CommandAlias("spawn|spawnpoint")
 public class SpawnCommand extends BaseCommand {
 
     private final Cooldown<UUID> cooldown = new Cooldown<>(SurvivalClasicBasis.getConfiguration().getCmdCooldown());
