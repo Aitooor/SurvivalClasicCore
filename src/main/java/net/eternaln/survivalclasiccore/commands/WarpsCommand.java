@@ -40,6 +40,13 @@ public class WarpsCommand extends BaseCommand {
         sender.teleport(LocationUtil.parseToLocation(warp));
     }
 
+    @Subcommand("list|lista")
+    public void listWarps(Player sender) {
+        Object warps = SurvivalClasicCore.getWarpsFile().getConfig() + "\n";
+
+        sender.sendMessage("&6&lETERNAL &fLista de Warps \n" + warps);
+    }
+
     @Subcommand("set|establece|add|agregar")
     @CommandPermission("survivalclasiccore.warps.set")
     public void SetWarp(Player sender, String name) {
