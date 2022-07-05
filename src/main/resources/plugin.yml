@@ -4,6 +4,8 @@ main: net.eternaln.survivalclasicbasis.SurvivalClasicBasis
 api-version: 1.19
 authors: [ Aitooor, EternalTeam, Vicen621 ]
 description: Simple basis plugin for Eternal Network Survival Clasic
-
 softdepend:
   - PlaceholderAPI
+libraries:
+  - org.projectlombok:lombok:1.18.24
+  - com.github.cryptomorin:XSeries:9.0.0
