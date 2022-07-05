@@ -26,13 +26,13 @@ public class SocialSpyListeners implements Listener {
     FileConfiguration config = SurvivalClasicBasis.getInstance().getConfig();
 
     @EventHandler
-    public void onCommandPrePr(PlayerCommandPreprocessEvent e){
-        Player pl = e.getPlayer();
+    public void onCommandPrePr(PlayerCommandPreprocessEvent event){
+        Player player = event.getPlayer();
         if (plugin.socialSpyToggle) {
             for (Player p : plugin.getServer().getOnlinePlayers()) {
-                if (plugin.reply.containsKey(pl.getUniqueId())) {
+                if (plugin.reply.containsKey(player.getUniqueId())) {
                     if (p.hasPermission("survivalclasicbasis.socialspy")) {
-                        p.sendMessage(pl.getName() + " said " + e.getMessage());
+                        p.sendMessage(player.getName() + " said " + event.getMessage());
                     }
                 }
             }
