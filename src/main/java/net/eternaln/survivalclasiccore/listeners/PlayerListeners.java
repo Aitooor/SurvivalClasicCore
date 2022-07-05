@@ -25,7 +25,11 @@ public class PlayerListeners implements Listener {
         String rank = "%vault_prefix% ";
         rank = PlaceholderAPI.setPlaceholders(event.getPlayer(), rank);
 
-
+        if(rank == null) {
+            rank = "";
+        } else {
+            rank = rank.replace("%vault_prefix%", "");
+        }
         event.setFormat(Utils.ct(rank + player.getDisplayName() + "&7: &r" + event.getMessage()));
     }
 
