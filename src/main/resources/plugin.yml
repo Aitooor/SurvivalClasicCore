@@ -2,7 +2,7 @@ name: SurvivalClasicBasis
 version: '${project.version}'
 main: net.eternaln.survivalclasicbasis.SurvivalClasicBasis
 api-version: 1.19
-authors: [ Aitooor, EternalTeam ]
+authors: [ Aitooor, EternalTeam, Vicen621 ]
 description: Simple basis plugin for Eternal Network Survival Clasic
 
 softdepend:
