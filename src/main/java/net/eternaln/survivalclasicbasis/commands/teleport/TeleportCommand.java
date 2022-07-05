@@ -22,12 +22,15 @@ public class TeleportCommand extends BaseCommand {
     public void teleport(Player sender, String target) {
         Player targetPlayer = Bukkit.getPlayer(target);
 
-        if(target == null) {
+        if(!(targetPlayer == null)) {
+            if(!(targetPlayer == sender)) {
+                sender.teleport(targetPlayer.getLocation());
+            } else {
+                Utils.send(sender, "&cNo puedes teletransportarte a ti mismo");
+            }
+        } else{
             Utils.send(sender, "&cJugador no encontrado");
-            return;
         }
-
-        sender.teleport(targetPlayer.getLocation());
     }
 
     @Subcommand("all|todos")
