@@ -35,6 +35,14 @@ public class Configuration extends BukkitYamlConfiguration {
             "&b/objetoc dar &7(oro/plata) (moneda/fragmento)",
             "&8&m-----------------------------------------"
     );
+    private List<String> warpHelp = Arrays.asList(
+            "&8&m-----------------------------------------",
+            "&6&lETERNAL &7Warps Help",
+            "&r",
+            "&b/warp &7(nombre del warp)",
+            "&b/warp lista|list",
+            "&8&m-----------------------------------------"
+    );
 
     @Comment({"", "Items"})
     private Items items = new Items();

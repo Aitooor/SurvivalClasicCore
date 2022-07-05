@@ -3,6 +3,7 @@ package net.eternaln.survivalclasicbasis.commands;
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.*;
 import net.eternaln.survivalclasicbasis.SurvivalClasicBasis;
+import net.eternaln.survivalclasicbasis.utils.LocationUtil;
 import net.eternaln.survivalclasicbasis.utils.Utils;
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
@@ -13,7 +14,13 @@ import org.bukkit.entity.Player;
 @CommandPermission("survivalclasicbasis.warps")
 public class WarpsCommand extends BaseCommand {
 
-    @HelpCommand @Default @CatchUnknown
+    @Default
+    public void onWarp(Player sender, String name) {
+        String warp = SurvivalClasicBasis.getInstance().getWarpsConfig().getString(name.toLowerCase());
+        sender.teleport(LocationUtil.parseToLocation(warp));
+    }
+
+    @HelpCommand @CatchUnknown
     public void onHelp(CommandSender sender) {
         Utils.sendNoPrefix(sender, SurvivalClasicBasis.getConfiguration().getWarpHelp().toArray(String[]::new));
     }
@@ -31,7 +38,8 @@ public class WarpsCommand extends BaseCommand {
         cs.set("Y", loc.getY());
         cs.set("Z", loc.getZ());
         cs.set("world", loc.getWorld().getName());
-        SurvivalClasicBasis.getInstance().getWarpsConfig().getString(name.toLowerCase());
+        String warpsConfig = SurvivalClasicBasis.getInstance().getWarpsConfig().getString(name.toLowerCase());
+        SurvivalClasicBasis.getInstance().getWarpsConfig().set(name.toLowerCase(), warpsConfig);
         // Save all the necessary components of the location in this section, and save the config
         player.sendMessage("Created warp: " + name + " at your location");
 

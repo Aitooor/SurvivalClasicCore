@@ -1,36 +1,9 @@
 name: SurvivalClasicBasis
 version: '${project.version}'
 main: net.eternaln.survivalclasicbasis.SurvivalClasicBasis
-api-version: 1.13
+api-version: 1.19
 authors: [ Aitooor, EternalTeam ]
 description: Simple basis plugin for Eternal Network Survival Clasic
 
 softdepend:
   - PlaceholderAPI
-
-commands:
-  basis:
-    aliases:
-      - survivalclasicbasis
-      - basics
-  itemc:
-    aliases:
-      - itemsclasic
-      - objetoc
-  spawn:
-    aliases:
-      - spawnpoint
-  msg:
-    aliases:
-      - tell
-      - hablar
-      - md
-      - pm
-  reply:
-    aliases:
-      - r
-      - responder
-      - contestar
-  socialspy:
-    aliases:
-      - revisarchat
