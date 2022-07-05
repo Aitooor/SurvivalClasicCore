@@ -6,7 +6,6 @@ import lombok.Getter;
 import net.eternaln.survivalclasicbasis.annotations.RegisterExecutor;
 import net.eternaln.survivalclasicbasis.data.Configuration;
 import net.eternaln.survivalclasicbasis.data.WarpsFile;
-import net.eternaln.survivalclasicbasis.listeners.PlayerListeners;
 import net.eternaln.survivalclasicbasis.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
