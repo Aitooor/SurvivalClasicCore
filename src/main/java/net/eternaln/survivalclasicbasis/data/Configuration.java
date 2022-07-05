@@ -5,6 +5,7 @@ import de.exlll.configlib.annotation.Convert;
 import de.exlll.configlib.configs.yaml.BukkitYamlConfiguration;
 import de.exlll.configlib.format.FieldNameFormatters;
 import lombok.Getter;
+import lombok.Setter;
 import net.eternaln.survivalclasicbasis.SurvivalClasicBasis;
 import net.eternaln.survivalclasicbasis.data.converters.LocationStringConverter;
 import net.eternaln.survivalclasicbasis.data.items.Items;
@@ -18,16 +19,16 @@ import java.util.List;
 @Getter
 public class Configuration extends BukkitYamlConfiguration {
 
-    private int cmdCooldown = 2;
+    public int cmdCooldown = 2;
 
     @Comment({"", "Messages"})
-    private String prefix = "&6&lETERNAL &r";
-    private String noPermission = "&cNo tienes permisos para hacer eso";
-    private String reload = "&aConfig recargada";
-    private String tpSpawn = "&aTeletransportado al spawn";
-    private String setSpawn = "&aSpawn establecido";
-    private String itemGived = "&aObjeto Entregado";
-    private List<String> itemHelp = Arrays.asList(
+    public String prefix = "&6&lETERNAL &r";
+    public String noPermission = "&cNo tienes permisos para hacer eso";
+    public String reload = "&aConfig recargada";
+    public String tpSpawn = "&aTeletransportado al spawn";
+    public String setSpawn = "&aSpawn establecido";
+    public String itemGived = "&aObjeto Entregado";
+    public List<String> itemHelp = Arrays.asList(
             "&8&m-----------------------------------------",
             "&6&lETERNAL &7Ayuda Items",
             "&r",
@@ -35,7 +36,7 @@ public class Configuration extends BukkitYamlConfiguration {
             "&b/objetoc dar &7(oro/plata) (moneda/fragmento)",
             "&8&m-----------------------------------------"
     );
-    private List<String> warpHelp = Arrays.asList(
+    public List<String> warpHelp = Arrays.asList(
             "&8&m-----------------------------------------",
             "&6&lETERNAL &7Warps Help",
             "&r",
@@ -45,16 +46,18 @@ public class Configuration extends BukkitYamlConfiguration {
     );
 
     @Comment({"", "Items"})
-    private Items items = new Items();
+    public Items items = new Items();
 
     @Convert(LocationStringConverter.class)
     @Comment({"", "DON'T MODIFY SPAWN LOCATION"})
-    private Location spawnLocation = new Location(Bukkit.getWorld("world"), 0, 128, 0);
+    @Setter
+    public Location spawnLocation = new Location(Bukkit.getWorld("world"), 0, 128, 0);
 
     public Configuration() {
         super(
                 new File(SurvivalClasicBasis.getInstance().getDataFolder(), "config.yml").toPath(),
                 BukkitYamlProperties.builder().setFormatter(FieldNameFormatters.LOWER_UNDERSCORE).build()
         );
+        this.loadAndSave();
     }
 }
