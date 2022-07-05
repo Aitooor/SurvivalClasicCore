@@ -1,12 +1,13 @@
 package net.eternaln.survivalclasicbasis;
 
-import net.eternaln.survivalclasicbasis.commands.ItemCommand;
-import net.eternaln.survivalclasicbasis.commands.MainCommand;
-import net.eternaln.survivalclasicbasis.commands.SpawnCommand;
+import net.eternaln.survivalclasicbasis.commands.*;
 import net.eternaln.survivalclasicbasis.listeners.PlayerListeners;
 import net.eternaln.survivalclasicbasis.utils.Utils;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.*;
 
 public final class SurvivalClasicBasis extends JavaPlugin {
 
@@ -14,6 +15,9 @@ public final class SurvivalClasicBasis extends JavaPlugin {
     public static SurvivalClasicBasis getInstance() {
         return instance;
     }
+
+    public Map<Player, Player> reply = new HashMap<Player, Player>();
+    public boolean socialSpyToggle = false;
 
     @Override
     public void onEnable() {
@@ -33,6 +37,9 @@ public final class SurvivalClasicBasis extends JavaPlugin {
         this.getCommand("basis").setExecutor(new MainCommand(this));
         this.getCommand("itemc").setExecutor(new ItemCommand(this));
         this.getCommand("spawn").setExecutor(new SpawnCommand(this));
+        this.getCommand("msg").setExecutor(new MessageCommand(this));
+        this.getCommand("reply").setExecutor(new MessageCommand(this));
+        this.getCommand("socialspy").setExecutor(new SocialSpyCommand(this));
 
         Utils.log("&aENABLED CORRECTLY");
 

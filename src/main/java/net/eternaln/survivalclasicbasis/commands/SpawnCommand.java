@@ -38,6 +38,11 @@ public class SpawnCommand implements CommandExecutor {
         if (args.length == 0) {
             int timeLeft = cooldownManager.getCooldown(player.getUniqueId());
 
+            if(config.getString("spawn-location") == null) {
+                Utils.send(player, "&cAvisa a un staff");
+                return true;
+            }
+
             if (!player.hasPermission("survivalclasicbasis.cooldown.bypass")) {
                 if(LocationUtil.parseToLocation(config.getString("spawn-location")) != null) {
                     if (timeLeft == 0) {
@@ -57,10 +62,9 @@ public class SpawnCommand implements CommandExecutor {
 
                         return false;
                     } else {
-                        player.sendMessage(Utils.ct("&fDebes esperar &c" + timeLeft + " segundos"));
+                        player.sendMessage(Utils.ct("&cDebes esperar &b" + timeLeft + " &csegundos"));
                     }
                 }
-                player.sendMessage(Utils.ct("&cAvisa a un staff"));
                 return true;
             } else {
                 player.teleport(LocationUtil.parseToLocation(config.getString("spawn-location")));

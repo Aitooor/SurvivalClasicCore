@@ -18,3 +18,19 @@ commands:
       - itemsclasic
       - objetoc
   spawn:
+    aliases:
+      - spawnpoint
+  msg:
+    aliases:
+      - tell
+      - hablar
+      - md
+      - pm
+  reply:
+    aliases:
+      - r
+      - responder
+      - contestar
+  socialspy:
+    aliases:
+      - revisarchat

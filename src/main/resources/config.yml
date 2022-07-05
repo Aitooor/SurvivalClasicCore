@@ -1,6 +1,3 @@
-# DON'T MODIFY Spawn Location
-spawn-location:
-
 cmd-cooldown: 2
 
 ## Messages
@@ -46,3 +43,6 @@ item:
         - "&f"
         - "&7Se tradea para obtener &f&lMoneda de &7&lPLATA"
         - "&aIntercambiable con los aldeanos"
+
+# DON'T MODIFY Spawn Location
+spawn-location:
