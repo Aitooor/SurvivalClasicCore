@@ -1,58 +1,34 @@
 package net.eternaln.survivalclasicbasis.commands;
 
-import net.eternaln.survivalclasicbasis.SurvivalClasicBasis;
+import co.aikar.commands.BaseCommand;
+import co.aikar.commands.annotation.CatchUnknown;
+import co.aikar.commands.annotation.CommandAlias;
+import co.aikar.commands.annotation.CommandPermission;
+import co.aikar.commands.annotation.Default;
+import lombok.Getter;
 import net.eternaln.survivalclasicbasis.utils.Utils;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
-public class SocialSpyCommand implements CommandExecutor {
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
-    private final SurvivalClasicBasis plugin;
+@CommandAlias("socialspy|revisarchat")
+@CommandPermission("survivalclasicbasis.socialspy")
+public class SocialSpyCommand extends BaseCommand {
 
-    public SocialSpyCommand(SurvivalClasicBasis instance) {
-        plugin = instance;
-    }
+    @Getter
+    private static final List<UUID> socialSpyList = new ArrayList<>();
 
-    @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        FileConfiguration config = plugin.getConfig();
-        
-        if (!(sender instanceof Player)) {
-            Utils.log("&cDebes ser un jugador para hacer eso");
-            return true;
+    @Default
+    @CatchUnknown
+    public void toggleSocialSpy(Player sender) {
+        if (socialSpyList.contains(sender.getUniqueId())) {
+            socialSpyList.remove(sender.getUniqueId());
+            Utils.send(sender, "&cSocial spy desactivado");
+        } else {
+            socialSpyList.add(sender.getUniqueId());
+            Utils.send(sender, "&aSocial spy activado");
         }
-
-        Player player = (Player) sender;
-
-        if (player.hasPermission("survivalclasicbasis.socialspy")) {
-            if (args.length == 0) {
-                Utils.send(player, "&cUso: /socialspy <on/off>");
-                return true;
-            }
-            /*if (args.length == 1 && args[0].equalsIgnoreCase("on")) {
-                if (!plugin.socialSpyToggle) {
-                    plugin.socialSpyToggle = true;
-                    Utils.send(player, "&aSocial spy activado");
-                } else {
-                    Utils.send(player, "&cSocial spy ya esta activado");
-                }
-                return true;
-            }
-            if (args.length == 1 && args[0].equalsIgnoreCase("off")) {
-                if (!plugin.socialSpyToggle) {
-                    plugin.socialSpyToggle = false;
-                    Utils.send(player, "&cSocial spy desactivado");
-                } else {
-                    Utils.send(player, "&cSocial spy ya esta desactivado");
-                }
-                return true;
-            }*/
-
-        }
-        return true;
     }
-
 }
