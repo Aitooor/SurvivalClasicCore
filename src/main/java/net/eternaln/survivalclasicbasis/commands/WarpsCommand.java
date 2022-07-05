@@ -7,59 +7,44 @@ import net.eternaln.survivalclasicbasis.utils.LocationUtil;
 import net.eternaln.survivalclasicbasis.utils.Utils;
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 
 @CommandAlias("warps|warp")
 @CommandPermission("survivalclasicbasis.warps")
 public class WarpsCommand extends BaseCommand {
 
-    @Default
-    public void onWarp(Player sender, String name) {
-        String warp = SurvivalClasicBasis.getInstance().getWarpsConfig().getString(name.toLowerCase());
-        sender.teleport(LocationUtil.parseToLocation(warp));
-    }
-
-    @HelpCommand @CatchUnknown
+    @HelpCommand
     public void onHelp(CommandSender sender) {
         Utils.sendNoPrefix(sender, SurvivalClasicBasis.getConfiguration().getWarpHelp().toArray(String[]::new));
     }
 
+    @Default
+    @CatchUnknown
+    public void onWarp(Player sender, String name) {
+        if (SurvivalClasicBasis.getWarpsFile().getConfig().getString(name.toLowerCase()) == null) {
+            Utils.send(sender, "&cEl warp no existe");
+            return;
+        }
+
+        String warp = SurvivalClasicBasis.getWarpsFile().getConfig().getString(name.toLowerCase());
+        sender.teleport(LocationUtil.parseToLocation(warp));
+    }
+
     @Subcommand("set|establece|add|agregar")
     @CommandPermission("survivalclasicbasis.warps.set")
-    public void SetWarp (Player sender, String name) {
-        Player player = sender;
-
-        Location loc = player.getLocation();
-        SurvivalClasicBasis.getInstance().getWarpsConfig().createSection(name.toLowerCase());
-        // Create the section in the config for the warp (I prefer lowercase, doesn't have to be)
-        ConfigurationSection cs = SurvivalClasicBasis.getInstance().getWarpsConfig().getConfigurationSection(name.toLowerCase());
-        cs.set("X", loc.getX());
-        cs.set("Y", loc.getY());
-        cs.set("Z", loc.getZ());
-        cs.set("world", loc.getWorld().getName());
-        String warpsConfig = SurvivalClasicBasis.getInstance().getWarpsConfig().getString(name.toLowerCase());
-        SurvivalClasicBasis.getInstance().getWarpsConfig().set(name.toLowerCase(), warpsConfig);
-        // Save all the necessary components of the location in this section, and save the config
-        player.sendMessage("Created warp: " + name + " at your location");
+    public void SetWarp(Player sender, String name) {
+        Location loc = sender.getLocation();
+        SurvivalClasicBasis.getWarpsFile().getConfig().set(name.toLowerCase(), LocationUtil.parseToString(loc));
+        SurvivalClasicBasis.getWarpsFile().saveConfig();
+        sender.sendMessage("Created warp: " + name + " at your location");
 
     }
 
     @Subcommand("remove|eliminar|delete|borrar")
     @CommandPermission("survivalclasicbasis.warps.remove")
-    public void RemoveWarp (Player sender, String name) {
-        Player player = sender;
-
-        Location loc = player.getLocation();
-        SurvivalClasicBasis.getInstance().getWarpsConfig().createSection(name.toLowerCase());
-        // Create the section in the config for the warp (I prefer lowercase, doesn't have to be)
-        ConfigurationSection cs = SurvivalClasicBasis.getInstance().getWarpsConfig().getConfigurationSection(name.toLowerCase());
-        cs.set("X", loc.getX());
-        cs.set("Y", loc.getY());
-        cs.set("Z", loc.getZ());
-        cs.set("world", loc.getWorld().getName());
-        SurvivalClasicBasis.getInstance().getWarpsConfig().set(name.toLowerCase(), null);
-        // Save all the necessary components of the location in this section, and save the config
-        player.sendMessage("Created warp: " + name + " at your location");
+    public void RemoveWarp(Player sender, String name) {
+        SurvivalClasicBasis.getWarpsFile().getConfig().set(name.toLowerCase(), null);
+        SurvivalClasicBasis.getWarpsFile().saveConfig();
+        sender.sendMessage("Created warp: " + name + " at your location");
     }
 }
