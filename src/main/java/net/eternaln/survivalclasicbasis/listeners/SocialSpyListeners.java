@@ -1,17 +1,10 @@
 package net.eternaln.survivalclasicbasis.listeners;
 
-import me.clip.placeholderapi.PlaceholderAPI;
 import net.eternaln.survivalclasicbasis.SurvivalClasicBasis;
-import net.eternaln.survivalclasicbasis.utils.CenteredMessage;
-import net.eternaln.survivalclasicbasis.utils.LocationUtil;
-import net.eternaln.survivalclasicbasis.utils.Utils;
-import org.bukkit.Bukkit;
-import org.bukkit.GameMode;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.*;
 
 
