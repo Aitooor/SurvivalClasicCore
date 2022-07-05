@@ -1,10 +1,11 @@
 package net.eternaln.survivalclasicbasis.data.items;
 
+import de.exlll.configlib.annotation.ConfigurationElement;
 import lombok.Getter;
 import net.eternaln.survivalclasicbasis.utils.ItemBuilder;
 import org.bukkit.Material;
 
-@Getter
+@Getter @ConfigurationElement
 public class Items {
 
     private final GoldItems goldItems;

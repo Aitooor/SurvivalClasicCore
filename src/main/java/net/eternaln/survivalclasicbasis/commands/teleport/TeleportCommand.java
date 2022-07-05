@@ -56,6 +56,27 @@ public class TeleportCommand extends BaseCommand {
             }
         }
     }
+    @Subcommand("here|aqui")
+    @CommandPermission("survivalclasicbasis.here")
+    public void teleportHere(Player sender, String target) {
+        if (target == null) {
+            Utils.send(sender,"&cPlease specify the player!");
+        } else {
+            Player targetPlayer = Bukkit.getPlayer(target);
+            if (target != null) {
+                if (targetPlayer.getName().equals(targetPlayer.getName())) {
+                    Utils.send(sender,"&cYou can't teleport yourself to yourself!");
+                } else {
+                    targetPlayer.teleport(sender);
+                }
+                Utils.send(sender,"&fHas teletranspotado hacia ti a &b" + targetPlayer.getName());
+                Utils.send(targetPlayer,sender.getName() + " &fte ha teletransportado hacia el");
+            } else {
+                Utils.send(sender,"&cThis player is not online!");
+            }
+        }
+    }
+
 
     @Subcommand("toggle")
     @CommandPermission("survivalclasicbasis.tptoggle")
@@ -83,6 +104,20 @@ public class TeleportCommand extends BaseCommand {
                     Utils.send(sender,"&cThis player is not online!");
                 }
             }
+        }
+    }
+
+    @Subcommand("accept")
+    @CommandPermission("survivalclasicbasis.tpaccept")
+    public void teleportAccept(Player sender, String target) {
+        Player targetPlayer = Bukkit.getPlayer(target);
+
+        if (requests.containsKey(sender)) {
+            Utils.send(sender,"&aYou &c&ldenied &athe request from&6 " + targetPlayer.getDisplayName());
+            requests.get(sender).sendMessage(Utils.ct("&aPlayer&6 " + sender.getName() + " &c&ldenied &ayour request!"));
+            requests.remove(sender);
+        } else {
+            Utils.send(sender,"&cYou do not have any pending teleport request right now!");
         }
     }
 }
