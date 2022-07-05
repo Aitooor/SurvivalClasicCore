@@ -1,4 +1,4 @@
-package net.eternaln.survivalclasicbasis.commands;
+package net.eternaln.survivalclasiccore.commands.admin;
 
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.CatchUnknown;
@@ -6,7 +6,7 @@ import co.aikar.commands.annotation.CommandAlias;
 import co.aikar.commands.annotation.CommandPermission;
 import co.aikar.commands.annotation.Default;
 import lombok.Getter;
-import net.eternaln.survivalclasicbasis.utils.Utils;
+import net.eternaln.survivalclasiccore.utils.Utils;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.UUID;
 
 @CommandAlias("socialspy|revisarchat")
-@CommandPermission("survivalclasicbasis.socialspy")
+@CommandPermission("survivalclasiccore.socialspy")
 public class SocialSpyCommand extends BaseCommand {
 
     @Getter

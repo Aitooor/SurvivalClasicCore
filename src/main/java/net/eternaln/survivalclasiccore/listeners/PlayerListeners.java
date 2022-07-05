@@ -1,10 +1,10 @@
-package net.eternaln.survivalclasicbasis.listeners;
+package net.eternaln.survivalclasiccore.listeners;
 
 import me.clip.placeholderapi.PlaceholderAPI;
-import net.eternaln.survivalclasicbasis.SurvivalClasicBasis;
-import net.eternaln.survivalclasicbasis.annotations.Register;
-import net.eternaln.survivalclasicbasis.utils.CenteredMessage;
-import net.eternaln.survivalclasicbasis.utils.Utils;
+import net.eternaln.survivalclasiccore.SurvivalClasicCore;
+import net.eternaln.survivalclasiccore.annotations.Register;
+import net.eternaln.survivalclasiccore.utils.CenteredMessage;
+import net.eternaln.survivalclasiccore.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
@@ -31,7 +31,7 @@ public class PlayerListeners implements Listener {
 
     @EventHandler
     public void onLogin(PlayerLoginEvent event) {
-        Bukkit.getScheduler().runTaskLater(SurvivalClasicBasis.getInstance(), () -> {
+        Bukkit.getScheduler().runTaskLater(SurvivalClasicCore.getInstance(), () -> {
             Player player = event.getPlayer();
             if (player == null) {
                 return;
@@ -51,7 +51,7 @@ public class PlayerListeners implements Listener {
         Player player = event.getPlayer();
 
         player.setGameMode(GameMode.SURVIVAL);
-        event.getPlayer().teleport(SurvivalClasicBasis.getConfiguration().getSpawnLocation());
+        event.getPlayer().teleport(SurvivalClasicCore.getConfiguration().getSpawnLocation());
         event.setJoinMessage(null);
     }
 
@@ -65,7 +65,7 @@ public class PlayerListeners implements Listener {
         Player player = event.getPlayer();
 
         if (player.getLocation().getBlockY() < 0) {
-            event.getPlayer().teleport(SurvivalClasicBasis.getConfiguration().getSpawnLocation());
+            event.getPlayer().teleport(SurvivalClasicCore.getConfiguration().getSpawnLocation());
         }
     }
 
@@ -79,6 +79,6 @@ public class PlayerListeners implements Listener {
 
     @EventHandler
     public void onPlayerRespawn(PlayerRespawnEvent event) {
-        event.getPlayer().teleport(SurvivalClasicBasis.getConfiguration().getSpawnLocation());
+        event.getPlayer().teleport(SurvivalClasicCore.getConfiguration().getSpawnLocation());
     }
 }

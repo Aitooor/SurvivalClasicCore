@@ -1,4 +1,4 @@
-package net.eternaln.survivalclasicbasis.annotations;
+package net.eternaln.survivalclasiccore.annotations;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

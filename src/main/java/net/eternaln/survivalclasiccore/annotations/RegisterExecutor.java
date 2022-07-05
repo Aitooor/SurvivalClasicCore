@@ -1,8 +1,8 @@
-package net.eternaln.survivalclasicbasis.annotations;
+package net.eternaln.survivalclasiccore.annotations;
 
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.CommandAlias;
-import net.eternaln.survivalclasicbasis.SurvivalClasicBasis;
+import net.eternaln.survivalclasiccore.SurvivalClasicCore;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
 import org.reflections.Reflections;
@@ -12,9 +12,9 @@ import java.lang.reflect.InvocationTargetException;
 public class RegisterExecutor {
 
     public RegisterExecutor() {
-        SurvivalClasicBasis.getInstance().getLogger().info("Registering commands and listeners...");
-        execute(new Reflections("net.eternaln.survivalclasicbasis"));
-        SurvivalClasicBasis.getInstance().getLogger().info("Commands and listeners registered.");
+        SurvivalClasicCore.getInstance().getLogger().info("Registering commands and listeners...");
+        execute(new Reflections("net.eternaln.survivalclasiccore"));
+        SurvivalClasicCore.getInstance().getLogger().info("Commands and listeners registered.");
     }
 
     private void execute(Reflections reflections) {
@@ -27,10 +27,10 @@ public class RegisterExecutor {
                 e.printStackTrace();
             }
 
-            SurvivalClasicBasis.getInstance().getLogger().info("Registering " + clazz.getSimpleName() + "...");
+            SurvivalClasicCore.getInstance().getLogger().info("Registering " + clazz.getSimpleName() + "...");
 
             if (obj instanceof Listener) {
-                Bukkit.getPluginManager().registerEvents((Listener) obj, SurvivalClasicBasis.getInstance());
+                Bukkit.getPluginManager().registerEvents((Listener) obj, SurvivalClasicCore.getInstance());
             }
         }
 
@@ -45,9 +45,9 @@ public class RegisterExecutor {
                 Bukkit.getLogger().info(clazz.getSimpleName());
             }
 
-            SurvivalClasicBasis.getInstance().getLogger().info("Registering " + clazz.getSimpleName() + "...");
+            SurvivalClasicCore.getInstance().getLogger().info("Registering " + clazz.getSimpleName() + "...");
 
-            SurvivalClasicBasis.getCmdManager().registerCommand((BaseCommand) obj);
+            SurvivalClasicCore.getCmdManager().registerCommand((BaseCommand) obj);
         }
     }
 }

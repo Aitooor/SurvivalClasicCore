@@ -5,13 +5,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>net.eternaln</groupId>
-    <artifactId>SurvivalClasicBasis</artifactId>
+    <artifactId>SurvivalClasicCore</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
 
     <name>${project.artifactId}-${project.version}</name>
 
-    <description>Simple basis plugin for Eternal Network Survival Clasic</description>
+    <description>Simple core plugin for Eternal Network Survival Clasic</description>
     <properties>
         <java.version>17</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -36,20 +36,20 @@
                 <artifactId>maven-shade-plugin</artifactId>
                 <version>3.3.0</version>
                 <configuration>
-                    <dependencyReducedPomLocation>${project.build.directory}/dependency-reduced-pom.xml</dependencyReducedPomLocation>
+                    <dependencyReducedPomLocation>false</dependencyReducedPomLocation>
                     <minimizeJar>true</minimizeJar>
                     <relocations>
                         <relocation>
                             <pattern>co.aikar.commands</pattern>
-                            <shadedPattern>net.eternaln.survivalclasicbasis.libs.acf</shadedPattern>
+                            <shadedPattern>net.eternaln.survivalclasiccore.libs.acf</shadedPattern>
                         </relocation>
                         <relocation>
                             <pattern>co.aikar.locales</pattern>
-                            <shadedPattern>net.eternaln.survivalclasicbasis.libs.locales</shadedPattern>
+                            <shadedPattern>net.eternaln.survivalclasiccore.libs.locales</shadedPattern>
                         </relocation>
                         <relocation>
                             <pattern>de.exlll.configlib</pattern>
-                            <shadedPattern>net.eternaln.survivalclasicbasis.libs.configlib</shadedPattern>
+                            <shadedPattern>net.eternaln.survivalclasiccore.libs.configlib</shadedPattern>
                         </relocation>
                     </relocations>
                 </configuration>

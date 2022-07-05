@@ -1,16 +1,15 @@
-package net.eternaln.survivalclasicbasis.data;
+package net.eternaln.survivalclasiccore.data;
 
 import de.exlll.configlib.annotation.Comment;
 import de.exlll.configlib.annotation.Convert;
-import de.exlll.configlib.annotation.NoConvert;
 import de.exlll.configlib.configs.yaml.BukkitYamlConfiguration;
 import de.exlll.configlib.format.FieldNameFormatters;
 import lombok.Getter;
 import lombok.Setter;
-import net.eternaln.survivalclasicbasis.SurvivalClasicBasis;
-import net.eternaln.survivalclasicbasis.data.converters.ItemStackMapConverter;
-import net.eternaln.survivalclasicbasis.data.converters.LocationStringConverter;
-import net.eternaln.survivalclasicbasis.utils.ItemBuilder;
+import net.eternaln.survivalclasiccore.SurvivalClasicCore;
+import net.eternaln.survivalclasiccore.data.converters.ItemStackMapConverter;
+import net.eternaln.survivalclasiccore.data.converters.LocationStringConverter;
+import net.eternaln.survivalclasiccore.utils.ItemBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -18,7 +17,6 @@ import org.bukkit.inventory.ItemStack;
 
 import java.io.File;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 
 @Getter
@@ -67,7 +65,7 @@ public class Configuration extends BukkitYamlConfiguration {
 
     public Configuration() {
         super(
-                new File(SurvivalClasicBasis.getInstance().getDataFolder(), "config.yml").toPath(),
+                new File(SurvivalClasicCore.getInstance().getDataFolder(), "config.yml").toPath(),
                 BukkitYamlProperties.builder().setFormatter(FieldNameFormatters.LOWER_UNDERSCORE).build()
         );
         this.loadAndSave();

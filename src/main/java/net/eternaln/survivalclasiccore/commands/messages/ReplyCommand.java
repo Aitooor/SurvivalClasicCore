@@ -1,7 +1,8 @@
-package net.eternaln.survivalclasicbasis.commands;
+package net.eternaln.survivalclasiccore.commands.messages;
 
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.*;
+import net.eternaln.survivalclasiccore.commands.admin.SocialSpyCommand;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
@@ -10,7 +11,7 @@ import org.bukkit.entity.Player;
 import java.util.Objects;
 
 @CommandAlias("reply|r|responder|contestar")
-@CommandPermission("survivalclasicbasis.tpa")
+@CommandPermission("survivalclasiccore.tpa")
 public class ReplyCommand extends BaseCommand {
 
     @Default

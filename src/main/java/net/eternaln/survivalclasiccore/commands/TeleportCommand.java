@@ -1,15 +1,18 @@
-package net.eternaln.survivalclasicbasis.commands.teleport;
+package net.eternaln.survivalclasiccore.commands;
 
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.*;
-import net.eternaln.survivalclasicbasis.utils.LocationUtil;
-import net.eternaln.survivalclasicbasis.utils.Utils;
+import net.eternaln.survivalclasiccore.SurvivalClasicCore;
+import net.eternaln.survivalclasiccore.utils.Cooldown;
+import net.eternaln.survivalclasiccore.utils.LocationUtil;
+import net.eternaln.survivalclasiccore.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.UUID;
 
 @CommandAlias("tp|teleport|teletransportar")
 public class TeleportCommand extends BaseCommand {
@@ -17,8 +20,10 @@ public class TeleportCommand extends BaseCommand {
     private ArrayList<Player> teleportToggled = new ArrayList<Player>();
     private HashMap<Player, Player> requests = new HashMap();
 
+    private final Cooldown<UUID> cooldown = new Cooldown<>(SurvivalClasicCore.getConfiguration().getCmdCooldown());
+
     @Default @CatchUnknown
-    @CommandPermission("survivalclasicbasis.tp")
+    @CommandPermission("survivalclasiccore.tp")
     public void teleport(Player sender, String target) {
         Player targetPlayer = Bukkit.getPlayer(target);
 
@@ -34,7 +39,7 @@ public class TeleportCommand extends BaseCommand {
     }
 
     @Subcommand("all|todos")
-    @CommandPermission("survivalclasicbasis.tpall")
+    @CommandPermission("survivalclasiccore.tpall")
     @CommandCompletion("@players")
     public void teleportAll(Player sender, String target) {
         Player targetPlayer = Bukkit.getPlayer(target);
@@ -58,7 +63,7 @@ public class TeleportCommand extends BaseCommand {
         }
     }
     @Subcommand("top")
-    @CommandPermission("survivalclasicbasis.top")
+    @CommandPermission("survivalclasiccore.top")
     public void teleportTop(Player sender) {
         Location currentLocation = sender.getLocation();
         Location newLocation = LocationUtil.teleportToHighestBlock(currentLocation);
@@ -71,7 +76,7 @@ public class TeleportCommand extends BaseCommand {
     }
 
     @Subcommand("pos|position|posicion")
-    @CommandPermission("survivalclasicbasis.tppos")
+    @CommandPermission("survivalclasiccore.tppos")
     public void teleportPosition(Player sender, String x, String y, String z) {
         if (!(x == null || y == null || z == null)) {
             try {
@@ -87,7 +92,7 @@ public class TeleportCommand extends BaseCommand {
     }
 
     @Subcommand("here|aqui")
-    @CommandPermission("survivalclasicbasis.here")
+    @CommandPermission("survivalclasiccore.here")
     @CommandCompletion("@players")
     public void teleportHere(Player sender, String target) {
         Player targetPlayer = Bukkit.getPlayer(target);
@@ -124,6 +129,10 @@ public class TeleportCommand extends BaseCommand {
     @Subcommand("request|solicitar|pedir")
     @CommandCompletion("@players")
     public void teleportRequest(Player sender, String target) {
+        if (!sender.hasPermission("survivalclasiccore.cooldown.bypass") && !cooldown.isCooledDown(sender.getUniqueId())) {
+            sender.sendMessage(Utils.ct("&cDebes esperar &b" + cooldown.getSecondsRemaining(sender.getUniqueId()) + " &csegundos"));
+            return;
+        }
         Player targetPlayer = Bukkit.getPlayer(target);
         if (targetPlayer != null) {
             if(!target.equals(sender.getName())) {

@@ -1,4 +1,4 @@
-package net.eternaln.survivalclasicbasis.utils;
+package net.eternaln.survivalclasiccore.utils;
 
 import org.bukkit.entity.Player;
 

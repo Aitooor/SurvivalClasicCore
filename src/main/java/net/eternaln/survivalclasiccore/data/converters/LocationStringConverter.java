@@ -1,7 +1,7 @@
-package net.eternaln.survivalclasicbasis.data.converters;
+package net.eternaln.survivalclasiccore.data.converters;
 
 import de.exlll.configlib.Converter;
-import net.eternaln.survivalclasicbasis.utils.LocationUtil;
+import net.eternaln.survivalclasiccore.utils.LocationUtil;
 import org.bukkit.Location;
 
 public class LocationStringConverter implements Converter<Location, String> {

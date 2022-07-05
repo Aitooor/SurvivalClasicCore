@@ -1,19 +1,19 @@
-package net.eternaln.survivalclasicbasis;
+package net.eternaln.survivalclasiccore;
 
 import co.aikar.commands.Locales;
 import co.aikar.commands.PaperCommandManager;
 import lombok.Getter;
-import net.eternaln.survivalclasicbasis.annotations.RegisterExecutor;
-import net.eternaln.survivalclasicbasis.data.Configuration;
-import net.eternaln.survivalclasicbasis.data.WarpsFile;
-import net.eternaln.survivalclasicbasis.utils.Utils;
+import net.eternaln.survivalclasiccore.annotations.RegisterExecutor;
+import net.eternaln.survivalclasiccore.data.Configuration;
+import net.eternaln.survivalclasiccore.data.WarpsFile;
+import net.eternaln.survivalclasiccore.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public final class SurvivalClasicBasis extends JavaPlugin {
+public final class SurvivalClasicCore extends JavaPlugin {
 
     @Getter
-    private static SurvivalClasicBasis instance;
+    private static SurvivalClasicCore instance;
     @Getter
     private static PaperCommandManager cmdManager;
     @Getter

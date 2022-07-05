@@ -1,6 +1,6 @@
-package net.eternaln.survivalclasicbasis.utils;
+package net.eternaln.survivalclasiccore.utils;
 
-import net.eternaln.survivalclasicbasis.SurvivalClasicBasis;
+import net.eternaln.survivalclasiccore.SurvivalClasicCore;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
@@ -42,12 +42,12 @@ public interface Utils {
     }
 
     static String getPrefixGame() {
-        return ct(SurvivalClasicBasis.getConfiguration().getPrefix());
+        return ct(SurvivalClasicCore.getConfiguration().getPrefix());
     }
 
     static String getPrefix() {
-        SurvivalClasicBasis survivalClasicBasis = SurvivalClasicBasis.getPlugin(SurvivalClasicBasis.class);
-        return "[" + survivalClasicBasis.getName() + "] ";
+        SurvivalClasicCore survivalClasicCore = SurvivalClasicCore.getPlugin(SurvivalClasicCore.class);
+        return "[" + survivalClasicCore.getName() + "] ";
     }
 
 }

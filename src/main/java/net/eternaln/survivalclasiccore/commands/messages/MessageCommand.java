@@ -1,8 +1,9 @@
-package net.eternaln.survivalclasicbasis.commands;
+package net.eternaln.survivalclasiccore.commands.messages;
 
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.*;
 import lombok.Getter;
+import net.eternaln.survivalclasiccore.commands.admin.SocialSpyCommand;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;

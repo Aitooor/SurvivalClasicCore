@@ -1,4 +1,4 @@
-package net.eternaln.survivalclasicbasis.data.converters;
+package net.eternaln.survivalclasiccore.data.converters;
 
 import com.cryptomorin.xseries.XItemStack;
 import de.exlll.configlib.Converter;

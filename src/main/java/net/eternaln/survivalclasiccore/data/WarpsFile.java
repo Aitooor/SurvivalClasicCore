@@ -1,6 +1,6 @@
-package net.eternaln.survivalclasicbasis.data;
+package net.eternaln.survivalclasiccore.data;
 
-import net.eternaln.survivalclasicbasis.SurvivalClasicBasis;
+import net.eternaln.survivalclasiccore.SurvivalClasicCore;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -11,11 +11,11 @@ import java.io.InputStreamReader;
 import java.util.logging.Level;
 
 public class WarpsFile {
-    private final SurvivalClasicBasis plugin;
+    private final SurvivalClasicCore plugin;
     private FileConfiguration fileConfig = null;
     private File configFile = null;
 
-    public WarpsFile(SurvivalClasicBasis plugin) {
+    public WarpsFile(SurvivalClasicCore plugin) {
         this.plugin = plugin;
         saveDefaultConfig();
     }
