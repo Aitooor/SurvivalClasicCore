@@ -6,6 +6,8 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public interface Utils {
@@ -48,6 +50,18 @@ public interface Utils {
     static String getPrefix() {
         SurvivalClasicCore survivalClasicCore = SurvivalClasicCore.getPlugin(SurvivalClasicCore.class);
         return "[" + survivalClasicCore.getName() + "] ";
+    }
+
+    static boolean checkNameLength(String name) {
+        Pattern pattern = Pattern.compile("&[A-Fa-f0-9]");
+        Matcher match = pattern.matcher(name);
+        String length = name;
+        while (match.find()) {
+            String substring = length.substring(match.start(), match.end());
+            length = length.replace(substring, "");
+            match = pattern.matcher(length);
+        }
+        return length.length() <= 16;
     }
 
 }
