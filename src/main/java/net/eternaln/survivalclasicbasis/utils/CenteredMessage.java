@@ -101,42 +101,26 @@ public class CenteredMessage {
         SPACE(' ', 3),
         DEFAULT('a', 4);
 
-        private final char character;
-        private final int length;
-
         private final static int CENTER_CHAT_PX = 154;
         private final static int MAX_CHAT_PX = 250;
+        private final char character;
+        private final int length;
 
         Chat(char character, int length) {
             this.character = character;
             this.length = length;
         }
 
-        public char getCharacter(){
-            return this.character;
-        }
-
-        public int getLength(){
-            return this.length;
-        }
-
-        public int getBoldLength(){
-            if(this == Chat.SPACE) {
-                return this.getLength();
-            }
-            return this.length + 1;
-        }
-
-        public static Chat getDefaultFontInfo(char c){
-            for(Chat dFI : Chat.values()){
-                if(dFI.getCharacter() == c) {
+        public static Chat getDefaultFontInfo(char c) {
+            for (Chat dFI : Chat.values()) {
+                if (dFI.getCharacter() == c) {
                     return dFI;
                 }
             }
             return Chat.DEFAULT;
         }
 
-        public static void sendCenteredMessage(Player player, String message){
+        public static void sendCenteredMessage(Player player, String message) {
             message = Utils.ct(message);
             int messagePxSize = 0;
             boolean previousCode = false;
@@ -145,27 +129,27 @@ public class CenteredMessage {
             int lastSpaceIndex = 0;
             String toSendAfter = null;
             String recentColorCode = "";
-            for(char c : message.toCharArray()){
-                if(c == '§'){
+            for (char c : message.toCharArray()) {
+                if (c == '§') {
                     previousCode = true;
                     continue;
-                }else if(previousCode){
+                } else if (previousCode) {
                     previousCode = false;
                     recentColorCode = "§" + c;
-                    if(c == 'l' || c == 'L'){
+                    if (c == 'l' || c == 'L') {
                         isBold = true;
                         continue;
                     } else {
                         isBold = false;
                     }
-                }else if(c == ' ') {
+                } else if (c == ' ') {
                     lastSpaceIndex = charIndex;
-                } else{
+                } else {
                     Chat dFI = Chat.getDefaultFontInfo(c);
                     messagePxSize += isBold ? dFI.getBoldLength() : dFI.getLength();
                     messagePxSize++;
                 }
-                if(messagePxSize >= MAX_CHAT_PX){
+                if (messagePxSize >= MAX_CHAT_PX) {
                     toSendAfter = recentColorCode + message.substring(lastSpaceIndex + 1);
                     message = message.substring(0, lastSpaceIndex + 1);
                     break;
@@ -177,14 +161,29 @@ public class CenteredMessage {
             int spaceLength = Chat.SPACE.getLength() + 1;
             int compensated = 0;
             StringBuilder sb = new StringBuilder();
-            while(compensated < toCompensate){
+            while (compensated < toCompensate) {
                 sb.append(" ");
                 compensated += spaceLength;
             }
             player.sendMessage(sb + message);
-            if(toSendAfter != null) {
+            if (toSendAfter != null) {
                 sendCenteredMessage(player, toSendAfter);
             }
+        }
+
+        public char getCharacter() {
+            return this.character;
+        }
+
+        public int getLength() {
+            return this.length;
+        }
+
+        public int getBoldLength() {
+            if (this == Chat.SPACE) {
+                return this.getLength();
+            }
+            return this.length + 1;
         }
     }
 }

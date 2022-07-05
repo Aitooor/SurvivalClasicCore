@@ -11,7 +11,9 @@ import org.bukkit.entity.Player;
 @CommandPermission("survivalclasicbasis.item.give")
 public class ItemCommand extends BaseCommand {
 
-    @HelpCommand @Default @CatchUnknown
+    @HelpCommand
+    @Default
+    @CatchUnknown
     public void onHelp(CommandSender sender) {
         Utils.sendNoPrefix(sender, SurvivalClasicBasis.getConfiguration().getItemHelp().toArray(String[]::new));
     }
