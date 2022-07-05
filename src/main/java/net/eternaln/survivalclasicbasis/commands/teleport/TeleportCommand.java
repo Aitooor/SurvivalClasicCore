@@ -101,7 +101,7 @@ public class TeleportCommand extends BaseCommand {
                 Utils.send(sender,"&cEste jugador no esta online");
             }
         } else {
-            Utils.send(sender,"&cEspecifica un jugador");
+            Utils.send(sender,"&cEste jugador no esta online");
         }
     }
 
@@ -132,7 +132,7 @@ public class TeleportCommand extends BaseCommand {
                 Utils.send(sender,"&cNo puedes teletransportarte a ti mismo");
             }
         } else {
-            Utils.send(sender,"&cEspecifica un jugador");
+            Utils.send(sender,"&cEste jugador no esta online");
         }
     }
 
