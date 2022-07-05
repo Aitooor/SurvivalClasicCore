@@ -14,7 +14,6 @@ public class FlyCommand extends BaseCommand {
 
     @Default
     @CatchUnknown
-    @HelpCommand
     @CommandPermission("survivalclasicbasis.fly")
     public void help(CommandSender sender) {
         Player player = (Player) sender;
