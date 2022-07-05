@@ -2,35 +2,32 @@ package net.eternaln.survivalclasicbasis.utils;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.World;
 
 public class LocationUtil {
 
     public static String parseToString(Location location) {
-        return location.getX() + ", "
-                + location.getY() + ", "
-                + location.getZ() + ", "
-                + location.getYaw() + ", "
-                + location.getPitch() + ", "
-                + location.getWorld().getName();
+        String worldName = location.getWorld().getName();
+        int blockX = location.getBlockX();
+        int blockY = location.getBlockY();
+        int blockZ = location.getBlockZ();
+        float yaw = location.getYaw();
+        float pitch = location.getPitch();
+        return worldName + ";" + blockX + ";" + blockY + ";" + blockZ + ";" + yaw + ";" + pitch;
     }
 
-    public static Location parseToLocation(String string) {
-        String[] data = string.split(", ");
-        try {
-            double x = Double.parseDouble(data[0]);
-            double y = Double.parseDouble(data[1]);
-            double z = Double.parseDouble(data[2]);
-            float pitch = Float.valueOf(data[4]);
-            float yaw = Float.valueOf(data[3]);
-            org.bukkit.World world = Bukkit.getWorld(data[5]);
-
-            Location location = new Location(world, x, y, z, yaw, pitch);
-
-            return location;
-        } catch (NumberFormatException ex) {
-            ex.printStackTrace();
-            return null;
+    public static Location parseToLocation(String s) {
+        String[] split = s.split(";");
+        World world = Bukkit.getWorld(split[0]);
+        int x = Integer.parseInt(split[1]);
+        int y = Integer.parseInt(split[2]);
+        int z = Integer.parseInt(split[3]);
+        if (split.length > 4) {
+            float yaw = Float.parseFloat(split[4]);
+            float pitch = Float.parseFloat(split[5]);
+            return new Location(world, x, y, z, yaw, pitch);
         }
+        return new Location(world, x, y, z);
     }
 
 }

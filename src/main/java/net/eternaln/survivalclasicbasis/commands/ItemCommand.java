@@ -1,105 +1,54 @@
 package net.eternaln.survivalclasicbasis.commands;
 
+import co.aikar.commands.BaseCommand;
+import co.aikar.commands.annotation.*;
 import net.eternaln.survivalclasicbasis.SurvivalClasicBasis;
 import net.eternaln.survivalclasicbasis.utils.Utils;
-import org.bukkit.Material;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 
-public class ItemCommand implements CommandExecutor {
+@CommandAlias("itemc|objetoc|itemclassic")
+@CommandPermission("survivalclasicbasis.item.give")
+public class ItemCommand extends BaseCommand {
 
-    private final SurvivalClasicBasis plugin;
-    public ItemCommand(SurvivalClasicBasis instance) {
-        plugin = instance;
+    @HelpCommand @Default @CatchUnknown
+    public void onHelp(CommandSender sender) {
+        Utils.sendNoPrefix(sender, SurvivalClasicBasis.getConfiguration().getItemHelp().toArray(String[]::new));
     }
 
-    @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        FileConfiguration config = plugin.getConfig();
+    @Subcommand("give|dar")
+    public class GiveItemSubCommand extends BaseCommand {
 
-        if (!(sender instanceof Player)) {
-            if (args.length == 0) {
-                Utils.log("&cDebes ser un usuario para usar esto");
-                return false;
-            }
-            if (args[0].equalsIgnoreCase("give")) {
-                Utils.log("&cDebes ser un usuario para usar esto");
-                return true;
-            }
-            return false;
-        }
+        @Subcommand("gold|oro")
+        public class GiveGoldItemSubCommand extends BaseCommand {
 
-        Player player = (Player) sender;
-
-        if (!player.hasPermission("survivalclasicbasis.item.give")) {
-            Utils.send(player, config.getString("no-permissions"));
-            return true;
-        }
-
-        if (args.length == 0) {
-            Utils.sendNoPrefix(player, config.getString("item.help"));
-            return false;
-        }
-
-        if (args[0].equalsIgnoreCase("give") || args[0].equalsIgnoreCase("dar")) {
-            if(args[1].equalsIgnoreCase("gold") || args[1].equalsIgnoreCase("oro")) {
-                if (args[2].equalsIgnoreCase("coin") || args[2].equalsIgnoreCase("moneda")) {
-                    Utils.send(player, config.getString("item.gived"));
-
-                    ItemStack item = new ItemStack(Material.RAW_GOLD, 1);
-                    ItemMeta itemmeta = item.getItemMeta();
-                    itemmeta.setDisplayName(Utils.ct(config.getString("item.gold.coin.name")));
-                    itemmeta.setLore(Utils.formatList(config.getStringList("item.gold.coin.lore")));
-                    item.setItemMeta(itemmeta);
-
-                    player.getInventory().addItem(new ItemStack(item));
-                }
-                else if (args[2].equalsIgnoreCase("fragment") || args[2].equalsIgnoreCase("fragmento")) {
-                    Utils.send(player, config.getString("item.gived"));
-
-                    ItemStack item = new ItemStack(Material.GOLD_NUGGET, 1);
-                    ItemMeta itemmeta = item.getItemMeta();
-                    itemmeta.setDisplayName(Utils.ct(config.getString("item.gold.fragment.name")));
-                    itemmeta.setLore(Utils.formatList(config.getStringList("item.gold.fragment.lore")));
-                    item.setItemMeta(itemmeta);
-
-                    player.getInventory().addItem(new ItemStack(item));
-                }
-            }
-            else if(args[1].equalsIgnoreCase("plate") || args[1].equalsIgnoreCase("plata")) {
-                if (args[2].equalsIgnoreCase("coin") || args[2].equalsIgnoreCase("moneda")) {
-                    Utils.send(player, config.getString("item.gived"));
-
-                    ItemStack item = new ItemStack(Material.RAW_IRON, 1);
-                    ItemMeta itemmeta = item.getItemMeta();
-                    itemmeta.setDisplayName(Utils.ct(config.getString("item.plate.coin.name")));
-                    itemmeta.setLore(Utils.formatList(config.getStringList("item.plate.coin.lore")));
-                    item.setItemMeta(itemmeta);
-
-                    player.getInventory().addItem(new ItemStack(item));
-                }
-                else if (args[2].equalsIgnoreCase("fragment") || args[2].equalsIgnoreCase("fragmento")) {
-                    Utils.send(player, config.getString("item.gived"));
-
-                    ItemStack item = new ItemStack(Material.IRON_NUGGET, 1);
-                    ItemMeta itemmeta = item.getItemMeta();
-                    itemmeta.setDisplayName(Utils.ct(config.getString("item.plate.coin.name")));
-                    itemmeta.setLore(Utils.formatList(config.getStringList("item.plate.fragment.lore")));
-                    item.setItemMeta(itemmeta);
-
-                    player.getInventory().addItem(new ItemStack(item));
-                }
+            @Subcommand("coin|moneda")
+            public void giveGoldCoin(Player sender) {
+                Utils.send(sender, SurvivalClasicBasis.getConfiguration().getItemGived());
+                sender.getInventory().addItem(SurvivalClasicBasis.getConfiguration().getItems().getGoldItems().getCoin());
             }
 
-            return true;
+            @Subcommand("fragment|fragmento")
+            public void giveGoldFragment(Player sender) {
+                Utils.send(sender, SurvivalClasicBasis.getConfiguration().getItemGived());
+                sender.getInventory().addItem(SurvivalClasicBasis.getConfiguration().getItems().getGoldItems().getFragment());
+            }
         }
 
-        return false;
+        @Subcommand("plate|plata")
+        public class GivePlateItemSubCommand extends BaseCommand {
+
+            @Subcommand("coin|moneda")
+            public void givePlateCoin(Player sender) {
+                Utils.send(sender, SurvivalClasicBasis.getConfiguration().getItemGived());
+                sender.getInventory().addItem(SurvivalClasicBasis.getConfiguration().getItems().getPlateItems().getCoin());
+            }
+
+            @Subcommand("fragment|fragmento")
+            public void givePlateFragment(Player sender) {
+                Utils.send(sender, SurvivalClasicBasis.getConfiguration().getItemGived());
+                sender.getInventory().addItem(SurvivalClasicBasis.getConfiguration().getItems().getPlateItems().getFragment());
+            }
+        }
     }
-
 }

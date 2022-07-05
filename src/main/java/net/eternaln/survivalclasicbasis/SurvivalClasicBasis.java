@@ -1,6 +1,12 @@
 package net.eternaln.survivalclasicbasis;
 
+import co.aikar.commands.BukkitCommandManager;
+import co.aikar.commands.Locales;
+import co.aikar.commands.MessageType;
+import co.aikar.commands.PaperCommandManager;
+import lombok.Getter;
 import net.eternaln.survivalclasicbasis.commands.*;
+import net.eternaln.survivalclasicbasis.data.Configuration;
 import net.eternaln.survivalclasicbasis.listeners.PlayerListeners;
 import net.eternaln.survivalclasicbasis.utils.Utils;
 import org.bukkit.Bukkit;
@@ -11,19 +17,20 @@ import java.util.*;
 
 public final class SurvivalClasicBasis extends JavaPlugin {
 
+    @Getter
     private static SurvivalClasicBasis instance;
-    public static SurvivalClasicBasis getInstance() {
-        return instance;
-    }
 
-    public Map<Player, Player> reply = new HashMap<Player, Player>();
-    public boolean socialSpyToggle = false;
+    @Getter
+    private static PaperCommandManager cmdManager;
+
+    @Getter
+    private static Configuration configuration;
 
     @Override
     public void onEnable() {
         instance = this;
-
-        this.saveDefaultConfig();
+        configuration = new Configuration();
+        configuration.loadAndSave();
 
         if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
             Bukkit.getPluginManager().registerEvents(new PlayerListeners(this), this);
@@ -34,12 +41,7 @@ public final class SurvivalClasicBasis extends JavaPlugin {
             Bukkit.getPluginManager().disablePlugin(this);
         }
 
-        this.getCommand("basis").setExecutor(new MainCommand(this));
-        this.getCommand("itemc").setExecutor(new ItemCommand(this));
-        this.getCommand("spawn").setExecutor(new SpawnCommand(this));
-        this.getCommand("msg").setExecutor(new MessageCommand(this));
-        this.getCommand("reply").setExecutor(new MessageCommand(this));
-        this.getCommand("socialspy").setExecutor(new SocialSpyCommand(this));
+        commands();
 
         Utils.log("&aENABLED CORRECTLY");
 
@@ -47,4 +49,11 @@ public final class SurvivalClasicBasis extends JavaPlugin {
 
     @Override
     public void onDisable() { Utils.log("&cDISABLED CORRECTLY"); }
+
+    private void commands() {
+        cmdManager = new PaperCommandManager(getInstance());
+        cmdManager.enableUnstableAPI("help");
+
+        cmdManager.getLocales().setDefaultLocale(Locales.SPANISH);
+    }
 }

@@ -61,7 +61,7 @@ public class PlayerListeners implements Listener {
         Player player = event.getPlayer();
         
         player.setGameMode(GameMode.SURVIVAL);
-        tpSpawn(player);
+        event.getPlayer().teleport(SurvivalClasicBasis.getConfiguration().getSpawnLocation());
         event.setJoinMessage(null);
     }
     
@@ -75,30 +75,19 @@ public class PlayerListeners implements Listener {
         Player player = event.getPlayer();
         
         if(player.getLocation().getBlockY() < 0) {
-            tpSpawn(player);
+            event.getPlayer().teleport(SurvivalClasicBasis.getConfiguration().getSpawnLocation());
         }
     }
 
     @EventHandler
     public void onDeath(PlayerDeathEvent event) {
-        Player player = event.getEntity().getPlayer();
+        Player player = event.getEntity();
         Player killer = event.getEntity().getKiller();
         event.setDeathMessage(Utils.ct(Utils.getPrefixGame() + "&fEl jugador &b" + player.getDisplayName() + " &fha sido asesinado por &c" + killer.getDisplayName()));
     }
     
     @EventHandler
     public void onPlayerRespawn(PlayerRespawnEvent event) {
-        if(event.getPlayer() != null) {
-            tpSpawn(event.getPlayer());
-        }
+        event.getPlayer().teleport(SurvivalClasicBasis.getConfiguration().getSpawnLocation());
     }
-    
-    private void tpSpawn(Player player) {
-        if(config.getString("spawn-location") == null) {
-            return;
-        }
-
-        player.teleport(LocationUtil.parseToLocation(config.getString("spawn-location")));
-    }
-
 }

@@ -32,7 +32,7 @@ public class SocialSpyCommand implements CommandExecutor {
                 Utils.send(player, "&cUso: /socialspy <on/off>");
                 return true;
             }
-            if (args.length == 1 && args[0].equalsIgnoreCase("on")) {
+            /*if (args.length == 1 && args[0].equalsIgnoreCase("on")) {
                 if (!plugin.socialSpyToggle) {
                     plugin.socialSpyToggle = true;
                     Utils.send(player, "&aSocial spy activado");
@@ -49,7 +49,7 @@ public class SocialSpyCommand implements CommandExecutor {
                     Utils.send(player, "&cSocial spy ya esta desactivado");
                 }
                 return true;
-            }
+            }*/
 
         }
         return true;

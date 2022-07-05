@@ -12,8 +12,6 @@ import java.util.stream.Collectors;
 
 public interface Utils {
 
-    FileConfiguration config = SurvivalClasicBasis.getInstance().getConfig();
-
     static void log(String... args){
         for(String str : args)
             Bukkit.getServer().getConsoleSender().sendMessage(ct(getPrefix() + str));
@@ -45,7 +43,7 @@ public interface Utils {
     }
 
     static String getPrefixGame(){
-        return  ct(config.getString("prefix"));
+        return ct(SurvivalClasicBasis.getConfiguration().getPrefix());
     }
 
     static String getPrefix(){

@@ -22,7 +22,7 @@ public class MessageCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        FileConfiguration config = plugin.getConfig();
+        /*FileConfiguration config = plugin.getConfig();
         
         if (!(sender instanceof Player)) {
             Utils.log("&cDebes ser un jugador para hacer eso");
@@ -92,7 +92,7 @@ public class MessageCommand implements CommandExecutor {
                 player.sendMessage(ChatColor.RED + "No permission!");
                 return true;
             }
-        }
+        }*/
         return true;
     }
 
