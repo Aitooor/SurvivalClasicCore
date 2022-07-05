@@ -39,6 +39,14 @@ public class TeleportCommand extends BaseCommand {
             Utils.send(sender, "&aHas teletransportado a todos.");
         }
     }
+    @Subcommand("top")
+    @CommandPermission("survivalclasicbasis.top")
+    public void teleportTop(Player sender) {
+        Location currentLocation = sender.getLocation();
+        Location newLocation = new Location(currentLocation.getWorld(), currentLocation.getX(), currentLocation.getWorld().getHighestBlockYAt(currentLocation), currentLocation.getZ(), currentLocation.getYaw(), currentLocation.getPitch());
+        sender.teleport(newLocation);
+        Utils.send(sender,"&aYou were teleported to the top!");
+    }
 
     @Subcommand("pos|position|posicion")
     @CommandPermission("survivalclasicbasis.tppos")
