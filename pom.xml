@@ -13,7 +13,7 @@
 
     <description>Simple core plugin for Eternal Network Survival Clasic</description>
     <properties>
-        <java.version>18</java.version>
+        <java.version>17</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
