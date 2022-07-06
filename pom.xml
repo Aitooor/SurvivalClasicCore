@@ -13,7 +13,7 @@
 
     <description>Simple core plugin for Eternal Network Survival Clasic</description>
     <properties>
-        <java.version>17</java.version>
+        <java.version>18</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -36,7 +36,7 @@
                 <artifactId>maven-shade-plugin</artifactId>
                 <version>3.3.0</version>
                 <configuration>
-                    <dependencyReducedPomLocation>false</dependencyReducedPomLocation>
+                    <createDependencyReducedPom>false</createDependencyReducedPom>
                     <minimizeJar>true</minimizeJar>
                     <relocations>
                         <relocation>
