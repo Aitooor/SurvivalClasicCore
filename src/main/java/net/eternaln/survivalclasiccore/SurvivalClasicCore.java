@@ -32,20 +32,20 @@ public final class SurvivalClasicCore extends JavaPlugin {
             Utils.log("&aHooked to PlaceholderAPI.");
             Utils.log("");
         } else {
-            Utils.logError("Could not find PlaceholderAPI! This plugin is required.");
+            Utils.logError("&cCould not find PlaceholderAPI! This plugin is required.");
             Bukkit.getPluginManager().disablePlugin(this);
         }
 
         commands();
         new RegisterExecutor();
 
-        Utils.log("&aENABLED CORRECTLY");
+        Utils.log("&aEnabled correctly.");
 
     }
 
     @Override
     public void onDisable() {
-        Utils.log("&cDISABLED CORRECTLY");
+        Utils.log("&cDisabled correctly");
     }
 
     private void commands() {

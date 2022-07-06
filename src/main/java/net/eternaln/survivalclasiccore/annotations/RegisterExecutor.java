@@ -12,9 +12,9 @@ import java.lang.reflect.InvocationTargetException;
 public class RegisterExecutor {
 
     public RegisterExecutor() {
-        SurvivalClasicCore.getInstance().getLogger().info("Registering commands and listeners...");
+        SurvivalClasicCore.getInstance().getLogger().info("&aRegistering commands and listeners...");
         execute(new Reflections("net.eternaln.survivalclasiccore"));
-        SurvivalClasicCore.getInstance().getLogger().info("Commands and listeners registered.");
+        SurvivalClasicCore.getInstance().getLogger().info("&aCommands and listeners registered.");
     }
 
     private void execute(Reflections reflections) {
