@@ -33,6 +33,7 @@ public class GodCommand extends BaseCommand {
 
     @Subcommand("other|others|otros|otro")
     @CommandPermission("survivalclasiccore.god.other")
+    @CommandCompletion("@players")
     public void other(CommandSender sender, String target) {
         Player targetPlayer = Bukkit.getPlayer(target);
 

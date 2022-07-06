@@ -27,6 +27,7 @@ public class NickCommand extends BaseCommand {
 
     @Subcommand("other|others|otros|otro")
     @CommandPermission("survivalclasiccore.nick.other")
+    @CommandCompletion("@players")
     public void other(CommandSender sender, String target, String string) {
         Player targetPlayer = Bukkit.getPlayer(target);
 

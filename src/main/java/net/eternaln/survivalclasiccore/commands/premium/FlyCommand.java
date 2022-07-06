@@ -28,6 +28,7 @@ public class FlyCommand extends BaseCommand {
 
     @Subcommand("other|others|otros|otro")
     @CommandPermission("survivalclasiccore.fly.other")
+    @CommandCompletion("@players")
     public void other(CommandSender sender, String target) {
         Player targetPlayer = Bukkit.getPlayer(target);
 

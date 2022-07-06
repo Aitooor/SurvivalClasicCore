@@ -48,20 +48,32 @@ public class TeleportCommand extends BaseCommand {
             for (Player online : Bukkit.getServer().getOnlinePlayers()) {
                 if(online != sender) {
                     online.teleport(targetPlayer.getLocation());
-                    Utils.send(online, "&fHas sido teletransportado hacia &b" + sender.getName());
-                }
-            }
-            Utils.send(sender, "&aHas teletransportado a todos hacia ti");
-        } else {
-            for (Player online : Bukkit.getServer().getOnlinePlayers()) {
-                if(online != sender) {
-                    online.teleport(sender.getLocation());
                     Utils.send(online, "&fHas sido teletransportado hacia &b" + targetPlayer.getName());
+                } else {
+                    Utils.send(sender, "&cNo puedes teletransportarte a ti mismo");
                 }
             }
             Utils.send(sender, "&fHas teletransportado a todos hacia &b" + targetPlayer.getName());
         }
     }
+
+    @Subcommand("allhere|todosaqui|allh")
+    @CommandPermission("survivalclasiccore.tpall")
+    @CommandCompletion("@players")
+    public void teleportAllHere(Player sender) {
+        if(sender == null || sender == null) {
+            for (Player online : Bukkit.getServer().getOnlinePlayers()) {
+                if(online != sender) {
+                    online.teleport(sender.getLocation());
+                    Utils.send(online, "&fHas sido teletransportado hacia &b" + sender.getName());
+                } else {
+                    Utils.send(sender, "&cNo puedes teletransportarte a ti mismo");
+                }
+            }
+            Utils.send(sender, "&fHas teletransportado a todos hacia &b" + sender.getName());
+        }
+    }
+
     @Subcommand("top")
     @CommandPermission("survivalclasiccore.top")
     public void teleportTop(Player sender) {
