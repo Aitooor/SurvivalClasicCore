@@ -22,15 +22,14 @@ public class PlayerListeners implements Listener {
 
         Player player = event.getPlayer();
 
-        String rank = "%vault_prefix% ";
+        String rank = "%vault_prefix%&r ";
         rank = PlaceholderAPI.setPlaceholders(event.getPlayer(), rank);
 
-        if(rank == null) {
-            rank = "";
+        if(rank == "") {
+            event.setFormat(Utils.ct(player.getDisplayName() + "&7: &r" + event.getMessage()));
         } else {
-            rank = rank.replace("%vault_prefix%", "");
+            event.setFormat(Utils.ct(rank + player.getDisplayName() + "&7: &r" + event.getMessage()));
         }
-        event.setFormat(Utils.ct(rank + player.getDisplayName() + "&7: &r" + event.getMessage()));
     }
 
     @EventHandler
@@ -40,13 +39,29 @@ public class PlayerListeners implements Listener {
             if (player == null) {
                 return;
             }
-            String name = "&f%player_name% ";
+            String name = "&f%player_name%&r ";
             name = PlaceholderAPI.setPlaceholders(event.getPlayer(), name);
-            String rank = "%vault_prefix% ";
+            String rank = "%vault_prefix%&r ";
             rank = PlaceholderAPI.setPlaceholders(event.getPlayer(), rank);
-
-            CenteredMessage.Chat.sendCenteredMessage(player, "TEST");
-            CenteredMessage.Chat.sendCenteredMessage(player, "TEST");
+            if(rank != null) {
+                CenteredMessage.Chat.sendCenteredMessage(player, "&6&lETERNAL &8| &bSúrvival Clásico &f1.19");
+                CenteredMessage.Chat.sendCenteredMessage(player, "");
+                CenteredMessage.Chat.sendCenteredMessage(player, "&aIP &7eternaln.net");
+                CenteredMessage.Chat.sendCenteredMessage(player, "&aTIENDA &7https://tienda.eternaln.net");
+                CenteredMessage.Chat.sendCenteredMessage(player, "&aDISCORD &7https://discord.com/invite/bMarGsQYfb");
+                CenteredMessage.Chat.sendCenteredMessage(player, "");
+                CenteredMessage.Chat.sendCenteredMessage(player, rank + name + "&aesperamos que disfrutes");
+                CenteredMessage.Chat.sendCenteredMessage(player, "&b¡Empecemos la aventura!");
+            } else {
+                CenteredMessage.Chat.sendCenteredMessage(player, "&6&lETERNAL &8| &bSúrvival Clásico &f1.19");
+                CenteredMessage.Chat.sendCenteredMessage(player, "");
+                CenteredMessage.Chat.sendCenteredMessage(player, "&aIP &7eternaln.net");
+                CenteredMessage.Chat.sendCenteredMessage(player, "&aTIENDA &7https://tienda.eternaln.net");
+                CenteredMessage.Chat.sendCenteredMessage(player, "&aDISCORD &7https://discord.com/invite/bMarGsQYfb");
+                CenteredMessage.Chat.sendCenteredMessage(player, "");
+                CenteredMessage.Chat.sendCenteredMessage(player, name + "&aesperamos que disfrutes");
+                CenteredMessage.Chat.sendCenteredMessage(player, "&b¡Empecemos la aventura!");
+            }
         }, 2);
     }
 
@@ -62,15 +77,6 @@ public class PlayerListeners implements Listener {
     @EventHandler
     public void onQuit(PlayerQuitEvent event) {
         event.setQuitMessage(null);
-    }
-
-    @EventHandler
-    public void onMove(PlayerMoveEvent event) {
-        Player player = event.getPlayer();
-
-        if (player.getLocation().getBlockY() < 0) {
-            event.getPlayer().teleport(SurvivalClasicCore.getConfiguration().getSpawnLocation());
-        }
     }
 
     @EventHandler

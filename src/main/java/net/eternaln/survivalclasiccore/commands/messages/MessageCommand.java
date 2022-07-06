@@ -5,6 +5,7 @@ import co.aikar.commands.CommandHelp;
 import co.aikar.commands.annotation.*;
 import lombok.Getter;
 import net.eternaln.survivalclasiccore.commands.admin.SocialSpyCommand;
+import net.eternaln.survivalclasiccore.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
@@ -34,23 +35,19 @@ public class MessageCommand extends BaseCommand {
         Player receiver = Bukkit.getPlayer(target);
 
         if (receiver == null) {
-            sender.sendMessage(ChatColor.RED + "The player must be online");
+            Utils.send(sender,"El jugador no esta online");
             return;
         }
 
-        sender.sendMessage(ChatColor.YELLOW + "To " + receiver.getDisplayName() + ChatColor.YELLOW + ChatColor.BOLD
-                + " >> " + ChatColor.GRAY + message);
-        receiver.sendMessage(ChatColor.YELLOW + "From " + sender.getDisplayName() + ChatColor.YELLOW
-                + ChatColor.BOLD + " >> " + ChatColor.GRAY + message);
+        Utils.send(sender,"&7Mensaje enviado a &b" + receiver.getDisplayName());
+        Utils.send(receiver,"&7Mensaje recibido de &b" + sender.getDisplayName() + "\n&f" + message);
         receiver.playSound(receiver.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1, 1);
 
         getConversations().put(sender.getUniqueId(), receiver.getUniqueId());
         getConversations().put(receiver.getUniqueId(), sender.getUniqueId());
 
         SocialSpyCommand.getSocialSpyList().stream().map(Bukkit::getPlayer).filter(Objects::nonNull).forEach(p -> {
-            p.sendMessage(ChatColor.YELLOW + "From " + sender.getDisplayName() + ChatColor.YELLOW + " to " +
-                    receiver.getDisplayName() + ChatColor.YELLOW + ChatColor.BOLD
-                    + " >> " + ChatColor.GRAY + message);
+            Utils.send(p,"&8(MSG) &7De &b" + sender.getDisplayName()  + " &7a &b" + receiver.getDisplayName() + " &7> &7" + message);
         });
     }
 }

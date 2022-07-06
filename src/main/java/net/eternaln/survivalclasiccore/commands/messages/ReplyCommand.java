@@ -4,6 +4,7 @@ import co.aikar.commands.BaseCommand;
 import co.aikar.commands.CommandHelp;
 import co.aikar.commands.annotation.*;
 import net.eternaln.survivalclasiccore.commands.admin.SocialSpyCommand;
+import net.eternaln.survivalclasiccore.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
@@ -25,27 +26,23 @@ public class ReplyCommand extends BaseCommand {
     @CommandCompletion("@players")
     public void reply(Player sender, String message) {
         if (MessageCommand.getConversations().get(sender.getUniqueId()) == null) {
-            sender.sendMessage(ChatColor.RED + "Nobody messaged you!");
+            Utils.send(sender, "Nobody messaged you!");
             return;
         }
 
         Player receiver = Bukkit.getPlayer(MessageCommand.getConversations().get(sender.getUniqueId()));
 
         if (receiver == null) {
-            sender.sendMessage(ChatColor.RED + "The player must be online");
+            Utils.send(sender, "The player must be online");
             return;
         }
 
-        sender.sendMessage(ChatColor.YELLOW + "To " + receiver.getDisplayName()
-                + ChatColor.YELLOW + ChatColor.BOLD + " >> " + ChatColor.GRAY + message);
-        receiver.sendMessage(ChatColor.YELLOW + "From " + sender.getDisplayName() + ChatColor.YELLOW + ChatColor.BOLD
-                + " >> " + ChatColor.GRAY + message);
+        Utils.send(sender,"&7Mensaje contestado a &b" + receiver.getDisplayName());
+        Utils.send(receiver,"&7Mensaje recibido de &b" + sender.getDisplayName() + "\n&f" + message);
         receiver.playSound(receiver.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1, 1);
 
         SocialSpyCommand.getSocialSpyList().stream().map(Bukkit::getPlayer).filter(Objects::nonNull).forEach(p -> {
-            p.sendMessage(ChatColor.YELLOW + "From " + sender.getDisplayName() + ChatColor.YELLOW + " to " +
-                    receiver.getDisplayName() + ChatColor.YELLOW + ChatColor.BOLD
-                    + " >> " + ChatColor.GRAY + message);
+            Utils.send(p,"&8(REPLY) &7De &b" + sender.getDisplayName()  + " &7a &b" + receiver.getDisplayName() + " &7> &7" + message);
         });
     }
 }

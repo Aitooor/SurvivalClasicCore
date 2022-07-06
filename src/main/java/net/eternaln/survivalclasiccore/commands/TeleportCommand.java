@@ -1,4 +1,4 @@
-package net.eternaln.survivalclasiccore.commands.teleports;
+package net.eternaln.survivalclasiccore.commands;
 
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.CommandHelp;
