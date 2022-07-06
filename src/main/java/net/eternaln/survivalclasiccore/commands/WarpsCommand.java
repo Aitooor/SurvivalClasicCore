@@ -19,7 +19,7 @@ public class WarpsCommand extends BaseCommand {
     private final Cooldown<UUID> cooldown = new Cooldown<>(SurvivalClasicCore.getConfiguration().getCmdCooldown());
 
     @HelpCommand
-    public void onHelp(CommandSender sender) {
+    public void onHelp(Player sender) {
         Utils.sendNoPrefix(sender, SurvivalClasicCore.getConfiguration().getWarpHelp().toArray(String[]::new));
     }
 

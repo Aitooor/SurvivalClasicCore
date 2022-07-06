@@ -13,14 +13,14 @@ public class FlyCommand extends BaseCommand {
     @Default
     @CatchUnknown
     @CommandPermission("survivalclasiccore.fly")
-    public void fly(CommandSender sender) {
+    public void fly(Player sender) {
         Player player = (Player) sender;
-        if (!player.getAllowFlight()){
-            player.setAllowFlight(true);
+        if (!sender.getAllowFlight()){
+            sender.setAllowFlight(true);
 
             Utils.send(sender, "&aHas activado el fly");
         } else {
-            player.setAllowFlight(false);
+            sender.setAllowFlight(false);
 
             Utils.send(sender, "&cHas desactivado el fly");
         }

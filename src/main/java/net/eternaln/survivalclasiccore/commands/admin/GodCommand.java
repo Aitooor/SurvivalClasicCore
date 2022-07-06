@@ -18,15 +18,15 @@ public class GodCommand extends BaseCommand {
     @Default
     @CatchUnknown
     @CommandPermission("survivalclasiccore.god")
-    public void god(CommandSender sender) {
+    public void god(Player sender) {
         Player player = (Player) sender;
         if (gods.contains(sender.getName())) {
             gods.remove(sender.getName());
-            player.setInvulnerable(false);
+            sender.setInvulnerable(false);
             Utils.send(sender,"&aYou are no longer immortal!");
         } else {
             gods.add(sender.getName());
-            player.setInvulnerable(true);
+            sender.setInvulnerable(true);
             Utils.send(sender,"&aYou are now immortal!");
         }
     }

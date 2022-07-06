@@ -14,7 +14,7 @@ public class ItemCommand extends BaseCommand {
     @HelpCommand
     @Default
     @CatchUnknown
-    public void onHelp(CommandSender sender) {
+    public void onHelp(Player sender) {
         Utils.sendNoPrefix(sender, SurvivalClasicCore.getConfiguration().getItemHelp().toArray(String[]::new));
     }
 
