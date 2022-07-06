@@ -1,4 +1,4 @@
-package net.eternaln.survivalclasiccore.commands.premium;
+package net.eternaln.survivalclasiccore.commands.admin;
 
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.*;
