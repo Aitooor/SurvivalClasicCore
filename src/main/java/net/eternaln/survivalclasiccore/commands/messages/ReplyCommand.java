@@ -1,6 +1,7 @@
 package net.eternaln.survivalclasiccore.commands.messages;
 
 import co.aikar.commands.BaseCommand;
+import co.aikar.commands.CommandHelp;
 import co.aikar.commands.annotation.*;
 import net.eternaln.survivalclasiccore.commands.admin.SocialSpyCommand;
 import org.bukkit.Bukkit;
@@ -14,8 +15,13 @@ import java.util.Objects;
 @CommandPermission("survivalclasiccore.tpa")
 public class ReplyCommand extends BaseCommand {
 
-    @Default
     @CatchUnknown
+    @HelpCommand("help|ayuda")
+    public void help(CommandHelp help) {
+        help.showHelp();
+    }
+
+    @Default
     @CommandCompletion("@players")
     public void reply(Player sender, String message) {
         if (MessageCommand.getConversations().get(sender.getUniqueId()) == null) {

@@ -1,6 +1,7 @@
 package net.eternaln.survivalclasiccore.commands.admin;
 
 import co.aikar.commands.BaseCommand;
+import co.aikar.commands.CommandHelp;
 import co.aikar.commands.annotation.*;
 import net.eternaln.survivalclasiccore.SurvivalClasicCore;
 import net.eternaln.survivalclasiccore.utils.Utils;
@@ -11,10 +12,11 @@ import org.bukkit.entity.Player;
 @CommandPermission("survivalclasiccore.item.give")
 public class ItemCommand extends BaseCommand {
 
-    @HelpCommand
     @Default
+    @HelpCommand("help|ayuda")
     @CatchUnknown
-    public void onHelp(Player sender) {
+    public void onHelp(Player sender, CommandHelp help) {
+        help.showHelp();
         Utils.sendNoPrefix(sender, SurvivalClasicCore.getConfiguration().getItemHelp().toArray(String[]::new));
     }
 

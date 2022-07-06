@@ -14,14 +14,14 @@ public class CoreCommand extends BaseCommand {
 
     @Default
     @CatchUnknown
-    @HelpCommand
+    @HelpCommand("help|ayuda")
     public void help(Player sender, CommandHelp help) {
         help.showHelp();
     }
 
     @Subcommand("reload")
     @CommandPermission("survivalclasiccore.reload")
-    public void reloadConfig(Player sender) {
+    public void reloadConfig(CommandSender sender) {
         SurvivalClasicCore.getConfiguration().load();
         SurvivalClasicCore.getWarpsFile().reloadConfig();
 

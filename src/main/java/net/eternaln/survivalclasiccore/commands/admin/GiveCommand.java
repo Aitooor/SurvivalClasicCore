@@ -16,8 +16,13 @@ import org.bukkit.inventory.PlayerInventory;
 @CommandAlias("give|dar")
 public class GiveCommand extends BaseCommand {
 
-    @Default
     @CatchUnknown
+    @HelpCommand("help|ayuda")
+    public void help(CommandHelp help) {
+        help.showHelp();
+    }
+
+    @Default
     public void give(Player sender, String item, int amount) {
         sender.getInventory().addItem(new ItemStack(Material.getMaterial(item), amount));
     }

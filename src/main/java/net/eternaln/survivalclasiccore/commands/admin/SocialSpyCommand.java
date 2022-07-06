@@ -1,10 +1,8 @@
 package net.eternaln.survivalclasiccore.commands.admin;
 
 import co.aikar.commands.BaseCommand;
-import co.aikar.commands.annotation.CatchUnknown;
-import co.aikar.commands.annotation.CommandAlias;
-import co.aikar.commands.annotation.CommandPermission;
-import co.aikar.commands.annotation.Default;
+import co.aikar.commands.CommandHelp;
+import co.aikar.commands.annotation.*;
 import lombok.Getter;
 import net.eternaln.survivalclasiccore.utils.Utils;
 import org.bukkit.entity.Player;
@@ -20,8 +18,13 @@ public class SocialSpyCommand extends BaseCommand {
     @Getter
     private static final List<UUID> socialSpyList = new ArrayList<>();
 
-    @Default
     @CatchUnknown
+    @HelpCommand("help|ayuda")
+    public void help(CommandHelp help) {
+        help.showHelp();
+    }
+
+    @Default
     public void toggleSocialSpy(Player sender) {
         if (socialSpyList.contains(sender.getUniqueId())) {
             socialSpyList.remove(sender.getUniqueId());

@@ -1,6 +1,7 @@
 package net.eternaln.survivalclasiccore.commands.premium;
 
 import co.aikar.commands.BaseCommand;
+import co.aikar.commands.CommandHelp;
 import co.aikar.commands.annotation.*;
 import net.eternaln.survivalclasiccore.utils.Utils;
 import org.bukkit.Bukkit;
@@ -10,8 +11,13 @@ import org.bukkit.entity.Player;
 @CommandAlias("fly|volar|vuelo")
 public class FlyCommand extends BaseCommand {
 
-    @Default
     @CatchUnknown
+    @HelpCommand("help|ayuda")
+    public void help(CommandHelp help) {
+        help.showHelp();
+    }
+
+    @Default
     @CommandPermission("survivalclasiccore.fly")
     public void fly(Player sender) {
         Player player = (Player) sender;

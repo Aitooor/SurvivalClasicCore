@@ -1,6 +1,7 @@
 package net.eternaln.survivalclasiccore.commands.teleports;
 
 import co.aikar.commands.BaseCommand;
+import co.aikar.commands.CommandHelp;
 import co.aikar.commands.annotation.*;
 import net.eternaln.survivalclasiccore.SurvivalClasicCore;
 import net.eternaln.survivalclasiccore.utils.Cooldown;
@@ -22,7 +23,13 @@ public class TeleportCommand extends BaseCommand {
 
     private final Cooldown<UUID> cooldown = new Cooldown<>(SurvivalClasicCore.getConfiguration().getCmdCooldown());
 
-    @Default @CatchUnknown
+    @CatchUnknown
+    @HelpCommand("help|ayuda")
+    public void help(CommandHelp help) {
+        help.showHelp();
+    }
+
+    @Default
     @CommandPermission("survivalclasiccore.tp")
     public void teleport(Player sender, String target) {
         Player targetPlayer = Bukkit.getPlayer(target);

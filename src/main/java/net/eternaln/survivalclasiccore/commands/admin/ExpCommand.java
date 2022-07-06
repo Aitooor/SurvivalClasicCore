@@ -1,6 +1,7 @@
 package net.eternaln.survivalclasiccore.commands.admin;
 
 import co.aikar.commands.BaseCommand;
+import co.aikar.commands.CommandHelp;
 import co.aikar.commands.annotation.*;
 import net.eternaln.survivalclasiccore.utils.Utils;
 import org.bukkit.Bukkit;
@@ -11,6 +12,12 @@ import org.bukkit.entity.Player;
 @CommandPermission("survivalclasiccore.exp")
 public class ExpCommand extends BaseCommand {
 
+    @Default
+    @CatchUnknown
+    @HelpCommand("help|ayuda")
+    public void help(CommandHelp help) {
+        help.showHelp();
+    }
     @Subcommand("add|añadir")
     public class GiveExpSubCommand extends BaseCommand {
         @Subcommand("amount|cantidad")

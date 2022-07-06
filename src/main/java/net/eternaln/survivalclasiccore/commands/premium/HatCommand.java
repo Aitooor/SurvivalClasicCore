@@ -1,6 +1,7 @@
 package net.eternaln.survivalclasiccore.commands.premium;
 
 import co.aikar.commands.BaseCommand;
+import co.aikar.commands.CommandHelp;
 import co.aikar.commands.annotation.*;
 import net.eternaln.survivalclasiccore.utils.Utils;
 import org.bukkit.Bukkit;
@@ -14,8 +15,13 @@ import java.util.Objects;
 @CommandAlias("hat|cabeza|gorro")
 public class HatCommand extends BaseCommand {
 
-    @Default
     @CatchUnknown
+    @HelpCommand("help|ayuda")
+    public void help(CommandHelp help) {
+        help.showHelp();
+    }
+
+    @Default
     @CommandPermission("survivalclasiccore.hat")
     public void god(Player sender) {
         ItemStack x = sender.getInventory().getItemInMainHand();

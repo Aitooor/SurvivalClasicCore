@@ -1,6 +1,7 @@
 package net.eternaln.survivalclasiccore.commands.admin;
 
 import co.aikar.commands.BaseCommand;
+import co.aikar.commands.CommandHelp;
 import co.aikar.commands.annotation.*;
 import net.eternaln.survivalclasiccore.utils.Utils;
 import org.bukkit.NamespacedKey;
@@ -11,6 +12,13 @@ import org.bukkit.inventory.meta.ItemMeta;
 @CommandAlias("enchant|encantamiento|enchants|enchantments|encantamientos")
 @CommandPermission("survivalclasiccore.enchant")
 public class EnchantCommand extends BaseCommand {
+
+    @Default
+    @CatchUnknown
+    @HelpCommand("help|ayuda")
+    public void help(CommandHelp help) {
+        help.showHelp();
+    }
 
     @Subcommand("add")
     @CommandPermission("survivalclasiccore.enchant.add")

@@ -1,6 +1,7 @@
 package net.eternaln.survivalclasiccore.commands;
 
 import co.aikar.commands.BaseCommand;
+import co.aikar.commands.CommandHelp;
 import co.aikar.commands.annotation.*;
 import net.eternaln.survivalclasiccore.SurvivalClasicCore;
 import net.eternaln.survivalclasiccore.utils.Cooldown;
@@ -18,13 +19,14 @@ public class WarpsCommand extends BaseCommand {
 
     private final Cooldown<UUID> cooldown = new Cooldown<>(SurvivalClasicCore.getConfiguration().getCmdCooldown());
 
-    @HelpCommand
-    public void onHelp(Player sender) {
+    @HelpCommand("help|ayuda")
+    @CatchUnknown
+    public void onHelp(Player sender, CommandHelp help) {
+        help.showHelp();
         Utils.sendNoPrefix(sender, SurvivalClasicCore.getConfiguration().getWarpHelp().toArray(String[]::new));
     }
 
     @Default
-    @CatchUnknown
     public void onWarp(Player sender, String name) {
         if (!sender.hasPermission("survivalclasiccore.cooldown.bypass") && !cooldown.isCooledDown(sender.getUniqueId())) {
             sender.sendMessage(Utils.ct("&cDebes esperar &b" + cooldown.getSecondsRemaining(sender.getUniqueId()) + " &csegundos"));

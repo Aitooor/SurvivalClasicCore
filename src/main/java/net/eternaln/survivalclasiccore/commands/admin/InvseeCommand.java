@@ -1,6 +1,7 @@
 package net.eternaln.survivalclasiccore.commands.admin;
 
 import co.aikar.commands.BaseCommand;
+import co.aikar.commands.CommandHelp;
 import co.aikar.commands.annotation.*;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -8,8 +9,12 @@ import org.bukkit.entity.Player;
 @CommandAlias("invsee|inv|inventario|verinventario|verinv")
 public class InvseeCommand extends BaseCommand {
 
-    @Default
     @CatchUnknown
+    @HelpCommand("help|ayuda")
+    public void help(CommandHelp help) {
+        help.showHelp();
+    }
+    @Default
     @CommandPermission("survivalclasiccore.invsee")
     public void god(Player sender) {
         sender.openInventory(sender.getInventory());

@@ -1,6 +1,7 @@
 package net.eternaln.survivalclasiccore.commands.admin;
 
 import co.aikar.commands.BaseCommand;
+import co.aikar.commands.CommandHelp;
 import co.aikar.commands.annotation.*;
 import net.eternaln.survivalclasiccore.utils.Utils;
 import org.bukkit.Bukkit;
@@ -15,8 +16,13 @@ public class GodCommand extends BaseCommand {
 
     private ArrayList<String> gods = new ArrayList<String>();
 
-    @Default
     @CatchUnknown
+    @HelpCommand("help|ayuda")
+    public void help(CommandHelp help) {
+        help.showHelp();
+    }
+
+    @Default
     @CommandPermission("survivalclasiccore.god")
     public void god(Player sender) {
         Player player = (Player) sender;

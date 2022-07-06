@@ -1,6 +1,7 @@
 package net.eternaln.survivalclasiccore.commands.messages;
 
 import co.aikar.commands.BaseCommand;
+import co.aikar.commands.CommandHelp;
 import co.aikar.commands.annotation.*;
 import lombok.Getter;
 import net.eternaln.survivalclasiccore.commands.admin.SocialSpyCommand;
@@ -20,8 +21,13 @@ public class MessageCommand extends BaseCommand {
     @Getter
     private static final HashMap<UUID, UUID> conversations = new HashMap<>();
 
-    @Default
     @CatchUnknown
+    @HelpCommand("help|ayuda")
+    public void help(CommandHelp help) {
+        help.showHelp();
+    }
+
+    @Default
     @CommandCompletion("@players @players")
     public void msg(Player sender, String target, String message) {
 
