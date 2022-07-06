@@ -10,8 +10,9 @@ import org.bukkit.entity.Player;
 @CommandPermission("survivalclasiccore.exp")
 public class ExpCommand extends BaseCommand {
 
+    @Subcommand("add|añadir")
     public class GiveExpSubCommand extends BaseCommand {
-        @Subcommand("give|dar|sumar|sumarxp|sumarexp")
+        @Subcommand("me|yo")
         public void give(Player sender, int amount) {
             sender.giveExp(amount);
             sender.playSound(sender.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
@@ -27,8 +28,9 @@ public class ExpCommand extends BaseCommand {
         }
     }
 
+    @Subcommand("remove|quitar|restar|restarxp|restarexp")
     public class RemoveExpSubCommand extends BaseCommand {
-        @Subcommand("remove|quitar|restar|restarxp|restarexp")
+        @Subcommand("me|yo")
         public void remove(Player sender, int amount) {
             int currentExp = sender.getTotalExperience();
             sender.setExp(currentExp - amount);
@@ -45,8 +47,9 @@ public class ExpCommand extends BaseCommand {
         }
     }
 
+    @Subcommand("set|establecer|establecerxp|establecerexp")
     public class SetExpSubCommand extends BaseCommand {
-        @Subcommand("set|establecer|establecerxp|establecerexp")
+        @Subcommand("me|yo")
         public void set(Player sender, int amount) {
             sender.setExp(amount);
             sender.playSound(sender.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
