@@ -40,7 +40,7 @@ public class MessageCommand extends BaseCommand {
         }
 
         Utils.send(sender,"&7Mensaje enviado a &b" + receiver.getDisplayName());
-        Utils.send(receiver,"&7Mensaje recibido de &b" + sender.getDisplayName() + "\n&f" + message);
+        Utils.send(receiver,"&7Mensaje recibido de &b" + sender.getDisplayName() + " &7> &f" + message);
         receiver.playSound(receiver.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1, 1);
 
         getConversations().put(sender.getUniqueId(), receiver.getUniqueId());
