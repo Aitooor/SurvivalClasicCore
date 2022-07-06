@@ -24,7 +24,7 @@ public class GiveCommand extends BaseCommand {
 
     @Subcommand("other|otro|otros|others")
     @CommandPermission("survivalclasiccore.give.other")
-    @CommandCompletion("@players @string @integers")
+    @CommandCompletion("@players")
     public void giveOther(Player sender, String target, String item, int amount) {
         Player targetPlayer = Bukkit.getPlayer(target);
         String itemName = item.toUpperCase();
