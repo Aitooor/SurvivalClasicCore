@@ -11,7 +11,7 @@ import org.bukkit.entity.Player;
 public class WorkbenchCommand extends BaseCommand {
 
     @CatchUnknown
-    @HelpCommand("help|ayuda")
+    @HelpCommand("ayuda|help")
     public void help(CommandHelp help) {
         help.showHelp();
     }
@@ -23,7 +23,7 @@ public class WorkbenchCommand extends BaseCommand {
         Utils.send(sender, "&aAbriendo tu mesa de trabajo");
     }
 
-    @Subcommand("other|others|otros|otro")
+    @Subcommand("otros|others|other|otro")
     @CommandPermission("survivalclasiccore.workbench.other")
     public void other(Player sender, String target) {
         Player targetPlayer = Bukkit.getPlayer(target);

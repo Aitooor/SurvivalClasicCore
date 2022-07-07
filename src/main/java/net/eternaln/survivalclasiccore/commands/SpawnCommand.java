@@ -17,7 +17,7 @@ public class SpawnCommand extends BaseCommand {
     private final Cooldown<UUID> cooldown = new Cooldown<>(SurvivalClasicCore.getConfiguration().getCmdCooldown());
 
     @CatchUnknown
-    @HelpCommand("help|ayuda")
+    @HelpCommand("ayuda|help")
     public void help(CommandHelp help) {
         help.showHelp();
     }
@@ -34,7 +34,7 @@ public class SpawnCommand extends BaseCommand {
         Utils.send(sender, SurvivalClasicCore.getConfiguration().getTpSpawn());
     }
 
-    @Subcommand("other|others|otros|otro")
+    @Subcommand("otros|others|other|otro")
     @CommandPermission("survivalclasiccore.spawn.other")
     @CommandCompletion("@players")
     public void spawnOther(Player sender, Player target) {

@@ -15,7 +15,7 @@ public class EnchantCommand extends BaseCommand {
 
     @Default
     @CatchUnknown
-    @HelpCommand("help|ayuda")
+    @HelpCommand("ayuda|help")
     public void help(CommandHelp help) {
         help.showHelp();
     }

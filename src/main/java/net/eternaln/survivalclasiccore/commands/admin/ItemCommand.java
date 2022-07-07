@@ -13,7 +13,7 @@ import org.bukkit.entity.Player;
 public class ItemCommand extends BaseCommand {
 
     @Default
-    @HelpCommand("help|ayuda")
+    @HelpCommand("ayuda|help")
     @CatchUnknown
     public void onHelp(Player sender, CommandHelp help) {
         help.showHelp();

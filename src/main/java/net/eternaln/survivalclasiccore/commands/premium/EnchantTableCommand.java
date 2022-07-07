@@ -11,7 +11,7 @@ import org.bukkit.entity.Player;
 public class EnchantTableCommand extends BaseCommand {
 
     @CatchUnknown
-    @HelpCommand("help|ayuda")
+    @HelpCommand("ayuda|help")
     public void help(CommandHelp help) {
         help.showHelp();
     }
@@ -23,7 +23,7 @@ public class EnchantTableCommand extends BaseCommand {
         Utils.send(sender, "&aAbriendo tu mesa de encantamiento");
     }
 
-    @Subcommand("other|others|otros|otro")
+    @Subcommand("otros|others|other|otro")
     @CommandPermission("survivalclasiccore.enchanttable.other")
     @CommandCompletion("@players")
     public void other(Player sender, String target) {

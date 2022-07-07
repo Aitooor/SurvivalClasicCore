@@ -24,7 +24,7 @@ public class TeleportCommand extends BaseCommand {
     private final Cooldown<UUID> cooldown = new Cooldown<>(SurvivalClasicCore.getConfiguration().getCmdCooldown());
 
     @CatchUnknown
-    @HelpCommand("help|ayuda")
+    @HelpCommand("ayuda|help")
     public void help(CommandHelp help) {
         help.showHelp();
     }
@@ -145,7 +145,7 @@ public class TeleportCommand extends BaseCommand {
         }
     }
 
-    @Subcommand("request|solicitar|pedir")
+    @Subcommand("solicitar|request|pedir")
     @CommandCompletion("@players")
     public void teleportRequest(Player sender, String target) {
         if (!sender.hasPermission("survivalclasiccore.cooldown.bypass") && !cooldown.isCooledDown(sender.getUniqueId())) {
@@ -157,7 +157,7 @@ public class TeleportCommand extends BaseCommand {
             if(!target.equals(sender.getName())) {
                 Utils.send(sender, "&fHas enviado solicitud a &b" + targetPlayer.getName());
                 Utils.send(targetPlayer, "&fEl jugador &b" + sender.getName() + " &fQuiere teletrasportarse a ti\n&aPuedes aceptar usando &l/tp accept|confirm|aceptar|confirmar\n" +
-                        "&cO rechazarlo usando &l/tp deny|rechazar");
+                        "&cO rechazarlo usando &l/tp rechazar|deny");
                 requests.put(targetPlayer, sender);
             } else {
                 Utils.send(sender,"&cNo puedes teletransportarte a ti mismo");
@@ -167,7 +167,7 @@ public class TeleportCommand extends BaseCommand {
         }
     }
 
-    @Subcommand("accept|confirm|aceptar|confirmar")
+    @Subcommand("aceptar|confirm|accept|confirmar")
     public void teleportAccept(Player sender) {
         if (requests.containsKey(sender)) {
             Utils.send(sender,"&fHas &a&lACEPTADO &fla petición de &b" + requests.get(sender).getPlayer().getDisplayName());
@@ -178,7 +178,7 @@ public class TeleportCommand extends BaseCommand {
         }
     }
 
-    @Subcommand("deny|rechazar")
+    @Subcommand("rechazar|deny")
     public void teleportDeny(Player sender) {
         if (requests.containsKey(sender)) {
             Utils.send(sender,"&fHas &c&lDENEGADO &ala petición de &b" + requests.get(sender).getPlayer().getDisplayName());

@@ -23,7 +23,7 @@ public class MessageCommand extends BaseCommand {
     private static final HashMap<UUID, UUID> conversations = new HashMap<>();
 
     @CatchUnknown
-    @HelpCommand("help|ayuda")
+    @HelpCommand("ayuda|help")
     public void help(CommandHelp help) {
         help.showHelp();
     }

@@ -17,7 +17,7 @@ public class GodCommand extends BaseCommand {
     private ArrayList<String> gods = new ArrayList<String>();
 
     @CatchUnknown
-    @HelpCommand("help|ayuda")
+    @HelpCommand("ayuda|help")
     public void help(CommandHelp help) {
         help.showHelp();
     }
@@ -25,7 +25,6 @@ public class GodCommand extends BaseCommand {
     @Default
     @CommandPermission("survivalclasiccore.god")
     public void god(Player sender) {
-        Player player = (Player) sender;
         if (gods.contains(sender.getName())) {
             gods.remove(sender.getName());
             sender.setInvulnerable(false);
@@ -37,7 +36,7 @@ public class GodCommand extends BaseCommand {
         }
     }
 
-    @Subcommand("other|others|otros|otro")
+    @Subcommand("otros|others|other|otro")
     @CommandPermission("survivalclasiccore.god.other")
     @CommandCompletion("@players")
     public void other(CommandSender sender, String target) {

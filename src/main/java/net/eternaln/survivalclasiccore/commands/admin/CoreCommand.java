@@ -14,7 +14,7 @@ public class CoreCommand extends BaseCommand {
 
     @Default
     @CatchUnknown
-    @HelpCommand("help|ayuda")
+    @HelpCommand("ayuda|help")
     public void help(Player sender, CommandHelp help) {
         help.showHelp();
     }

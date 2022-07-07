@@ -14,7 +14,7 @@ public class ExpCommand extends BaseCommand {
 
     @Default
     @CatchUnknown
-    @HelpCommand("help|ayuda")
+    @HelpCommand("ayuda|help")
     public void help(CommandHelp help) {
         help.showHelp();
     }
@@ -22,14 +22,14 @@ public class ExpCommand extends BaseCommand {
     public class GiveExpSubCommand extends BaseCommand {
         @Subcommand("amount|cantidad")
         public class AmountExpSubCommand extends BaseCommand {
-            @Subcommand("me|yo")
+            @Subcommand("yo|me")
             public void give(Player sender, int amount) {
                 sender.giveExp(amount);
                 Utils.send(sender, "&fHas recibido &b" + amount + " &fexp");
                 sender.playSound(sender.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
             }
 
-            @Subcommand("other|otro|otros|others")
+            @Subcommand("otros|otro|other|others")
             @CommandPermission("survivalclasiccore.exp.other")
             @CommandCompletion("@players")
             public void giveOther(Player sender, String target, int amount) {
@@ -43,14 +43,14 @@ public class ExpCommand extends BaseCommand {
 
         @Subcommand("level|nivel")
         public class LevelExpSubCommand extends BaseCommand {
-            @Subcommand("me|yo")
+            @Subcommand("yo|me")
             public void give(Player sender, int amount) {
                 sender.giveExpLevels(amount);
                 Utils.send(sender, "&fHas recibido &b" + amount + " &fniveles de exp");
                 sender.playSound(sender.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
             }
 
-            @Subcommand("other|otro|otros|others")
+            @Subcommand("otros|otro|other|others")
             @CommandPermission("survivalclasiccore.exp.other")
             @CommandCompletion("@players")
             public void giveOther(Player sender, String target, int amount) {
@@ -65,7 +65,7 @@ public class ExpCommand extends BaseCommand {
 
     @Subcommand("set|establecer|establecerxp|establecerexp")
     public class SetExpSubCommand extends BaseCommand {
-        @Subcommand("me|yo")
+        @Subcommand("yo|me")
         public void set(Player sender, int amount) {
             sender.setExp(0);
             sender.setLevel(amount);
@@ -73,7 +73,7 @@ public class ExpCommand extends BaseCommand {
             sender.playSound(sender.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
         }
 
-        @Subcommand("other|otro|otros|others")
+        @Subcommand("otros|otro|other|others")
         @CommandPermission("survivalclasiccore.exp.other")
         @CommandCompletion("@players")
         public void setOther(Player sender, String target, int amount) {
@@ -86,9 +86,9 @@ public class ExpCommand extends BaseCommand {
         }
     }
 
-    @Subcommand("clear|limpiar")
+    @Subcommand("limpiar|clear")
     public class RemoveExpSubCommand extends BaseCommand {
-        @Subcommand("me|yo")
+        @Subcommand("yo|me")
         public void remove(Player sender) {
             sender.setExp(0);
             sender.setLevel(0);
@@ -96,7 +96,7 @@ public class ExpCommand extends BaseCommand {
             sender.playSound(sender.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
         }
 
-        @Subcommand("other|otro|otros|others")
+        @Subcommand("otros|otro|other|others")
         @CommandPermission("survivalclasiccore.exp.other")
         @CommandCompletion("@players")
         public void removeOther(Player sender, String target) {

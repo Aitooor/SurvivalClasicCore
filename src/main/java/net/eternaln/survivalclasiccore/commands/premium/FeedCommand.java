@@ -7,11 +7,11 @@ import net.eternaln.survivalclasiccore.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-@CommandAlias("feed|comida|food|alimento")
+@CommandAlias("comida|feed|food|alimento")
 public class FeedCommand extends BaseCommand {
 
     @CatchUnknown
-    @HelpCommand("help|ayuda")
+    @HelpCommand("ayuda|help")
     public void help(CommandHelp help) {
         help.showHelp();
     }
@@ -23,7 +23,7 @@ public class FeedCommand extends BaseCommand {
         Utils.send(sender, "&aTu comida ha sido restaurada");
     }
 
-    @Subcommand("other|others|otros|otro")
+    @Subcommand("otros|others|other|otro")
     @CommandPermission("survivalclasiccore.feed.other")
     @CommandCompletion("@players")
     public void other(Player sender, String target) {

@@ -12,7 +12,7 @@ import org.bukkit.entity.Player;
 public class FlyCommand extends BaseCommand {
 
     @CatchUnknown
-    @HelpCommand("help|ayuda")
+    @HelpCommand("ayuda|help")
     public void help(CommandHelp help) {
         help.showHelp();
     }
@@ -32,7 +32,7 @@ public class FlyCommand extends BaseCommand {
         }
     }
 
-    @Subcommand("other|others|otros|otro")
+    @Subcommand("otros|others|other|otro")
     @CommandPermission("survivalclasiccore.fly.other")
     @CommandCompletion("@players")
     public void other(CommandSender sender, String target) {

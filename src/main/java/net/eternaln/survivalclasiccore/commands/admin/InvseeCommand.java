@@ -10,7 +10,7 @@ import org.bukkit.entity.Player;
 public class InvseeCommand extends BaseCommand {
 
     @CatchUnknown
-    @HelpCommand("help|ayuda")
+    @HelpCommand("ayuda|help")
     public void help(CommandHelp help) {
         help.showHelp();
     }
@@ -20,7 +20,7 @@ public class InvseeCommand extends BaseCommand {
         sender.openInventory(sender.getInventory());
     }
 
-    @Subcommand("other|others|otros|otro")
+    @Subcommand("otros|others|other|otro")
     @CommandPermission("survivalclasiccore.invsee.other")
     @CommandCompletion("@players")
     public void other(Player sender, String target) {

@@ -19,7 +19,7 @@ public class WarpsCommand extends BaseCommand {
 
     private final Cooldown<UUID> cooldown = new Cooldown<>(SurvivalClasicCore.getConfiguration().getCmdCooldown());
 
-    @HelpCommand("help|ayuda")
+    @HelpCommand("ayuda|help")
     @CatchUnknown
     public void onHelp(Player sender, CommandHelp help) {
         help.showHelp();
@@ -42,7 +42,7 @@ public class WarpsCommand extends BaseCommand {
         sender.teleport(LocationUtil.parseToLocation(warp));
     }
 
-    @Subcommand("list|lista")
+    @Subcommand("lista|list")
     public void listWarps(Player sender) {
         Object warps = SurvivalClasicCore.getWarpsFile().getConfig() + "\n";
 

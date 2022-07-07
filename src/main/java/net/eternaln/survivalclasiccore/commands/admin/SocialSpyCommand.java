@@ -19,7 +19,7 @@ public class SocialSpyCommand extends BaseCommand {
     private static final List<UUID> socialSpyList = new ArrayList<>();
 
     @CatchUnknown
-    @HelpCommand("help|ayuda")
+    @HelpCommand("ayuda|help")
     public void help(CommandHelp help) {
         help.showHelp();
     }

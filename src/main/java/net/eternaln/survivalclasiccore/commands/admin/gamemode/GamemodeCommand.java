@@ -14,7 +14,7 @@ public class GamemodeCommand extends BaseCommand {
 
     @Default
     @CatchUnknown
-    @HelpCommand("help|ayuda")
+    @HelpCommand("ayuda|help")
     public void help(CommandSender sender, CommandHelp help) {
         help.showHelp();
     }

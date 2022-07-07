@@ -12,7 +12,7 @@ import org.bukkit.entity.Player;
 public class NickCommand extends BaseCommand {
 
     @CatchUnknown
-    @HelpCommand("help|ayuda")
+    @HelpCommand("ayuda|help")
     public void help(CommandHelp help) {
         help.showHelp();
     }
@@ -31,7 +31,7 @@ public class NickCommand extends BaseCommand {
         }
     }
 
-    @Subcommand("other|others|otros|otro")
+    @Subcommand("otros|others|other|otro")
     @CommandPermission("survivalclasiccore.nick.other")
     @CommandCompletion("@players")
     public void other(CommandSender sender, String target, String string) {

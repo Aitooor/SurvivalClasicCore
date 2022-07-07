@@ -16,7 +16,7 @@ import java.util.Objects;
 public class HatCommand extends BaseCommand {
 
     @CatchUnknown
-    @HelpCommand("help|ayuda")
+    @HelpCommand("ayuda|help")
     public void help(CommandHelp help) {
         help.showHelp();
     }
@@ -42,7 +42,7 @@ public class HatCommand extends BaseCommand {
         Utils.send(sender, "&aHas cambiado tu casco");
     }
 
-    @Subcommand("other|others|otros|otro")
+    @Subcommand("otros|others|other|otro")
     @CommandPermission("survivalclasiccore.hat.other")
     @CommandCompletion("@players")
     public void other(Player sender, String target) {
