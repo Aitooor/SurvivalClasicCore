@@ -6,6 +6,7 @@ import lombok.Getter;
 import net.eternaln.survivalclasiccore.annotations.RegisterExecutor;
 import net.eternaln.survivalclasiccore.data.Configuration;
 import net.eternaln.survivalclasiccore.data.WarpsFile;
+import net.eternaln.survivalclasiccore.managers.menus.MenuManager;
 import net.eternaln.survivalclasiccore.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -26,6 +27,8 @@ public final class SurvivalClasicCore extends JavaPlugin {
         instance = this;
         configuration = new Configuration();
         warpsFile = new WarpsFile(this);
+
+        new MenuManager(this);
 
 
         if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {

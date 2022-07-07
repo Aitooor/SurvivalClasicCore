@@ -44,6 +44,7 @@ public class PlayerListeners implements Listener {
             String rank = "%vault_prefix%&r ";
             rank = PlaceholderAPI.setPlaceholders(event.getPlayer(), rank);
             if(rank != null) {
+                CenteredMessage.Chat.sendCenteredMessage(player, "");
                 CenteredMessage.Chat.sendCenteredMessage(player, "&6&lETERNAL &8| &bSúrvival Clásico &f1.19");
                 CenteredMessage.Chat.sendCenteredMessage(player, "");
                 CenteredMessage.Chat.sendCenteredMessage(player, "&aIP &7eternaln.net");
@@ -52,7 +53,9 @@ public class PlayerListeners implements Listener {
                 CenteredMessage.Chat.sendCenteredMessage(player, "");
                 CenteredMessage.Chat.sendCenteredMessage(player, rank + name + "&aesperamos que disfrutes");
                 CenteredMessage.Chat.sendCenteredMessage(player, "&b¡Empecemos la aventura!");
+                CenteredMessage.Chat.sendCenteredMessage(player, "");
             } else {
+                CenteredMessage.Chat.sendCenteredMessage(player, "");
                 CenteredMessage.Chat.sendCenteredMessage(player, "&6&lETERNAL &8| &bSúrvival Clásico &f1.19");
                 CenteredMessage.Chat.sendCenteredMessage(player, "");
                 CenteredMessage.Chat.sendCenteredMessage(player, "&aIP &7eternaln.net");
@@ -61,6 +64,7 @@ public class PlayerListeners implements Listener {
                 CenteredMessage.Chat.sendCenteredMessage(player, "");
                 CenteredMessage.Chat.sendCenteredMessage(player, name + "&aesperamos que disfrutes");
                 CenteredMessage.Chat.sendCenteredMessage(player, "&b¡Empecemos la aventura!");
+                CenteredMessage.Chat.sendCenteredMessage(player, "");
             }
         }, 2);
     }
