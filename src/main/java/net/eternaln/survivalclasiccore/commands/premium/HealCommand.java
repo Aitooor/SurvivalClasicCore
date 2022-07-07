@@ -20,6 +20,7 @@ public class HealCommand extends BaseCommand {
     @CommandPermission("survivalclasiccore.heal")
     public void heal(Player sender) {
         sender.setHealth(20);
+        sender.setFoodLevel(20);
         Utils.send(sender, "&aTu salud ha sido restaurada");
     }
 
@@ -29,6 +30,7 @@ public class HealCommand extends BaseCommand {
     public void other(Player sender, String target) {
         Player targetPlayer = Bukkit.getPlayer(target);
         targetPlayer.setHealth(20);
+        targetPlayer.setFoodLevel(20);
         Utils.send(targetPlayer, "&aTu salud ha sido restaurada por &b" + sender.getName());
     }
 

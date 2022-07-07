@@ -44,7 +44,7 @@ public class WarpsCommand extends BaseCommand {
 
     @Subcommand("lista|list")
     public void listWarps(Player sender) {
-        Object warps = SurvivalClasicCore.getWarpsFile().getConfig() + "\n";
+        Object warps = SurvivalClasicCore.getWarpsFile().getConfig();
 
         sender.sendMessage("&6&lETERNAL &fLista de Warps \n" + warps);
     }
