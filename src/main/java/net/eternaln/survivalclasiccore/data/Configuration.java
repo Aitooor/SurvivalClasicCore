@@ -9,7 +9,7 @@ import lombok.Setter;
 import net.eternaln.survivalclasiccore.SurvivalClasicCore;
 import net.eternaln.survivalclasiccore.data.converters.ItemStackMapConverter;
 import net.eternaln.survivalclasiccore.data.converters.LocationStringConverter;
-import net.eternaln.survivalclasiccore.utils.ItemBuilder;
+import net.eternaln.survivalclasiccore.utils.items.ItemBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;

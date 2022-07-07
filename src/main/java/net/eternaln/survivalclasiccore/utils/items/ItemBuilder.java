@@ -1,5 +1,6 @@
-package net.eternaln.survivalclasiccore.utils;
+package net.eternaln.survivalclasiccore.utils.items;
 
+import net.eternaln.survivalclasiccore.utils.Utils;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;

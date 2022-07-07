@@ -3,7 +3,7 @@ package net.eternaln.survivalclasiccore.menus;
 import net.eternaln.survivalclasiccore.managers.menus.Menu;
 import net.eternaln.survivalclasiccore.managers.menus.button.Button;
 import net.eternaln.survivalclasiccore.managers.menus.type.FillType;
-import net.eternaln.survivalclasiccore.utils.ItemCreator;
+import net.eternaln.survivalclasiccore.utils.items.ItemCreator;
 import net.eternaln.survivalclasiccore.utils.skull.SkullBuilder;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;

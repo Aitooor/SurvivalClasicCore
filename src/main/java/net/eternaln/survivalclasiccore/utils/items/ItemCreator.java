@@ -1,7 +1,8 @@
-package net.eternaln.survivalclasiccore.utils;
+package net.eternaln.survivalclasiccore.utils.items;
 
 import lombok.Getter;
 import lombok.Setter;
+import net.eternaln.survivalclasiccore.utils.Utils;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
