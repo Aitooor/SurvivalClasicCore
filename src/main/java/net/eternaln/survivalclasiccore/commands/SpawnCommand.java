@@ -51,13 +51,12 @@ public class SpawnCommand extends BaseCommand {
     }
 
     @Subcommand("all|todos")
+    @CommandPermission("survivalclasiccore.spawn.all")
     public void spawnAll(Player sender) {
         for (Player online : Bukkit.getServer().getOnlinePlayers()) {
             if (online != sender) {
                 online.teleport(SurvivalClasicCore.getConfiguration().getSpawnLocation());
                 Utils.send(online, "&fHas sido teletransportado hacia &bSpawn");
-            } else {
-                Utils.send(sender, "&cNo puedes teletransportarte a ti mismo");
             }
         }
         Utils.send(sender, "&fHas teletransportado a todos hacia &bSpawn");

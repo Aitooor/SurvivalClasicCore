@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 @CommandAlias("hat|cabeza|gorro")
+@CommandPermission("survivalclasiccore.hat")
 public class HatCommand extends BaseCommand {
 
     @CatchUnknown
@@ -22,7 +23,6 @@ public class HatCommand extends BaseCommand {
     }
 
     @Default
-    @CommandPermission("survivalclasiccore.hat")
     public void god(Player sender) {
         ItemStack x = sender.getInventory().getItemInMainHand();
         ItemStack y = sender.getInventory().getHelmet();

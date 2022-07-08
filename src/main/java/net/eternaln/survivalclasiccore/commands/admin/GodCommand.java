@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @CommandAlias("god|dios|inmortal")
+@CommandPermission("survivalclasiccore.god")
 public class GodCommand extends BaseCommand {
 
     private ArrayList<String> gods = new ArrayList<String>();
@@ -23,7 +24,6 @@ public class GodCommand extends BaseCommand {
     }
 
     @Default
-    @CommandPermission("survivalclasiccore.god")
     public void god(Player sender) {
         if (gods.contains(sender.getName())) {
             gods.remove(sender.getName());

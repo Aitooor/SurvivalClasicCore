@@ -14,6 +14,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
 @CommandAlias("give|dar")
+@CommandPermission("survivalclasiccore.give")
 public class GiveCommand extends BaseCommand {
 
     @CatchUnknown
@@ -24,7 +25,7 @@ public class GiveCommand extends BaseCommand {
 
     @Default
     public void give(Player sender, String item, int amount) {
-        sender.getInventory().addItem(new ItemStack(Material.getMaterial(item), amount));
+        sender.getInventory().addItem(new ItemStack(Material.getMaterial(item.toUpperCase()), amount));
         Utils.send(sender, "&fHas recibido &b" + amount + " &fde &a" + item);
     }
 

@@ -9,6 +9,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 @CommandAlias("fly|volar|vuelo")
+@CommandPermission("survivalclasiccore.fly")
 public class FlyCommand extends BaseCommand {
 
     @CatchUnknown
@@ -18,7 +19,6 @@ public class FlyCommand extends BaseCommand {
     }
 
     @Default
-    @CommandPermission("survivalclasiccore.fly")
     public void fly(Player sender) {
         Player player = (Player) sender;
         if (!sender.getAllowFlight()){

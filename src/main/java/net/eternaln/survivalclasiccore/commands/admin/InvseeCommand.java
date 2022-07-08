@@ -7,6 +7,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 @CommandAlias("invsee|inv|inventario|verinventario|verinv")
+@CommandPermission("survivalclasiccore.invsee")
 public class InvseeCommand extends BaseCommand {
 
     @CatchUnknown
@@ -15,7 +16,6 @@ public class InvseeCommand extends BaseCommand {
         help.showHelp();
     }
     @Default
-    @CommandPermission("survivalclasiccore.invsee")
     public void god(Player sender) {
         sender.openInventory(sender.getInventory());
     }
