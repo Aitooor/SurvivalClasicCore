@@ -35,4 +35,9 @@ public class LocationUtil {
         return new Location(location.getWorld(), location.getX(), highestBlockY + 1, location.getZ(), location.getYaw(), location.getPitch());
     }
 
+    public static int highestBlock(Location location) {
+        int highestBlockY = location.getWorld().getHighestBlockYAt(location);
+        return highestBlockY;
+    }
+
 }

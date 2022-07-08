@@ -31,6 +31,37 @@ public class NickCommand extends BaseCommand {
         }
     }
 
+    @Subcommand("limpiar|clear|borrar")
+    @CommandPermission("survivalclasiccore.nick")
+    public void clear(Player sender) {
+        if (!(sender.getDisplayName() == sender.getName())) {
+            sender.setDisplayName(sender.getName());
+            sender.setPlayerListName(sender.getName());
+            Utils.send(sender, "&fTu nombre ha sido borrado");
+        } else {
+            Utils.send(sender, "&cTu nombre ya es tu nombre original");
+        }
+    }
+
+    @Subcommand("clearother|clearo")
+    @CommandPermission("survivalclasiccore.nick.other")
+    @CommandCompletion("@players")
+    public void clearOther(Player sender, String target) {
+        Player targetPlayer = Bukkit.getPlayer(target);
+        if (targetPlayer == null) {
+            Utils.send(sender, "&cEl jugador no esta online");
+            return;
+        }
+        if (!(targetPlayer.getDisplayName() == targetPlayer.getName())) {
+            targetPlayer.setDisplayName(targetPlayer.getName());
+            targetPlayer.setPlayerListName(targetPlayer.getName());
+            Utils.send(sender, "&fEl nombre de &b" + targetPlayer.getName() + " &fha sido borrado");
+            Utils.send(targetPlayer, "&fTu nombre ha sido borrado por &b" + sender.getName());
+        } else {
+            Utils.send(sender, "&cEl jugador " + sender.getName() + " ya tiene su nombre original");
+        }
+    }
+
     @Subcommand("otros|others|other|otro")
     @CommandPermission("survivalclasiccore.nick.other")
     @CommandCompletion("@players")

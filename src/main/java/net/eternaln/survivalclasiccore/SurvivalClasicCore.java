@@ -2,6 +2,7 @@ package net.eternaln.survivalclasiccore;
 
 import co.aikar.commands.Locales;
 import co.aikar.commands.PaperCommandManager;
+import com.google.common.collect.ImmutableList;
 import lombok.Getter;
 import net.eternaln.survivalclasiccore.annotations.RegisterExecutor;
 import net.eternaln.survivalclasiccore.data.Configuration;
@@ -54,6 +55,10 @@ public final class SurvivalClasicCore extends JavaPlugin {
     private void commands() {
         cmdManager = new PaperCommandManager(getInstance());
         cmdManager.enableUnstableAPI("help");
+
+        cmdManager.getCommandCompletions().registerCompletion("warps", c ->
+                new ImmutableList.Builder<String>().addAll(getWarpsFile().getConfig()
+                        .getConfigurationSection("warps").getValues(false).keySet()).build());
 
         cmdManager.getLocales().setDefaultLocale(Locales.SPANISH);
     }

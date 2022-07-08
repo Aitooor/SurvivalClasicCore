@@ -28,6 +28,10 @@ public class EnchantTableCommand extends BaseCommand {
     @CommandCompletion("@players")
     public void other(Player sender, String target) {
         Player targetPlayer = Bukkit.getPlayer(target);
+        if (targetPlayer == null) {
+            Utils.send(sender, "&cEl jugador no esta online");
+            return;
+        }
         targetPlayer.openEnchanting(null, true);
         Utils.send(sender, "&fAbriendo la mesa de encantamiento de &b" + targetPlayer.getName());
         Utils.send(targetPlayer, sender.getDisplayName() + " &fha abierto tu mesa de encantamiento");

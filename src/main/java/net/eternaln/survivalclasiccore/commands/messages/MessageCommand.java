@@ -39,15 +39,15 @@ public class MessageCommand extends BaseCommand {
             return;
         }
 
-        Utils.send(sender,"&7Mensaje enviado a &b" + receiver.getDisplayName());
-        Utils.send(receiver,"&7Mensaje recibido de &b" + sender.getDisplayName() + " &7> &f" + message);
+        Utils.sendNoPrefix(sender, "&8(MSG) &7" + sender.getDisplayName() + " &7-> &b" + receiver.getDisplayName() + " &7> &7" + message);
+        Utils.sendNoPrefix(receiver,"&8(MSG) &b" + sender.getDisplayName() + " &7> &7" + message);
         receiver.playSound(receiver.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1, 1);
 
         getConversations().put(sender.getUniqueId(), receiver.getUniqueId());
         getConversations().put(receiver.getUniqueId(), sender.getUniqueId());
 
         SocialSpyCommand.getSocialSpyList().stream().map(Bukkit::getPlayer).filter(Objects::nonNull).forEach(p -> {
-            Utils.send(p,"&8(MSG) &7De &b" + sender.getDisplayName()  + " &7a &b" + receiver.getDisplayName() + " &7> &7" + message);
+            Utils.sendNoPrefix(p,"&6&lSP &8(MSG) &7De &b" + sender.getDisplayName()  + " &7a &b" + receiver.getDisplayName() + " &7> &7" + message);
         });
     }
 }

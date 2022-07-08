@@ -86,7 +86,7 @@ public class TeleportCommand extends BaseCommand {
     public void teleportTop(Player sender) {
         Location currentLocation = sender.getLocation();
         Location newLocation = LocationUtil.teleportToHighestBlock(currentLocation);
-        if(currentLocation.getY() > newLocation.getY() + 1) {
+        if(currentLocation.getY() < LocationUtil.highestBlock(currentLocation)) {
             sender.teleport(newLocation);
             Utils.send(sender, "&aHas sido teletransportado hacia el top");
         } else {

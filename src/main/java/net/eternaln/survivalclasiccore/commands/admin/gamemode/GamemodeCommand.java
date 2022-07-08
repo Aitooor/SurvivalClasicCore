@@ -52,7 +52,7 @@ public class GamemodeCommand extends BaseCommand {
         }
     }
 
-    @Subcommand("spectator|s|spectator|3")
+    @Subcommand("spectator|spec|spectator|3")
     @CommandPermission("survivalclasiccore.gm.spectator")
     public void setSpectator(Player sender) {
         if(sender.getGameMode() != GameMode.SPECTATOR) {

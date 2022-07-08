@@ -30,7 +30,6 @@ public class EnderchestCommand extends BaseCommand {
         Player targetPlayer = Bukkit.getPlayer(target);
         sender.openInventory(targetPlayer.getEnderChest());
         Utils.send(sender, "&fAbriendo el cofre ender de &b" + targetPlayer.getName());
-        Utils.send(targetPlayer, sender.getDisplayName() + " &fha abierto tu cofre ender");
     }
 
 }

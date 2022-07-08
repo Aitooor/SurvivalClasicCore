@@ -82,7 +82,7 @@ public class GamemodeOtherCommand extends BaseCommand {
         }
     }
 
-    @Subcommand("spectator|s|spectator|3")
+    @Subcommand("spectator|spec|spectator|3")
     @CommandCompletion("@players")
     public void setSpectator(Player sender, String target) {
         Player targetPlayer = Bukkit.getPlayer(target);
