@@ -6,6 +6,7 @@ import com.google.common.collect.ImmutableList;
 import lombok.Getter;
 import net.eternaln.survivalclasiccore.annotations.RegisterExecutor;
 import net.eternaln.survivalclasiccore.data.Configuration;
+import net.eternaln.survivalclasiccore.data.HomesFile;
 import net.eternaln.survivalclasiccore.data.WarpsFile;
 import net.eternaln.survivalclasiccore.managers.menus.MenuManager;
 import net.eternaln.survivalclasiccore.utils.Utils;
@@ -22,15 +23,17 @@ public final class SurvivalClasicCore extends JavaPlugin {
     private static Configuration configuration;
     @Getter
     private static WarpsFile warpsFile;
+    @Getter
+    private static HomesFile homesFile;
 
     @Override
     public void onEnable() {
         instance = this;
         configuration = new Configuration();
         warpsFile = new WarpsFile(this);
+        homesFile = new HomesFile(this);
 
         new MenuManager(this);
-
 
         if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
             Utils.log("&aHooked to PlaceholderAPI.");

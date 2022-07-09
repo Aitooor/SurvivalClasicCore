@@ -8,7 +8,7 @@ import net.eternaln.survivalclasiccore.utils.Utils;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-@CommandAlias("item|itemc|objeto|objetos|objetosc|itemclassic")
+@CommandAlias("itemc||objetosc|itemclassic")
 @CommandPermission("survivalclasiccore.item.give")
 public class ItemCommand extends BaseCommand {
 
