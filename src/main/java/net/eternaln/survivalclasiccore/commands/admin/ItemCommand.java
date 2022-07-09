@@ -8,8 +8,8 @@ import net.eternaln.survivalclasiccore.utils.Utils;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-@CommandAlias("itemc||objetosc|itemclassic")
-@CommandPermission("survivalclasiccore.item.give")
+@CommandAlias("itemc|objeto|objetos|objetosc|itemclassic")
+@CommandPermission("survivalclasiccore.itemc.give")
 public class ItemCommand extends BaseCommand {
 
     @Default
@@ -17,7 +17,6 @@ public class ItemCommand extends BaseCommand {
     @CatchUnknown
     public void onHelp(Player sender, CommandHelp help) {
         help.showHelp();
-        Utils.sendNoPrefix(sender, SurvivalClasicCore.getConfiguration().getItemHelp().toArray(String[]::new));
     }
 
     @Subcommand("give|dar")

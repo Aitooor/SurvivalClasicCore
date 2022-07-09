@@ -8,6 +8,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 @CommandAlias("workbench|mesa|mesadetrabajo")
+@CommandPermission("survivalclasiccore.workbench")
 public class WorkbenchCommand extends BaseCommand {
 
     @CatchUnknown
@@ -17,7 +18,6 @@ public class WorkbenchCommand extends BaseCommand {
     }
 
     @Default
-    @CommandPermission("survivalclasiccore.workbench")
     public void god(Player sender) {
         sender.openWorkbench(null, true);
         Utils.send(sender, "&aAbriendo tu mesa de trabajo");

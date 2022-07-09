@@ -9,6 +9,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 @CommandAlias("nick|apodo|nombre")
+@CommandPermission("survivalclasiccore.nick")
 public class NickCommand extends BaseCommand {
 
     @CatchUnknown
@@ -18,7 +19,6 @@ public class NickCommand extends BaseCommand {
     }
 
     @Default
-    @CommandPermission("survivalclasiccore.nick")
     public void nick(CommandSender sender, String string) {
         Player player = (Player) sender;
 

@@ -8,6 +8,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 @CommandAlias("comida|feed|food|alimento")
+@CommandPermission("survivalclasiccore.feed")
 public class FeedCommand extends BaseCommand {
 
     @CatchUnknown
@@ -17,7 +18,6 @@ public class FeedCommand extends BaseCommand {
     }
 
     @Default
-    @CommandPermission("survivalclasiccore.feed")
     public void heal(Player sender) {
         sender.setFoodLevel(20);
         Utils.send(sender, "&aTu comida ha sido restaurada");

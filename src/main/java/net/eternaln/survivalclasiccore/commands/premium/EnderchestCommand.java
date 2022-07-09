@@ -8,6 +8,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 @CommandAlias("enderchest|ender|cofreender")
+@CommandPermission("survivalclasiccore.enderchest")
 public class EnderchestCommand extends BaseCommand {
 
     @CatchUnknown
@@ -17,7 +18,6 @@ public class EnderchestCommand extends BaseCommand {
     }
 
     @Default
-    @CommandPermission("survivalclasiccore.enderchest")
     public void god(Player sender) {
         sender.openInventory(sender.getEnderChest());
         Utils.send(sender, "&aAbriendo tu cofre");

@@ -8,6 +8,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 @CommandAlias("heal|curar|health|salud")
+@CommandPermission("survivalclasiccore.heal")
 public class HealCommand extends BaseCommand {
 
     @CatchUnknown
@@ -17,7 +18,6 @@ public class HealCommand extends BaseCommand {
     }
 
     @Default
-    @CommandPermission("survivalclasiccore.heal")
     public void heal(Player sender) {
         sender.setHealth(20);
         sender.setFoodLevel(20);

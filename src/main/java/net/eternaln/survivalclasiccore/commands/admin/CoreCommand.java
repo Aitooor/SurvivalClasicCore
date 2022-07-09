@@ -10,6 +10,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 @CommandAlias("core|basis|basic")
+@CommandPermission("survivalclasiccore.core")
 public class CoreCommand extends BaseCommand {
 
     @Default
