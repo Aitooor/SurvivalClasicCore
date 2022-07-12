@@ -19,11 +19,10 @@ import java.util.List;
 @Setter
 public class ItemCreator {
 
-    private ItemStack itemStack;
-    private ItemMeta itemMeta;
-
     protected String displayName;
     protected List<String> lore;
+    private ItemStack itemStack;
+    private ItemMeta itemMeta;
 
     public ItemCreator(Material material) {
         this(material, 1, (short) 0);
@@ -73,34 +72,6 @@ public class ItemCreator {
         return itemStack;
     }
 
-    public void setDisplayName(ItemStack itemStack, String displayName) {
-        this.displayName = displayName;
-
-        itemMeta.setDisplayName(Utils.ct(displayName));
-        itemStack.setItemMeta(itemMeta);
-    }
-
-    public ItemCreator setLore(String... lore) {
-        List<String> list = Arrays.asList(lore);
-
-        return setLore(list);
-    }
-
-    public ItemCreator setLore(List<String> lore) {
-        this.lore = lore;
-
-        itemMeta.setLore(Utils.formatList(lore));
-        itemStack.setItemMeta(itemMeta);
-        return this;
-    }
-
-    public void setUnbreakable(ItemStack itemStack, boolean unbreakable) {
-        ItemMeta itemMeta = itemStack.getItemMeta();
-
-        itemMeta.setUnbreakable(unbreakable);
-        itemStack.setItemMeta(itemMeta);
-    }
-
     public static void addEnchant(ItemStack itemStack, Enchantment enchantment, int level) {
         if (itemStack != null) {
             ItemMeta itemMeta = itemStack.getItemMeta();
@@ -143,6 +114,34 @@ public class ItemCreator {
         LeatherArmorMeta leatherArmorMeta = (LeatherArmorMeta) itemStack.getItemMeta();
         leatherArmorMeta.setColor(org.bukkit.Color.fromRGB(red, green, blue));
         itemStack.setItemMeta(leatherArmorMeta);
+    }
+
+    public void setDisplayName(ItemStack itemStack, String displayName) {
+        this.displayName = displayName;
+
+        itemMeta.setDisplayName(Utils.ct(displayName));
+        itemStack.setItemMeta(itemMeta);
+    }
+
+    public ItemCreator setLore(String... lore) {
+        List<String> list = Arrays.asList(lore);
+
+        return setLore(list);
+    }
+
+    public ItemCreator setLore(List<String> lore) {
+        this.lore = lore;
+
+        itemMeta.setLore(Utils.formatList(lore));
+        itemStack.setItemMeta(itemMeta);
+        return this;
+    }
+
+    public void setUnbreakable(ItemStack itemStack, boolean unbreakable) {
+        ItemMeta itemMeta = itemStack.getItemMeta();
+
+        itemMeta.setUnbreakable(unbreakable);
+        itemStack.setItemMeta(itemMeta);
     }
 
     public ItemCreator setMaterial(Material material) {

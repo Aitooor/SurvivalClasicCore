@@ -23,9 +23,9 @@ public class EnchantCommand extends BaseCommand {
     @Subcommand("add")
     @CommandPermission("survivalclasiccore.enchant.add")
     public void add(Player sender, String enchant, int level) {
-        if (!(sender.getInventory().getItemInMainHand() == null)){
+        if (!(sender.getInventory().getItemInMainHand() == null)) {
             Enchantment enchantment = Enchantment.getByKey(NamespacedKey.minecraft(enchant));
-            if (enchantment == null){
+            if (enchantment == null) {
                 Utils.send(sender, "&cEl encantamiento no existe");
             } else {
                 ItemMeta itemMeta = sender.getInventory().getItemInMainHand().getItemMeta();
@@ -41,11 +41,11 @@ public class EnchantCommand extends BaseCommand {
     @Subcommand("remove")
     @CommandPermission("survivalclasiccore.enchant.remove")
     public void remove(Player sender, String enchant) {
-        if (!(sender.getInventory().getItemInMainHand() == null)){
+        if (!(sender.getInventory().getItemInMainHand() == null)) {
             Utils.send(sender, "&cNo puedes usar este comando si no tienes nada en tu mano");
         } else {
             Enchantment enchantment = Enchantment.getByKey(NamespacedKey.minecraft(enchant));
-            if (enchantment == null){
+            if (enchantment == null) {
                 Utils.send(sender, "&cEl encantamiento no existe");
             } else {
                 ItemMeta itemMeta = sender.getInventory().getItemInMainHand().getItemMeta();

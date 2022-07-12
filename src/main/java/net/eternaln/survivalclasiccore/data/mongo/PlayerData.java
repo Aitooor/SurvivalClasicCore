@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.Setter;
 import net.eternaln.survivalclasiccore.SurvivalClasicCore;
 import org.bson.Document;
-import org.bukkit.Location;
 
 import java.util.HashMap;
 import java.util.Map;

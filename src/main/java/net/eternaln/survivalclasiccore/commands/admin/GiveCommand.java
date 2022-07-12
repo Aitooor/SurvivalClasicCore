@@ -3,15 +3,12 @@ package net.eternaln.survivalclasiccore.commands.admin;
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.CommandHelp;
 import co.aikar.commands.annotation.*;
-import net.eternaln.survivalclasiccore.SurvivalClasicCore;
 import net.eternaln.survivalclasiccore.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
-import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.PlayerInventory;
 
 @CommandAlias("give|dar")
 @CommandPermission("survivalclasiccore.give")
@@ -35,7 +32,7 @@ public class GiveCommand extends BaseCommand {
     public void giveOther(Player sender, String target, String item, int amount) {
         Player targetPlayer = Bukkit.getPlayer(target);
         String itemName = item.toUpperCase();
-        if(!(targetPlayer == null)) {
+        if (!(targetPlayer == null)) {
             targetPlayer.getInventory().addItem(new ItemStack(Material.getMaterial(itemName), amount));
             Utils.send(sender, "&fHas dado &b" + amount + " &a" + itemName + " &fa &b" + targetPlayer.getName());
             Utils.send(targetPlayer, "&fHas recibido &b" + amount + " &a" + itemName + " &fde &b" + sender.getName());

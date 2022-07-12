@@ -21,7 +21,7 @@ public class MainMenu extends Menu {
         this.setFillEnabled(true);
 
         this.setFillItemStack(new ItemCreator(Material.GRAY_STAINED_GLASS_PANE, 1, (short) 4)
-                        .setDisplayName("&8Eternal")
+                .setDisplayName("&8Eternal")
                 .toItemStack());
 
         this.setFillType(FillType.ALL);
@@ -69,7 +69,7 @@ public class MainMenu extends Menu {
         public void onClick(InventoryClickEvent event) {
             Player player = (Player) event.getWhoClicked();
             player.closeInventory();
-            if(this.command == null) {
+            if (this.command == null) {
                 return;
             }
             player.performCommand(this.command);

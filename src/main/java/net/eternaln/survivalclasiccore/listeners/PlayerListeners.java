@@ -26,7 +26,7 @@ public class PlayerListeners implements Listener {
         String rank = "%vault_prefix%&r ";
         rank = PlaceholderAPI.setPlaceholders(event.getPlayer(), rank);
 
-        if(rank.equals("")) {
+        if (rank.equals("")) {
             event.setFormat(Utils.ct(player.getDisplayName() + "&7: &r" + event.getMessage()));
         } else {
             event.setFormat(Utils.ct(rank + player.getDisplayName() + "&7: &r" + event.getMessage()));
@@ -44,7 +44,7 @@ public class PlayerListeners implements Listener {
             name = PlaceholderAPI.setPlaceholders(event.getPlayer(), name);
             String rank = "%vault_prefix%&r ";
             rank = PlaceholderAPI.setPlaceholders(event.getPlayer(), rank);
-            if(rank != null) {
+            if (rank != null) {
                 CenteredMessage.Chat.sendCenteredMessage(player, "");
                 CenteredMessage.Chat.sendCenteredMessage(player, "&6&lETERNAL &8| &bSúrvival Clásico &f1.19");
                 CenteredMessage.Chat.sendCenteredMessage(player, "");

@@ -75,7 +75,7 @@ public final class SurvivalClasicCore extends JavaPlugin {
             if (!(c.getSender() instanceof Player p))
                 return ImmutableList.of();
             PlayerData playerData = dataManager.getData(p.getUniqueId());
-           return new ImmutableList.Builder<String>().addAll(playerData.getHomes().keySet()).build();
+            return new ImmutableList.Builder<String>().addAll(playerData.getHomes().keySet()).build();
         });
 
         cmdManager.getLocales().setDefaultLocale(Locales.SPANISH);

@@ -20,8 +20,8 @@ public class FlyCommand extends BaseCommand {
 
     @Default
     public void fly(Player sender) {
-        Player player = (Player) sender;
-        if (!sender.getAllowFlight()){
+        Player player = sender;
+        if (!sender.getAllowFlight()) {
             sender.setAllowFlight(true);
 
             Utils.send(sender, "&aHas activado el fly");
@@ -38,7 +38,7 @@ public class FlyCommand extends BaseCommand {
     public void other(CommandSender sender, String target) {
         Player targetPlayer = Bukkit.getPlayer(target);
 
-        if(!(targetPlayer == null)) {
+        if (!(targetPlayer == null)) {
             if (!targetPlayer.getAllowFlight()) {
                 targetPlayer.setAllowFlight(true);
 

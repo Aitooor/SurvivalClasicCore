@@ -15,6 +15,7 @@ public class InvseeCommand extends BaseCommand {
     public void help(CommandHelp help) {
         help.showHelp();
     }
+
     @Default
     public void god(Player sender) {
         sender.openInventory(sender.getInventory());

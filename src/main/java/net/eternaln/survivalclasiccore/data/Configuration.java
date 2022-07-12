@@ -26,7 +26,7 @@ public class Configuration extends BukkitYamlConfiguration {
     @Comment("Mongo credentials")
     public MongoCredentials credentials = new MongoCredentials("", "survival", "");
 
-    @Comment({"","CommandCooldown"})
+    @Comment({"", "CommandCooldown"})
     public int cmdCooldown = 2;
 
     @Comment({"", "Messages"})

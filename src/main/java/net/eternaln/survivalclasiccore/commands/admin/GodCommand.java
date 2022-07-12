@@ -9,13 +9,12 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
-import java.util.List;
 
 @CommandAlias("god|dios|inmortal")
 @CommandPermission("survivalclasiccore.god")
 public class GodCommand extends BaseCommand {
 
-    private ArrayList<String> gods = new ArrayList<String>();
+    private final ArrayList<String> gods = new ArrayList<String>();
 
     @CatchUnknown
     @HelpCommand("ayuda|help")
@@ -28,11 +27,11 @@ public class GodCommand extends BaseCommand {
         if (gods.contains(sender.getName())) {
             gods.remove(sender.getName());
             sender.setInvulnerable(false);
-            Utils.send(sender,"&aYou are no longer immortal!");
+            Utils.send(sender, "&aYou are no longer immortal!");
         } else {
             gods.add(sender.getName());
             sender.setInvulnerable(true);
-            Utils.send(sender,"&aYou are now immortal!");
+            Utils.send(sender, "&aYou are now immortal!");
         }
     }
 
@@ -42,7 +41,7 @@ public class GodCommand extends BaseCommand {
     public void other(CommandSender sender, String target) {
         Player targetPlayer = Bukkit.getPlayer(target);
 
-        if(!(targetPlayer == null)) {
+        if (!(targetPlayer == null)) {
             if (gods.contains(targetPlayer.getName())) {
                 gods.remove(targetPlayer.getName());
                 targetPlayer.setInvulnerable(false);

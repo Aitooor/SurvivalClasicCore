@@ -18,10 +18,9 @@ import java.util.UUID;
 @CommandAlias("tp|teleport|teletransportar")
 public class TeleportCommand extends BaseCommand {
 
-    private ArrayList<Player> teleportToggled = new ArrayList<Player>();
-    private HashMap<Player, Player> requests = new HashMap();
-
     private final Cooldown<UUID> cooldown = new Cooldown<>(SurvivalClasicCore.getConfiguration().getCmdCooldown());
+    private final ArrayList<Player> teleportToggled = new ArrayList<Player>();
+    private final HashMap<Player, Player> requests = new HashMap();
 
     @CatchUnknown
     @HelpCommand("ayuda|help")
@@ -34,13 +33,13 @@ public class TeleportCommand extends BaseCommand {
     public void teleport(Player sender, String target) {
         Player targetPlayer = Bukkit.getPlayer(target);
 
-        if(!(targetPlayer == null)) {
-            if(!(targetPlayer == sender)) {
+        if (!(targetPlayer == null)) {
+            if (!(targetPlayer == sender)) {
                 sender.teleport(targetPlayer.getLocation());
             } else {
                 Utils.send(sender, "&cNo puedes teletransportarte a ti mismo");
             }
-        } else{
+        } else {
             Utils.send(sender, "&cJugador no encontrado");
         }
     }
@@ -51,9 +50,9 @@ public class TeleportCommand extends BaseCommand {
     public void teleportAll(Player sender, String target) {
         Player targetPlayer = Bukkit.getPlayer(target);
 
-        if(targetPlayer == null || target == null) {
+        if (targetPlayer == null || target == null) {
             for (Player online : Bukkit.getServer().getOnlinePlayers()) {
-                if(online != sender) {
+                if (online != sender) {
                     online.teleport(targetPlayer.getLocation());
                     Utils.send(online, "&fHas sido teletransportado hacia &b" + targetPlayer.getName());
                 } else {
@@ -68,9 +67,9 @@ public class TeleportCommand extends BaseCommand {
     @CommandPermission("survivalclasiccore.tpall")
     @CommandCompletion("@players")
     public void teleportAllHere(Player sender) {
-        if(sender == null || sender == null) {
+        if (sender == null || sender == null) {
             for (Player online : Bukkit.getServer().getOnlinePlayers()) {
-                if(online != sender) {
+                if (online != sender) {
                     online.teleport(sender.getLocation());
                     Utils.send(online, "&fHas sido teletransportado hacia &b" + sender.getName());
                 } else {
@@ -86,7 +85,7 @@ public class TeleportCommand extends BaseCommand {
     public void teleportTop(Player sender) {
         Location currentLocation = sender.getLocation();
         Location newLocation = LocationUtil.teleportToHighestBlock(currentLocation);
-        if(currentLocation.getY() < LocationUtil.highestBlock(currentLocation)) {
+        if (currentLocation.getY() < LocationUtil.highestBlock(currentLocation)) {
             sender.teleport(newLocation);
             Utils.send(sender, "&aHas sido teletransportado hacia el top");
         } else {
@@ -101,12 +100,12 @@ public class TeleportCommand extends BaseCommand {
             try {
                 Location location = new Location(sender.getWorld(), Double.parseDouble(x), Double.parseDouble(y), Double.parseDouble(z));
                 sender.teleport(location);
-                Utils.send(sender,"&fHas sido teletransportado a las cordenadas &a" + x + "&a " + y + "&a " + z);
+                Utils.send(sender, "&fHas sido teletransportado a las cordenadas &a" + x + "&a " + y + "&a " + z);
             } catch (NumberFormatException e) {
-                Utils.send(sender,"&cUsa numeros reales, no letras");
+                Utils.send(sender, "&cUsa numeros reales, no letras");
             }
         } else {
-            Utils.send(sender,"&cEspecifica las cordenadas &7x y z");
+            Utils.send(sender, "&cEspecifica las cordenadas &7x y z");
         }
     }
 
@@ -118,17 +117,17 @@ public class TeleportCommand extends BaseCommand {
         if (targetPlayer != null) {
             if (targetPlayer != null) {
                 if (!targetPlayer.getName().equals(targetPlayer.getName())) {
-                    Utils.send(sender,"&cNo puedes teletransportarte hacia ti mismo");
+                    Utils.send(sender, "&cNo puedes teletransportarte hacia ti mismo");
                 } else {
                     targetPlayer.teleport(sender);
-                    Utils.send(sender,"&fHas teletranspotado hacia ti a &b" + targetPlayer.getName());
-                    Utils.send(targetPlayer,sender.getName() + " &fte ha teletransportado hacia el");
+                    Utils.send(sender, "&fHas teletranspotado hacia ti a &b" + targetPlayer.getName());
+                    Utils.send(targetPlayer, sender.getName() + " &fte ha teletransportado hacia el");
                 }
             } else {
-                Utils.send(sender,"&cEste jugador no esta online");
+                Utils.send(sender, "&cEste jugador no esta online");
             }
         } else {
-            Utils.send(sender,"&cEste jugador no esta online");
+            Utils.send(sender, "&cEste jugador no esta online");
         }
     }
 
@@ -138,7 +137,7 @@ public class TeleportCommand extends BaseCommand {
         if (requests.containsKey(sender.getUniqueId())) {
             for (Player player1 : requests.keySet())
                 Utils.send(player1, "&cHas desactivado el teletransporte");
-                requests.remove(sender.getUniqueId());
+            requests.remove(sender.getUniqueId());
         } else {
             requests.put(sender, sender);
             Utils.send(sender, "&aHas activado el teletransporte");
@@ -154,38 +153,38 @@ public class TeleportCommand extends BaseCommand {
         }
         Player targetPlayer = Bukkit.getPlayer(target);
         if (targetPlayer != null) {
-            if(!target.equals(sender.getName())) {
+            if (!target.equals(sender.getName())) {
                 Utils.send(sender, "&fHas enviado solicitud a &b" + targetPlayer.getName());
                 Utils.send(targetPlayer, "&fEl jugador &b" + sender.getName() + " &fQuiere teletrasportarse a ti\n&aPuedes aceptar usando &l/tp accept|confirm|aceptar|confirmar\n" +
                         "&cO rechazarlo usando &l/tp rechazar|deny");
                 requests.put(targetPlayer, sender);
             } else {
-                Utils.send(sender,"&cNo puedes teletransportarte a ti mismo");
+                Utils.send(sender, "&cNo puedes teletransportarte a ti mismo");
             }
         } else {
-            Utils.send(sender,"&cEste jugador no esta online");
+            Utils.send(sender, "&cEste jugador no esta online");
         }
     }
 
     @Subcommand("aceptar|confirm|accept|confirmar")
     public void teleportAccept(Player sender) {
         if (requests.containsKey(sender)) {
-            Utils.send(sender,"&fHas &a&lACEPTADO &fla petición de &b" + requests.get(sender).getPlayer().getDisplayName());
+            Utils.send(sender, "&fHas &a&lACEPTADO &fla petición de &b" + requests.get(sender).getPlayer().getDisplayName());
             requests.get(sender).sendMessage(Utils.ct("&fEl jugador &b" + sender.getName() + " &fha &a&lACEPTADO &ftu petición"));
             sender.teleport(requests.get(sender).getLocation());
         } else {
-            Utils.send(sender,"&cNo tienes ninguna peticiones de teletransporte");
+            Utils.send(sender, "&cNo tienes ninguna peticiones de teletransporte");
         }
     }
 
     @Subcommand("rechazar|deny")
     public void teleportDeny(Player sender) {
         if (requests.containsKey(sender)) {
-            Utils.send(sender,"&fHas &c&lDENEGADO &ala petición de &b" + requests.get(sender).getPlayer().getDisplayName());
+            Utils.send(sender, "&fHas &c&lDENEGADO &ala petición de &b" + requests.get(sender).getPlayer().getDisplayName());
             requests.get(sender).sendMessage(Utils.ct("&fEl jugador &b" + sender.getName() + " &fha &c&lDENEGADO &ftu petición"));
             requests.remove(sender);
         } else {
-            Utils.send(sender,"&cNo tienes ninguna peticiones de teletransporte");
+            Utils.send(sender, "&cNo tienes ninguna peticiones de teletransporte");
         }
     }
 }

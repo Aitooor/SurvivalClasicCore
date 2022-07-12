@@ -2,7 +2,10 @@ package net.eternaln.survivalclasiccore.commands.teleport;
 
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.CommandHelp;
-import co.aikar.commands.annotation.*;
+import co.aikar.commands.annotation.CatchUnknown;
+import co.aikar.commands.annotation.CommandAlias;
+import co.aikar.commands.annotation.Default;
+import co.aikar.commands.annotation.HelpCommand;
 import net.eternaln.survivalclasiccore.SurvivalClasicCore;
 import net.eternaln.survivalclasiccore.utils.Cooldown;
 import net.eternaln.survivalclasiccore.utils.Utils;
@@ -27,11 +30,11 @@ public class TpdenyCommand extends BaseCommand {
     @Default
     public void teleportDeny(Player sender) {
         if (requests.containsKey(sender)) {
-            Utils.send(sender,"&fHas &c&lDENEGADO &ala petición de &b" + requests.get(sender).getPlayer().getDisplayName());
+            Utils.send(sender, "&fHas &c&lDENEGADO &ala petición de &b" + requests.get(sender).getPlayer().getDisplayName());
             requests.get(sender).sendMessage(Utils.ct("&fEl jugador &b" + sender.getName() + " &fha &c&lDENEGADO &ftu petición"));
             requests.remove(sender);
         } else {
-            Utils.send(sender,"&cNo tienes ninguna peticiones de teletransporte");
+            Utils.send(sender, "&cNo tienes ninguna peticiones de teletransporte");
         }
     }
 }

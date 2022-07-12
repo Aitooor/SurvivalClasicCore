@@ -23,9 +23,9 @@ public class GamemodeOtherCommand extends BaseCommand {
     @CommandCompletion("@players")
     public void setSurvival(Player sender, String target) {
         Player targetPlayer = Bukkit.getPlayer(target);
-        if(!(targetPlayer == null || !targetPlayer.isOnline())) {
-            if(targetPlayer.getGameMode() != GameMode.SURVIVAL) {
-                if(targetPlayer != sender) {
+        if (!(targetPlayer == null || !targetPlayer.isOnline())) {
+            if (targetPlayer.getGameMode() != GameMode.SURVIVAL) {
+                if (targetPlayer != sender) {
                     targetPlayer.setGameMode(GameMode.SURVIVAL);
                     Utils.send(sender, "&fHas cambiado el modo de juego de &b" + targetPlayer.getName() + " &fa &eSurvival");
                     Utils.send(targetPlayer, "&fTu modo de juego ha sido cambiado por &b" + sender.getName() + " &fa &eSurvival");
@@ -44,9 +44,9 @@ public class GamemodeOtherCommand extends BaseCommand {
     @CommandCompletion("@players")
     public void setCreative(Player sender, String target) {
         Player targetPlayer = Bukkit.getPlayer(target);
-        if(!(targetPlayer == null || !targetPlayer.isOnline())) {
-            if(targetPlayer.getGameMode() != GameMode.CREATIVE) {
-                if(targetPlayer != sender) {
+        if (!(targetPlayer == null || !targetPlayer.isOnline())) {
+            if (targetPlayer.getGameMode() != GameMode.CREATIVE) {
+                if (targetPlayer != sender) {
                     targetPlayer.setGameMode(GameMode.CREATIVE);
                     Utils.send(sender, "&fHas cambiado el modo de juego de &b" + targetPlayer.getName() + " &fa &eCreative");
                     Utils.send(targetPlayer, "&fTu modo de juego ha sido cambiado por &b" + sender.getName() + " &fa &eCreative");
@@ -65,9 +65,9 @@ public class GamemodeOtherCommand extends BaseCommand {
     @CommandCompletion("@players")
     public void setAdventure(Player sender, String target) {
         Player targetPlayer = Bukkit.getPlayer(target);
-        if(!(targetPlayer == null || !targetPlayer.isOnline())) {
-            if(targetPlayer.getGameMode() != GameMode.ADVENTURE) {
-                if(targetPlayer != sender) {
+        if (!(targetPlayer == null || !targetPlayer.isOnline())) {
+            if (targetPlayer.getGameMode() != GameMode.ADVENTURE) {
+                if (targetPlayer != sender) {
                     targetPlayer.setGameMode(GameMode.ADVENTURE);
                     Utils.send(sender, "&fHas cambiado el modo de juego de &b" + targetPlayer.getName() + " &fa &eAdventure");
                     Utils.send(targetPlayer, "&fTu modo de juego ha sido cambiado por &b" + sender.getName() + " &fa &eAdventure");
@@ -86,9 +86,9 @@ public class GamemodeOtherCommand extends BaseCommand {
     @CommandCompletion("@players")
     public void setSpectator(Player sender, String target) {
         Player targetPlayer = Bukkit.getPlayer(target);
-        if(!(targetPlayer == null || !targetPlayer.isOnline())) {
-            if(targetPlayer.getGameMode() != GameMode.SPECTATOR) {
-                if(targetPlayer != sender) {
+        if (!(targetPlayer == null || !targetPlayer.isOnline())) {
+            if (targetPlayer.getGameMode() != GameMode.SPECTATOR) {
+                if (targetPlayer != sender) {
                     targetPlayer.setGameMode(GameMode.SPECTATOR);
                     Utils.send(sender, "&fHas cambiado el modo de juego de &b" + targetPlayer.getName() + " &fa &eEspectador");
                     Utils.send(targetPlayer, "&fTu modo de juego ha sido cambiado por &b" + sender.getName() + " &fa &eEspectador");

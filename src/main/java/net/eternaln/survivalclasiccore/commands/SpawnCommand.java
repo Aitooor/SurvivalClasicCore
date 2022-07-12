@@ -38,8 +38,8 @@ public class SpawnCommand extends BaseCommand {
     @CommandPermission("survivalclasiccore.spawn.other")
     @CommandCompletion("@players")
     public void spawnOther(Player sender, Player target) {
-        if(!(target == null || target == null)) {
-            if(!(target == sender)) {
+        if (!(target == null || target == null)) {
+            if (!(target == sender)) {
                 target.teleport(SurvivalClasicCore.getConfiguration().getSpawnLocation());
                 Utils.send(target, SurvivalClasicCore.getConfiguration().getTpSpawn());
             } else {

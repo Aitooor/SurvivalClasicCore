@@ -22,7 +22,7 @@ public class GamemodeCommand extends BaseCommand {
     @Subcommand("survival|s|supervivencia|0")
     @CommandPermission("survivalclasiccore.gm.survival")
     public void setSurvival(Player sender) {
-        if(sender.getGameMode() != GameMode.SURVIVAL) {
+        if (sender.getGameMode() != GameMode.SURVIVAL) {
             sender.setGameMode(GameMode.SURVIVAL);
             Utils.send(sender, "&fHas cambiado tu modo de juego a &eSurvival");
         } else {
@@ -33,7 +33,7 @@ public class GamemodeCommand extends BaseCommand {
     @Subcommand("creative|c|creacion|1")
     @CommandPermission("survivalclasiccore.gm.creative")
     public void setCreative(Player sender) {
-        if(sender.getGameMode() != GameMode.CREATIVE) {
+        if (sender.getGameMode() != GameMode.CREATIVE) {
             sender.setGameMode(GameMode.CREATIVE);
             Utils.send(sender, "&fHas cambiado tu modo de juego a &eCreative");
         } else {
@@ -44,7 +44,7 @@ public class GamemodeCommand extends BaseCommand {
     @Subcommand("adventure|a|aventura|2")
     @CommandPermission("survivalclasiccore.gm.adventure")
     public void setAdventure(Player sender) {
-        if(sender.getGameMode() != GameMode.ADVENTURE) {
+        if (sender.getGameMode() != GameMode.ADVENTURE) {
             sender.setGameMode(GameMode.ADVENTURE);
             Utils.send(sender, "&fHas cambiado tu modo de juego a &eAdventure");
         } else {
@@ -55,7 +55,7 @@ public class GamemodeCommand extends BaseCommand {
     @Subcommand("spectator|spec|spectator|3")
     @CommandPermission("survivalclasiccore.gm.spectator")
     public void setSpectator(Player sender) {
-        if(sender.getGameMode() != GameMode.SPECTATOR) {
+        if (sender.getGameMode() != GameMode.SPECTATOR) {
             sender.setGameMode(GameMode.SPECTATOR);
             Utils.send(sender, "&fHas cambiado tu modo de juego a &eEspectador");
         } else {

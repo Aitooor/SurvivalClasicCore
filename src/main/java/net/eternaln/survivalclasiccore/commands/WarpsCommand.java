@@ -1,7 +1,6 @@
 package net.eternaln.survivalclasiccore.commands;
 
 import co.aikar.commands.BaseCommand;
-import co.aikar.commands.CommandHelp;
 import co.aikar.commands.annotation.*;
 import net.eternaln.survivalclasiccore.SurvivalClasicCore;
 import net.eternaln.survivalclasiccore.utils.Cooldown;

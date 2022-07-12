@@ -7,8 +7,6 @@ import net.eternaln.survivalclasiccore.utils.Utils;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
-import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.inventory.meta.Repairable;
 
 @CommandAlias("reparar|repair|fix")
 @CommandPermission("survivalclasiccore.repair")

@@ -7,7 +7,6 @@ import lombok.Getter;
 import net.eternaln.survivalclasiccore.commands.admin.SocialSpyCommand;
 import net.eternaln.survivalclasiccore.utils.Utils;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
@@ -35,19 +34,19 @@ public class MessageCommand extends BaseCommand {
         Player receiver = Bukkit.getPlayer(target);
 
         if (receiver == null) {
-            Utils.send(sender,"El jugador no esta online");
+            Utils.send(sender, "El jugador no esta online");
             return;
         }
 
         Utils.sendNoPrefix(sender, "&8(MSG) &7" + sender.getDisplayName() + " &7-> &b" + receiver.getDisplayName() + " &7> &7" + message);
-        Utils.sendNoPrefix(receiver,"&8(MSG) &b" + sender.getDisplayName() + " &7> &7" + message);
+        Utils.sendNoPrefix(receiver, "&8(MSG) &b" + sender.getDisplayName() + " &7> &7" + message);
         receiver.playSound(receiver.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1, 1);
 
         getConversations().put(sender.getUniqueId(), receiver.getUniqueId());
         getConversations().put(receiver.getUniqueId(), sender.getUniqueId());
 
         SocialSpyCommand.getSocialSpyList().stream().map(Bukkit::getPlayer).filter(Objects::nonNull).forEach(p -> {
-            Utils.sendNoPrefix(p,"&6&lSP &8(MSG) &7De &b" + sender.getDisplayName()  + " &7a &b" + receiver.getDisplayName() + " &7> &7" + message);
+            Utils.sendNoPrefix(p, "&6&lSP &8(MSG) &7De &b" + sender.getDisplayName() + " &7a &b" + receiver.getDisplayName() + " &7> &7" + message);
         });
     }
 }

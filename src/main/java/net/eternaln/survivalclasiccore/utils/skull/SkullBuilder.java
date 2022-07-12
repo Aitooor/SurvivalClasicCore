@@ -22,6 +22,10 @@ public class SkullBuilder {
     private String displayName;
     private List<String> lore;
 
+    public static SkullBuilder newBuilder() {
+        return new SkullBuilder();
+    }
+
     public SkullBuilder setDisplayName(String displayName) {
         this.displayName = Utils.ct(displayName);
 
@@ -40,8 +44,6 @@ public class SkullBuilder {
         );
     }
 
-
-
     public SkullBuilder setOwner(String owner) {
         this.owner = owner;
         return this;
@@ -58,7 +60,7 @@ public class SkullBuilder {
     }
 
     public ItemStack toItemStack() {
-        ItemStack itemStack =  new ItemStack(Material.PLAYER_HEAD, 1);
+        ItemStack itemStack = new ItemStack(Material.PLAYER_HEAD, 1);
         SkullMeta skullMeta = (SkullMeta) itemStack.getItemMeta();
 
 
@@ -101,9 +103,5 @@ public class SkullBuilder {
         itemStack.setItemMeta(skullMeta);
 
         return itemStack;
-    }
-
-    public static SkullBuilder newBuilder() {
-        return new SkullBuilder();
     }
 }

@@ -18,6 +18,7 @@ public class ExpCommand extends BaseCommand {
     public void help(CommandHelp help) {
         help.showHelp();
     }
+
     @Subcommand("add|añadir")
     public class GiveExpSubCommand extends BaseCommand {
         @Subcommand("amount|cantidad")

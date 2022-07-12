@@ -7,7 +7,6 @@ import co.aikar.commands.bukkit.contexts.OnlinePlayer;
 import net.eternaln.survivalclasiccore.SurvivalClasicCore;
 import net.eternaln.survivalclasiccore.data.mongo.PlayerData;
 import net.eternaln.survivalclasiccore.utils.Utils;
-import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -23,7 +22,7 @@ public class NickCommand extends BaseCommand {
 
     @Default
     public void nick(Player sender, String string) {
-        if(Utils.checkNameLength(string)) {
+        if (Utils.checkNameLength(string)) {
             PlayerData data = SurvivalClasicCore.getDataManager().getData(sender.getUniqueId());
             sender.setDisplayName(string);
             sender.setPlayerListName(Utils.ct(string));
