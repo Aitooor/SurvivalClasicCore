@@ -12,9 +12,7 @@ import java.lang.reflect.InvocationTargetException;
 public class RegisterExecutor {
 
     public RegisterExecutor() {
-        SurvivalClasicCore.getInstance().getLogger().info("&aRegistering commands and listeners...");
         execute(new Reflections("net.eternaln.survivalclasiccore"));
-        SurvivalClasicCore.getInstance().getLogger().info("&aCommands and listeners registered.");
     }
 
     private void execute(Reflections reflections) {
@@ -26,8 +24,6 @@ public class RegisterExecutor {
                      NoSuchMethodException e) {
                 e.printStackTrace();
             }
-
-            SurvivalClasicCore.getInstance().getLogger().info("Registering " + clazz.getSimpleName() + "...");
 
             if (obj instanceof Listener) {
                 Bukkit.getPluginManager().registerEvents((Listener) obj, SurvivalClasicCore.getInstance());
@@ -44,8 +40,6 @@ public class RegisterExecutor {
                 e.printStackTrace();
                 Bukkit.getLogger().info(clazz.getSimpleName());
             }
-
-            SurvivalClasicCore.getInstance().getLogger().info("Registering " + clazz.getSimpleName() + "...");
 
             SurvivalClasicCore.getCmdManager().registerCommand((BaseCommand) obj);
         }

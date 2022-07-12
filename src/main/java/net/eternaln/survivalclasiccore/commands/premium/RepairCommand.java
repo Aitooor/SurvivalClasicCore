@@ -23,16 +23,11 @@ public class RepairCommand extends BaseCommand {
     @Default
     public void repair(Player sender) {
         ItemStack item = sender.getInventory().getItemInMainHand();
-        if (item != null) {
-            if (!(item.getItemMeta() instanceof Repairable)) {
-                item.setDurability((short) 0);
-                Utils.send(sender, "&aReparado correctamente.");
-            } else {
-                Utils.send(sender, "&cEste item no se puede reparar.");
-            }
-        } else {
-            Utils.send(sender, "&cNo tienes nada en la mano.");
-        }
+        if (item.getItemMeta() instanceof Damageable d) {
+            d.setDamage(0);
+            Utils.send(sender, "&aReparado correctamente.");
+        } else
+            Utils.send(sender, "&cEste item no se puede reparar.");
     }
 
     @Subcommand("todo|all|todos|all")
@@ -40,14 +35,12 @@ public class RepairCommand extends BaseCommand {
     @CommandCompletion("@players")
     public void all(Player sender) {
         for (ItemStack items : sender.getInventory().getContents()) {
-            if (items instanceof Repairable) {
-                items.setDurability((short)0);
-            }
+            if (items instanceof Damageable d)
+                d.setDamage(0);
         }
         for (ItemStack items : sender.getInventory().getArmorContents()) {
-            if (items instanceof Repairable) {
-                items.setDurability((short)0);
-            }
+            if (items instanceof Damageable d)
+                d.setDamage(0);
         }
         Utils.send(sender, "&aReparado todo correctamente");
     }

@@ -9,6 +9,7 @@ import lombok.Setter;
 import net.eternaln.survivalclasiccore.SurvivalClasicCore;
 import net.eternaln.survivalclasiccore.data.converters.ItemStackMapConverter;
 import net.eternaln.survivalclasiccore.data.converters.LocationStringConverter;
+import net.eternaln.survivalclasiccore.data.mongo.MongoCredentials;
 import net.eternaln.survivalclasiccore.utils.items.ItemBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -22,6 +23,10 @@ import java.util.List;
 @Getter
 public class Configuration extends BukkitYamlConfiguration {
 
+    @Comment("Mongo credentials")
+    public MongoCredentials credentials = new MongoCredentials("", "survival", "");
+
+    @Comment({"","CommandCooldown"})
     public int cmdCooldown = 2;
 
     @Comment({"", "Messages"})

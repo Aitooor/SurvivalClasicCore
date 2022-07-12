@@ -1,7 +1,7 @@
 name: SurvivalClasicCore
 version: '${project.version}'
 main: net.eternaln.survivalclasiccore.SurvivalClasicCore
-api-version: 1.19
+api-version: 1.18
 authors: [ Aitooor, EternalTeam, Vicen621 ]
 description: Simple core plugin for Eternal Network Survival Clasic
 softdepend:
@@ -9,3 +9,4 @@ softdepend:
 libraries:
   - org.projectlombok:lombok:1.18.24
   - com.github.cryptomorin:XSeries:9.0.0
+  - org.mongodb:mongodb-driver-sync:4.6.0

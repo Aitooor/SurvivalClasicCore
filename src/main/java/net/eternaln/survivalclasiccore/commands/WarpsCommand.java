@@ -27,8 +27,8 @@ public class WarpsCommand extends BaseCommand {
             return;
         }
 
-        if (!(SurvivalClasicCore.getWarpsFile().getConfig().getString(name.toLowerCase()) == null)) {
-            String warp = SurvivalClasicCore.getWarpsFile().getConfig().getString(name.toLowerCase());
+        if (!SurvivalClasicCore.getWarpsFile().getConfig().contains("warps." + name.toLowerCase())) {
+            String warp = SurvivalClasicCore.getWarpsFile().getConfig().getString("warps." + name.toLowerCase());
             sender.teleport(LocationUtil.parseToLocation(warp));
             Utils.send(sender, "&fHas sido teletransportado a &a" + name);
         } else {
@@ -39,9 +39,9 @@ public class WarpsCommand extends BaseCommand {
     @Subcommand("set|establece|add|agregar")
     @CommandPermission("survivalclasiccore.warps.set")
     public void SetWarp(Player sender, String name) {
-        if (SurvivalClasicCore.getWarpsFile().getConfig().getString(name.toLowerCase()) == null) {
+        if (!SurvivalClasicCore.getWarpsFile().getConfig().contains("warps." + name.toLowerCase())) {
             Location loc = sender.getLocation();
-            SurvivalClasicCore.getWarpsFile().getConfig().set(name.toLowerCase(), LocationUtil.parseToString(loc));
+            SurvivalClasicCore.getWarpsFile().getConfig().set("warps." + name.toLowerCase(), LocationUtil.parseToString(loc));
             SurvivalClasicCore.getWarpsFile().saveConfig();
             Utils.send(sender, "&fEl warp &a" + name + " &fha sido establecido");
         } else {
@@ -52,8 +52,8 @@ public class WarpsCommand extends BaseCommand {
     @Subcommand("remove|eliminar|delete|borrar")
     @CommandPermission("survivalclasiccore.warps.remove")
     public void RemoveWarp(Player sender, String name) {
-        if (!(SurvivalClasicCore.getWarpsFile().getConfig().getString(name.toLowerCase()) == null)) {
-            SurvivalClasicCore.getWarpsFile().getConfig().set(name.toLowerCase(), null);
+        if (SurvivalClasicCore.getWarpsFile().getConfig().contains("warps." + name.toLowerCase())) {
+            SurvivalClasicCore.getWarpsFile().getConfig().set("warps." + name.toLowerCase(), null);
             SurvivalClasicCore.getWarpsFile().saveConfig();
             Utils.send(sender, "&fWarp &c" + name + " &fborrado");
         } else {

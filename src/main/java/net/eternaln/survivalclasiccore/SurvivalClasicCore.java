@@ -6,11 +6,14 @@ import com.google.common.collect.ImmutableList;
 import lombok.Getter;
 import net.eternaln.survivalclasiccore.annotations.RegisterExecutor;
 import net.eternaln.survivalclasiccore.data.Configuration;
-import net.eternaln.survivalclasiccore.data.HomesFile;
 import net.eternaln.survivalclasiccore.data.WarpsFile;
+import net.eternaln.survivalclasiccore.data.mongo.DataManager;
+import net.eternaln.survivalclasiccore.data.mongo.MongoDB;
+import net.eternaln.survivalclasiccore.data.mongo.PlayerData;
 import net.eternaln.survivalclasiccore.managers.menus.MenuManager;
 import net.eternaln.survivalclasiccore.utils.Utils;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class SurvivalClasicCore extends JavaPlugin {
@@ -24,14 +27,17 @@ public final class SurvivalClasicCore extends JavaPlugin {
     @Getter
     private static WarpsFile warpsFile;
     @Getter
-    private static HomesFile homesFile;
+    private static MongoDB mongo;
+    @Getter
+    private static DataManager dataManager;
 
     @Override
     public void onEnable() {
         instance = this;
         configuration = new Configuration();
         warpsFile = new WarpsFile(this);
-        homesFile = new HomesFile(this);
+        mongo = new MongoDB();
+        dataManager = new DataManager();
 
         new MenuManager(this);
 
@@ -59,9 +65,18 @@ public final class SurvivalClasicCore extends JavaPlugin {
         cmdManager = new PaperCommandManager(getInstance());
         cmdManager.enableUnstableAPI("help");
 
-        cmdManager.getCommandCompletions().registerCompletion("warps", c ->
-                new ImmutableList.Builder<String>().addAll(getWarpsFile().getConfig()
-                        .getConfigurationSection("warps").getValues(false).keySet()).build());
+        cmdManager.getCommandCompletions().registerCompletion("warps", c -> {
+            if (getWarpsFile().getConfig().getConfigurationSection("warps") == null)
+                return ImmutableList.of();
+            return new ImmutableList.Builder<String>().addAll(getWarpsFile().getConfig().getConfigurationSection("warps").getValues(true).keySet()).build();
+        });
+
+        cmdManager.getCommandCompletions().registerCompletion("homes", c -> {
+            if (!(c.getSender() instanceof Player p))
+                return ImmutableList.of();
+            PlayerData playerData = dataManager.getData(p.getUniqueId());
+           return new ImmutableList.Builder<String>().addAll(playerData.getHomes().keySet()).build();
+        });
 
         cmdManager.getLocales().setDefaultLocale(Locales.SPANISH);
     }

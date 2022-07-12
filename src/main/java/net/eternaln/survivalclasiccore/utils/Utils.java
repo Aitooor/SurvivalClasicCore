@@ -4,6 +4,7 @@ import net.eternaln.survivalclasiccore.SurvivalClasicCore;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.List;
 import java.util.regex.Matcher;
@@ -64,4 +65,21 @@ public interface Utils {
         return length.length() <= 16;
     }
 
+    static void async(Runnable run) {
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                run.run();
+            }
+        }.runTaskAsynchronously(SurvivalClasicCore.getInstance());
+    }
+
+    static void sync(Runnable run) {
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                run.run();
+            }
+        }.runTask(SurvivalClasicCore.getInstance());
+    }
 }

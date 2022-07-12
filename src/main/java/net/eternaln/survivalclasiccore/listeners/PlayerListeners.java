@@ -3,6 +3,7 @@ package net.eternaln.survivalclasiccore.listeners;
 import me.clip.placeholderapi.PlaceholderAPI;
 import net.eternaln.survivalclasiccore.SurvivalClasicCore;
 import net.eternaln.survivalclasiccore.annotations.Register;
+import net.eternaln.survivalclasiccore.data.mongo.PlayerData;
 import net.eternaln.survivalclasiccore.utils.CenteredMessage;
 import net.eternaln.survivalclasiccore.utils.Utils;
 import org.bukkit.Bukkit;
@@ -25,7 +26,7 @@ public class PlayerListeners implements Listener {
         String rank = "%vault_prefix%&r ";
         rank = PlaceholderAPI.setPlaceholders(event.getPlayer(), rank);
 
-        if(rank == "") {
+        if(rank.equals("")) {
             event.setFormat(Utils.ct(player.getDisplayName() + "&7: &r" + event.getMessage()));
         } else {
             event.setFormat(Utils.ct(rank + player.getDisplayName() + "&7: &r" + event.getMessage()));
@@ -73,6 +74,13 @@ public class PlayerListeners implements Listener {
     public void onJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
 
+        PlayerData data = SurvivalClasicCore.getDataManager().handleDataCreation(player.getUniqueId());
+
+        if (data.getNickName() != null) {
+            player.setDisplayName(data.getNickName());
+            player.setPlayerListName(Utils.ct(data.getNickName()));
+        }
+
         player.setGameMode(GameMode.SURVIVAL);
         event.getPlayer().teleport(SurvivalClasicCore.getConfiguration().getSpawnLocation());
         event.setJoinMessage(null);
@@ -88,7 +96,8 @@ public class PlayerListeners implements Listener {
         Player player = event.getEntity();
         Player killer = event.getEntity().getKiller();
 
-        event.setDeathMessage(Utils.ct(Utils.getPrefixGame() + "&fEl jugador &b" + player.getDisplayName() + " &fha sido asesinado por &c" + killer.getDisplayName()));
+        if (killer != null)
+            event.setDeathMessage(Utils.ct(Utils.getPrefixGame() + "&fEl jugador &b" + player.getDisplayName() + " &fha sido asesinado por &c" + killer.getDisplayName()));
     }
 
     @EventHandler
