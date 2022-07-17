@@ -83,6 +83,13 @@ public class PlayerListeners implements Listener {
         player.setGameMode(GameMode.SURVIVAL);
         event.getPlayer().teleport(SurvivalClasicCore.getConfiguration().getSpawnLocation());
         event.setJoinMessage(null);
+
+
+        for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
+            if (onlinePlayer.hasMetadata("survivalclasiccore.vanish")) {
+                player.hidePlayer(SurvivalClasicCore.getInstance(), onlinePlayer);
+            }
+        }
     }
 
     @EventHandler

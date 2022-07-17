@@ -30,7 +30,6 @@ public class RepairCommand extends BaseCommand {
 
     @Subcommand("todo|all|todos|all")
     @CommandPermission("survivalclasiccore.repair.all")
-    @CommandCompletion("@players")
     public void all(Player sender) {
         for (ItemStack items : sender.getInventory().getContents()) {
             if (items instanceof Damageable d)
