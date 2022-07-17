@@ -13,8 +13,8 @@ import org.bukkit.permissions.PermissionAttachmentInfo;
 import java.util.ArrayList;
 import java.util.UUID;
 
-@CommandAlias("casa|home|casas|homes")
-public class HomesCommand extends BaseCommand {
+@CommandAlias("borrarcasa|delhome|borrarcasas|delhomes|dhome|bcasa")
+public class DelHomeCommand extends BaseCommand {
 
     private final Cooldown<UUID> cooldown = new Cooldown<>(SurvivalClasicCore.getConfiguration().getCmdCooldown());
 
@@ -34,7 +34,17 @@ public class HomesCommand extends BaseCommand {
             return;
         }
 
-        sender.teleport(LocationUtil.parseToLocation(data.getHomes().get(name)));
-        Utils.send(sender, "&fHas sido teletransportado a &a" + name);
+        data.getHomes().remove(name);
+        data.save();
+        sender.sendMessage(Utils.ct("&fHas eliminado la casa &a" + name));
+    }
+
+    public int getMaxInteger(Integer[] array) {
+        int i = array[0];
+        for (byte b = 1; b < array.length; b++) {
+            if (array[b] > i)
+                i = array[b];
+        }
+        return i;
     }
 }

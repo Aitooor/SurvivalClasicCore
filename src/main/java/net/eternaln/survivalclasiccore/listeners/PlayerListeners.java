@@ -40,8 +40,7 @@ public class PlayerListeners implements Listener {
             if (player == null) {
                 return;
             }
-            String name = "&f%player_name%&r ";
-            name = PlaceholderAPI.setPlaceholders(event.getPlayer(), name);
+            String name = player.getDisplayName();
             String rank = "%vault_prefix%&r ";
             rank = PlaceholderAPI.setPlaceholders(event.getPlayer(), rank);
             if (rank != null) {
@@ -52,7 +51,7 @@ public class PlayerListeners implements Listener {
                 CenteredMessage.Chat.sendCenteredMessage(player, "&aTIENDA &7https://tienda.eternaln.net");
                 CenteredMessage.Chat.sendCenteredMessage(player, "&aDISCORD &7https://discord.com/invite/bMarGsQYfb");
                 CenteredMessage.Chat.sendCenteredMessage(player, "");
-                CenteredMessage.Chat.sendCenteredMessage(player, rank + name + "&aesperamos que disfrutes");
+                CenteredMessage.Chat.sendCenteredMessage(player, rank + name + " &aesperamos que disfrutes");
                 CenteredMessage.Chat.sendCenteredMessage(player, "&b¡Empecemos la aventura!");
                 CenteredMessage.Chat.sendCenteredMessage(player, "");
             } else {

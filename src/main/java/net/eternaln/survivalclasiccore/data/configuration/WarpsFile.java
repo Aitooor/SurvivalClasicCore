@@ -1,4 +1,4 @@
-package net.eternaln.survivalclasiccore.data;
+package net.eternaln.survivalclasiccore.data.configuration;
 
 import net.eternaln.survivalclasiccore.SurvivalClasicCore;
 import org.bukkit.configuration.file.FileConfiguration;

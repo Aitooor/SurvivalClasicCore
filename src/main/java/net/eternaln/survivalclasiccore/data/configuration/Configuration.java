@@ -1,4 +1,4 @@
-package net.eternaln.survivalclasiccore.data;
+package net.eternaln.survivalclasiccore.data.configuration;
 
 import de.exlll.configlib.annotation.Comment;
 import de.exlll.configlib.annotation.Convert;
@@ -24,7 +24,10 @@ import java.util.List;
 public class Configuration extends BukkitYamlConfiguration {
 
     @Comment("Mongo credentials")
-    public MongoCredentials credentials = new MongoCredentials("", "survival", "");
+    public MongoCredentials credentials = new MongoCredentials(
+            "localhost", 27017, "admin",
+            true,"root", "password", "SurvivalClasicCore", "players"
+    );
 
     @Comment({"", "CommandCooldown"})
     public int cmdCooldown = 2;
@@ -43,6 +46,14 @@ public class Configuration extends BukkitYamlConfiguration {
             "&b/itemc give &7(gold/plate) (coin/fragment)",
             "&b/objetoc dar &7(oro/plata) (moneda/fragmento)",
             "&8&m-----------------------------------------"
+    );
+
+    @Comment({"", "Scoreboard"})
+    public String scoreboardTitle = "&6&lETERNAL &r";
+    public List<String> scoreboardLines = Arrays.asList(
+            "",
+            "&fNombre &a%player_name%",
+            ""
     );
 
     @Comment({"", "Items"})

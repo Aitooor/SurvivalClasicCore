@@ -26,7 +26,7 @@ public class WarpsCommand extends BaseCommand {
             return;
         }
 
-        if (!SurvivalClasicCore.getWarpsFile().getConfig().contains("warps." + name.toLowerCase())) {
+        if (SurvivalClasicCore.getWarpsFile().getConfig().contains("warps." + name.toLowerCase())) {
             String warp = SurvivalClasicCore.getWarpsFile().getConfig().getString("warps." + name.toLowerCase());
             sender.teleport(LocationUtil.parseToLocation(warp));
             Utils.send(sender, "&fHas sido teletransportado a &a" + name);

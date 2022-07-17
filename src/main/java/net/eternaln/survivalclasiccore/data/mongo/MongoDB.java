@@ -1,54 +1,46 @@
 package net.eternaln.survivalclasiccore.data.mongo;
 
-import com.mongodb.ConnectionString;
-import com.mongodb.MongoClientSettings;
-import com.mongodb.ServerApi;
-import com.mongodb.ServerApiVersion;
-import com.mongodb.client.MongoClient;
-import com.mongodb.client.MongoClients;
+import com.mongodb.MongoClient;
+import com.mongodb.MongoClientOptions;
+import com.mongodb.MongoCredential;
+import com.mongodb.ServerAddress;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
+import lombok.Data;
 import lombok.Getter;
 import net.eternaln.survivalclasiccore.SurvivalClasicCore;
 import net.eternaln.survivalclasiccore.utils.Utils;
 import org.bson.Document;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicReference;
 
-@Getter
+@Data
 public class MongoDB {
-    private MongoDatabase mongoDb;
+
+    @Getter
+    private static MongoDB instance;
+
+    private MongoClient mongoClient;
+    private MongoDatabase restorerDatabase;
     private MongoCollection<Document> mongoCol;
 
+
     public MongoDB() {
-        connect();
-    }
+        instance = this;
 
-    public void connect() {
-        Utils.async(() -> {
-            MongoCredentials credentials = SurvivalClasicCore.getConfiguration().getCredentials();
+        MongoCredentials credentials = SurvivalClasicCore.getConfiguration().getCredentials();
 
-            try {
-                ConnectionString connectionString = new ConnectionString(credentials.link);
-                MongoClientSettings settings = MongoClientSettings.builder()
-                        .applyConnectionString(connectionString)
-                        .serverApi(ServerApi.builder()
-                                .version(ServerApiVersion.V1)
-                                .build())
-                        .build();
-                MongoClient mongoClient = MongoClients.create(settings);
-                mongoDb = mongoClient.getDatabase(credentials.getDatabase());
-                mongoCol = mongoDb.getCollection(credentials.getCollection());
+        if (credentials.isAuthentication()) {
+            this.mongoClient = new MongoClient(new ServerAddress(credentials.ip, credentials.port), MongoCredential.createCredential(credentials.user, credentials.authDatabase, credentials.password.toCharArray()), MongoClientOptions.builder().build());
+        } else {
+            this.mongoClient = new MongoClient(new ServerAddress(credentials.ip, credentials.port));
+        }
 
-                Bukkit.getLogger().info("[SurvivalClasicCore] " + ChatColor.GREEN + "Connected to MongoDB!");
-            } catch (Exception e) {
-                Bukkit.getLogger().info("[SurvivalClasicCore] " + ChatColor.RED + "The plugin can't reach the MongoDB connection");
-            }
-        });
+        this.restorerDatabase = this.mongoClient.getDatabase(credentials.database);
+
+        this.mongoCol = this.restorerDatabase.getCollection(credentials.collection);
     }
 
     public Document getPlayer(UUID uuid) {

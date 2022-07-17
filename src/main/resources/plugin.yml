@@ -1,7 +1,7 @@
 name: SurvivalClasicCore
 version: '${project.version}'
 main: net.eternaln.survivalclasiccore.SurvivalClasicCore
-api-version: 1.18
+api-version: 1.19
 authors: [ Aitooor, EternalTeam, Vicen621 ]
 description: Simple core plugin for Eternal Network Survival Clasic
 softdepend:

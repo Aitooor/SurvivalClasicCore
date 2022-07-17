@@ -8,11 +8,16 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public class MongoCredentials {
-    public String link;
+    public String ip;
+    public int port;
+    public String authDatabase;
+    public boolean isAuthentication;
+    public String user;
+    public String password;
     public String database;
     public String collection;
 
     public MongoCredentials() {
-        this("", "", "");
+        this("" ,27017, "", true, "", "", "", "");
     }
 }
