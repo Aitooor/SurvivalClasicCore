@@ -86,8 +86,8 @@ public class PlayerListeners implements Listener {
 
 
         for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
-            if (onlinePlayer.hasMetadata("survivalclasiccore.vanish")) {
-                player.hidePlayer(SurvivalClasicCore.getInstance(), onlinePlayer);
+            if (onlinePlayer.hasMetadata("survivalclasiccore.vanish") || onlinePlayer.hasPermission("survivalclasiccore.vanish.see")) {
+                    player.hidePlayer(SurvivalClasicCore.getInstance(), onlinePlayer);
             }
         }
     }

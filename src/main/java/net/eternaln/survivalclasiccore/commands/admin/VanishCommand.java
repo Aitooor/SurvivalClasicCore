@@ -33,6 +33,7 @@ public class VanishCommand extends BaseCommand {
     }
 
     @Subcommand("list")
+    @CommandPermission("survivalclasiccore.vanish.list")
     public void list(Player sender) {
         List<String> players = new ArrayList<>();
         for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
@@ -40,10 +41,16 @@ public class VanishCommand extends BaseCommand {
                 players.add(onlinePlayer.getName());
             }
         }
-        Utils.send(sender, "&aLista de jugadores invisible\n" + players.toString());
+        if(!players.isEmpty()) {
+            Utils.sendNoPrefix(sender, "&6&lJUGADORES INVISIBLES\n&b" + players.toString().replace("[", "").replace("]", ""));
+        } else {
+            Utils.sendNoPrefix(sender, "&6&lJUGADORES INVISIBLES\n&cNo hay jugadores invisibles");
+        }
     }
 
     @Subcommand("other|others|otros|otro")
+    @CommandPermission("survivalclasiccore.vanish.other")
+    @CommandCompletion("@players")
     public void other(Player sender, Player target) {
         if (target.hasMetadata("survivalclasiccore.vanish")) {
             target.removeMetadata("survivalclasiccore.vanish", SurvivalClasicCore.getInstance());

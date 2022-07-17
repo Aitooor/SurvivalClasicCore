@@ -35,9 +35,9 @@ public class GamemodeCommand extends BaseCommand {
     public void setCreative(Player sender) {
         if (sender.getGameMode() != GameMode.CREATIVE) {
             sender.setGameMode(GameMode.CREATIVE);
-            Utils.send(sender, "&fHas cambiado tu modo de juego a &eCreative");
+            Utils.send(sender, "&fHas cambiado tu modo de juego a &eCreativo");
         } else {
-            Utils.send(sender, "&fYa tienes el modo de juego &eCreative");
+            Utils.send(sender, "&fYa tienes el modo de juego &eCreativo");
         }
     }
 
@@ -46,9 +46,9 @@ public class GamemodeCommand extends BaseCommand {
     public void setAdventure(Player sender) {
         if (sender.getGameMode() != GameMode.ADVENTURE) {
             sender.setGameMode(GameMode.ADVENTURE);
-            Utils.send(sender, "&fHas cambiado tu modo de juego a &eAdventure");
+            Utils.send(sender, "&fHas cambiado tu modo de juego a &eAventura");
         } else {
-            Utils.send(sender, "&fYa tienes el modo de juego &eAdventure");
+            Utils.send(sender, "&fYa tienes el modo de juego &eAventura");
         }
     }
 

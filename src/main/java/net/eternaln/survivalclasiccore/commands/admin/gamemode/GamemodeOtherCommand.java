@@ -48,13 +48,13 @@ public class GamemodeOtherCommand extends BaseCommand {
             if (targetPlayer.getGameMode() != GameMode.CREATIVE) {
                 if (targetPlayer != sender) {
                     targetPlayer.setGameMode(GameMode.CREATIVE);
-                    Utils.send(sender, "&fHas cambiado el modo de juego de &b" + targetPlayer.getName() + " &fa &eCreative");
-                    Utils.send(targetPlayer, "&fTu modo de juego ha sido cambiado por &b" + sender.getName() + " &fa &eCreative");
+                    Utils.send(sender, "&fHas cambiado el modo de juego de &b" + targetPlayer.getName() + " &fa &eCreativo");
+                    Utils.send(targetPlayer, "&fTu modo de juego ha sido cambiado por &b" + sender.getName() + " &fa &eCreativo");
                 } else {
                     Utils.send(sender, "&fNo puedes cambiar tu propio modo de juego");
                 }
             } else {
-                Utils.send(sender, "&fEl jugador &b" + targetPlayer.getName() + " &fya tiene el modo de juego &eCreative");
+                Utils.send(sender, "&fEl jugador &b" + targetPlayer.getName() + " &fya tiene el modo de juego &eCreativo");
             }
         } else {
             Utils.send(sender, "&fEl jugador &b" + target + " &fno esta online");
@@ -69,13 +69,13 @@ public class GamemodeOtherCommand extends BaseCommand {
             if (targetPlayer.getGameMode() != GameMode.ADVENTURE) {
                 if (targetPlayer != sender) {
                     targetPlayer.setGameMode(GameMode.ADVENTURE);
-                    Utils.send(sender, "&fHas cambiado el modo de juego de &b" + targetPlayer.getName() + " &fa &eAdventure");
-                    Utils.send(targetPlayer, "&fTu modo de juego ha sido cambiado por &b" + sender.getName() + " &fa &eAdventure");
+                    Utils.send(sender, "&fHas cambiado el modo de juego de &b" + targetPlayer.getName() + " &fa &eAventura");
+                    Utils.send(targetPlayer, "&fTu modo de juego ha sido cambiado por &b" + sender.getName() + " &fa &eAventura");
                 } else {
                     Utils.send(sender, "&fNo puedes cambiar tu propio modo de juego");
                 }
             } else {
-                Utils.send(sender, "&fEl jugador &b" + targetPlayer.getName() + " &fya tiene el modo de juego &eAdventure");
+                Utils.send(sender, "&fEl jugador &b" + targetPlayer.getName() + " &fya tiene el modo de juego &eAventura");
             }
         } else {
             Utils.send(sender, "&fEl jugador &b" + target + " &fno esta online");
