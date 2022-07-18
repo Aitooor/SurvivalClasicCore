@@ -91,14 +91,13 @@ public class MessagesFile extends BukkitYamlConfiguration {
 
     @Comment({"", "Item"})
     public String itemGived = "&aObjeto Entregado";
-    public List<String> itemHelp = Arrays.asList(
-            "&8&m-----------------------------------------",
-            "&6&lETERNAL &7Ayuda Items",
-            "&r",
-            "&b/itemc give &7(gold/plate) (coin/fragment)",
-            "&b/objetoc dar &7(oro/plata) (moneda/fragmento)",
-            "&8&m-----------------------------------------"
-    );
+    public String itemcHelp =
+            "&8&m-----------------------------------------" +
+                    "\n&6&lETERNAL &7Ayuda Items" +
+                    "\n&r" +
+                    "\n&b/itemc give &7(gold/plate) (coin/fragment)" +
+                    "\n&b/objetoc dar &7(oro/plata) (moneda/fragmento)" +
+                    "\n&8&m-----------------------------------------";
 
     public MessagesFile() {
         super(

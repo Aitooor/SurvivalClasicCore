@@ -4,6 +4,7 @@ import co.aikar.commands.BaseCommand;
 import co.aikar.commands.CommandHelp;
 import co.aikar.commands.annotation.*;
 import net.eternaln.survivalclasiccore.SurvivalClasicCore;
+import net.eternaln.survivalclasiccore.data.configuration.MessagesFile;
 import net.eternaln.survivalclasiccore.utils.Utils;
 import org.bukkit.entity.Player;
 
@@ -11,11 +12,13 @@ import org.bukkit.entity.Player;
 @CommandPermission("survivalclasiccore.itemc.give")
 public class ItemCommand extends BaseCommand {
 
+    MessagesFile messagesFile = SurvivalClasicCore.getMessagesFile();
+
     @Default
     @HelpCommand("ayuda|help")
     @CatchUnknown
-    public void onHelp(Player sender, CommandHelp help) {
-        help.showHelp();
+    public void onHelp(Player sender) {
+        Utils.sendNoPrefix(sender, String.valueOf(messagesFile.itemcHelp));
     }
 
     @Subcommand("give|dar")
