@@ -7,6 +7,7 @@ import co.aikar.commands.annotation.CommandAlias;
 import co.aikar.commands.annotation.Default;
 import co.aikar.commands.annotation.HelpCommand;
 import net.eternaln.survivalclasiccore.SurvivalClasicCore;
+import net.eternaln.survivalclasiccore.data.configuration.MessagesFile;
 import net.eternaln.survivalclasiccore.utils.Cooldown;
 import net.eternaln.survivalclasiccore.utils.Utils;
 import org.bukkit.entity.Player;
@@ -16,6 +17,8 @@ import java.util.UUID;
 
 @CommandAlias("tpdeny")
 public class TpdenyCommand extends BaseCommand {
+
+    MessagesFile messagesFile = SurvivalClasicCore.getMessagesFile();
 
     private final Cooldown<UUID> cooldown = new Cooldown<>(SurvivalClasicCore.getConfiguration().getCmdCooldown());
 
@@ -30,11 +33,10 @@ public class TpdenyCommand extends BaseCommand {
     @Default
     public void teleportDeny(Player sender) {
         if (requests.containsKey(sender)) {
-            Utils.send(sender, "&fHas &c&lDENEGADO &ala petición de &b" + requests.get(sender).getPlayer().getDisplayName());
-            requests.get(sender).sendMessage(Utils.ct("&fEl jugador &b" + sender.getName() + " &fha &c&lDENEGADO &ftu petición"));
+            requests.get(sender).sendMessage(Utils.ct(messagesFile.tpDeny.replace("%player%", sender.getDisplayName())));
             requests.remove(sender);
         } else {
-            Utils.send(sender, "&cNo tienes ninguna peticiones de teletransporte");
+            Utils.send(sender, messagesFile.tpDenyNoRequest);
         }
     }
 }

@@ -45,7 +45,7 @@ public interface Utils {
     }
 
     static String getPrefixGame() {
-        return ct(SurvivalClasicCore.getConfiguration().getPrefix());
+        return ct(SurvivalClasicCore.getMessagesFile().getPrefix());
     }
 
     static String getPrefix() {

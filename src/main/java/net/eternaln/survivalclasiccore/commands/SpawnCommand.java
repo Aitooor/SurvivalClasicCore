@@ -4,6 +4,7 @@ import co.aikar.commands.BaseCommand;
 import co.aikar.commands.CommandHelp;
 import co.aikar.commands.annotation.*;
 import net.eternaln.survivalclasiccore.SurvivalClasicCore;
+import net.eternaln.survivalclasiccore.data.configuration.MessagesFile;
 import net.eternaln.survivalclasiccore.utils.Cooldown;
 import net.eternaln.survivalclasiccore.utils.Utils;
 import org.bukkit.Bukkit;
@@ -13,6 +14,8 @@ import java.util.UUID;
 
 @CommandAlias("spawn|spawnpoint")
 public class SpawnCommand extends BaseCommand {
+
+    MessagesFile messageFile = SurvivalClasicCore.getMessagesFile();
 
     private final Cooldown<UUID> cooldown = new Cooldown<>(SurvivalClasicCore.getConfiguration().getCmdCooldown());
 
@@ -25,13 +28,14 @@ public class SpawnCommand extends BaseCommand {
     @Default
     public void spawn(Player sender) {
         if (!sender.hasPermission("survivalclasiccore.cooldown.bypass") && !cooldown.isCooledDown(sender.getUniqueId())) {
-            sender.sendMessage(Utils.ct("&cDebes esperar &b" + cooldown.getSecondsRemaining(sender.getUniqueId()) + " &csegundos"));
+            long cooldownTime = cooldown.getSecondsRemaining(sender.getUniqueId());
+            Utils.send(sender, messageFile.cooldown.replace("%time%", String.valueOf(cooldownTime)));
             return;
         }
 
         sender.teleport(SurvivalClasicCore.getConfiguration().getSpawnLocation());
         cooldown.addToCooldown(sender.getUniqueId());
-        Utils.send(sender, SurvivalClasicCore.getConfiguration().getTpSpawn());
+        Utils.send(sender, messageFile.tpSpawn);
     }
 
     @Subcommand("otros|others|other|otro")
@@ -41,12 +45,12 @@ public class SpawnCommand extends BaseCommand {
         if (!(target == null || target == null)) {
             if (!(target == sender)) {
                 target.teleport(SurvivalClasicCore.getConfiguration().getSpawnLocation());
-                Utils.send(target, SurvivalClasicCore.getConfiguration().getTpSpawn());
+                Utils.send(target, messageFile.tpSpawn);
             } else {
-                Utils.send(sender, "&cNo puedes teletransportarte a ti mismo");
+                Utils.send(sender, messageFile.tpSelf);
             }
         } else {
-            Utils.send(sender, "&cJugador no encontrado");
+            Utils.send(sender, messageFile.playerNotFound);
         }
     }
 
@@ -56,9 +60,9 @@ public class SpawnCommand extends BaseCommand {
         for (Player online : Bukkit.getServer().getOnlinePlayers()) {
             if (online != sender) {
                 online.teleport(SurvivalClasicCore.getConfiguration().getSpawnLocation());
-                Utils.send(online, "&fHas sido teletransportado hacia &bSpawn");
+                Utils.send(online, messageFile.tpSpawnOther);
             }
         }
-        Utils.send(sender, "&fHas teletransportado a todos hacia &bSpawn");
+        Utils.send(sender, messageFile.tpSpawnAll);
     }
 }

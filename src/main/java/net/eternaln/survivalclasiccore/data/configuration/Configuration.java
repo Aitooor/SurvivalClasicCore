@@ -32,30 +32,6 @@ public class Configuration extends BukkitYamlConfiguration {
     @Comment({"", "CommandCooldown"})
     public int cmdCooldown = 2;
 
-    @Comment({"", "Messages"})
-    public String prefix = "&6&lETERNAL &r";
-    public String noPermission = "&cNo tienes permisos para hacer eso";
-    public String reload = "&aConfig recargada";
-    public String tpSpawn = "&aTeletransportado al spawn";
-    public String setSpawn = "&aSpawn establecido";
-    public String itemGived = "&aObjeto Entregado";
-    public List<String> itemHelp = Arrays.asList(
-            "&8&m-----------------------------------------",
-            "&6&lETERNAL &7Ayuda Items",
-            "&r",
-            "&b/itemc give &7(gold/plate) (coin/fragment)",
-            "&b/objetoc dar &7(oro/plata) (moneda/fragmento)",
-            "&8&m-----------------------------------------"
-    );
-
-    @Comment({"", "Scoreboard"})
-    public String scoreboardTitle = "&6&lETERNAL &r";
-    public List<String> scoreboardLines = Arrays.asList(
-            "",
-            "&fNombre &a%player_name%",
-            ""
-    );
-
     @Comment({"", "Items"})
     @Convert(ItemStackMapConverter.class)
     public ItemStack goldCoin = new ItemBuilder(Material.RAW_GOLD).name("&f&lMoneda de &6&lORO").lore("&f", "&7Reluciente como el sol", "&aIntercambiable con los aldeanos").build();

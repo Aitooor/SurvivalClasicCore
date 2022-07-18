@@ -3,6 +3,8 @@ package net.eternaln.survivalclasiccore.commands.admin.gamemode;
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.CommandHelp;
 import co.aikar.commands.annotation.*;
+import net.eternaln.survivalclasiccore.SurvivalClasicCore;
+import net.eternaln.survivalclasiccore.data.configuration.MessagesFile;
 import net.eternaln.survivalclasiccore.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
@@ -11,6 +13,8 @@ import org.bukkit.entity.Player;
 @CommandAlias("gamemodeto|gmto|modoa|gmother|gamemodeother")
 @CommandPermission("survivalclasiccore.gm.other")
 public class GamemodeOtherCommand extends BaseCommand {
+
+    MessagesFile messageFile = SurvivalClasicCore.getMessagesFile();
 
     @Default
     @CatchUnknown
@@ -27,16 +31,16 @@ public class GamemodeOtherCommand extends BaseCommand {
             if (targetPlayer.getGameMode() != GameMode.SURVIVAL) {
                 if (targetPlayer != sender) {
                     targetPlayer.setGameMode(GameMode.SURVIVAL);
-                    Utils.send(sender, "&fHas cambiado el modo de juego de &b" + targetPlayer.getName() + " &fa &eSurvival");
-                    Utils.send(targetPlayer, "&fTu modo de juego ha sido cambiado por &b" + sender.getName() + " &fa &eSurvival");
+                    Utils.send(sender, messageFile.setSurvivalSender).replace("%player%", targetPlayer.getName());
+                    Utils.send(targetPlayer, messageFile.setSurvivalTarget).replace("%player%", sender.getName());
                 } else {
-                    Utils.send(sender, "&fNo puedes cambiar tu propio modo de juego");
+                    Utils.send(sender, messageFile.cannotChangeGamemode);
                 }
             } else {
-                Utils.send(sender, "&fEl jugador &b" + targetPlayer.getName() + " &fya tiene el modo de juego &eSurvival");
+                Utils.send(sender, messageFile.alreadySurvivalTarget).replace("%player%", targetPlayer.getName());
             }
         } else {
-            Utils.send(sender, "&fEl jugador &b" + target + " &fno esta online");
+            Utils.send(sender, messageFile.noOnlinePlayer);
         }
     }
 
@@ -48,16 +52,16 @@ public class GamemodeOtherCommand extends BaseCommand {
             if (targetPlayer.getGameMode() != GameMode.CREATIVE) {
                 if (targetPlayer != sender) {
                     targetPlayer.setGameMode(GameMode.CREATIVE);
-                    Utils.send(sender, "&fHas cambiado el modo de juego de &b" + targetPlayer.getName() + " &fa &eCreativo");
-                    Utils.send(targetPlayer, "&fTu modo de juego ha sido cambiado por &b" + sender.getName() + " &fa &eCreativo");
+                    Utils.send(sender, messageFile.setCreativeSender).replace("%player%", targetPlayer.getName());
+                    Utils.send(targetPlayer, messageFile.setCreativeTarget).replace("%player%", sender.getName());
                 } else {
-                    Utils.send(sender, "&fNo puedes cambiar tu propio modo de juego");
+                    Utils.send(sender, messageFile.cannotChangeGamemode);
                 }
             } else {
-                Utils.send(sender, "&fEl jugador &b" + targetPlayer.getName() + " &fya tiene el modo de juego &eCreativo");
+                Utils.send(sender, messageFile.alreadyCreativeTarget).replace("%player%", targetPlayer.getName());
             }
         } else {
-            Utils.send(sender, "&fEl jugador &b" + target + " &fno esta online");
+            Utils.send(sender, messageFile.noOnlinePlayer);
         }
     }
 
@@ -69,16 +73,16 @@ public class GamemodeOtherCommand extends BaseCommand {
             if (targetPlayer.getGameMode() != GameMode.ADVENTURE) {
                 if (targetPlayer != sender) {
                     targetPlayer.setGameMode(GameMode.ADVENTURE);
-                    Utils.send(sender, "&fHas cambiado el modo de juego de &b" + targetPlayer.getName() + " &fa &eAventura");
-                    Utils.send(targetPlayer, "&fTu modo de juego ha sido cambiado por &b" + sender.getName() + " &fa &eAventura");
+                    Utils.send(sender, messageFile.setAdventureSender).replace("%player%", targetPlayer.getName());
+                    Utils.send(targetPlayer, messageFile.setAdventureTarget).replace("%player%", sender.getName());
                 } else {
-                    Utils.send(sender, "&fNo puedes cambiar tu propio modo de juego");
+                    Utils.send(sender, messageFile.cannotChangeGamemode);
                 }
             } else {
-                Utils.send(sender, "&fEl jugador &b" + targetPlayer.getName() + " &fya tiene el modo de juego &eAventura");
+                Utils.send(sender, messageFile.alreadyAdventureTarget).replace("%player%", targetPlayer.getName());
             }
         } else {
-            Utils.send(sender, "&fEl jugador &b" + target + " &fno esta online");
+            Utils.send(sender, messageFile.noOnlinePlayer);
         }
     }
 
@@ -90,16 +94,16 @@ public class GamemodeOtherCommand extends BaseCommand {
             if (targetPlayer.getGameMode() != GameMode.SPECTATOR) {
                 if (targetPlayer != sender) {
                     targetPlayer.setGameMode(GameMode.SPECTATOR);
-                    Utils.send(sender, "&fHas cambiado el modo de juego de &b" + targetPlayer.getName() + " &fa &eEspectador");
-                    Utils.send(targetPlayer, "&fTu modo de juego ha sido cambiado por &b" + sender.getName() + " &fa &eEspectador");
+                    Utils.send(sender, messageFile.setSpectatorSender).replace("%player%", targetPlayer.getName());
+                    Utils.send(targetPlayer, messageFile.setSpectatorTarget).replace("%player%", sender.getName());
                 } else {
-                    Utils.send(sender, "&fNo puedes cambiar tu propio modo de juego");
+                    Utils.send(sender, messageFile.cannotChangeGamemode);
                 }
             } else {
-                Utils.send(sender, "&fEl jugador &b" + targetPlayer.getName() + " &fya tiene el modo de juego &eEspectador");
+                Utils.send(sender, messageFile.alreadySpectatorTarget).replace("%player%", targetPlayer.getName());
             }
         } else {
-            Utils.send(sender, "&fEl jugador &b" + target + " &fno esta online");
+            Utils.send(sender, messageFile.noOnlinePlayer);
         }
     }
 

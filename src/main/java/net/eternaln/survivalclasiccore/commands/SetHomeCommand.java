@@ -3,6 +3,7 @@ package net.eternaln.survivalclasiccore.commands;
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.*;
 import net.eternaln.survivalclasiccore.SurvivalClasicCore;
+import net.eternaln.survivalclasiccore.data.configuration.MessagesFile;
 import net.eternaln.survivalclasiccore.data.mongo.PlayerData;
 import net.eternaln.survivalclasiccore.utils.Cooldown;
 import net.eternaln.survivalclasiccore.utils.LocationUtil;
@@ -16,6 +17,8 @@ import java.util.UUID;
 @CommandAlias("setcasa|sethome|setcasas|sethomes")
 public class SetHomeCommand extends BaseCommand {
 
+    MessagesFile messagesFile = SurvivalClasicCore.getMessagesFile();
+
     private final Cooldown<UUID> cooldown = new Cooldown<>(SurvivalClasicCore.getConfiguration().getCmdCooldown());
 
     @Default
@@ -23,7 +26,8 @@ public class SetHomeCommand extends BaseCommand {
     @CommandCompletion("@homes")
     public void onHome(Player sender, String name) {
         if (!sender.hasPermission("survivalclasiccore.cooldown.bypass") && !cooldown.isCooledDown(sender.getUniqueId())) {
-            sender.sendMessage(Utils.ct("&cDebes esperar &b" + cooldown.getSecondsRemaining(sender.getUniqueId()) + " &csegundos"));
+            long cooldownTime = cooldown.getSecondsRemaining(sender.getUniqueId());
+            Utils.send(sender, SurvivalClasicCore.getMessagesFile().cooldown.replace("%time%", String.valueOf(cooldownTime)));
             return;
         }
 
@@ -38,24 +42,24 @@ public class SetHomeCommand extends BaseCommand {
         }
 
         if (arrayList.size() == 0) {
-            sender.sendMessage(Utils.ct("&cYa tienes el máximo de casas"));
+            Utils.send(sender, messagesFile.maxHomes);
             return;
         }
 
         Integer[] arrayOfInteger = arrayList.toArray(new Integer[0]);
         int i = getMaxInteger(arrayOfInteger);
         if (data.getHomes().size() >= i) {
-            sender.sendMessage(Utils.ct("&cYa tienes el máximo de casas"));
+            Utils.send(sender, messagesFile.maxHomes);
             return;
         }
 
         if (data.getHomes().containsKey(name)) {
-            sender.sendMessage(Utils.ct("&cLa casa ya existe"));
+            Utils.send(sender, messagesFile.homeExists);
             return;
         }
 
         data.getHomes().put(name, LocationUtil.parseToString(sender.getLocation()));
-        sender.sendMessage(Utils.ct("&fHas establecido la casa &a" + name));
+        Utils.send(sender, messagesFile.homeSet).replace("%home%", name);
         data.save();
     }
 

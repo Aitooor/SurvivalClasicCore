@@ -26,13 +26,13 @@ public class ItemCommand extends BaseCommand {
 
             @Subcommand("coin|moneda")
             public void giveGoldCoin(Player sender) {
-                Utils.send(sender, SurvivalClasicCore.getConfiguration().getItemGived());
+                Utils.send(sender, SurvivalClasicCore.getMessagesFile().getItemGived());
                 sender.getInventory().addItem(SurvivalClasicCore.getConfiguration().getGoldCoin());
             }
 
             @Subcommand("fragment|fragmento")
             public void giveGoldFragment(Player sender) {
-                Utils.send(sender, SurvivalClasicCore.getConfiguration().getItemGived());
+                Utils.send(sender, SurvivalClasicCore.getMessagesFile().getItemGived());
                 sender.getInventory().addItem(SurvivalClasicCore.getConfiguration().getGoldFragment());
             }
         }
@@ -42,13 +42,13 @@ public class ItemCommand extends BaseCommand {
 
             @Subcommand("coin|moneda")
             public void givePlateCoin(Player sender) {
-                Utils.send(sender, SurvivalClasicCore.getConfiguration().getItemGived());
+                Utils.send(sender, SurvivalClasicCore.getMessagesFile().getItemGived());
                 sender.getInventory().addItem(SurvivalClasicCore.getConfiguration().getPlateCoin());
             }
 
             @Subcommand("fragment|fragmento")
             public void givePlateFragment(Player sender) {
-                Utils.send(sender, SurvivalClasicCore.getConfiguration().getItemGived());
+                Utils.send(sender, SurvivalClasicCore.getMessagesFile().getItemGived());
                 sender.getInventory().addItem(SurvivalClasicCore.getConfiguration().getPlateFragment());
             }
         }

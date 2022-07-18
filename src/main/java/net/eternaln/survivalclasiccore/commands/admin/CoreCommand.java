@@ -4,6 +4,7 @@ import co.aikar.commands.BaseCommand;
 import co.aikar.commands.CommandHelp;
 import co.aikar.commands.annotation.*;
 import net.eternaln.survivalclasiccore.SurvivalClasicCore;
+import net.eternaln.survivalclasiccore.data.configuration.MessagesFile;
 import net.eternaln.survivalclasiccore.utils.Utils;
 import org.bukkit.Sound;
 import org.bukkit.command.CommandSender;
@@ -12,6 +13,8 @@ import org.bukkit.entity.Player;
 @CommandAlias("core|basis|basic")
 @CommandPermission("survivalclasiccore.core")
 public class CoreCommand extends BaseCommand {
+
+    MessagesFile messageFile = SurvivalClasicCore.getMessagesFile();
 
     @Default
     @CatchUnknown
@@ -26,8 +29,8 @@ public class CoreCommand extends BaseCommand {
         SurvivalClasicCore.getConfiguration().load();
         SurvivalClasicCore.getWarpsFile().reloadConfig();
 
-        sender.sendMessage(SurvivalClasicCore.getConfiguration().getReload());
-        Utils.log(SurvivalClasicCore.getConfiguration().getReload());
+        sender.sendMessage(messageFile.reload);
+        Utils.log(messageFile.reload);
     }
 
     @Subcommand("setSpawn")
@@ -37,7 +40,7 @@ public class CoreCommand extends BaseCommand {
         SurvivalClasicCore.getConfiguration().setSpawnLocation(sender.getLocation());
         SurvivalClasicCore.getConfiguration().save();
 
-        Utils.send(sender, SurvivalClasicCore.getConfiguration().getSetSpawn());
+        Utils.send(sender, messageFile.setSpawn);
         sender.playSound(sender.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1.0f, 1.0f);
     }
 }
