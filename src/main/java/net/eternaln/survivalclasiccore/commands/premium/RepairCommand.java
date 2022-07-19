@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
 
+//TODO: Fix repair command
 @CommandAlias("reparar|repair|fix")
 @CommandPermission("survivalclasiccore.repair")
 public class RepairCommand extends BaseCommand {

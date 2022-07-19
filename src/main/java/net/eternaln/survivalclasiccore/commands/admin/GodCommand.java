@@ -3,6 +3,7 @@ package net.eternaln.survivalclasiccore.commands.admin;
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.CommandHelp;
 import co.aikar.commands.annotation.*;
+import lombok.Getter;
 import net.eternaln.survivalclasiccore.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
