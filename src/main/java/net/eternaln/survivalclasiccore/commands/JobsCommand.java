@@ -14,7 +14,7 @@ public class JobsCommand extends BaseCommand {
 
     @Default
     public void jobsCommand(Player sender) {
-        sender.performCommand("jobs stats");
+        sender.performCommand("moneyhunters:job stats");
     }
 
     @HelpCommand
@@ -25,6 +25,6 @@ public class JobsCommand extends BaseCommand {
 
     @Subcommand("lista|list|info|informacion")
     public void statsCommand(Player sender) {
-        sender.performCommand("jobs jobs");
+        sender.performCommand("moneyhunters:job jobs");
     }
 }
