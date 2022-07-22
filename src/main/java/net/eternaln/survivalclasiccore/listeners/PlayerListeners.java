@@ -83,7 +83,9 @@ public class PlayerListeners implements Listener {
         }
 
         player.setGameMode(GameMode.SURVIVAL);
-        event.getPlayer().teleport(SurvivalClasicCore.getConfiguration().getSpawnLocation());
+        if(!player.hasPlayedBefore()) {
+            event.getPlayer().teleport(SurvivalClasicCore.getConfiguration().getSpawnLocation());
+        }
         event.setJoinMessage(null);
 
 
