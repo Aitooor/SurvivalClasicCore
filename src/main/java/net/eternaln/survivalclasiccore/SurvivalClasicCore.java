@@ -32,6 +32,7 @@ public final class SurvivalClasicCore extends JavaPlugin {
     private static MessagesFile messagesFile;
     @Getter
     private static WarpsFile warpsFile;
+
     @Getter
     private static MongoDB mongo;
     @Getter

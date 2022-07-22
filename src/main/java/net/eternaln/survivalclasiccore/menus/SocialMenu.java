@@ -13,10 +13,10 @@ import org.bukkit.inventory.ItemStack;
 import java.util.HashSet;
 import java.util.Set;
 
-public class MainMenu extends Menu {
+public class SocialMenu extends Menu {
 
-    public MainMenu(String title) {
-        super(title, 4);
+    public SocialMenu(String title) {
+        super(title, 6);
 
         this.setFillEnabled(true);
 
@@ -33,50 +33,70 @@ public class MainMenu extends Menu {
 
         buttons.add(new ButtonItem(
                 12,
-                "warps",
+                "shop",
                 SkullBuilder.newBuilder()
-                        .setDisplayName("&bWarps")
-                        .setLore("", "&fLista de Warps", "","&7Clic para abrir")
-                        .setTexture("6d821092ce5e7557451c723a0341e90b93e0564e2b01481de81eea271f04c5b6")
+                        .setDisplayName("&bTienda")
+                        .setLore("", "&fUrl de la Tienda", "","&7Clic para ver")
+                        .setTexture("844498a0fe278956e3d04135ef4b1343d0548a7e208c61b1fb6f3b4dbc240da8")
                         .toItemStack()
         ));
 
         buttons.add(new ButtonItem(
                 14,
-                "kits",
+                "social discord",
                 SkullBuilder.newBuilder()
-                        .setDisplayName("&bKits")
-                        .setLore("", "&fLista de Kits", "&eKits del usuario","","&7Clic para abrir")
-                        .setTexture("6979a0d1b565d7c1d2ebf47733b6f47b997d38e757e12992f4efb0603ebfc9b9")
+                        .setDisplayName("&bDiscord")
+                        .setLore("", "&fUrl del Discord", "","&7Clic para ver")
+                        .setTexture("3664e54e76287e3fe2bd397c098ee7a4bd0f9c88f939fde8bab78c3271a4618f")
                         .toItemStack()
         ));
 
         buttons.add(new ButtonItem(
                 16,
-                "ah",
+                "twitter",
                 SkullBuilder.newBuilder()
-                        .setDisplayName("&bSubastas")
-                        .setLore("", "&fLista de Subastas", "&eSubastas de usuarios","","&7Clic para abrir")
-                        .setTexture("f98bc63f05f6378bf29ef10e3d82acb3ceb73a720bf80f30bc576d0ad8c40cfb")
+                        .setDisplayName("&bTwitter")
+                        .setLore("", "&fUrl del Twitter", "&eTwitter del usuario","","&7Clic para ver")
+                        .setTexture("dcb76166d1e1e449457b5c4436b3f48b7d768ac60f19e2c6b25ea42c4bad7c")
                         .toItemStack()
         ));
 
         buttons.add(new ButtonItem(
-                28,
-                "social",
+                22,
+                "web",
                 SkullBuilder.newBuilder()
-                        .setDisplayName("&bSocial")
-                        .setLore("", "&fRedes Sociales", "","&7Clic para abrir")
-                        .setTexture("6ce2643d5d82ae23c5ecf7818483c4f81c7953de2aebe5ce1f8fe72fcfbc2a0e")
+                        .setDisplayName("&bPagina Web")
+                        .setLore("", "&fUrl de la Pagina Web", "","&7Clic para ver")
+                        .setTexture("3431ae7dcd1e2dd36c33a0c9a116b56e14acdaf0dafb2a04986d65aea0e35314")
+                        .toItemStack()
+        ));
+
+        buttons.add(new ButtonItem(
+                24,
+                "tiktok",
+                SkullBuilder.newBuilder()
+                        .setDisplayName("&bTiktok")
+                        .setLore("", "&fUrl del Tiktok", "&eTiktok del usuario","","&7Clic para ver")
+                        .setTexture("bcf2105bb737638833033dd8244071e75870e2e11c2617e542e8924fb2b90180")
                         .toItemStack()
         ));
 
         buttons.add(new ButtonItem(
                 32,
-                null,
+                "youtube",
                 SkullBuilder.newBuilder()
-                        .setDisplayName("&cCerrar")
-                        .setTexture("6c51a49cf15b8cea465ee6f31e0c7f7064e9b8b84de2cf01d2c74b897a02dde7")
+                        .setDisplayName("&bYoutube")
+                        .setLore("", "&fUrl del Youtube", "&eYoutube del usuario","","&7Clic para ver")
+                        .setTexture("cecd041f628c005a690fc6b8237e7311bb7c3b3aac10539fefe396a4c7c783e7")
+                        .toItemStack()
+        ));
+
+        buttons.add(new ButtonItem(
+                50,
+                "menu",
+                SkullBuilder.newBuilder()
+                        .setDisplayName("&cAtras")
+                        .setTexture("dcec807dcc1436334fd4dc9ab349342f6c52c9e7b2bf346712db72a0d6d7a4")
                         .toItemStack()
         ));
 

@@ -28,6 +28,8 @@ public class MenusFile extends BukkitYamlConfiguration {
                     "\n&b/trabajos ayuda &7- &fAyuda de trabajos"+
                     "\n&r";
 
+    @Comment({"", "Social"})
+    public String socialMenuTitle = "Redes Sociales";
 
     public MenusFile() {
         super(

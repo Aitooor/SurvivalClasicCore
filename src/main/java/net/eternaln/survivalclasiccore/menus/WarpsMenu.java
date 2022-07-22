@@ -37,7 +37,7 @@ public class WarpsMenu extends Menu {
                 SkullBuilder.newBuilder()
                         .setDisplayName("&bComida")
                         .setLore("", "&fLista de Warps", "","&7Clic para abrir")
-                        .setOwner(player.getName())
+                        .setTexture("89fc9c5b8736f36f3405cbe1363d434c141cd23aac04186476af0a0f7877aef4")
                         .toItemStack()
         ));
 
@@ -47,7 +47,7 @@ public class WarpsMenu extends Menu {
                 SkullBuilder.newBuilder()
                         .setDisplayName("&bNether")
                         .setLore("", "&fLista de Kits", "&eKits del usuario","","&7Clic para abrir")
-                        .setOwner(player.getName())
+                        .setTexture("26e6696b63738bbcc5fd973709ea90997215b0cfeece20b2659cb7b35f1bf0")
                         .toItemStack()
         ));
 
@@ -57,7 +57,7 @@ public class WarpsMenu extends Menu {
                 SkullBuilder.newBuilder()
                         .setDisplayName("&bEnd")
                         .setLore("", "&fLista de Subastas", "&eSubastas de usuarios","","&7Clic para abrir")
-                        .setOwner(player.getName())
+                        .setTexture("f4684e3e7890caf7d13762ea19eb14c5940b88fd7f077d81e6effb4f6df16c26")
                         .toItemStack()
         ));
 
@@ -67,7 +67,7 @@ public class WarpsMenu extends Menu {
                 SkullBuilder.newBuilder()
                         .setDisplayName("&bCajas")
                         .setLore("", "&fLista de Subastas", "&eSubastas de usuarios","","&7Clic para abrir")
-                        .setOwner(player.getName())
+                        .setTexture("47ec41e0df8e170d97f9b9af1d65edad4979c78c89b01b180f389ee08a61af82")
                         .toItemStack()
         ));
 
@@ -77,7 +77,7 @@ public class WarpsMenu extends Menu {
                 SkullBuilder.newBuilder()
                         .setDisplayName("&bTienda")
                         .setLore("", "&fLista de Subastas", "&eSubastas de usuarios","","&7Clic para abrir")
-                        .setOwner(player.getName())
+                        .setTexture("f2784307b892f52b92f74fa9db4984c4f0f02eb81c6752e5eba69ad67858427e")
                         .toItemStack()
         ));
 

@@ -105,6 +105,14 @@ public class MessagesFile extends BukkitYamlConfiguration {
     public String setSpectatorSender = "&fHas cambiado el modo de juego de &b%player% &fa &eEspectador";
     public String setSpectatorTarget = "&fTu modo de juego ha sido cambiado por &b%player% &fa &eEspectador";
 
+    @Comment({"", "Social Commands"})
+    public String shopUrl = "https://tienda.eternaln.net";
+    public String twitterUrl = "https://twitter.com/EternalNOficial";
+    public String discordUrl = "https://discord.com/invite/bMarGsQYfb";
+    public String youtubeUrl = "https://www.youtube.com/c/eternalnetwork";
+    public String websiteUrl = "https://eternalnetwork.net";
+    public String tiktokUrl = "https://www.tiktok.com/@eternalnmc";
+
     @Comment({"", "Item"})
     public String itemGived = "&aObjeto Entregado";
     public String itemcHelp =
