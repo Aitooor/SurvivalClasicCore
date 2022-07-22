@@ -34,7 +34,11 @@ public class MessageCommand extends BaseCommand {
         Player receiver = Bukkit.getPlayer(target);
 
         if (receiver == null) {
-            Utils.send(sender, "El jugador no esta online");
+            Utils.send(sender, "&cEl jugador no esta online");
+            return;
+        }
+        if(target.equals(sender.getName())) {
+            Utils.send(sender, "&cNo puedes enviar mensajes a ti mismo");
             return;
         }
 
