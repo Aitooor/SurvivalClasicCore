@@ -22,6 +22,7 @@ public class EnchantCommand extends BaseCommand {
 
     @Subcommand("add")
     @CommandPermission("survivalclasiccore.enchant.add")
+    @CommandCompletion("@enchantments")
     public void add(Player sender, String enchant, int level) {
         if (!(sender.getInventory().getItemInMainHand() == null)) {
             Enchantment enchantment = Enchantment.getByKey(NamespacedKey.minecraft(enchant));
@@ -40,6 +41,7 @@ public class EnchantCommand extends BaseCommand {
 
     @Subcommand("remove")
     @CommandPermission("survivalclasiccore.enchant.remove")
+    @CommandCompletion("@enchantments")
     public void remove(Player sender, String enchant) {
         if (!(sender.getInventory().getItemInMainHand() == null)) {
             Utils.send(sender, "&cNo puedes usar este comando si no tienes nada en tu mano");
