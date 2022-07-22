@@ -6,6 +6,7 @@ import com.google.common.collect.ImmutableList;
 import lombok.Getter;
 import net.eternaln.survivalclasiccore.annotations.RegisterExecutor;
 import net.eternaln.survivalclasiccore.data.configuration.Configuration;
+import net.eternaln.survivalclasiccore.data.configuration.MenusFile;
 import net.eternaln.survivalclasiccore.data.configuration.MessagesFile;
 import net.eternaln.survivalclasiccore.data.configuration.WarpsFile;
 import net.eternaln.survivalclasiccore.data.mongo.DataManager;
@@ -26,6 +27,8 @@ public final class SurvivalClasicCore extends JavaPlugin {
     @Getter
     private static Configuration configuration;
     @Getter
+    private static MenusFile menusFile;
+    @Getter
     private static MessagesFile messagesFile;
     @Getter
     private static WarpsFile warpsFile;
@@ -39,6 +42,7 @@ public final class SurvivalClasicCore extends JavaPlugin {
         instance = this;
         configuration = new Configuration();
         messagesFile = new MessagesFile();
+        menusFile = new MenusFile();
         warpsFile = new WarpsFile(this);
         mongo = new MongoDB();
         dataManager = new DataManager();

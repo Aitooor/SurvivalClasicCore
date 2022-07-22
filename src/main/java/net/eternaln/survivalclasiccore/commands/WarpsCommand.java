@@ -3,8 +3,8 @@ package net.eternaln.survivalclasiccore.commands;
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.*;
 import net.eternaln.survivalclasiccore.SurvivalClasicCore;
+import net.eternaln.survivalclasiccore.data.configuration.MenusFile;
 import net.eternaln.survivalclasiccore.data.configuration.MessagesFile;
-import net.eternaln.survivalclasiccore.menus.MainMenu;
 import net.eternaln.survivalclasiccore.menus.WarpsMenu;
 import net.eternaln.survivalclasiccore.utils.Cooldown;
 import net.eternaln.survivalclasiccore.utils.LocationUtil;
@@ -20,6 +20,7 @@ import java.util.UUID;
 public class WarpsCommand extends BaseCommand {
 
     MessagesFile messageFile = SurvivalClasicCore.getMessagesFile();
+    MenusFile menusFile = SurvivalClasicCore.getMenusFile();
 
     private final Cooldown<UUID> cooldown = new Cooldown<>(SurvivalClasicCore.getConfiguration().getCmdCooldown());
 
@@ -35,7 +36,7 @@ public class WarpsCommand extends BaseCommand {
         }
 
         if (name == null) {
-            new WarpsMenu("Lista de Warps").openMenu(player);
+            new WarpsMenu(menusFile.warpsMenuTitle).openMenu(player);
             return;
         }
 
