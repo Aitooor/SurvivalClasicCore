@@ -15,8 +15,13 @@ import net.eternaln.survivalclasiccore.data.mongo.PlayerData;
 import net.eternaln.survivalclasiccore.managers.menus.MenuManager;
 import net.eternaln.survivalclasiccore.utils.Utils;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public final class SurvivalClasicCore extends JavaPlugin {
 
@@ -78,6 +83,15 @@ public final class SurvivalClasicCore extends JavaPlugin {
             if (getWarpsFile().getConfig().getConfigurationSection("warps") == null)
                 return ImmutableList.of();
             return new ImmutableList.Builder<String>().addAll(getWarpsFile().getConfig().getConfigurationSection("warps").getValues(true).keySet()).build();
+        });
+        List<String> materialNames = Arrays.stream(Material.values())
+                .map(Material::name)
+                .collect(Collectors.toList());
+
+        cmdManager.getCommandCompletions().registerCompletion("items", c -> {
+            if (materialNames == null)
+                return ImmutableList.of();
+            return new ImmutableList.Builder<String>().addAll(materialNames).build();
         });
 
         cmdManager.getCommandCompletions().registerCompletion("homes", c -> {
