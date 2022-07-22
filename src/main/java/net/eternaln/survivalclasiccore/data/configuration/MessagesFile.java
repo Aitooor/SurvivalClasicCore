@@ -20,7 +20,7 @@ public class MessagesFile extends BukkitYamlConfiguration {
     public String reload = "&aConfig recargada";
     public String setSpawn = "&aSpawn establecido";
     public String jobsHelp =
-            "" +
+            "\n" +
                     "\n&6&lETERNAL"+
                     "\n"+
                     "\n&b/trabajos &7- &fInformación de los trabajos"+
