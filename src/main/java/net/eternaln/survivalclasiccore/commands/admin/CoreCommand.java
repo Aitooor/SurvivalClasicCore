@@ -4,6 +4,7 @@ import co.aikar.commands.BaseCommand;
 import co.aikar.commands.CommandHelp;
 import co.aikar.commands.annotation.*;
 import net.eternaln.survivalclasiccore.SurvivalClasicCore;
+import net.eternaln.survivalclasiccore.data.configuration.Configuration;
 import net.eternaln.survivalclasiccore.data.configuration.MessagesFile;
 import net.eternaln.survivalclasiccore.utils.Utils;
 import org.bukkit.Sound;
@@ -27,6 +28,7 @@ public class CoreCommand extends BaseCommand {
     @CommandPermission("survivalclasiccore.reload")
     public void reloadConfig(CommandSender sender) {
         SurvivalClasicCore.getConfiguration().load();
+        SurvivalClasicCore.getMessagesFile().load();
         SurvivalClasicCore.getWarpsFile().reloadConfig();
 
         sender.sendMessage(messageFile.reload);

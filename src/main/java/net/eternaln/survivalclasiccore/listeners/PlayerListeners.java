@@ -3,7 +3,6 @@ package net.eternaln.survivalclasiccore.listeners;
 import me.clip.placeholderapi.PlaceholderAPI;
 import net.eternaln.survivalclasiccore.SurvivalClasicCore;
 import net.eternaln.survivalclasiccore.annotations.Register;
-import net.eternaln.survivalclasiccore.commands.admin.GodCommand;
 import net.eternaln.survivalclasiccore.data.mongo.PlayerData;
 import net.eternaln.survivalclasiccore.utils.CenteredMessage;
 import net.eternaln.survivalclasiccore.utils.Utils;
@@ -19,8 +18,6 @@ import java.util.ArrayList;
 
 @Register
 public class PlayerListeners implements Listener {
-
-    private final ArrayList<String> gods = new ArrayList<String>();
 
     @EventHandler
     public void onChat(AsyncPlayerChatEvent event) {
@@ -102,9 +99,6 @@ public class PlayerListeners implements Listener {
         event.setQuitMessage(null);
         if(event.getPlayer().hasMetadata("survivalclasiccore.vanish")) {
             event.getPlayer().removeMetadata("survivalclasiccore.vanish", SurvivalClasicCore.getInstance());
-        }
-        if(gods.contains(event.getPlayer().getUniqueId().toString())) {
-            gods.remove(event.getPlayer().getUniqueId().toString());
         }
     }
 

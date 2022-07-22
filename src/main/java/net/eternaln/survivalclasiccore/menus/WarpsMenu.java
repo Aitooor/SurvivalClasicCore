@@ -13,10 +13,10 @@ import org.bukkit.inventory.ItemStack;
 import java.util.HashSet;
 import java.util.Set;
 
-public class MainMenu extends Menu {
+public class WarpsMenu extends Menu {
 
-    public MainMenu(String title) {
-        super(title, 4);
+    public WarpsMenu(String title) {
+        super(title, 5);
 
         this.setFillEnabled(true);
 
@@ -33,40 +33,60 @@ public class MainMenu extends Menu {
 
         buttons.add(new ButtonItem(
                 12,
-                "warps",
+                "warp comida",
                 SkullBuilder.newBuilder()
-                        .setDisplayName("&bWarps")
+                        .setDisplayName("&bComida")
                         .setLore("", "&fLista de Warps", "","&7Clic para abrir")
-                        .setTexture("6d821092ce5e7557451c723a0341e90b93e0564e2b01481de81eea271f04c5b6")
+                        .setOwner(player.getName())
                         .toItemStack()
         ));
 
         buttons.add(new ButtonItem(
                 14,
-                "kits",
+                "warp nether",
                 SkullBuilder.newBuilder()
-                        .setDisplayName("&bKits")
+                        .setDisplayName("&bNether")
                         .setLore("", "&fLista de Kits", "&eKits del usuario","","&7Clic para abrir")
-                        .setTexture("6979a0d1b565d7c1d2ebf47733b6f47b997d38e757e12992f4efb0603ebfc9b9")
+                        .setOwner(player.getName())
                         .toItemStack()
         ));
 
         buttons.add(new ButtonItem(
                 16,
-                "ah",
+                "warp end",
                 SkullBuilder.newBuilder()
-                        .setDisplayName("&bSubastas")
+                        .setDisplayName("&bEnd")
                         .setLore("", "&fLista de Subastas", "&eSubastas de usuarios","","&7Clic para abrir")
-                        .setTexture("f98bc63f05f6378bf29ef10e3d82acb3ceb73a720bf80f30bc576d0ad8c40cfb")
+                        .setOwner(player.getName())
                         .toItemStack()
         ));
 
         buttons.add(new ButtonItem(
-                32,
-                null,
+                22,
+                "warp cajas",
                 SkullBuilder.newBuilder()
-                        .setDisplayName("&cCerrar")
-                        .setTexture("6c51a49cf15b8cea465ee6f31e0c7f7064e9b8b84de2cf01d2c74b897a02dde7")
+                        .setDisplayName("&bCajas")
+                        .setLore("", "&fLista de Subastas", "&eSubastas de usuarios","","&7Clic para abrir")
+                        .setOwner(player.getName())
+                        .toItemStack()
+        ));
+
+        buttons.add(new ButtonItem(
+                24,
+                "warp tienda",
+                SkullBuilder.newBuilder()
+                        .setDisplayName("&bTienda")
+                        .setLore("", "&fLista de Subastas", "&eSubastas de usuarios","","&7Clic para abrir")
+                        .setOwner(player.getName())
+                        .toItemStack()
+        ));
+
+        buttons.add(new ButtonItem(
+                41,
+                "menu",
+                SkullBuilder.newBuilder()
+                        .setDisplayName("&cAtras")
+                        .setTexture("dcec807dcc1436334fd4dc9ab349342f6c52c9e7b2bf346712db72a0d6d7a4")
                         .toItemStack()
         ));
 

@@ -7,8 +7,6 @@ import lombok.Getter;
 import net.eternaln.survivalclasiccore.SurvivalClasicCore;
 
 import java.io.File;
-import java.util.Arrays;
-import java.util.List;
 
 @Getter
 public class MessagesFile extends BukkitYamlConfiguration {
@@ -21,6 +19,13 @@ public class MessagesFile extends BukkitYamlConfiguration {
     public String cooldown = "&cDebes esperar &b%time% &csegundos para hacer eso";
     public String reload = "&aConfig recargada";
     public String setSpawn = "&aSpawn establecido";
+    public String jobsHelp =
+            "" +
+                    "\n&6&lETERNAL"+
+                    "\n"+
+                    "\n&b/trabajos &7- &fInformación de los trabajos"+
+                    "\n&b/trabajos lista &7- &fLista de trabajos y información detallada"+
+                    "\n";
 
     @Comment({"", "Teleport"})
     public String tpSpawn = "&aTeletransportado al spawn";
