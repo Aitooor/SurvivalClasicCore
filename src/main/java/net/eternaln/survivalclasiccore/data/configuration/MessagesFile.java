@@ -20,12 +20,12 @@ public class MessagesFile extends BukkitYamlConfiguration {
     public String reload = "&aConfig recargada";
     public String setSpawn = "&aSpawn establecido";
     public String jobsHelp =
-            "\n" +
+            "\n&r" +
                     "\n&6&lETERNAL"+
-                    "\n"+
+                    "\n&r"+
                     "\n&b/trabajos &7- &fInformación de los trabajos"+
                     "\n&b/trabajos lista &7- &fLista de trabajos y información detallada"+
-                    "\n";
+                    "\n&r";
 
     @Comment({"", "Teleport"})
     public String tpSpawn = "&aTeletransportado al spawn";
