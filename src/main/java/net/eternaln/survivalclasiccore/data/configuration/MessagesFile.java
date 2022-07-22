@@ -19,9 +19,20 @@ public class MessagesFile extends BukkitYamlConfiguration {
     public String cooldown = "&cDebes esperar &b%time% &csegundos para hacer eso";
     public String reload = "&aConfig recargada";
     public String setSpawn = "&aSpawn establecido";
+    public String helpCommand =
+            "\n&r" +
+                    "\n&6&lETERNAL &8(&fAyuda&7)"+
+                    "\n&r"+
+                    "\n&b/menu &7- &fAbre el menu principal"+
+                    "\n&b/warps &7- &fAbre el menu de warps"+
+                    "\n&b/pwarp &7- &fAbre el menu de warps de usuarios"+
+                    "\n&b/kits &7- &fAbre el menu de kits"+
+                    "\n&b/ah &7- &fAbre el menu de subastas"+
+                    "\n&b/trabajos ayuda &7- &fAyuda de trabajos"+
+                    "\n&r";
     public String jobsHelp =
             "\n&r" +
-                    "\n&6&lETERNAL"+
+                    "\n&6&lETERNAL &8(&fTrabajos&7)"+
                     "\n&r"+
                     "\n&b/trabajos &7- &fInformación de los trabajos"+
                     "\n&b/trabajos lista &7- &fLista de trabajos y información detallada"+
