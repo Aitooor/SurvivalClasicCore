@@ -34,9 +34,9 @@ public class PlayerListeners implements Listener {
         rank = PlaceholderAPI.setPlaceholders(event.getPlayer(), rank);
 
         if (rank.equals("")) {
-            event.setFormat(Utils.ct(player.getDisplayName() + "&7: &r" + event.getMessage()));
+            event.setFormat(Utils.ct(messagesFile.chatFormat.replace("%player%", player.getName()).replace("%message%", event.getMessage())));
         } else {
-            event.setFormat(Utils.ct(rank + player.getDisplayName() + "&7: &r" + event.getMessage()));
+            event.setFormat(Utils.ct(messagesFile.chatFormat.replace("%player%", rank + player.getName()).replace("%message%", event.getMessage())));
         }
     }
 

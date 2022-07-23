@@ -25,6 +25,9 @@ public class MessagesFile extends BukkitYamlConfiguration {
                     "\n&r" +
                     "\n&r";
 
+    @Comment({"", "Chat Format", "Use %player% for player name and prefix. And %message% to chat message", "If prefix is empty, only player name will be used"})
+    public String chatFormat = "%player%&7: &r%message%";
+
 
     @Comment({"", "Common"})
     public String prefix = "&6&lETERNAL &r";
