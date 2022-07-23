@@ -3,6 +3,7 @@ package net.eternaln.survivalclasiccore.listeners;
 import me.clip.placeholderapi.PlaceholderAPI;
 import net.eternaln.survivalclasiccore.SurvivalClasicCore;
 import net.eternaln.survivalclasiccore.annotations.Register;
+import net.eternaln.survivalclasiccore.data.configuration.MessagesFile;
 import net.eternaln.survivalclasiccore.data.mongo.PlayerData;
 import net.eternaln.survivalclasiccore.utils.CenteredMessage;
 import net.eternaln.survivalclasiccore.utils.Utils;
@@ -14,10 +15,10 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.*;
 
-import java.util.ArrayList;
-
 @Register
 public class PlayerListeners implements Listener {
+
+    MessagesFile messagesFile = SurvivalClasicCore.getMessagesFile();
 
     @EventHandler
     public void onChat(AsyncPlayerChatEvent event) {
@@ -33,42 +34,6 @@ public class PlayerListeners implements Listener {
         } else {
             event.setFormat(Utils.ct(rank + player.getDisplayName() + "&7: &r" + event.getMessage()));
         }
-    }
-
-    @EventHandler
-    public void onLogin(PlayerLoginEvent event) {
-        Bukkit.getScheduler().runTaskLater(SurvivalClasicCore.getInstance(), () -> {
-            Player player = event.getPlayer();
-            if (player == null) {
-                return;
-            }
-            String name = player.getDisplayName();
-            String rank = "%vault_prefix%&r ";
-            rank = PlaceholderAPI.setPlaceholders(event.getPlayer(), rank);
-            if (rank != null) {
-                CenteredMessage.Chat.sendCenteredMessage(player, "");
-                CenteredMessage.Chat.sendCenteredMessage(player, "&6&lETERNAL &8| &bSúrvival Clásico &f1.19");
-                CenteredMessage.Chat.sendCenteredMessage(player, "");
-                CenteredMessage.Chat.sendCenteredMessage(player, "&aIP &7eternaln.net");
-                CenteredMessage.Chat.sendCenteredMessage(player, "&aTIENDA &7https://tienda.eternaln.net");
-                CenteredMessage.Chat.sendCenteredMessage(player, "&aDISCORD &7https://discord.com/invite/bMarGsQYfb");
-                CenteredMessage.Chat.sendCenteredMessage(player, "");
-                CenteredMessage.Chat.sendCenteredMessage(player, rank + name + " &aesperamos que disfrutes");
-                CenteredMessage.Chat.sendCenteredMessage(player, "&b¡Empecemos la aventura!");
-                CenteredMessage.Chat.sendCenteredMessage(player, "");
-            } else {
-                CenteredMessage.Chat.sendCenteredMessage(player, "");
-                CenteredMessage.Chat.sendCenteredMessage(player, "&6&lETERNAL &8| &bSúrvival Clásico &f1.19");
-                CenteredMessage.Chat.sendCenteredMessage(player, "");
-                CenteredMessage.Chat.sendCenteredMessage(player, "&aIP &7eternaln.net");
-                CenteredMessage.Chat.sendCenteredMessage(player, "&aTIENDA &7https://tienda.eternaln.net");
-                CenteredMessage.Chat.sendCenteredMessage(player, "&aDISCORD &7https://discord.com/invite/bMarGsQYfb");
-                CenteredMessage.Chat.sendCenteredMessage(player, "");
-                CenteredMessage.Chat.sendCenteredMessage(player, name + "&aesperamos que disfrutes");
-                CenteredMessage.Chat.sendCenteredMessage(player, "&b¡Empecemos la aventura!");
-                CenteredMessage.Chat.sendCenteredMessage(player, "");
-            }
-        }, 2);
     }
 
     @EventHandler
@@ -92,6 +57,22 @@ public class PlayerListeners implements Listener {
         for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
             if (onlinePlayer.hasMetadata("survivalclasiccore.vanish") || onlinePlayer.hasPermission("survivalclasiccore.vanish.see")) {
                     player.hidePlayer(SurvivalClasicCore.getInstance(), onlinePlayer);
+            }
+        }
+
+        String name = player.getDisplayName();
+        String rank = "%vault_prefix%&r ";
+        rank = PlaceholderAPI.setPlaceholders(event.getPlayer(), rank);
+
+        String messages = messagesFile.joinMessage;
+
+        if (rank != null) {
+            for (String message : messages.split("\n")) {
+                CenteredMessage.Chat.sendCenteredMessage(player, message.replace("%player%", rank + name));
+            }
+        } else {
+            for (String message : messages.split("\n")) {
+                CenteredMessage.Chat.sendCenteredMessage(player, message.replace("%player%", name));
             }
         }
     }

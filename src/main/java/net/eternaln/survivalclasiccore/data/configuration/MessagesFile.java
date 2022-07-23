@@ -11,6 +11,21 @@ import java.io.File;
 @Getter
 public class MessagesFile extends BukkitYamlConfiguration {
 
+    @Comment({"Use \\n for new lines", "Use %player% for player name" ,"" , "Join Message", "Use %player% for player name and prefix", "If prefix is empty, only player name will be used"})
+    public String joinMessage =
+            "\n&r" +
+                    "\n&6&lETERNAL &8| &bSúrvival Clásico &f1.19"+
+                    "\n&r"+
+                    "\n&aIP &7eternaln.net"+
+                    "\n&aTIENDA &7https://tienda.eternaln.net"+
+                    "\n&aDISCORD &7https://discord.com/invite/bMarGsQYfb"+
+                    "\n"+
+                    "\n%player% &aesperamos que disfrutes" +
+                    "\n&b¡Empecemos la aventura!" +
+                    "\n&r" +
+                    "\n&r";
+
+
     @Comment({"", "Common"})
     public String prefix = "&6&lETERNAL &r";
     public String noPermission = "&cNo tienes permisos para hacer eso";
@@ -116,7 +131,7 @@ public class MessagesFile extends BukkitYamlConfiguration {
     @Comment({"", "Item"})
     public String itemGived = "&aObjeto Entregado";
     public String itemcHelp =
-            "&8&m-----------------------------------------" +
+            "\n&8&m-----------------------------------------" +
                     "\n&6&lETERNAL &7Ayuda Items" +
                     "\n&r" +
                     "\n&b/itemc give &7(gold/plate) (coin/fragment)" +
