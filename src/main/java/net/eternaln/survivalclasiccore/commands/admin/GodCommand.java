@@ -15,7 +15,7 @@ import java.util.ArrayList;
 @CommandPermission("survivalclasiccore.god")
 public class GodCommand extends BaseCommand {
 
-    private final ArrayList<String> gods = new ArrayList<String>();
+    @Getter private final ArrayList<String> gods = new ArrayList<String>();
 
     @CatchUnknown
     @HelpCommand("ayuda|help")
