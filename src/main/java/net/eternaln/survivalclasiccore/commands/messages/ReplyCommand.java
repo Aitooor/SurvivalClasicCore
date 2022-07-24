@@ -3,17 +3,22 @@ package net.eternaln.survivalclasiccore.commands.messages;
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.CommandHelp;
 import co.aikar.commands.annotation.*;
+import net.eternaln.survivalclasiccore.SurvivalClasicCore;
 import net.eternaln.survivalclasiccore.commands.admin.SocialSpyCommand;
+import net.eternaln.survivalclasiccore.utils.Cooldown;
 import net.eternaln.survivalclasiccore.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
 import java.util.Objects;
+import java.util.UUID;
 
 @CommandAlias("reply|r|responder|contestar")
 @CommandPermission("survivalclasic.tpa")
 public class ReplyCommand extends BaseCommand {
+
+    private final Cooldown<UUID> cooldown = new Cooldown<>(SurvivalClasicCore.getConfiguration().getCmdCooldown());
 
     @CatchUnknown
     @HelpCommand("ayuda|help")
@@ -24,6 +29,11 @@ public class ReplyCommand extends BaseCommand {
     @Default
     @CommandCompletion("@players")
     public void reply(Player sender, String message) {
+        if (!sender.hasPermission("simple.message.bypass") && !cooldown.isCooledDown(sender.getUniqueId())) {
+            long cooldownTime = cooldown.getSecondsRemaining(sender.getUniqueId());
+            Utils.send(sender, SurvivalClasicCore.getMessagesFile().cooldown.replace("%time%", String.valueOf(cooldownTime)));
+            return;
+        }
         if (MessageCommand.getConversations().get(sender.getUniqueId()) == null) {
             Utils.send(sender, "&cNo hay ninguna conversación abierta");
             return;

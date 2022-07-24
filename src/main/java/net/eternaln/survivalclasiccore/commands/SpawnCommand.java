@@ -19,12 +19,6 @@ public class SpawnCommand extends BaseCommand {
 
     private final Cooldown<UUID> cooldown = new Cooldown<>(SurvivalClasicCore.getConfiguration().getCmdCooldown());
 
-    @CatchUnknown
-    @HelpCommand("ayuda|help")
-    public void help(CommandHelp help) {
-        help.showHelp();
-    }
-
     @Default
     public void spawn(Player sender) {
         if (!sender.hasPermission("survivalclasic.cooldown.bypass") && !cooldown.isCooledDown(sender.getUniqueId())) {

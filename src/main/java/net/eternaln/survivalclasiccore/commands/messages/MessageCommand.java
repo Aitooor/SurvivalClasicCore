@@ -4,7 +4,9 @@ import co.aikar.commands.BaseCommand;
 import co.aikar.commands.CommandHelp;
 import co.aikar.commands.annotation.*;
 import lombok.Getter;
+import net.eternaln.survivalclasiccore.SurvivalClasicCore;
 import net.eternaln.survivalclasiccore.commands.admin.SocialSpyCommand;
+import net.eternaln.survivalclasiccore.utils.Cooldown;
 import net.eternaln.survivalclasiccore.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
@@ -21,6 +23,8 @@ public class MessageCommand extends BaseCommand {
     @Getter
     private static final HashMap<UUID, UUID> conversations = new HashMap<>();
 
+    private final Cooldown<UUID> cooldown = new Cooldown<>(SurvivalClasicCore.getConfiguration().getCmdCooldown());
+
     @CatchUnknown
     @HelpCommand("ayuda|help")
     public void help(CommandHelp help) {
@@ -30,6 +34,11 @@ public class MessageCommand extends BaseCommand {
     @Default
     @CommandCompletion("@players @players")
     public void msg(Player sender, String target, String message) {
+        if (!sender.hasPermission("simple.message.bypass") && !cooldown.isCooledDown(sender.getUniqueId())) {
+            long cooldownTime = cooldown.getSecondsRemaining(sender.getUniqueId());
+            Utils.send(sender, SurvivalClasicCore.getMessagesFile().cooldown.replace("%time%", String.valueOf(cooldownTime)));
+            return;
+        }
 
         Player receiver = Bukkit.getPlayer(target);
 

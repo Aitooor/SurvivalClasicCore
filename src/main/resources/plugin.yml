@@ -13,5 +13,6 @@ libraries:
 
 permissions:
   survivalclasic.staffmode.onjoin:
+  survivalclasic.cooldown.bypass:
   survivalclasic.homes.max:
     description: "Set <permision>.max.<number> to set the max amount of homes a player can have."

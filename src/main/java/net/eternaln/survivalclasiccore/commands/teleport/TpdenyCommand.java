@@ -26,12 +26,22 @@ public class TpdenyCommand extends BaseCommand {
 
     @CatchUnknown
     @HelpCommand("ayuda|help")
-    public void help(CommandHelp help) {
+    public void help(CommandHelp help, Player sender) {
+        if(!sender.hasPermission("survivalclasic.cooldown.bypass") && !cooldown.isCooledDown(sender.getUniqueId())) {
+            long cooldownTime = cooldown.getSecondsRemaining(sender.getUniqueId());
+            Utils.send(sender, messagesFile.cooldown.replace("%time%", String.valueOf(cooldownTime)));
+            return;
+        }
         help.showHelp();
     }
 
     @Default
     public void teleportDeny(Player sender) {
+        if (!sender.hasPermission("survivalclasic.cooldown.bypass") && !cooldown.isCooledDown(sender.getUniqueId())) {
+            long cooldownTime = cooldown.getSecondsRemaining(sender.getUniqueId());
+            Utils.send(sender, messagesFile.cooldown.replace("%time%", String.valueOf(cooldownTime)));
+            return;
+        }
         if (requests.containsKey(sender)) {
             requests.get(sender).sendMessage(Utils.ct(messagesFile.tpDeny.replace("%player%", sender.getDisplayName())));
             requests.remove(sender);

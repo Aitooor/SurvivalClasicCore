@@ -26,12 +26,22 @@ public class TpacceptCommand extends BaseCommand {
 
     @CatchUnknown
     @HelpCommand("ayuda|help")
-    public void help(CommandHelp help) {
+    public void help(CommandHelp help, Player sender) {
+        if(!sender.hasPermission("survivalclasic.cooldown.bypass") && !cooldown.isCooledDown(sender.getUniqueId())) {
+            long cooldownTime = cooldown.getSecondsRemaining(sender.getUniqueId());
+            Utils.send(sender, messagesFile.cooldown.replace("%time%", String.valueOf(cooldownTime)));
+            return;
+        }
         help.showHelp();
     }
 
     @Default
     public void teleportAccept(Player sender) {
+        if (!sender.hasPermission("survivalclasic.cooldown.bypass") && !cooldown.isCooledDown(sender.getUniqueId())) {
+            long cooldownTime = cooldown.getSecondsRemaining(sender.getUniqueId());
+            Utils.send(sender, messagesFile.cooldown.replace("%time%", String.valueOf(cooldownTime)));
+            return;
+        }
         if (requests.containsKey(sender)) {
             Utils.send(sender, messagesFile.tpAccept).replace("%player%", requests.get(sender).getName());
             requests.get(sender).sendMessage(Utils.ct(messagesFile.tpAcceptTarget).replace("%player%", sender.getName()));

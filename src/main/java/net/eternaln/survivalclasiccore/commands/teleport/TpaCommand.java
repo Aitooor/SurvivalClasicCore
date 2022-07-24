@@ -28,7 +28,12 @@ public class TpaCommand extends BaseCommand {
 
     @CatchUnknown
     @HelpCommand("ayuda|help")
-    public void help(CommandHelp help) {
+    public void help(CommandHelp help, Player sender) {
+        if(!sender.hasPermission("survivalclasic.cooldown.bypass") && !cooldown.isCooledDown(sender.getUniqueId())) {
+            long cooldownTime = cooldown.getSecondsRemaining(sender.getUniqueId());
+            Utils.send(sender, messagesFile.cooldown.replace("%time%", String.valueOf(cooldownTime)));
+            return;
+        }
         help.showHelp();
     }
 

@@ -52,6 +52,11 @@ public class WarpsCommand extends BaseCommand {
     @Subcommand("set|establece|add|agregar")
     @CommandPermission("survivalclasic.warps.set")
     public void SetWarp(Player sender, String name) {
+        if (!sender.hasPermission("survivalclasic.cooldown.bypass") && !cooldown.isCooledDown(sender.getUniqueId())) {
+            long cooldownTime = cooldown.getSecondsRemaining(sender.getUniqueId());
+            Utils.send(sender, messageFile.cooldown.replace("%time%", String.valueOf(cooldownTime)));
+            return;
+        }
         if (!SurvivalClasicCore.getWarpsFile().getConfig().contains("warps." + name.toLowerCase())) {
             Location loc = sender.getLocation();
             SurvivalClasicCore.getWarpsFile().getConfig().set("warps." + name.toLowerCase(), LocationUtil.parseToString(loc));
@@ -65,6 +70,11 @@ public class WarpsCommand extends BaseCommand {
     @Subcommand("remove|eliminar|delete|borrar")
     @CommandPermission("survivalclasic.warps.remove")
     public void RemoveWarp(Player sender, String name) {
+        if (!sender.hasPermission("survivalclasic.cooldown.bypass") && !cooldown.isCooledDown(sender.getUniqueId())) {
+            long cooldownTime = cooldown.getSecondsRemaining(sender.getUniqueId());
+            Utils.send(sender, messageFile.cooldown.replace("%time%", String.valueOf(cooldownTime)));
+            return;
+        }
         if (SurvivalClasicCore.getWarpsFile().getConfig().contains("warps." + name.toLowerCase())) {
             SurvivalClasicCore.getWarpsFile().getConfig().set("warps." + name.toLowerCase(), null);
             SurvivalClasicCore.getWarpsFile().saveConfig();
