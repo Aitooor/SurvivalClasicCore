@@ -10,12 +10,13 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 @CommandAlias("god|dios|inmortal")
 @CommandPermission("survivalclasiccore.god")
 public class GodCommand extends BaseCommand {
 
-    @Getter private final ArrayList<String> gods = new ArrayList<String>();
+    @Getter private final ArrayList<UUID> gods = new ArrayList<>();
 
     @CatchUnknown
     @HelpCommand("ayuda|help")
@@ -25,12 +26,12 @@ public class GodCommand extends BaseCommand {
 
     @Default
     public void god(Player sender) {
-        if (gods.contains(sender.getName())) {
-            gods.remove(sender.getName());
+        if (gods.contains(sender.getUniqueId())) {
+            gods.remove(sender.getUniqueId());
             sender.setInvulnerable(false);
             Utils.send(sender, "&aYou are no longer immortal!");
         } else {
-            gods.add(sender.getName());
+            gods.add(sender.getUniqueId());
             sender.setInvulnerable(true);
             Utils.send(sender, "&aYou are now immortal!");
         }
@@ -49,7 +50,7 @@ public class GodCommand extends BaseCommand {
                 Utils.send(sender, "&aYou are no longer immortal!");
                 Utils.send(targetPlayer, sender.getName() + " &fte ha &aactivado &fel fly");
             } else {
-                gods.add(targetPlayer.getName());
+                gods.add(targetPlayer.getUniqueId());
                 targetPlayer.setInvulnerable(true);
                 Utils.send(sender, "&aYou are now immortal!");
                 Utils.send(targetPlayer, sender.getName() + " &fte ha &aactivado &fel fly");

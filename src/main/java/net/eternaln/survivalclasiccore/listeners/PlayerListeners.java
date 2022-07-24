@@ -18,6 +18,8 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.*;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 @Register
 public class PlayerListeners implements Listener {
@@ -26,17 +28,17 @@ public class PlayerListeners implements Listener {
 
     @EventHandler
     public void onChat(AsyncPlayerChatEvent event) {
-        event.getFormat();
-
         Player player = event.getPlayer();
+
+        event.getFormat();
 
         String rank = "%vault_prefix%&r ";
         rank = PlaceholderAPI.setPlaceholders(event.getPlayer(), rank);
 
         if (rank.equals("")) {
-            event.setFormat(Utils.ct(messagesFile.chatFormat.replace("%player%", player.getName()).replace("%message%", event.getMessage())));
+            event.setFormat(Utils.ct(messagesFile.chatFormat.replace("%player%", this.playerName(player)).replace("%message%", event.getMessage())));
         } else {
-            event.setFormat(Utils.ct(messagesFile.chatFormat.replace("%player%", rank + player.getName()).replace("%message%", event.getMessage())));
+            event.setFormat(Utils.ct(messagesFile.chatFormat.replace("%player%", rank + this.playerName(player)).replace("%message%", event.getMessage())));
         }
     }
 
@@ -72,11 +74,11 @@ public class PlayerListeners implements Listener {
 
         if (rank != null) {
             for (String message : messages.split("\n")) {
-                CenteredMessage.Chat.sendCenteredMessage(player, message.replace("%player%", rank + name));
+                CenteredMessage.Chat.sendCenteredMessage(player, message.replace("%player%", rank + this.playerName(player)));
             }
         } else {
             for (String message : messages.split("\n")) {
-                CenteredMessage.Chat.sendCenteredMessage(player, message.replace("%player%", name));
+                CenteredMessage.Chat.sendCenteredMessage(player, message.replace("%player%", this.playerName(player)));
             }
         }
     }
@@ -85,13 +87,16 @@ public class PlayerListeners implements Listener {
     public void onQuit(PlayerQuitEvent event) {
         event.setQuitMessage(null);
 
-        ArrayList<String> gods = new GodCommand().getGods();
+        ArrayList<UUID> gods = new GodCommand().getGods();
         if(gods.contains(event.getPlayer().getUniqueId())) {
             gods.remove(event.getPlayer().getUniqueId());
         }
-        if(SocialSpyCommand.getSocialSpyList().contains(event.getPlayer().getUniqueId())) {
-            new SocialSpyCommand().toggleSocialSpy(event.getPlayer());
+
+        List<UUID> socialSpy = SocialSpyCommand.getSocialSpyList();
+        if(socialSpy.contains(event.getPlayer().getUniqueId())) {
+            socialSpy.remove(event.getPlayer().getUniqueId());
         }
+
         if(event.getPlayer().hasMetadata("survivalclasiccore.vanish")) {
             event.getPlayer().removeMetadata("survivalclasiccore.vanish", SurvivalClasicCore.getInstance());
         }
@@ -109,5 +114,17 @@ public class PlayerListeners implements Listener {
     @EventHandler
     public void onPlayerRespawn(PlayerRespawnEvent event) {
         event.getPlayer().teleport(SurvivalClasicCore.getConfiguration().getSpawnLocation());
+    }
+
+    public String playerName(Player sender) {
+        Player player = sender.getPlayer();
+        PlayerData data = SurvivalClasicCore.getDataManager().getData(player.getUniqueId());
+        if(data.getNickName() != null) {
+            String playerName = data.getNickName();
+            return playerName;
+        } else {
+            String playerName = player.getName();
+            return playerName;
+        }
     }
 }
