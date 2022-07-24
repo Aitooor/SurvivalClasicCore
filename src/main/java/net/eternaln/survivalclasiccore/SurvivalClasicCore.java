@@ -19,6 +19,7 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -47,6 +48,7 @@ public final class SurvivalClasicCore extends JavaPlugin {
     public void onEnable() {
         instance = this;
 
+        createMessageFolder();
         configuration = new Configuration();
         messagesFile = new MessagesFile();
         menusFile = new MenusFile();
@@ -115,5 +117,15 @@ public final class SurvivalClasicCore extends JavaPlugin {
         });
 
         cmdManager.getLocales().setDefaultLocale(Locales.SPANISH);
+    }
+
+    public void createMessageFolder() {
+        if (!instance.getDataFolder().exists()) {
+            instance.getDataFolder().mkdir();
+        }
+        File messagesFolder = new File(instance.getDataFolder(), "messages");
+        if(!messagesFolder.exists()) {
+            messagesFolder.mkdirs();
+        }
     }
 }

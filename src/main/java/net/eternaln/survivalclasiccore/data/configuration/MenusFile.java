@@ -33,7 +33,7 @@ public class MenusFile extends BukkitYamlConfiguration {
 
     public MenusFile() {
         super(
-                new File(SurvivalClasicCore.getInstance().getDataFolder(), "menus.yml").toPath(),
+                new File(SurvivalClasicCore.getInstance().getDataFolder(), "messages/menus.yml").toPath(),
                 BukkitYamlProperties.builder().setFormatter(FieldNameFormatters.LOWER_UNDERSCORE).build()
         );
         this.loadAndSave();

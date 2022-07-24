@@ -143,7 +143,7 @@ public class MessagesFile extends BukkitYamlConfiguration {
 
     public MessagesFile() {
         super(
-                new File(SurvivalClasicCore.getInstance().getDataFolder(), "messages.yml").toPath(),
+                new File(SurvivalClasicCore.getInstance().getDataFolder(), "messages/messages.yml").toPath(),
                 BukkitYamlProperties.builder().setFormatter(FieldNameFormatters.LOWER_UNDERSCORE).build()
         );
         this.loadAndSave();
