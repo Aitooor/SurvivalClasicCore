@@ -88,9 +88,17 @@ public class StaffListener implements Listener {
         Player player = (Player) event.getWhoClicked();
         Staff staff = Staff.getStaff(player.getUniqueId());
 
-        if(event.getAction() == InventoryAction.HOTBAR_SWAP) {
-            event.setCancelled(true);
+        if (staff != null) {
+            if (staff.isStaffMode()) {
+                event.setCancelled(true);
+                player.updateInventory();
+            }
         }
+    }
+    @EventHandler
+    private void onPlayerSwapHandItemsEvent(PlayerSwapHandItemsEvent event) {
+        Player player = event.getPlayer();
+        Staff staff = Staff.getStaff(player.getUniqueId());
 
         if (staff != null) {
             if (staff.isStaffMode()) {
