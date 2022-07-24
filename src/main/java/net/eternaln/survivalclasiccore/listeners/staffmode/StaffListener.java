@@ -95,18 +95,6 @@ public class StaffListener implements Listener {
             }
         }
     }
-    @EventHandler
-    private void onPlayerSwapHandItemsEvent(PlayerSwapHandItemsEvent event) {
-        Player player = event.getPlayer();
-        Staff staff = Staff.getStaff(player.getUniqueId());
-
-        if (staff != null) {
-            if (staff.isStaffMode()) {
-                event.setCancelled(true);
-                player.updateInventory();
-            }
-        }
-    }
 
     @EventHandler
     private void onStaffPickupItem(PlayerItemHeldEvent event) {
