@@ -9,7 +9,7 @@ import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
 @CommandAlias("xp|exp|experiencia")
-@CommandPermission("survivalclasiccore.exp")
+@CommandPermission("survivalclasic.exp")
 public class ExpCommand extends BaseCommand {
 
     @Default
@@ -31,7 +31,7 @@ public class ExpCommand extends BaseCommand {
             }
 
             @Subcommand("otros|otro|other|others")
-            @CommandPermission("survivalclasiccore.exp.other")
+            @CommandPermission("survivalclasic.exp.other")
             @CommandCompletion("@players")
             public void giveOther(Player sender, String target, int amount) {
                 Player targetPlayer = Bukkit.getPlayer(target);
@@ -52,7 +52,7 @@ public class ExpCommand extends BaseCommand {
             }
 
             @Subcommand("otros|otro|other|others")
-            @CommandPermission("survivalclasiccore.exp.other")
+            @CommandPermission("survivalclasic.exp.other")
             @CommandCompletion("@players")
             public void giveOther(Player sender, String target, int amount) {
                 Player targetPlayer = Bukkit.getPlayer(target);
@@ -75,7 +75,7 @@ public class ExpCommand extends BaseCommand {
         }
 
         @Subcommand("otros|otro|other|others")
-        @CommandPermission("survivalclasiccore.exp.other")
+        @CommandPermission("survivalclasic.exp.other")
         @CommandCompletion("@players")
         public void setOther(Player sender, String target, int amount) {
             Player targetPlayer = Bukkit.getPlayer(target);
@@ -98,7 +98,7 @@ public class ExpCommand extends BaseCommand {
         }
 
         @Subcommand("otros|otro|other|others")
-        @CommandPermission("survivalclasiccore.exp.other")
+        @CommandPermission("survivalclasic.exp.other")
         @CommandCompletion("@players")
         public void removeOther(Player sender, String target) {
             Player targetPlayer = Bukkit.getPlayer(target);

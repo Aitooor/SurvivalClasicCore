@@ -17,7 +17,7 @@ public class TiktokCommand extends BaseCommand {
     public void tiktokCommand(Player player) { Utils.send(player, messageFile.tiktokUrl); }
 
     @Subcommand("otro|other|others|otro")
-    @CommandPermission("survivalclasiccore.menu.other")
+    @CommandPermission("survivalclasic.menu.other")
     @CommandCompletion("@players")
     public void otherCommand(Player target) { Utils.send(target, messageFile.tiktokUrl); }
 

@@ -14,7 +14,7 @@ import org.bukkit.entity.Player;
 import java.util.HashMap;
 
 @CommandAlias("tp|teleport|teletransportar")
-@CommandPermission("survivalclasiccore.tp")
+@CommandPermission("survivalclasic.tp")
 public class TeleportCommand extends BaseCommand {
 
     MessagesFile messagesFile = SurvivalClasicCore.getMessagesFile();
@@ -28,7 +28,7 @@ public class TeleportCommand extends BaseCommand {
     }
 
     @Default
-    @CommandPermission("survivalclasiccore.tp")
+    @CommandPermission("survivalclasic.tp")
     public void teleport(Player sender, String target) {
         Player targetPlayer = Bukkit.getPlayer(target);
 
@@ -44,7 +44,7 @@ public class TeleportCommand extends BaseCommand {
     }
 
     @Subcommand("all|todos")
-    @CommandPermission("survivalclasiccore.tpall")
+    @CommandPermission("survivalclasic.tpall")
     @CommandCompletion("@players")
     public void teleportAll(Player sender, String target) {
         Player targetPlayer = Bukkit.getPlayer(target);
@@ -63,7 +63,7 @@ public class TeleportCommand extends BaseCommand {
     }
 
     @Subcommand("allhere|todosaqui|allh")
-    @CommandPermission("survivalclasiccore.tpall")
+    @CommandPermission("survivalclasic.tpall")
     @CommandCompletion("@players")
     public void teleportAllHere(Player sender) {
         if (sender == null || sender == null) {
@@ -80,7 +80,7 @@ public class TeleportCommand extends BaseCommand {
     }
 
     @Subcommand("top")
-    @CommandPermission("survivalclasiccore.top")
+    @CommandPermission("survivalclasic.top")
     public void teleportTop(Player sender) {
         Location currentLocation = sender.getLocation();
         Location newLocation = LocationUtil.teleportToHighestBlock(currentLocation);
@@ -93,7 +93,7 @@ public class TeleportCommand extends BaseCommand {
     }
 
     @Subcommand("pos|position|posicion")
-    @CommandPermission("survivalclasiccore.tppos")
+    @CommandPermission("survivalclasic.tppos")
     public void teleportPosition(Player sender, String x, String y, String z) {
         if (!(x == null || y == null || z == null)) {
             try {
@@ -109,7 +109,7 @@ public class TeleportCommand extends BaseCommand {
     }
 
     @Subcommand("here|aqui")
-    @CommandPermission("survivalclasiccore.here")
+    @CommandPermission("survivalclasic.here")
     @CommandCompletion("@players")
     public void teleportHere(Player sender, String target) {
         Player targetPlayer = Bukkit.getPlayer(target);

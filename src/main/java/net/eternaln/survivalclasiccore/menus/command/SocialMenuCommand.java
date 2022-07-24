@@ -23,7 +23,7 @@ public class SocialMenuCommand extends BaseCommand {
     }
 
     @Subcommand("otro|other|others|otro")
-    @CommandPermission("survivalclasiccore.menu.other")
+    @CommandPermission("survivalclasic.menu.other")
     @CommandCompletion("@players")
     public void otherCommand(CommandSender sender, Player target) {
         new SocialMenu(menusFile.socialMenuTitle).openMenu(target);

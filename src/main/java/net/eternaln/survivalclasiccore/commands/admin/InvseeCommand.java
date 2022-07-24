@@ -7,7 +7,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 @CommandAlias("invsee|inv|inventario|verinventario|verinv")
-@CommandPermission("survivalclasiccore.invsee")
+@CommandPermission("survivalclasic.invsee")
 public class InvseeCommand extends BaseCommand {
 
     @CatchUnknown
@@ -22,7 +22,7 @@ public class InvseeCommand extends BaseCommand {
     }
 
     @Subcommand("otros|others|other|otro")
-    @CommandPermission("survivalclasiccore.invsee.other")
+    @CommandPermission("survivalclasic.invsee.other")
     @CommandCompletion("@players")
     public void other(Player sender, String target) {
         Player targetPlayer = Bukkit.getPlayer(target);

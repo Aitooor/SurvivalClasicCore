@@ -8,7 +8,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 @CommandAlias("enderchest|ender|cofreender")
-@CommandPermission("survivalclasiccore.enderchest")
+@CommandPermission("survivalclasic.enderchest")
 public class EnderchestCommand extends BaseCommand {
 
     @CatchUnknown
@@ -24,7 +24,7 @@ public class EnderchestCommand extends BaseCommand {
     }
 
     @Subcommand("otros|others|other|otro")
-    @CommandPermission("survivalclasiccore.enderchest.other")
+    @CommandPermission("survivalclasic.enderchest.other")
     @CommandCompletion("@players")
     public void other(Player sender, String target) {
         Player targetPlayer = Bukkit.getPlayer(target);

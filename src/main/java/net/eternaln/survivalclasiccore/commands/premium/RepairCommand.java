@@ -10,7 +10,7 @@ import org.bukkit.inventory.meta.Damageable;
 
 //TODO: Fix repair command
 @CommandAlias("reparar|repair|fix")
-@CommandPermission("survivalclasiccore.repair")
+@CommandPermission("survivalclasic.repair")
 public class RepairCommand extends BaseCommand {
 
     @CatchUnknown
@@ -30,7 +30,7 @@ public class RepairCommand extends BaseCommand {
     }
 
     @Subcommand("todo|all|todos|all")
-    @CommandPermission("survivalclasiccore.repair.all")
+    @CommandPermission("survivalclasic.repair.all")
     public void all(Player sender) {
         for (ItemStack items : sender.getInventory().getContents()) {
             if (items instanceof Damageable d)

@@ -25,7 +25,7 @@ public class SetHomeCommand extends BaseCommand {
     @CatchUnknown
     @CommandCompletion("@homes")
     public void onHome(Player sender, String name) {
-        if (!sender.hasPermission("survivalclasiccore.cooldown.bypass") && !cooldown.isCooledDown(sender.getUniqueId())) {
+        if (!sender.hasPermission("survivalclasic.cooldown.bypass") && !cooldown.isCooledDown(sender.getUniqueId())) {
             long cooldownTime = cooldown.getSecondsRemaining(sender.getUniqueId());
             Utils.send(sender, SurvivalClasicCore.getMessagesFile().cooldown.replace("%time%", String.valueOf(cooldownTime)));
             return;
@@ -35,7 +35,7 @@ public class SetHomeCommand extends BaseCommand {
 
         ArrayList<Integer> arrayList = new ArrayList<>();
         for (PermissionAttachmentInfo permissionAttachmentInfo : sender.getEffectivePermissions()) {
-            if (permissionAttachmentInfo.getPermission().startsWith("survivalclasiccore.homes.max.")) {
+            if (permissionAttachmentInfo.getPermission().startsWith("survivalclasic.homes.max.")) {
                 int i = Integer.parseInt(permissionAttachmentInfo.getPermission().toLowerCase().replaceAll("survivalclasiccore\\.homes\\.max\\.", ""));
                 arrayList.add(i);
             }

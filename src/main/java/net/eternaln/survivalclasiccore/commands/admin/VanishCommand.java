@@ -1,9 +1,9 @@
 package net.eternaln.survivalclasiccore.commands.admin;
 
 import co.aikar.commands.BaseCommand;
-import co.aikar.commands.CommandHelp;
 import co.aikar.commands.annotation.*;
 import net.eternaln.survivalclasiccore.SurvivalClasicCore;
+import net.eternaln.survivalclasiccore.objects.staff.Staff;
 import net.eternaln.survivalclasiccore.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -13,31 +13,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 @CommandAlias("vanish|v|invisible")
-@CommandPermission("survivalclasiccore.vanish")
+@CommandPermission("survivalclasic.vanish")
 public class VanishCommand extends BaseCommand {
 
     @Default
     public void vanish(Player sender) {
-        if (sender.hasMetadata("survivalclasiccore.vanish")) {
-            sender.removeMetadata("survivalclasiccore.vanish", SurvivalClasicCore.getInstance());
-            Utils.send(sender,"&cHas desactivado el modo vanish");
+        Staff staff = new Staff(sender.getUniqueId());
+        if(staff.isVanished()) {
+            staff.disableVanish(true);
+            Utils.send(sender, "&aHas desactivado el modo vanish");
         } else {
-            sender.setMetadata("survivalclasiccore.vanish", new FixedMetadataValue(SurvivalClasicCore.getInstance(), ""));
-
-            for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
-                onlinePlayer.hidePlayer(SurvivalClasicCore.getInstance(), sender);
-            }
-
-            Utils.send(sender,"&aHas activado el modo vanish");
+            staff.enableVanish(true);
+            Utils.send(sender, "&aHas activado el modo vanish");
         }
     }
 
     @Subcommand("list")
-    @CommandPermission("survivalclasiccore.vanish.list")
+    @CommandPermission("survivalclasic.vanish.list")
     public void list(Player sender) {
         List<String> players = new ArrayList<>();
         for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
-            if (onlinePlayer.hasMetadata("survivalclasiccore.vanish")) {
+            Staff staff = new Staff(onlinePlayer.getUniqueId());
+            if(staff.isVanished()) {
                 players.add(onlinePlayer.getName());
             }
         }
@@ -49,15 +46,18 @@ public class VanishCommand extends BaseCommand {
     }
 
     @Subcommand("other|others|otros|otro")
-    @CommandPermission("survivalclasiccore.vanish.other")
+    @CommandPermission("survivalclasic.vanish.other")
     @CommandCompletion("@players")
     public void other(Player sender, Player target) {
-        if (target.hasMetadata("survivalclasiccore.vanish")) {
-            target.removeMetadata("survivalclasiccore.vanish", SurvivalClasicCore.getInstance());
-            Utils.send(sender,"&aHas desactivado el modo vanish de &b" + target.getName());
+        Staff staff = new Staff(target.getUniqueId());
+        if(staff.isVanished()) {
+            staff.disableVanish(true);
+            Utils.send(sender, "&aHas desvinculado a &b" + target.getName() + " &ade la lista de invisibles");
+            Utils.send(target, "&fEl staff &c" + sender.getName() + " &fte ha vuelto visible");
         } else {
-            target.setMetadata("survivalclasiccore.vanish", new FixedMetadataValue(SurvivalClasicCore.getInstance(), ""));
-            Utils.send(sender,"&aHas activado el modo vanish de &b" + target.getName());
+            staff.enableVanish(true);
+            Utils.send(sender, "&aHas vinculado a &b" + target.getName() + " &aen la lista de invisibles");
+            Utils.send(target, "&fEl staff &c" + sender.getName() + " &fte ha vuelto invisible");
         }
     }
 }

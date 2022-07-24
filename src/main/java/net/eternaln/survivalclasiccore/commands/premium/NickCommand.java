@@ -11,7 +11,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 @CommandAlias("nick|apodo|nombre")
-@CommandPermission("survivalclasiccore.nick")
+@CommandPermission("survivalclasic.nick")
 public class NickCommand extends BaseCommand {
 
     @CatchUnknown
@@ -35,7 +35,7 @@ public class NickCommand extends BaseCommand {
     }
 
     @Subcommand("limpiar|clear|borrar")
-    @CommandPermission("survivalclasiccore.nick")
+    @CommandPermission("survivalclasic.nick")
     public void clear(Player sender) {
         if (!sender.getDisplayName().equals(sender.getName())) {
             PlayerData data = SurvivalClasicCore.getDataManager().getData(sender.getUniqueId());
@@ -50,7 +50,7 @@ public class NickCommand extends BaseCommand {
     }
 
     @Subcommand("clearother|clearo")
-    @CommandPermission("survivalclasiccore.nick.other")
+    @CommandPermission("survivalclasic.nick.other")
     @CommandCompletion("@players")
     public void clearOther(Player sender, OnlinePlayer target) {
         Player targetPlayer = target.getPlayer();
@@ -68,7 +68,7 @@ public class NickCommand extends BaseCommand {
     }
 
     @Subcommand("otros|others|other|otro")
-    @CommandPermission("survivalclasiccore.nick.other")
+    @CommandPermission("survivalclasic.nick.other")
     @CommandCompletion("@players")
     public void other(CommandSender sender, OnlinePlayer target, String string) {
         Player targetPlayer = target.getPlayer();

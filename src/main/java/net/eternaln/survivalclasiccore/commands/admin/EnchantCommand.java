@@ -10,7 +10,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.meta.ItemMeta;
 
 @CommandAlias("enchant|encantamiento|enchants|enchantments|encantamientos")
-@CommandPermission("survivalclasiccore.enchant")
+@CommandPermission("survivalclasic.enchant")
 public class EnchantCommand extends BaseCommand {
 
     @Default
@@ -21,7 +21,7 @@ public class EnchantCommand extends BaseCommand {
     }
 
     @Subcommand("add")
-    @CommandPermission("survivalclasiccore.enchant.add")
+    @CommandPermission("survivalclasic.enchant.add")
     @CommandCompletion("@enchantments")
     public void add(Player sender, String enchant, int level) {
         if (!(sender.getInventory().getItemInMainHand() == null)) {
@@ -40,7 +40,7 @@ public class EnchantCommand extends BaseCommand {
     }
 
     @Subcommand("remove")
-    @CommandPermission("survivalclasiccore.enchant.remove")
+    @CommandPermission("survivalclasic.enchant.remove")
     @CommandCompletion("@enchantments")
     public void remove(Player sender, String enchant) {
         if (!(sender.getInventory().getItemInMainHand() == null)) {

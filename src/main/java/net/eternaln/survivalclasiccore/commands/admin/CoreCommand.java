@@ -12,7 +12,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 @CommandAlias("core|basis|basic")
-@CommandPermission("survivalclasiccore.core")
+@CommandPermission("survivalclasic.core")
 public class CoreCommand extends BaseCommand {
 
     MessagesFile messageFile = SurvivalClasicCore.getMessagesFile();
@@ -25,7 +25,7 @@ public class CoreCommand extends BaseCommand {
     }
 
     @Subcommand("reload")
-    @CommandPermission("survivalclasiccore.reload")
+    @CommandPermission("survivalclasic.reload")
     public void reloadConfig(CommandSender sender) {
         SurvivalClasicCore.getConfiguration().load();
         SurvivalClasicCore.getMessagesFile().load();
@@ -36,7 +36,7 @@ public class CoreCommand extends BaseCommand {
     }
 
     @Subcommand("setSpawn")
-    @CommandPermission("survivalclasiccore.setspawn")
+    @CommandPermission("survivalclasic.setspawn")
     public void setSpawn(Player sender) {
         SurvivalClasicCore.getConfiguration().load();
         SurvivalClasicCore.getConfiguration().setSpawnLocation(sender.getLocation());

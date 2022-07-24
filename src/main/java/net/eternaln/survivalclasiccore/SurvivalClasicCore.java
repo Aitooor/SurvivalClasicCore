@@ -10,6 +10,8 @@ import net.eternaln.survivalclasiccore.data.mongo.DataManager;
 import net.eternaln.survivalclasiccore.data.mongo.MongoDB;
 import net.eternaln.survivalclasiccore.data.mongo.PlayerData;
 import net.eternaln.survivalclasiccore.managers.menus.MenuManager;
+import net.eternaln.survivalclasiccore.objects.freeze.FreezeHandler;
+import net.eternaln.survivalclasiccore.objects.staff.StaffHandler;
 import net.eternaln.survivalclasiccore.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -72,6 +74,8 @@ public final class SurvivalClasicCore extends JavaPlugin {
 
     @Override
     public void onDisable() {
+        StaffHandler.disable();
+        FreezeHandler.disable();
         Utils.log("&cDisabled correctly");
     }
 

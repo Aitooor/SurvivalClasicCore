@@ -9,7 +9,7 @@ import net.eternaln.survivalclasiccore.utils.items.ItemBuilder;
 import org.bukkit.entity.Player;
 
 @CommandAlias("itemc|objeto|objetos|objetosc|itemclassic")
-@CommandPermission("survivalclasiccore.itemc.give")
+@CommandPermission("survivalclasic.itemc.give")
 public class ItemcCommand extends BaseCommand {
 
     MessagesFile messagesFile = SurvivalClasicCore.getMessagesFile();

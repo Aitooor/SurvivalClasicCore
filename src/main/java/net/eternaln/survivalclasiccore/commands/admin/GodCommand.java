@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 @CommandAlias("god|dios|inmortal")
-@CommandPermission("survivalclasiccore.god")
+@CommandPermission("survivalclasic.god")
 public class GodCommand extends BaseCommand {
 
     @Getter private final ArrayList<UUID> gods = new ArrayList<>();
@@ -38,7 +38,7 @@ public class GodCommand extends BaseCommand {
     }
 
     @Subcommand("otros|others|other|otro")
-    @CommandPermission("survivalclasiccore.god.other")
+    @CommandPermission("survivalclasic.god.other")
     @CommandCompletion("@players")
     public void other(CommandSender sender, String target) {
         Player targetPlayer = Bukkit.getPlayer(target);

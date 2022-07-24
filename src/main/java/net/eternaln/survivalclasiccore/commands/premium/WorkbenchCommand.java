@@ -8,7 +8,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 @CommandAlias("workbench|mesa|mesadetrabajo")
-@CommandPermission("survivalclasiccore.workbench")
+@CommandPermission("survivalclasic.workbench")
 public class WorkbenchCommand extends BaseCommand {
 
     @CatchUnknown
@@ -24,7 +24,7 @@ public class WorkbenchCommand extends BaseCommand {
     }
 
     @Subcommand("otros|others|other|otro")
-    @CommandPermission("survivalclasiccore.workbench.other")
+    @CommandPermission("survivalclasic.workbench.other")
     public void other(Player sender, String target) {
         Player targetPlayer = Bukkit.getPlayer(target);
         targetPlayer.openWorkbench(null, true);

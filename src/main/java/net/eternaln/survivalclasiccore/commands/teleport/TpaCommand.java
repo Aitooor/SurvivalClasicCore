@@ -34,7 +34,7 @@ public class TpaCommand extends BaseCommand {
 
     @Default
     public void teleport(Player sender, String target) {
-        if (!sender.hasPermission("survivalclasiccore.cooldown.bypass") && !cooldown.isCooledDown(sender.getUniqueId())) {
+        if (!sender.hasPermission("survivalclasic.cooldown.bypass") && !cooldown.isCooledDown(sender.getUniqueId())) {
             long cooldownTime = cooldown.getSecondsRemaining(sender.getUniqueId());
             Utils.send(sender, SurvivalClasicCore.getMessagesFile().cooldown.replace("%time%", String.valueOf(cooldownTime)));
             return;

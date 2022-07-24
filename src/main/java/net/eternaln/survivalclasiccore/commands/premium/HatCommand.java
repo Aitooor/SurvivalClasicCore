@@ -11,7 +11,7 @@ import org.bukkit.inventory.ItemStack;
 import java.util.Objects;
 
 @CommandAlias("hat|cabeza|gorro")
-@CommandPermission("survivalclasiccore.hat")
+@CommandPermission("survivalclasic.hat")
 public class HatCommand extends BaseCommand {
 
     @CatchUnknown
@@ -41,7 +41,7 @@ public class HatCommand extends BaseCommand {
     }
 
     @Subcommand("otros|others|other|otro")
-    @CommandPermission("survivalclasiccore.hat.other")
+    @CommandPermission("survivalclasic.hat.other")
     @CommandCompletion("@players")
     public void other(Player sender, String target) {
         Player targetPlayer = Bukkit.getPlayer(target);

@@ -12,7 +12,7 @@ import org.bukkit.entity.Player;
 import java.util.Objects;
 
 @CommandAlias("reply|r|responder|contestar")
-@CommandPermission("survivalclasiccore.tpa")
+@CommandPermission("survivalclasic.tpa")
 public class ReplyCommand extends BaseCommand {
 
     @CatchUnknown

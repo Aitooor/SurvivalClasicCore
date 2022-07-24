@@ -27,7 +27,7 @@ public class SpawnCommand extends BaseCommand {
 
     @Default
     public void spawn(Player sender) {
-        if (!sender.hasPermission("survivalclasiccore.cooldown.bypass") && !cooldown.isCooledDown(sender.getUniqueId())) {
+        if (!sender.hasPermission("survivalclasic.cooldown.bypass") && !cooldown.isCooledDown(sender.getUniqueId())) {
             long cooldownTime = cooldown.getSecondsRemaining(sender.getUniqueId());
             Utils.send(sender, messageFile.cooldown.replace("%time%", String.valueOf(cooldownTime)));
             return;
@@ -39,7 +39,7 @@ public class SpawnCommand extends BaseCommand {
     }
 
     @Subcommand("otros|others|other|otro")
-    @CommandPermission("survivalclasiccore.spawn.other")
+    @CommandPermission("survivalclasic.spawn.other")
     @CommandCompletion("@players")
     public void spawnOther(Player sender, Player target) {
         if (!(target == null || target == null)) {
@@ -55,7 +55,7 @@ public class SpawnCommand extends BaseCommand {
     }
 
     @Subcommand("all|todos")
-    @CommandPermission("survivalclasiccore.spawn.all")
+    @CommandPermission("survivalclasic.spawn.all")
     public void spawnAll(Player sender) {
         for (Player online : Bukkit.getServer().getOnlinePlayers()) {
             if (online != sender) {

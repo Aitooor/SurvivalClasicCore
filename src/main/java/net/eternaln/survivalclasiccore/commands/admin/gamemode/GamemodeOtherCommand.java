@@ -11,7 +11,7 @@ import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 
 @CommandAlias("gamemodeto|gmto|modoa|gmother|gamemodeother")
-@CommandPermission("survivalclasiccore.gm.other")
+@CommandPermission("survivalclasic.gm.other")
 public class GamemodeOtherCommand extends BaseCommand {
 
     MessagesFile messageFile = SurvivalClasicCore.getMessagesFile();

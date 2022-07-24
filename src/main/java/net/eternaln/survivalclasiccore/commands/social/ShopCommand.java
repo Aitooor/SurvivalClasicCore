@@ -17,7 +17,7 @@ public class ShopCommand extends BaseCommand {
     public void shopCommand(Player player) { Utils.send(player, messageFile.shopUrl); }
 
     @Subcommand("otro|other|others|otro")
-    @CommandPermission("survivalclasiccore.menu.other")
+    @CommandPermission("survivalclasic.menu.other")
     @CommandCompletion("@players")
     public void otherCommand(Player target) { Utils.send(target, messageFile.shopUrl); }
 

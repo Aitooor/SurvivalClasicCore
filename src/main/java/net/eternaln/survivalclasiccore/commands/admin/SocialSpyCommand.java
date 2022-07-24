@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.UUID;
 
 @CommandAlias("socialspy|revisarchat")
-@CommandPermission("survivalclasiccore.socialspy")
+@CommandPermission("survivalclasic.socialspy")
 public class SocialSpyCommand extends BaseCommand {
 
     @Getter private static final List<UUID> socialSpyList = new ArrayList<>();

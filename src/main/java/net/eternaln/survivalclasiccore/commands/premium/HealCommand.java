@@ -8,7 +8,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 @CommandAlias("heal|curar|health|salud")
-@CommandPermission("survivalclasiccore.heal")
+@CommandPermission("survivalclasic.heal")
 public class HealCommand extends BaseCommand {
 
     @CatchUnknown
@@ -25,7 +25,7 @@ public class HealCommand extends BaseCommand {
     }
 
     @Subcommand("otros|others|other|otro")
-    @CommandPermission("survivalclasiccore.heal.other")
+    @CommandPermission("survivalclasic.heal.other")
     @CommandCompletion("@players")
     public void other(Player sender, String target) {
         Player targetPlayer = Bukkit.getPlayer(target);
@@ -35,7 +35,7 @@ public class HealCommand extends BaseCommand {
     }
 
     @Subcommand("set|establecer")
-    @CommandPermission("survivalclasiccore.heal.set")
+    @CommandPermission("survivalclasic.heal.set")
     @CommandCompletion("@players")
     public void set(String target, int amount) {
         Player targetPlayer = Bukkit.getPlayer(target);

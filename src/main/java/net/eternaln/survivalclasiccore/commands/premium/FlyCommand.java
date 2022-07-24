@@ -9,7 +9,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 @CommandAlias("fly|volar|vuelo")
-@CommandPermission("survivalclasiccore.fly")
+@CommandPermission("survivalclasic.fly")
 public class FlyCommand extends BaseCommand {
 
     @CatchUnknown
@@ -33,7 +33,7 @@ public class FlyCommand extends BaseCommand {
     }
 
     @Subcommand("otros|others|other|otro")
-    @CommandPermission("survivalclasiccore.fly.other")
+    @CommandPermission("survivalclasic.fly.other")
     @CommandCompletion("@players")
     public void other(CommandSender sender, String target) {
         Player targetPlayer = Bukkit.getPlayer(target);

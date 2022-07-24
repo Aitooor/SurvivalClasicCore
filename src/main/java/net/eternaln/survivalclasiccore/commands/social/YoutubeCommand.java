@@ -17,7 +17,7 @@ public class YoutubeCommand extends BaseCommand {
     public void youtubeCommand(Player player) { Utils.send(player, messageFile.youtubeUrl); }
 
     @Subcommand("otro|other|others|otro")
-    @CommandPermission("survivalclasiccore.menu.other")
+    @CommandPermission("survivalclasic.menu.other")
     @CommandCompletion("@players")
     public void otherCommand(Player target) { Utils.send(target, messageFile.youtubeUrl); }
 

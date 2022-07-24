@@ -61,7 +61,7 @@ public class PlayerListeners implements Listener {
 
 
         for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
-            if (onlinePlayer.hasMetadata("survivalclasiccore.vanish") || onlinePlayer.hasPermission("survivalclasiccore.vanish.see")) {
+            if (onlinePlayer.hasMetadata("survivalclasic.vanish") || onlinePlayer.hasPermission("survivalclasic.vanish.see")) {
                     player.hidePlayer(SurvivalClasicCore.getInstance(), onlinePlayer);
             }
         }
@@ -97,8 +97,8 @@ public class PlayerListeners implements Listener {
             socialSpy.remove(event.getPlayer().getUniqueId());
         }
 
-        if(event.getPlayer().hasMetadata("survivalclasiccore.vanish")) {
-            event.getPlayer().removeMetadata("survivalclasiccore.vanish", SurvivalClasicCore.getInstance());
+        if(event.getPlayer().hasMetadata("survivalclasic.vanish")) {
+            event.getPlayer().removeMetadata("survivalclasic.vanish", SurvivalClasicCore.getInstance());
         }
     }
 

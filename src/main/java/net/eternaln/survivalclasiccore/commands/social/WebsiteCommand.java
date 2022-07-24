@@ -17,7 +17,7 @@ public class WebsiteCommand extends BaseCommand {
     public void webCommand(Player player) { Utils.send(player, messageFile.websiteUrl); }
 
     @Subcommand("otro|other|others|otro")
-    @CommandPermission("survivalclasiccore.menu.other")
+    @CommandPermission("survivalclasic.menu.other")
     @CommandCompletion("@players")
     public void otherCommand(Player target) { Utils.send(target, messageFile.websiteUrl); }
 

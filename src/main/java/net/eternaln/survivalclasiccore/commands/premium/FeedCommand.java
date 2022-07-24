@@ -8,7 +8,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 @CommandAlias("comida|feed|food|alimento")
-@CommandPermission("survivalclasiccore.feed")
+@CommandPermission("survivalclasic.feed")
 public class FeedCommand extends BaseCommand {
 
     @CatchUnknown
@@ -24,7 +24,7 @@ public class FeedCommand extends BaseCommand {
     }
 
     @Subcommand("otros|others|other|otro")
-    @CommandPermission("survivalclasiccore.feed.other")
+    @CommandPermission("survivalclasic.feed.other")
     @CommandCompletion("@players")
     public void other(Player sender, String target) {
         Player targetPlayer = Bukkit.getPlayer(target);
@@ -33,7 +33,7 @@ public class FeedCommand extends BaseCommand {
     }
 
     @Subcommand("set|establecer")
-    @CommandPermission("survivalclasiccore.feed.set")
+    @CommandPermission("survivalclasic.feed.set")
     @CommandCompletion("@players")
     public void set(String target, int amount) {
         Player targetPlayer = Bukkit.getPlayer(target);

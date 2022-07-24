@@ -12,7 +12,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 @CommandAlias("gamemode|gm|modo")
-@CommandPermission("survivalclasiccore.gm")
+@CommandPermission("survivalclasic.gm")
 public class GamemodeCommand extends BaseCommand {
 
     MessagesFile messageFile = SurvivalClasicCore.getMessagesFile();
@@ -25,7 +25,7 @@ public class GamemodeCommand extends BaseCommand {
     }
 
     @Subcommand("survival|s|supervivencia|0")
-    @CommandPermission("survivalclasiccore.gm.survival")
+    @CommandPermission("survivalclasic.gm.survival")
     public void setSurvival(Player sender) {
         if (sender.getGameMode() != GameMode.SURVIVAL) {
             sender.setGameMode(GameMode.SURVIVAL);
@@ -36,7 +36,7 @@ public class GamemodeCommand extends BaseCommand {
     }
 
     @Subcommand("creative|c|creacion|1")
-    @CommandPermission("survivalclasiccore.gm.creative")
+    @CommandPermission("survivalclasic.gm.creative")
     public void setCreative(Player sender) {
         if (sender.getGameMode() != GameMode.CREATIVE) {
             sender.setGameMode(GameMode.CREATIVE);
@@ -47,7 +47,7 @@ public class GamemodeCommand extends BaseCommand {
     }
 
     @Subcommand("adventure|a|aventura|2")
-    @CommandPermission("survivalclasiccore.gm.adventure")
+    @CommandPermission("survivalclasic.gm.adventure")
     public void setAdventure(Player sender) {
         if (sender.getGameMode() != GameMode.ADVENTURE) {
             sender.setGameMode(GameMode.ADVENTURE);
@@ -58,7 +58,7 @@ public class GamemodeCommand extends BaseCommand {
     }
 
     @Subcommand("spectator|spec|spectator|3")
-    @CommandPermission("survivalclasiccore.gm.spectator")
+    @CommandPermission("survivalclasic.gm.spectator")
     public void setSpectator(Player sender) {
         if (sender.getGameMode() != GameMode.SPECTATOR) {
             sender.setGameMode(GameMode.SPECTATOR);

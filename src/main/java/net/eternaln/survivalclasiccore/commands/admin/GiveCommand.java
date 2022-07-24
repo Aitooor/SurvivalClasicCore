@@ -13,7 +13,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 @CommandAlias("give|dar")
-@CommandPermission("survivalclasiccore.give")
+@CommandPermission("survivalclasic.give")
 public class GiveCommand extends BaseCommand {
 
     MessagesFile messagesFile = SurvivalClasicCore.getMessagesFile();
@@ -46,7 +46,7 @@ public class GiveCommand extends BaseCommand {
     }
 
     @Subcommand("otros|otro|other|others")
-    @CommandPermission("survivalclasiccore.give.other")
+    @CommandPermission("survivalclasic.give.other")
     @CommandCompletion("@players @items @range:1-2304")
     public void giveOther(Player sender, String target, String item, int amount) {
         Player targetPlayer = Bukkit.getPlayer(target);

@@ -17,7 +17,7 @@ public class TwitterCommand extends BaseCommand {
     public void twitterCommand(Player player) { Utils.send(player, messageFile.twitterUrl); }
 
     @Subcommand("otro|other|others|otro")
-    @CommandPermission("survivalclasiccore.menu.other")
+    @CommandPermission("survivalclasic.menu.other")
     @CommandCompletion("@players")
     public void otherCommand(Player target) { Utils.send(target, messageFile.twitterUrl); }
 
