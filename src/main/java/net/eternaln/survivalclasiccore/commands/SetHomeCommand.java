@@ -36,7 +36,7 @@ public class SetHomeCommand extends BaseCommand {
         ArrayList<Integer> arrayList = new ArrayList<>();
         for (PermissionAttachmentInfo permissionAttachmentInfo : sender.getEffectivePermissions()) {
             if (permissionAttachmentInfo.getPermission().startsWith("survivalclasic.homes.max.")) {
-                int i = Integer.parseInt(permissionAttachmentInfo.getPermission().toLowerCase().replaceAll("survivalclasiccore\\.homes\\.max\\.", ""));
+                int i = Integer.parseInt(permissionAttachmentInfo.getPermission().toLowerCase().replaceAll("survivalclasic\\.homes\\.max\\.", ""));
                 arrayList.add(i);
             }
         }
@@ -59,7 +59,7 @@ public class SetHomeCommand extends BaseCommand {
         }
 
         data.getHomes().put(name, LocationUtil.parseToString(sender.getLocation()));
-        Utils.send(sender, messagesFile.homeSet).replace("%home%", name);
+        Utils.send(sender, messagesFile.homeSet.replace("%home%", name));
         data.save();
     }
 

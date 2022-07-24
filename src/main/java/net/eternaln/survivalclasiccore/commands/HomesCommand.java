@@ -40,6 +40,6 @@ public class HomesCommand extends BaseCommand {
 
         sender.teleport(LocationUtil.parseToLocation(data.getHomes().get(name)));
         Utils.send(sender, "&fHas sido teletransportado a &a" + name);
-        Utils.send(sender, messagesFile.homeTeleported).replace("%home%", name);
+        Utils.send(sender, messagesFile.homeTeleported.replace("%home%", name));
     }
 }
