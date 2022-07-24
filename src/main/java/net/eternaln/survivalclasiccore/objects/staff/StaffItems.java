@@ -5,19 +5,22 @@ import lombok.Getter;
 import net.eternaln.survivalclasiccore.utils.Utils;
 import net.eternaln.survivalclasiccore.utils.items.ItemBuilder;
 import org.bukkit.Material;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 
 @Getter
 @AllArgsConstructor
 public enum StaffItems {
 
-    COMPASS("&bBrújula", new ItemStack(Material.COMPASS),0 ,1),
-    INSPECTOR("&cMirar inventario", new ItemStack(Material.BOOK),0,8),
-    WORLD_EDIT("&bWorld Edit", new ItemStack(Material.WOODEN_AXE),0,7),
-    FREEZE("&cCongelar", new ItemStack(Material.PACKED_ICE), 0,4),
-    RANDOM_TELEPORT("&bRPT a un User", new ItemStack(Material.CLOCK), 0,2),
-    VANISH_OFF("&fVanish &c&lDESACTIVADO", new ItemStack(Material.INK_SAC), 8,0),
-    VANISH_ON("&fVanish &a&lACTIVADO", new ItemStack(Material.GLOW_INK_SAC), 10,0);
+    VANISH_OFF("&bVanish &c&lDESACTIVADO", new ItemStack(Material.INK_SAC), 1,0),
+    VANISH_ON("&bVanish &a&lACTIVADO", new ItemStack(Material.GLOW_INK_SAC), 2,0),
+    FLY_OFF("&bFly &c&lDESACTIVADO", new ItemStack(Material.GRAY_DYE), 3,1),
+    FLY_ON("&bFly &a&lACTIVADO", new ItemStack(Material.LIME_DYE), 4, 1),
+    INSPECTOR("&cInvsee", new ItemStack(Material.CHEST),0,2),
+    FREEZE("&cCongelar", new ItemStack(Material.ICE), 0,4),
+    RANDOM_TELEPORT("&bRPT a un User", new ItemStack(Material.BOOK), 0,6),
+    COMPASS("&bBrújula", new ItemStack(Material.COMPASS),0 ,7),
+    WORLD_EDIT("&bWorldEdit", new ItemStack(Material.WOODEN_AXE),0,8);
 
     private final String displayName;
     private final ItemStack itemStack;
@@ -27,6 +30,7 @@ public enum StaffItems {
     public ItemStack getItem() {
         return new ItemBuilder(this.itemStack)
                 .name(Utils.ct(this.displayName))
+                .removeFlags(ItemFlag.HIDE_ATTRIBUTES)
                 .data(this.data)
                 .build();
     }

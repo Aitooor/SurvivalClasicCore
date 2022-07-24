@@ -2,7 +2,7 @@ package net.eternaln.survivalclasiccore.listeners;
 
 import me.clip.placeholderapi.PlaceholderAPI;
 import net.eternaln.survivalclasiccore.SurvivalClasicCore;
-import net.eternaln.survivalclasiccore.annotations.Register;
+import net.eternaln.survivalclasiccore.managers.annotations.Register;
 import net.eternaln.survivalclasiccore.commands.admin.GodCommand;
 import net.eternaln.survivalclasiccore.commands.admin.SocialSpyCommand;
 import net.eternaln.survivalclasiccore.data.configuration.MessagesFile;

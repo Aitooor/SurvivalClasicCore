@@ -3,6 +3,7 @@ package net.eternaln.survivalclasiccore.objects.staff;
 import com.google.common.collect.Maps;
 import lombok.Getter;
 import lombok.Setter;
+import net.eternaln.survivalclasiccore.SurvivalClasicCore;
 import net.eternaln.survivalclasiccore.utils.PlayerUtil;
 import net.eternaln.survivalclasiccore.utils.Utils;
 import org.bukkit.Bukkit;
@@ -25,6 +26,7 @@ public class Staff {
     private UUID uuid;
     private boolean vanished;
     private boolean staffMode;
+    private boolean flying;
     private ItemStack[] armorContents;
     private ItemStack[] contents;
 
@@ -82,10 +84,10 @@ public class Staff {
 
         for (Player online : Bukkit.getServer().getOnlinePlayers()) {
             if (Staff.getStaff(online.getUniqueId()) != null) {
-                online.showPlayer(player);
+                online.showPlayer(SurvivalClasicCore.getInstance(), player);
             }
             else {
-                online.hidePlayer(player);
+                online.hidePlayer(SurvivalClasicCore.getInstance(), player);
             }
         }
 
@@ -100,11 +102,33 @@ public class Staff {
         Player player = getPlayer();
 
         for (Player online : Bukkit.getServer().getOnlinePlayers()) {
-            online.showPlayer(player);
+            online.showPlayer(SurvivalClasicCore.getInstance(), player);
         }
 
         if (message) {
             Utils.send(player, "&cVanish Desactivado");
+        }
+    }
+
+    public void enableFly(boolean message) {
+        Player player = getPlayer();
+        if(!player.getAllowFlight()) {
+            player.setAllowFlight(true);
+            setFlying(true);
+            if(message) {
+                Utils.send(player, "&aFly Activado");
+            }
+        }
+    }
+
+    public void disableFly(boolean message) {
+        Player player = getPlayer();
+        if(player.getAllowFlight()) {
+            player.setAllowFlight(false);
+            setFlying(false);
+            if(message) {
+                Utils.send(player, "&cFly Desactivado");
+            }
         }
     }
 

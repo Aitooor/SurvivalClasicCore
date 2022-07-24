@@ -1,6 +1,6 @@
 package net.eternaln.survivalclasiccore.listeners.staffmode;
 
-import net.eternaln.survivalclasiccore.annotations.Register;
+import net.eternaln.survivalclasiccore.managers.annotations.Register;
 import net.eternaln.survivalclasiccore.objects.staff.Staff;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -10,6 +10,7 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.*;
 
@@ -86,6 +87,10 @@ public class StaffListener implements Listener {
     private void onStaffInventory(InventoryClickEvent event) {
         Player player = (Player) event.getWhoClicked();
         Staff staff = Staff.getStaff(player.getUniqueId());
+
+        if(event.getAction() == InventoryAction.HOTBAR_SWAP) {
+            event.setCancelled(true);
+        }
 
         if (staff != null) {
             if (staff.isStaffMode()) {

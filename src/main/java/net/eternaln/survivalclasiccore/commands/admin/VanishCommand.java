@@ -21,10 +21,8 @@ public class VanishCommand extends BaseCommand {
         Staff staff = new Staff(sender.getUniqueId());
         if(staff.isVanished()) {
             staff.disableVanish(true);
-            Utils.send(sender, "&aHas desactivado el modo vanish");
         } else {
             staff.enableVanish(true);
-            Utils.send(sender, "&aHas activado el modo vanish");
         }
     }
 
@@ -53,11 +51,9 @@ public class VanishCommand extends BaseCommand {
         if(staff.isVanished()) {
             staff.disableVanish(true);
             Utils.send(sender, "&aHas desvinculado a &b" + target.getName() + " &ade la lista de invisibles");
-            Utils.send(target, "&fEl staff &c" + sender.getName() + " &fte ha vuelto visible");
         } else {
             staff.enableVanish(true);
             Utils.send(sender, "&aHas vinculado a &b" + target.getName() + " &aen la lista de invisibles");
-            Utils.send(target, "&fEl staff &c" + sender.getName() + " &fte ha vuelto invisible");
         }
     }
 }

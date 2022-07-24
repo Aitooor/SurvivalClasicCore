@@ -17,16 +17,14 @@ public class InvseeCommand extends BaseCommand {
     }
 
     @Default
-    public void god(Player sender) {
-        sender.openInventory(sender.getInventory());
-    }
-
-    @Subcommand("otros|others|other|otro")
-    @CommandPermission("survivalclasic.invsee.other")
     @CommandCompletion("@players")
-    public void other(Player sender, String target) {
-        Player targetPlayer = Bukkit.getPlayer(target);
-        sender.openInventory(targetPlayer.getInventory());
+    public void invSee(Player sender, Player target) {
+        if(target.equals(sender)) {
+            sender.openInventory(sender.getInventory());
+            return;
+        }
+
+        sender.openInventory(target.getInventory());
     }
 
 }

@@ -1,6 +1,6 @@
 package net.eternaln.survivalclasiccore.listeners.staffmode;
 
-import net.eternaln.survivalclasiccore.annotations.Register;
+import net.eternaln.survivalclasiccore.managers.annotations.Register;
 import net.eternaln.survivalclasiccore.objects.freeze.Freeze;
 import net.eternaln.survivalclasiccore.objects.staff.Staff;
 import net.eternaln.survivalclasiccore.objects.staff.StaffItems;
@@ -86,6 +86,14 @@ public class StaffItemsListener implements Listener {
                 else if (StaffItems.VANISH_OFF.canUse(item)) {
                     staff.enableVanish(true);
                     staff.getPlayer().getInventory().setItem(StaffItems.VANISH_ON.getSlot(), StaffItems.VANISH_ON.getItem());
+                }
+                else if (StaffItems.FLY_ON.canUse(item)) {
+                    staff.disableFly(true);
+                    staff.getPlayer().getInventory().setItem(StaffItems.FLY_OFF.getSlot(), StaffItems.FLY_OFF.getItem());
+                }
+                else if (StaffItems.FLY_OFF.canUse(item)) {
+                    staff.enableFly(true);
+                    staff.getPlayer().getInventory().setItem(StaffItems.FLY_ON.getSlot(), StaffItems.FLY_ON.getItem());
                 }
             }
         }

@@ -4,7 +4,7 @@ import co.aikar.commands.Locales;
 import co.aikar.commands.PaperCommandManager;
 import com.google.common.collect.ImmutableList;
 import lombok.Getter;
-import net.eternaln.survivalclasiccore.annotations.RegisterExecutor;
+import net.eternaln.survivalclasiccore.managers.annotations.RegisterExecutor;
 import net.eternaln.survivalclasiccore.data.configuration.*;
 import net.eternaln.survivalclasiccore.data.mongo.DataManager;
 import net.eternaln.survivalclasiccore.data.mongo.MongoDB;
