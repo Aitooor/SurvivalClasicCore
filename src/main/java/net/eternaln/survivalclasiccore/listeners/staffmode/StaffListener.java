@@ -10,8 +10,6 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.event.entity.EntityRegainHealthEvent;
-import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.*;
 
@@ -39,29 +37,6 @@ public class StaffListener implements Listener {
         if (staff != null) {
             staff.disableStaffMode(true);
             Staff.getStaffs().remove(event.getPlayer().getUniqueId());
-        }
-    }
-
-    @EventHandler
-    private void onFoodLevelChange(FoodLevelChangeEvent event) {
-        Staff staff = Staff.getStaff(event.getEntity().getUniqueId());
-        if(event.getEntity() instanceof Player) {
-            Player player = (Player) event.getEntity();
-            if(staff.isStaffMode()) {
-                event.setFoodLevel(20);
-                event.setCancelled(true);
-            }
-        }
-    }
-
-    @EventHandler
-    private void onHealLevelChange(EntityRegainHealthEvent event) {
-        Staff staff = Staff.getStaff(event.getEntity().getUniqueId());
-        if(event.getEntity() instanceof Player) {
-            if(staff.isStaffMode()) {
-                event.setAmount(20);
-                event.setCancelled(true);
-            }
         }
     }
 

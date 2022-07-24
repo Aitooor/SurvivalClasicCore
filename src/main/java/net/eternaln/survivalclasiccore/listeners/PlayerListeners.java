@@ -1,6 +1,5 @@
 package net.eternaln.survivalclasiccore.listeners;
 
-import lombok.Getter;
 import me.clip.placeholderapi.PlaceholderAPI;
 import net.eternaln.survivalclasiccore.SurvivalClasicCore;
 import net.eternaln.survivalclasiccore.annotations.Register;
@@ -12,7 +11,6 @@ import net.eternaln.survivalclasiccore.utils.CenteredMessage;
 import net.eternaln.survivalclasiccore.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
-import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -20,7 +18,6 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.*;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
@@ -28,7 +25,6 @@ import java.util.UUID;
 public class PlayerListeners implements Listener {
 
     MessagesFile messagesFile = SurvivalClasicCore.getMessagesFile();
-    @Getter public HashMap<Player, Location> positions = new HashMap<>();
 
     @EventHandler
     public void onChat(AsyncPlayerChatEvent event) {
@@ -111,13 +107,8 @@ public class PlayerListeners implements Listener {
         Player player = event.getEntity();
         Player killer = event.getEntity().getKiller();
 
-        if (killer != null) {
-            event.setDeathMessage(Utils.ct("&fEl jugador &b" + player.getDisplayName() + " &fha sido asesinado por &c" + killer.getDisplayName()));
-        } else {
-            event.setDeathMessage(Utils.ct("El jugador &b" + player.getDisplayName() + " &fha sido asesinado"));
-        }
-        Utils.sendNoPrefix(player,"&fTus cordenadas de muerte son&7: &cX " +  player.getLocation().getBlockX() + " Y " + player.getLocation().getBlockY() + " Z " + player.getLocation().getBlockZ() + " ");
-        positions.put(player, player.getLocation());
+        if (killer != null)
+            event.setDeathMessage(Utils.ct(Utils.getPrefixGame() + "&fEl jugador &b" + player.getDisplayName() + " &fha sido asesinado por &c" + killer.getDisplayName()));
     }
 
     @EventHandler

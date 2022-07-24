@@ -27,7 +27,6 @@ public enum StaffItems {
     public ItemStack getItem() {
         return new ItemBuilder(this.itemStack)
                 .name(Utils.ct(this.displayName))
-                .setUnbrekeable(true)
                 .data(this.data)
                 .build();
     }
