@@ -28,13 +28,14 @@ public class CoreCommand extends BaseCommand {
 
     @Subcommand("reload")
     @CommandPermission("survivalclasic.reload")
-    public void reloadConfig(CommandSender sender) {
+    public void reloadConfig(Player sender) {
         SurvivalClasicCore.getConfiguration().load();
         SurvivalClasicCore.getMessagesFile().load();
         SurvivalClasicCore.getMenusFile().load();
         //TODO: Add Warps File
 
         sender.sendMessage(messageFile.reload);
+        Utils.log(messageFile.reload);
     }
 
     @Subcommand("setSpawn")
