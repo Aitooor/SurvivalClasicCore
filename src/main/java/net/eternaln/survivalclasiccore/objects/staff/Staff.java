@@ -3,6 +3,7 @@ package net.eternaln.survivalclasiccore.objects.staff;
 import com.google.common.collect.Maps;
 import lombok.Getter;
 import lombok.Setter;
+import net.eternaln.survivalclasiccore.commands.admin.GodCommand;
 import net.eternaln.survivalclasiccore.utils.PlayerUtil;
 import net.eternaln.survivalclasiccore.utils.Utils;
 import org.bukkit.Bukkit;
@@ -13,6 +14,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.UUID;
 
@@ -41,11 +43,19 @@ public class Staff {
     }
 
     public void enableStaffMode(boolean message) {
+        Player player = getPlayer();
+        Staff staff = new Staff(player.getUniqueId());
+
         setStaffMode(true);
         enableVanish(false);
 
-        Player player = getPlayer();
-        player.setGameMode(GameMode.CREATIVE);
+        if(!player.getAllowFlight()) {
+            player.setAllowFlight(true);
+        }
+        ArrayList<UUID> gods = new GodCommand().getGods();
+        if(!gods.contains(player.getUniqueId())) {
+            gods.add(player.getUniqueId());
+        }
 
         setArmorContents(player.getInventory().getArmorContents());
         setContents(player.getInventory().getContents());
@@ -64,6 +74,13 @@ public class Staff {
 
         Player player = getPlayer();
         player.setGameMode(GameMode.SURVIVAL);
+        if(player.getAllowFlight()) {
+            player.setAllowFlight(false);
+        }
+        ArrayList<UUID> gods = new GodCommand().getGods();
+        if(gods.contains(player.getUniqueId())) {
+            gods.remove(player.getUniqueId());
+        }
 
         PlayerUtil.clear(player, true, true);
 
