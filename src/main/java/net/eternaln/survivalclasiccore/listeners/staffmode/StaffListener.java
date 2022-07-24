@@ -1,5 +1,6 @@
 package net.eternaln.survivalclasiccore.listeners.staffmode;
 
+import net.eternaln.survivalclasiccore.SurvivalClasicCore;
 import net.eternaln.survivalclasiccore.managers.annotations.Register;
 import net.eternaln.survivalclasiccore.objects.staff.Staff;
 import org.bukkit.entity.Player;
@@ -10,7 +11,6 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.*;
 
@@ -27,7 +27,7 @@ public class StaffListener implements Listener {
         }
 
         for (Staff staff : Staff.getStaffs().values()) {
-            player.hidePlayer(staff.getPlayer());
+            player.hidePlayer(SurvivalClasicCore.getInstance(), staff.getPlayer());
         }
     }
 
@@ -109,7 +109,7 @@ public class StaffListener implements Listener {
     }
 
     @EventHandler
-    private void onStaffPickupItem(PlayerPickupItemEvent event) {
+    private void onStaffPickupItem(PlayerItemHeldEvent event) {
         Staff staff = Staff.getStaff(event.getPlayer().getUniqueId());
 
         if (staff != null) {

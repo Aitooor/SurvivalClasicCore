@@ -10,9 +10,3 @@ libraries:
   - org.projectlombok:lombok:1.18.24
   - com.github.cryptomorin:XSeries:9.0.0
   - org.mongodb:mongodb-driver-sync:4.6.0
-
-permissions:
-  survivalclasic.staffmode.onjoin:
-  survivalclasic.cooldown.bypass:
-  survivalclasic.homes.max:
-    description: "Set <permision>.max.<number> to set the max amount of homes a player can have."

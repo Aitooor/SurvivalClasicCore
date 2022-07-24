@@ -6,9 +6,11 @@ import co.aikar.commands.annotation.*;
 import net.eternaln.survivalclasiccore.SurvivalClasicCore;
 import net.eternaln.survivalclasiccore.data.configuration.Configuration;
 import net.eternaln.survivalclasiccore.data.configuration.MessagesFile;
+import net.eternaln.survivalclasiccore.data.configuration.WarpsFile;
 import net.eternaln.survivalclasiccore.utils.Utils;
 import org.bukkit.Sound;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
 @CommandAlias("core|basis|basic")
@@ -29,10 +31,10 @@ public class CoreCommand extends BaseCommand {
     public void reloadConfig(CommandSender sender) {
         SurvivalClasicCore.getConfiguration().load();
         SurvivalClasicCore.getMessagesFile().load();
-        SurvivalClasicCore.getWarpsFile().reloadConfig();
+        SurvivalClasicCore.getMenusFile().load();
+        //TODO: Add Warps File
 
         sender.sendMessage(messageFile.reload);
-        Utils.log(messageFile.reload);
     }
 
     @Subcommand("setSpawn")
