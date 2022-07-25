@@ -29,8 +29,9 @@ public class Configuration extends BukkitYamlConfiguration {
             true,"root", "password", "SurvivalClasicCore", "players"
     );
 
-    @Comment({"", "CommandCooldown"})
+    @Comment({"", "Cooldown"})
     public int cmdCooldown = 2;
+    public int repairCooldown = 86400;
 
     @Comment({"", "Items"})
     @Convert(ItemStackMapConverter.class)

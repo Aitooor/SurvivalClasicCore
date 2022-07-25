@@ -26,8 +26,9 @@ public class LocationUtil {
             float yaw = Float.parseFloat(split[4]);
             float pitch = Float.parseFloat(split[5]);
             return new Location(world, x, y, z, yaw, pitch);
+        } else {
+            return new Location(world, x, y, z);
         }
-        return new Location(world, x, y, z);
     }
 
     public static Location teleportToHighestBlock(Location location) {

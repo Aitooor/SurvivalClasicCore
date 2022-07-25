@@ -55,9 +55,10 @@ public class PlayerListeners implements Listener {
             player.setPlayerListName(Utils.ct(data.getNickName()));
         }
 
-        if(staff.isStaffMode()) {
+        if(!staff.isStaffMode()) {
             player.setGameMode(GameMode.SURVIVAL);
         }
+
         if(!player.hasPlayedBefore()) {
             event.getPlayer().teleport(SurvivalClasicCore.getConfiguration().getSpawnLocation());
         }
