@@ -26,9 +26,7 @@ public class PlayerData {
     }
 
     public void load() {
-        //TODO On Mongo PlayerData load error document = null
         Document document = SurvivalClasicCore.getMongo().getMongoCol().find(Filters.eq("uuid", uuid.toString())).first();
-        System.out.println("PlayerData load: " + document);
         if (document != null) {
             this.nickName = document.getString("nick");
             this.homes = document.get("homes", Map.class);

@@ -1,4 +1,4 @@
-package net.eternaln.survivalclasiccore.commands.admin;
+package net.eternaln.survivalclasiccore.commands.admin.staffmode;
 
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.*;
@@ -6,11 +6,8 @@ import net.eternaln.survivalclasiccore.SurvivalClasicCore;
 import net.eternaln.survivalclasiccore.objects.staff.Staff;
 import net.eternaln.survivalclasiccore.utils.Cooldown;
 import net.eternaln.survivalclasiccore.utils.Utils;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 @CommandAlias("vanish|v|invisible")
@@ -26,11 +23,15 @@ public class VanishCommand extends BaseCommand {
             Utils.send(sender, SurvivalClasicCore.getMessagesFile().cooldown.replace("%time%", String.valueOf(cooldownTime)));
             return;
         }
-        Staff staff = new Staff(sender.getUniqueId());
-        if(staff.isVanished()) {
-            staff.disableVanish(true);
+        Staff staff = Staff.getStaff(sender.getUniqueId());
+        if(!staff.isStaffMode()) {
+            if (staff.isVanished()) {
+                staff.disableVanish(true);
+            } else {
+                staff.enableVanish(true);
+            }
         } else {
-            staff.enableVanish(true);
+            Utils.send(sender, "&cNo puedes hacer eso mientras estás en StaffMode");
         }
     }
 
@@ -38,13 +39,17 @@ public class VanishCommand extends BaseCommand {
     @CommandPermission("survivalclasic.vanish.other")
     @CommandCompletion("@players")
     public void other(Player sender, Player target) {
-        Staff staff = new Staff(target.getUniqueId());
-        if(staff.isVanished()) {
-            staff.disableVanish(true);
-            Utils.send(sender, "&aHas desvinculado a &b" + target.getName() + " &ade la lista de invisibles");
+        Staff staff = Staff.getStaff(target.getUniqueId());
+        if(!staff.isStaffMode()) {
+            if (staff.isVanished()) {
+                staff.disableVanish(true);
+                Utils.send(sender, "&aHas desvinculado a &b" + target.getName() + " &ade la lista de invisibles");
+            } else {
+                staff.enableVanish(true);
+                Utils.send(sender, "&aHas vinculado a &b" + target.getName() + " &aen la lista de invisibles");
+            }
         } else {
-            staff.enableVanish(true);
-            Utils.send(sender, "&aHas vinculado a &b" + target.getName() + " &aen la lista de invisibles");
+            Utils.send(sender, "&cNo puedes hacer eso mientras " + target.getName() + " está en StaffMode");
         }
     }
 
