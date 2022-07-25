@@ -9,7 +9,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 
-//TODO: Fix repair command
 @CommandAlias("reparar|repair|fix")
 @CommandPermission("survivalclasic.repair")
 public class RepairCommand extends BaseCommand {
