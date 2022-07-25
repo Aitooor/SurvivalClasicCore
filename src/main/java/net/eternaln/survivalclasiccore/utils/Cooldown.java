@@ -1,6 +1,9 @@
 package net.eternaln.survivalclasiccore.utils;
 
+import org.bukkit.Bukkit;
+
 import java.util.HashMap;
+import java.util.UUID;
 
 /**
  * An easy to use Cooldown class
@@ -58,8 +61,12 @@ public class Cooldown<T> {
     public boolean isCooledDown(T player) {
         if (!cooldowns.containsKey(player) || (((System.currentTimeMillis() - cooldowns.get(player))) >= time)) {
             cooldowns.remove(player);
+            Utils.send(Bukkit.getPlayer((UUID) player), "&cNo tienes cooldown");
+            Utils.log("&cCOOLDOWN FUNCIONA &7(No tiene)");
             return true;
         } else
+            Utils.send(Bukkit.getPlayer((UUID) player), "&cTienes cooldown");
+            Utils.log("&cCOOLDOWN FUNCIONA &7(Tiene)");
             return false;
     }
 
