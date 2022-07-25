@@ -28,7 +28,7 @@ public class CoreCommand extends BaseCommand {
 
     @Subcommand("reload")
     @CommandPermission("survivalclasic.reload")
-    public void reloadConfig(Player sender) {
+    public void reloadConfig(CommandSender sender) {
         SurvivalClasicCore.getConfiguration().load();
         SurvivalClasicCore.getMessagesFile().load();
         SurvivalClasicCore.getMenusFile().load();
