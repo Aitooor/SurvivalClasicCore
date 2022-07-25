@@ -9,6 +9,7 @@ import net.eternaln.survivalclasiccore.menus.WarpsMenu;
 import net.eternaln.survivalclasiccore.utils.Cooldown;
 import net.eternaln.survivalclasiccore.utils.LocationUtil;
 import net.eternaln.survivalclasiccore.utils.Utils;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -52,14 +53,17 @@ public class WarpsCommand extends BaseCommand {
     @Subcommand("set|establece|add|agregar")
     @CommandPermission("survivalclasic.warps.set")
     public void SetWarp(Player sender, String name) {
+        //TODO Player tp to correct location
+        Location warpLocation = new Location(Bukkit.getWorld(sender.getWorld().getName()), sender.getLocation().getX(), sender.getLocation().getY(), sender.getLocation().getZ(), sender.getLocation().getYaw(), sender.getLocation().getPitch());
+
         if (!sender.hasPermission("survivalclasic.cooldown.bypass") && !cooldown.isCooledDown(sender.getUniqueId())) {
             long cooldownTime = cooldown.getSecondsRemaining(sender.getUniqueId());
             Utils.send(sender, messageFile.cooldown.replace("%time%", String.valueOf(cooldownTime)));
             return;
         }
         if (!SurvivalClasicCore.getWarpsFile().getConfig().contains("warps." + name.toLowerCase())) {
-            Location loc = sender.getLocation();
-            SurvivalClasicCore.getWarpsFile().getConfig().set("warps." + name.toLowerCase(), LocationUtil.parseToString(loc));
+
+            SurvivalClasicCore.getWarpsFile().getConfig().set("warps." + name.toLowerCase(), LocationUtil.parseToString(warpLocation));
             SurvivalClasicCore.getWarpsFile().saveConfig();
             Utils.send(sender, messageFile.warpSet.replace("%warp%", name));
         } else {

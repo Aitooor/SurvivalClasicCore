@@ -72,13 +72,25 @@ public class PlayerListeners implements Listener {
 
         String messages = messagesFile.joinMessage;
 
-        if (rank != null) {
-            for (String message : messages.split("\n")) {
-                CenteredMessage.Chat.sendCenteredMessage(player, message.replace("%player%", rank + this.playerName(player)));
+        if(this.playerName(player) != null) {
+            if (rank != null) {
+                for (String message : messages.split("\n")) {
+                    CenteredMessage.Chat.sendCenteredMessage(player, message.replace("%player%", rank + this.playerName(player)));
+                }
+            } else {
+                for (String message : messages.split("\n")) {
+                    CenteredMessage.Chat.sendCenteredMessage(player, message.replace("%player%", this.playerName(player)));
+                }
             }
         } else {
-            for (String message : messages.split("\n")) {
-                CenteredMessage.Chat.sendCenteredMessage(player, message.replace("%player%", this.playerName(player)));
+            if(rank != null) {
+                for (String message : messages.split("\n")) {
+                    CenteredMessage.Chat.sendCenteredMessage(player, message.replace("%player%", rank + name));
+                }
+            } else {
+                for (String message : messages.split("\n")) {
+                    CenteredMessage.Chat.sendCenteredMessage(player, message.replace("%player%", name));
+                }
             }
         }
     }
