@@ -14,9 +14,7 @@ import java.util.UUID;
 @CommandAlias("socialspy|revisarchat")
 @CommandPermission("survivalclasic.socialspy")
 public class SocialSpyCommand extends BaseCommand {
-
     @Getter private static final List<UUID> socialSpyList = new ArrayList<>();
-
     @CatchUnknown
     @HelpCommand("ayuda|help")
     public void help(CommandHelp help) {

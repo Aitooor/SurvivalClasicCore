@@ -13,7 +13,6 @@ import java.util.Objects;
 @CommandAlias("hat|cabeza|gorro")
 @CommandPermission("survivalclasic.hat")
 public class HatCommand extends BaseCommand {
-
     @CatchUnknown
     @HelpCommand("ayuda|help")
     public void help(CommandHelp help) {

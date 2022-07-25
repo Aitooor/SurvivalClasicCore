@@ -11,9 +11,7 @@ import org.bukkit.entity.Player;
 @CommandAlias("itemc|objeto|objetos|objetosc|itemclassic")
 @CommandPermission("survivalclasic.itemc.give")
 public class ItemcCommand extends BaseCommand {
-
     MessagesFile messagesFile = SurvivalClasicCore.getMessagesFile();
-
     @Default
     @HelpCommand("ayuda|help")
     @CatchUnknown

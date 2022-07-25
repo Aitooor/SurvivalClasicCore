@@ -8,40 +8,25 @@ import co.aikar.commands.annotation.Default;
 import co.aikar.commands.annotation.HelpCommand;
 import net.eternaln.survivalclasiccore.SurvivalClasicCore;
 import net.eternaln.survivalclasiccore.data.configuration.MessagesFile;
-import net.eternaln.survivalclasiccore.utils.Cooldown;
 import net.eternaln.survivalclasiccore.utils.Utils;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
-import java.util.UUID;
 
 @CommandAlias("tpdeny")
 public class TpdenyCommand extends BaseCommand {
 
     MessagesFile messagesFile = SurvivalClasicCore.getMessagesFile();
-
-    private final Cooldown<UUID> cooldown = new Cooldown<>(SurvivalClasicCore.getConfiguration().getCmdCooldown());
-
     HashMap<Player, Player> requests = TpaCommand.getRequests();
 
     @CatchUnknown
     @HelpCommand("ayuda|help")
     public void help(CommandHelp help, Player sender) {
-        if(!sender.hasPermission("survivalclasic.cooldown.bypass") && !cooldown.isCooledDown(sender.getUniqueId())) {
-            long cooldownTime = cooldown.getSecondsRemaining(sender.getUniqueId());
-            Utils.send(sender, messagesFile.cooldown.replace("%time%", String.valueOf(cooldownTime)));
-            return;
-        }
         help.showHelp();
     }
 
     @Default
     public void teleportDeny(Player sender) {
-        if (!sender.hasPermission("survivalclasic.cooldown.bypass") && !cooldown.isCooledDown(sender.getUniqueId())) {
-            long cooldownTime = cooldown.getSecondsRemaining(sender.getUniqueId());
-            Utils.send(sender, messagesFile.cooldown.replace("%time%", String.valueOf(cooldownTime)));
-            return;
-        }
         if (requests.containsKey(sender)) {
             requests.get(sender).sendMessage(Utils.ct(messagesFile.tpDeny.replace("%player%", sender.getDisplayName())));
             requests.remove(sender);

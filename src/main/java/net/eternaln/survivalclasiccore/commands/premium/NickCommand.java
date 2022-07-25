@@ -1,32 +1,20 @@
 package net.eternaln.survivalclasiccore.commands.premium;
 
 import co.aikar.commands.BaseCommand;
-import co.aikar.commands.CommandHelp;
 import co.aikar.commands.annotation.*;
 import co.aikar.commands.bukkit.contexts.OnlinePlayer;
 import net.eternaln.survivalclasiccore.SurvivalClasicCore;
 import net.eternaln.survivalclasiccore.data.mongo.PlayerData;
-import net.eternaln.survivalclasiccore.utils.Cooldown;
 import net.eternaln.survivalclasiccore.utils.Utils;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-
-import java.util.UUID;
 
 @CommandAlias("nick|apodo|nombre")
 @CommandPermission("survivalclasic.nick")
 public class NickCommand extends BaseCommand {
 
-    private final Cooldown<UUID> cooldown = new Cooldown<>(SurvivalClasicCore.getConfiguration().getCmdCooldown());
-
     @Default
-    public void nick(Player sender, String string) {
-        if (!sender.hasPermission("survivalclasic.cooldown.bypass") && !cooldown.isCooledDown(sender.getUniqueId())) {
-            long cooldownTime = cooldown.getSecondsRemaining(sender.getUniqueId());
-            Utils.send(sender, SurvivalClasicCore.getMessagesFile().cooldown.replace("%time%", String.valueOf(cooldownTime)));
-            return;
-        }
-        if (Utils.checkNameLength(string)) {
+    public void nick(Player sender, String string) {        if (Utils.checkNameLength(string)) {
             PlayerData data = SurvivalClasicCore.getDataManager().getData(sender.getUniqueId());
             sender.setDisplayName(string);
             sender.setPlayerListName(Utils.ct(string));
@@ -41,11 +29,6 @@ public class NickCommand extends BaseCommand {
     @Subcommand("limpiar|clear|borrar")
     @CommandPermission("survivalclasic.nick")
     public void clear(Player sender) {
-        if(!sender.hasPermission("survivalclasic.cooldown.bypass") && !cooldown.isCooledDown(sender.getUniqueId())) {
-            long cooldownTime = cooldown.getSecondsRemaining(sender.getUniqueId());
-            Utils.send(sender, SurvivalClasicCore.getMessagesFile().cooldown.replace("%time%", String.valueOf(cooldownTime)));
-            return;
-        }
         if (!sender.getDisplayName().equals(sender.getName())) {
             PlayerData data = SurvivalClasicCore.getDataManager().getData(sender.getUniqueId());
             sender.setDisplayName(sender.getName());

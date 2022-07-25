@@ -130,7 +130,6 @@ public class TeleportCommand extends BaseCommand {
         }
     }
 
-
     @Subcommand("toggle")
     public void teleportToggle(Player sender) {
         if (requests.containsKey(sender.getUniqueId())) {
