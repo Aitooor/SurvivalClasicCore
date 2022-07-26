@@ -6,9 +6,8 @@ import net.eternaln.survivalclasiccore.SurvivalClasicCore;
 import net.eternaln.survivalclasiccore.data.configuration.Configuration;
 import net.eternaln.survivalclasiccore.data.configuration.MessagesFile;
 import net.eternaln.survivalclasiccore.managers.CooldownManager;
-import net.eternaln.survivalclasiccore.utils.Cooldown;
+import net.eternaln.survivalclasiccore.utils.CooldownOld;
 import net.eternaln.survivalclasiccore.utils.Utils;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.util.concurrent.TimeUnit;
@@ -27,16 +26,16 @@ public class WorkbenchCommand extends BaseCommand {
         if (cooldowns.getCooldown(sender.getUniqueId()) == null) {
             sender.openWorkbench(null, true);
             Utils.send(sender, "&aAbriendo tu mesa de trabajo");
-            cooldowns.create(sender.getUniqueId(), new Cooldown(TimeUnit.SECONDS.toMillis(cooldownConfig)));
+            cooldowns.create(sender.getUniqueId(), new CooldownOld(TimeUnit.SECONDS.toMillis(cooldownConfig)));
             return;
         }
-        Cooldown cooldown = cooldowns.getOrCreate(sender.getUniqueId(), TimeUnit.SECONDS.toMillis(cooldownConfig));
-        if (!cooldown.hasExpired()) {
-            Utils.send(sender, messageFile.cooldown.replace("%time%", String.valueOf(TimeUnit.MILLISECONDS.toSeconds(cooldown.getRemaining()))));
+        CooldownOld cooldownOld = cooldowns.getOrCreate(sender.getUniqueId(), TimeUnit.SECONDS.toMillis(cooldownConfig));
+        if (!cooldownOld.hasExpired()) {
+            Utils.send(sender, messageFile.cooldown.replace("%time%", String.valueOf(TimeUnit.MILLISECONDS.toSeconds(cooldownOld.getRemaining()))));
             return;
         }
-        cooldown.stop();
-        cooldowns.create(sender.getUniqueId(), new Cooldown(TimeUnit.SECONDS.toMillis(cooldownConfig)));
+        cooldownOld.stop();
+        cooldowns.create(sender.getUniqueId(), new CooldownOld(TimeUnit.SECONDS.toMillis(cooldownConfig)));
         sender.openWorkbench(null, true);
         Utils.send(sender, "&aAbriendo tu mesa de trabajo");
     }
@@ -48,16 +47,16 @@ public class WorkbenchCommand extends BaseCommand {
             target.openWorkbench(null, true);
             Utils.send(sender, "&fAbriendo la mesa de trabajo de &b" + target.getName());
             Utils.send(target, sender.getDisplayName() + " &fha abierto tu mesa de trabajo");
-            cooldowns.create(sender.getUniqueId(), new Cooldown(TimeUnit.SECONDS.toMillis(cooldownConfig)));
+            cooldowns.create(sender.getUniqueId(), new CooldownOld(TimeUnit.SECONDS.toMillis(cooldownConfig)));
             return;
         }
-        Cooldown cooldown = cooldowns.getOrCreate(sender.getUniqueId(), TimeUnit.SECONDS.toMillis(cooldownConfig));
-        if (!cooldown.hasExpired()) {
-            Utils.send(sender, messageFile.cooldown.replace("%time%", String.valueOf(TimeUnit.MILLISECONDS.toSeconds(cooldown.getRemaining()))));
+        CooldownOld cooldownOld = cooldowns.getOrCreate(sender.getUniqueId(), TimeUnit.SECONDS.toMillis(cooldownConfig));
+        if (!cooldownOld.hasExpired()) {
+            Utils.send(sender, messageFile.cooldown.replace("%time%", String.valueOf(TimeUnit.MILLISECONDS.toSeconds(cooldownOld.getRemaining()))));
             return;
         }
-        cooldown.stop();
-        cooldowns.create(sender.getUniqueId(), new Cooldown(TimeUnit.SECONDS.toMillis(cooldownConfig)));
+        cooldownOld.stop();
+        cooldowns.create(sender.getUniqueId(), new CooldownOld(TimeUnit.SECONDS.toMillis(cooldownConfig)));
         target.openWorkbench(null, true);
         Utils.send(sender, "&fAbriendo la mesa de trabajo de &b" + target.getName());
         Utils.send(target, sender.getDisplayName() + " &fha abierto tu mesa de trabajo");

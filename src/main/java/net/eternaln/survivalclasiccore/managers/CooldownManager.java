@@ -1,6 +1,6 @@
 package net.eternaln.survivalclasiccore.managers;
 
-import net.eternaln.survivalclasiccore.utils.Cooldown;
+import net.eternaln.survivalclasiccore.utils.CooldownOld;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -8,15 +8,15 @@ import java.util.UUID;
 
 public class CooldownManager {
 
-    private final Map<UUID, Cooldown> cooldonws = new HashMap<>();
-    private final Map<UUID, Cooldown> cooldownsRepair = new HashMap<>();
+    private final Map<UUID, CooldownOld> cooldonws = new HashMap<>();
+    private final Map<UUID, CooldownOld> cooldownsRepair = new HashMap<>();
 
-    public void create(UUID uuid, Cooldown cooldown) {
-        this.cooldonws.put(uuid, cooldown);
+    public void create(UUID uuid, CooldownOld cooldownOld) {
+        this.cooldonws.put(uuid, cooldownOld);
     }
 
-    public void createRepair(UUID uuid, Cooldown cooldown) {
-        this.cooldownsRepair.put(uuid, cooldown);
+    public void createRepair(UUID uuid, CooldownOld cooldownOld) {
+        this.cooldownsRepair.put(uuid, cooldownOld);
     }
 
     public void delete(UUID uuid) {
@@ -27,19 +27,19 @@ public class CooldownManager {
         this.cooldownsRepair.remove(uuid);
     }
 
-    public Cooldown getOrCreate(UUID uuid, long duration) {
-        return this.cooldonws.putIfAbsent(uuid, new Cooldown(duration));
+    public CooldownOld getOrCreate(UUID uuid, long duration) {
+        return this.cooldonws.putIfAbsent(uuid, new CooldownOld(duration));
     }
 
-    public Cooldown getOrCreateRepair(UUID uuid, long duration) {
-        return this.cooldownsRepair.putIfAbsent(uuid, new Cooldown(duration));
+    public CooldownOld getOrCreateRepair(UUID uuid, long duration) {
+        return this.cooldownsRepair.putIfAbsent(uuid, new CooldownOld(duration));
     }
 
-    public Cooldown getCooldown(UUID uuid) {
+    public CooldownOld getCooldown(UUID uuid) {
         return this.cooldonws.get(uuid);
     }
 
-    public Cooldown getCooldownRepair(UUID uuid) {
+    public CooldownOld getCooldownRepair(UUID uuid) {
         return this.cooldownsRepair.get(uuid);
     }
 

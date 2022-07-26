@@ -58,7 +58,11 @@ public final class SurvivalClasicCore extends JavaPlugin {
         menusFile = new MenusFile();
         warpsFile = new WarpsFile(this);
 
-        mongo = new MongoDB();
+        try {
+            mongo = new MongoDB();
+        } catch(Exception e) {
+            Utils.log("MongoDB not connected");
+        }
         dataManager = new DataManager();
 
         this.cooldowns = new CooldownManager();

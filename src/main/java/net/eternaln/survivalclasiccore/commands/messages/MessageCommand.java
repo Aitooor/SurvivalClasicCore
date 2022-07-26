@@ -10,11 +10,11 @@ import net.eternaln.survivalclasiccore.data.configuration.Configuration;
 import net.eternaln.survivalclasiccore.data.configuration.MessagesFile;
 import net.eternaln.survivalclasiccore.managers.CooldownManager;
 import net.eternaln.survivalclasiccore.utils.Cooldown;
+import net.eternaln.survivalclasiccore.utils.CooldownOld;
 import net.eternaln.survivalclasiccore.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
-import org.checkerframework.checker.units.qual.C;
 
 import java.util.HashMap;
 import java.util.Objects;
@@ -24,11 +24,8 @@ import java.util.concurrent.TimeUnit;
 @CommandAlias("msg|w|whisper|tell|hablar|pm|md")
 @CommandPermission("simple.message")
 public class MessageCommand extends BaseCommand {
-
-    private Configuration config = SurvivalClasicCore.getInstance().getConfiguration();
     private MessagesFile messageFile = SurvivalClasicCore.getMessagesFile();
-    private CooldownManager cooldowns = SurvivalClasicCore.getInstance().getCooldowns();
-    private int cooldownConfig = config.cmdCooldown;
+    private Cooldown<UUID> cooldown = new Cooldown<>(SurvivalClasicCore.getConfiguration().getCmdCooldown(), TimeUnit.SECONDS);
 
     @Getter
     private static final HashMap<UUID, UUID> conversations = new HashMap<>();
@@ -36,36 +33,24 @@ public class MessageCommand extends BaseCommand {
     @CatchUnknown
     @HelpCommand("ayuda|help")
     public void help(Player sender, CommandHelp help) {
-        if (cooldowns.getCooldown(sender.getUniqueId()) == null) {
-            help.showHelp();
-            cooldowns.create(sender.getUniqueId(), new Cooldown(TimeUnit.SECONDS.toMillis(cooldownConfig)));
+        if (!cooldown.isCooldownOver(sender.getUniqueId())) {
+            String cooldownTime = cooldown.getSecondsRemainingString(sender.getUniqueId());
+            Utils.send(sender, messageFile.cooldown.replace("%time%", cooldownTime));
             return;
         }
-        Cooldown cooldown = cooldowns.getOrCreate(sender.getUniqueId(), TimeUnit.SECONDS.toMillis(cooldownConfig));
-        if (!cooldown.hasExpired()) {
-            Utils.send(sender, messageFile.cooldown.replace("%time%", String.valueOf(TimeUnit.MILLISECONDS.toSeconds(cooldown.getRemaining()))));
-            return;
-        }
-        cooldown.stop();
-        cooldowns.create(sender.getUniqueId(), new Cooldown(TimeUnit.SECONDS.toMillis(cooldownConfig)));
+        cooldown.addToCooldown(sender.getUniqueId());
         help.showHelp();
     }
 
     @Default
     @CommandCompletion("@players @players")
     public void msg(Player sender, Player target, String message) {
-        if (cooldowns.getCooldown(sender.getUniqueId()) == null) {
-            onMsg(sender, target, message);
-            cooldowns.create(sender.getUniqueId(), new Cooldown(TimeUnit.SECONDS.toMillis(cooldownConfig)));
+        if (!cooldown.isCooldownOver(sender.getUniqueId())) {
+            String cooldownTime = cooldown.getSecondsRemainingString(sender.getUniqueId());
+            Utils.send(sender, messageFile.cooldown.replace("%time%", cooldownTime));
             return;
         }
-        Cooldown cooldown = cooldowns.getOrCreate(sender.getUniqueId(), TimeUnit.SECONDS.toMillis(cooldownConfig));
-        if (!cooldown.hasExpired()) {
-            Utils.send(sender, messageFile.cooldown.replace("%time%", String.valueOf(TimeUnit.MILLISECONDS.toSeconds(cooldown.getRemaining()))));
-            return;
-        }
-        cooldown.stop();
-        cooldowns.create(sender.getUniqueId(), new Cooldown(TimeUnit.SECONDS.toMillis(cooldownConfig)));
+        cooldown.addToCooldown(sender.getUniqueId());
         onMsg(sender, target, message);
     }
 

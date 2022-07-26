@@ -6,7 +6,7 @@ import net.eternaln.survivalclasiccore.SurvivalClasicCore;
 import net.eternaln.survivalclasiccore.data.configuration.Configuration;
 import net.eternaln.survivalclasiccore.data.configuration.MessagesFile;
 import net.eternaln.survivalclasiccore.managers.CooldownManager;
-import net.eternaln.survivalclasiccore.utils.Cooldown;
+import net.eternaln.survivalclasiccore.utils.CooldownOld;
 import net.eternaln.survivalclasiccore.utils.Utils;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -48,16 +48,16 @@ public class RepairCommand extends BaseCommand {
                         damageable.setDamage(0);
                         item.setItemMeta(damageable);
                         Utils.send(sender, "&aReparado");
-                        cooldowns.createRepair(sender.getUniqueId(), new Cooldown(TimeUnit.MINUTES.toMillis(cooldownConfig)));
+                        cooldowns.createRepair(sender.getUniqueId(), new CooldownOld(TimeUnit.MINUTES.toMillis(cooldownConfig)));
                         return;
                     }
-                    Cooldown cooldown = cooldowns.getOrCreateRepair(sender.getUniqueId(), TimeUnit.MINUTES.toMillis(cooldownConfig));
-                    if (!cooldown.hasExpired()) {
-                        Utils.send(sender, messageFile.cooldown.replace("%time%", String.valueOf(TimeUnit.MILLISECONDS.toMinutes(cooldown.getRemaining()))));
+                    CooldownOld cooldownOld = cooldowns.getOrCreateRepair(sender.getUniqueId(), TimeUnit.MINUTES.toMillis(cooldownConfig));
+                    if (!cooldownOld.hasExpired()) {
+                        Utils.send(sender, messageFile.cooldown.replace("%time%", String.valueOf(TimeUnit.MILLISECONDS.toMinutes(cooldownOld.getRemaining()))));
                         return;
                     }
-                    cooldown.stop();
-                    cooldowns.createRepair(sender.getUniqueId(), new Cooldown(TimeUnit.MINUTES.toMillis(cooldownConfig)));
+                    cooldownOld.stop();
+                    cooldowns.createRepair(sender.getUniqueId(), new CooldownOld(TimeUnit.MINUTES.toMillis(cooldownConfig)));
                     return;
                 }
             } else {

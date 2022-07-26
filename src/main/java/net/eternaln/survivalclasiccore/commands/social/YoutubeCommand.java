@@ -6,7 +6,7 @@ import net.eternaln.survivalclasiccore.SurvivalClasicCore;
 import net.eternaln.survivalclasiccore.data.configuration.Configuration;
 import net.eternaln.survivalclasiccore.data.configuration.MessagesFile;
 import net.eternaln.survivalclasiccore.managers.CooldownManager;
-import net.eternaln.survivalclasiccore.utils.Cooldown;
+import net.eternaln.survivalclasiccore.utils.CooldownOld;
 import net.eternaln.survivalclasiccore.utils.Utils;
 import org.bukkit.entity.Player;
 
@@ -25,16 +25,16 @@ public class YoutubeCommand extends BaseCommand {
     public void youtubeCommand(Player player) {
         if (cooldowns.getCooldown(player.getUniqueId()) == null) {
             Utils.sendNoPrefix(player, messagesFile.youtubeUrl);
-            cooldowns.create(player.getUniqueId(), new Cooldown(TimeUnit.SECONDS.toMillis(cooldownConfig)));
+            cooldowns.create(player.getUniqueId(), new CooldownOld(TimeUnit.SECONDS.toMillis(cooldownConfig)));
             return;
         }
-        Cooldown cooldown = cooldowns.getOrCreate(player.getUniqueId(), TimeUnit.SECONDS.toMillis(cooldownConfig));
-        if (!cooldown.hasExpired()) {
-            Utils.send(player, messagesFile.cooldown.replace("%time%", String.valueOf(TimeUnit.MILLISECONDS.toSeconds(cooldown.getRemaining()))));
+        CooldownOld cooldownOld = cooldowns.getOrCreate(player.getUniqueId(), TimeUnit.SECONDS.toMillis(cooldownConfig));
+        if (!cooldownOld.hasExpired()) {
+            Utils.send(player, messagesFile.cooldown.replace("%time%", String.valueOf(TimeUnit.MILLISECONDS.toSeconds(cooldownOld.getRemaining()))));
             return;
         }
-        cooldown.stop();
-        cooldowns.create(player.getUniqueId(), new Cooldown(TimeUnit.SECONDS.toMillis(cooldownConfig)));
+        cooldownOld.stop();
+        cooldowns.create(player.getUniqueId(), new CooldownOld(TimeUnit.SECONDS.toMillis(cooldownConfig)));
         Utils.sendNoPrefix(player, messagesFile.youtubeUrl);
     }
 
@@ -45,16 +45,16 @@ public class YoutubeCommand extends BaseCommand {
         if (cooldowns.getCooldown(sender.getUniqueId()) == null) {
             Utils.send(target, messagesFile.youtubeUrl);
             Utils.send(sender, "&fHas enviado el url de Youtube a &a" + target.getName());
-            cooldowns.create(sender.getUniqueId(), new Cooldown(TimeUnit.SECONDS.toMillis(cooldownConfig)));
+            cooldowns.create(sender.getUniqueId(), new CooldownOld(TimeUnit.SECONDS.toMillis(cooldownConfig)));
             return;
         }
-        Cooldown cooldown = cooldowns.getOrCreate(sender.getUniqueId(), TimeUnit.SECONDS.toMillis(cooldownConfig));
-        if (!cooldown.hasExpired()) {
-            Utils.send(sender, messagesFile.cooldown.replace("%time%", String.valueOf(TimeUnit.MILLISECONDS.toSeconds(cooldown.getRemaining()))));
+        CooldownOld cooldownOld = cooldowns.getOrCreate(sender.getUniqueId(), TimeUnit.SECONDS.toMillis(cooldownConfig));
+        if (!cooldownOld.hasExpired()) {
+            Utils.send(sender, messagesFile.cooldown.replace("%time%", String.valueOf(TimeUnit.MILLISECONDS.toSeconds(cooldownOld.getRemaining()))));
             return;
         }
-        cooldown.stop();
-        cooldowns.create(sender.getUniqueId(), new Cooldown(TimeUnit.SECONDS.toMillis(cooldownConfig)));
+        cooldownOld.stop();
+        cooldowns.create(sender.getUniqueId(), new CooldownOld(TimeUnit.SECONDS.toMillis(cooldownConfig)));
         Utils.send(target, messagesFile.youtubeUrl);
         Utils.send(sender, "&fHas enviado el url de Youtube a &a" + target.getName());
     }

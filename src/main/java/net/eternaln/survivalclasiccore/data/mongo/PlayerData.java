@@ -5,6 +5,7 @@ import com.mongodb.client.model.ReplaceOptions;
 import lombok.Getter;
 import lombok.Setter;
 import net.eternaln.survivalclasiccore.SurvivalClasicCore;
+import net.eternaln.survivalclasiccore.utils.Utils;
 import org.bson.Document;
 
 import java.util.HashMap;
@@ -26,11 +27,13 @@ public class PlayerData {
     }
 
     public void load() {
-        Document document = SurvivalClasicCore.getMongo().getMongoCol().find(Filters.eq("uuid", uuid.toString())).first();
-        if (document != null) {
-            this.nickName = document.getString("nick");
-            this.homes = document.get("homes", Map.class);
-        }
+        Utils.async(() -> {
+            Document document = SurvivalClasicCore.getMongo().getMongoCol().find(Filters.eq("uuid", uuid.toString())).first();
+            if (document != null) {
+                this.nickName = document.getString("nick");
+                this.homes = document.get("homes", Map.class);
+            }
+        });
     }
 
     public void save() {

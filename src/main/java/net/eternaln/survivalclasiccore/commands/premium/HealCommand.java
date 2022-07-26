@@ -6,7 +6,7 @@ import net.eternaln.survivalclasiccore.SurvivalClasicCore;
 import net.eternaln.survivalclasiccore.data.configuration.Configuration;
 import net.eternaln.survivalclasiccore.data.configuration.MessagesFile;
 import net.eternaln.survivalclasiccore.managers.CooldownManager;
-import net.eternaln.survivalclasiccore.utils.Cooldown;
+import net.eternaln.survivalclasiccore.utils.CooldownOld;
 import net.eternaln.survivalclasiccore.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -28,16 +28,16 @@ public class HealCommand extends BaseCommand {
             sender.setHealth(20);
             sender.setFoodLevel(20);
             Utils.send(sender, "&aTu salud ha sido restaurada");
-            cooldowns.create(sender.getUniqueId(), new Cooldown(TimeUnit.SECONDS.toMillis(cooldownConfig)));
+            cooldowns.create(sender.getUniqueId(), new CooldownOld(TimeUnit.SECONDS.toMillis(cooldownConfig)));
             return;
         }
-        Cooldown cooldown = cooldowns.getOrCreate(sender.getUniqueId(), TimeUnit.SECONDS.toMillis(cooldownConfig));
-        if (!cooldown.hasExpired()) {
-            Utils.send(sender, messageFile.cooldown.replace("%time%", String.valueOf(TimeUnit.MILLISECONDS.toSeconds(cooldown.getRemaining()))));
+        CooldownOld cooldownOld = cooldowns.getOrCreate(sender.getUniqueId(), TimeUnit.SECONDS.toMillis(cooldownConfig));
+        if (!cooldownOld.hasExpired()) {
+            Utils.send(sender, messageFile.cooldown.replace("%time%", String.valueOf(TimeUnit.MILLISECONDS.toSeconds(cooldownOld.getRemaining()))));
             return;
         }
-        cooldown.stop();
-        cooldowns.create(sender.getUniqueId(), new Cooldown(TimeUnit.SECONDS.toMillis(cooldownConfig)));
+        cooldownOld.stop();
+        cooldowns.create(sender.getUniqueId(), new CooldownOld(TimeUnit.SECONDS.toMillis(cooldownConfig)));
         sender.setHealth(20);
         sender.setFoodLevel(20);
         Utils.send(sender, "&aTu salud ha sido restaurada");
@@ -51,16 +51,16 @@ public class HealCommand extends BaseCommand {
             target.setHealth(20);
             target.setFoodLevel(20);
             Utils.send(target, "&aTu salud ha sido restaurada por &b" + sender.getName());
-            cooldowns.create(sender.getUniqueId(), new Cooldown(TimeUnit.SECONDS.toMillis(cooldownConfig)));
+            cooldowns.create(sender.getUniqueId(), new CooldownOld(TimeUnit.SECONDS.toMillis(cooldownConfig)));
             return;
         }
-        Cooldown cooldown = cooldowns.getOrCreate(sender.getUniqueId(), TimeUnit.SECONDS.toMillis(cooldownConfig));
-        if (!cooldown.hasExpired()) {
-            Utils.send(sender, messageFile.cooldown.replace("%time%", String.valueOf(TimeUnit.MILLISECONDS.toSeconds(cooldown.getRemaining()))));
+        CooldownOld cooldownOld = cooldowns.getOrCreate(sender.getUniqueId(), TimeUnit.SECONDS.toMillis(cooldownConfig));
+        if (!cooldownOld.hasExpired()) {
+            Utils.send(sender, messageFile.cooldown.replace("%time%", String.valueOf(TimeUnit.MILLISECONDS.toSeconds(cooldownOld.getRemaining()))));
             return;
         }
-        cooldown.stop();
-        cooldowns.create(sender.getUniqueId(), new Cooldown(TimeUnit.SECONDS.toMillis(cooldownConfig)));
+        cooldownOld.stop();
+        cooldowns.create(sender.getUniqueId(), new CooldownOld(TimeUnit.SECONDS.toMillis(cooldownConfig)));
         target.setHealth(20);
         target.setFoodLevel(20);
         Utils.send(target, "&aTu salud ha sido restaurada por &b" + sender.getName());
@@ -74,16 +74,16 @@ public class HealCommand extends BaseCommand {
         if (cooldowns.getCooldown(targetPlayer.getUniqueId()) == null) {
             targetPlayer.setHealth(amount);
             Utils.send(targetPlayer, "&aTu salud ha sido establecida a &e" + amount);
-            cooldowns.create(targetPlayer.getUniqueId(), new Cooldown(TimeUnit.SECONDS.toMillis(cooldownConfig)));
+            cooldowns.create(targetPlayer.getUniqueId(), new CooldownOld(TimeUnit.SECONDS.toMillis(cooldownConfig)));
             return;
         }
-        Cooldown cooldown = cooldowns.getOrCreate(targetPlayer.getUniqueId(), TimeUnit.SECONDS.toMillis(cooldownConfig));
-        if (!cooldown.hasExpired()) {
-            Utils.send(targetPlayer, messageFile.cooldown.replace("%time%", String.valueOf(TimeUnit.MILLISECONDS.toSeconds(cooldown.getRemaining()))));
+        CooldownOld cooldownOld = cooldowns.getOrCreate(targetPlayer.getUniqueId(), TimeUnit.SECONDS.toMillis(cooldownConfig));
+        if (!cooldownOld.hasExpired()) {
+            Utils.send(targetPlayer, messageFile.cooldown.replace("%time%", String.valueOf(TimeUnit.MILLISECONDS.toSeconds(cooldownOld.getRemaining()))));
             return;
         }
-        cooldown.stop();
-        cooldowns.create(targetPlayer.getUniqueId(), new Cooldown(TimeUnit.SECONDS.toMillis(cooldownConfig)));
+        cooldownOld.stop();
+        cooldowns.create(targetPlayer.getUniqueId(), new CooldownOld(TimeUnit.SECONDS.toMillis(cooldownConfig)));
         targetPlayer.setHealth(amount);
         Utils.send(targetPlayer, "&aTu salud ha sido establecida a &e" + amount);
     }
