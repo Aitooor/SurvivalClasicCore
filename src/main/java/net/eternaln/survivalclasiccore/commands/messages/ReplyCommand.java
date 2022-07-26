@@ -7,61 +7,53 @@ import net.eternaln.survivalclasiccore.SurvivalClasicCore;
 import net.eternaln.survivalclasiccore.commands.admin.SocialSpyCommand;
 import net.eternaln.survivalclasiccore.data.configuration.Configuration;
 import net.eternaln.survivalclasiccore.data.configuration.MessagesFile;
-import net.eternaln.survivalclasiccore.managers.CooldownManager;
-import net.eternaln.survivalclasiccore.utils.CooldownOld;
+import net.eternaln.survivalclasiccore.utils.Cooldown;
 import net.eternaln.survivalclasiccore.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
 import java.util.Objects;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 @CommandAlias("reply|r|responder|contestar")
 @CommandPermission("survivalclasic.tpa")
 public class ReplyCommand extends BaseCommand {
 
-    private Configuration config = SurvivalClasicCore.getInstance().getConfiguration();
     private MessagesFile messageFile = SurvivalClasicCore.getMessagesFile();
-    private CooldownManager cooldowns = SurvivalClasicCore.getInstance().getCooldowns();
-    private int cooldownConfig = config.cmdCooldown;
+    private Cooldown<UUID> cooldown = new Cooldown<>(SurvivalClasicCore.getConfiguration().getCmdCooldown(), TimeUnit.SECONDS);
 
     @CatchUnknown
     @HelpCommand("ayuda|help")
     public void help(Player sender, CommandHelp help) {
-        if (cooldowns.getCooldown(sender.getUniqueId()) == null) {
-            help.showHelp();
-            cooldowns.create(sender.getUniqueId(), new CooldownOld(TimeUnit.SECONDS.toMillis(cooldownConfig)));
+        if (!cooldown.isCooldownOver(sender.getUniqueId())) {
+            String cooldownTime = cooldown.getSecondsRemainingString(sender.getUniqueId());
+            Utils.send(sender, messageFile.cooldown.replace("%time%", cooldownTime));
             return;
         }
-        CooldownOld cooldownOld = cooldowns.getOrCreate(sender.getUniqueId(), TimeUnit.SECONDS.toMillis(cooldownConfig));
-        if (!cooldownOld.hasExpired()) {
-            Utils.send(sender, messageFile.cooldown.replace("%time%", String.valueOf(TimeUnit.MILLISECONDS.toSeconds(cooldownOld.getRemaining()))));
-            return;
-        }
-        cooldownOld.stop();
-        cooldowns.create(sender.getUniqueId(), new CooldownOld(TimeUnit.SECONDS.toMillis(cooldownConfig)));
+        cooldown.addToCooldown(sender.getUniqueId());
         help.showHelp();
     }
     @Default
     @CommandCompletion("@players")
     public void reply(Player sender, String message) {
-        if (cooldowns.getCooldown(sender.getUniqueId()) == null) {
-            onReply(sender, message);
-            cooldowns.create(sender.getUniqueId(), new CooldownOld(TimeUnit.SECONDS.toMillis(cooldownConfig)));
+        if (!cooldown.isCooldownOver(sender.getUniqueId())) {
+            String cooldownTime = cooldown.getSecondsRemainingString(sender.getUniqueId());
+            Utils.send(sender, messageFile.cooldown.replace("%time%", cooldownTime));
             return;
         }
-        CooldownOld cooldownOld = cooldowns.getOrCreate(sender.getUniqueId(), TimeUnit.SECONDS.toMillis(cooldownConfig));
-        if (!cooldownOld.hasExpired()) {
-            Utils.send(sender, messageFile.cooldown.replace("%time%", String.valueOf(TimeUnit.MILLISECONDS.toSeconds(cooldownOld.getRemaining()))));
-            return;
-        }
-        cooldownOld.stop();
-        cooldowns.create(sender.getUniqueId(), new CooldownOld(TimeUnit.SECONDS.toMillis(cooldownConfig)));
+        cooldown.addToCooldown(sender.getUniqueId());
         onReply(sender, message);
     }
 
     private void onReply(Player sender, String message) {
+        if (!cooldown.isCooldownOver(sender.getUniqueId())) {
+            String cooldownTime = cooldown.getSecondsRemainingString(sender.getUniqueId());
+            Utils.send(sender, messageFile.cooldown.replace("%time%", cooldownTime));
+            return;
+        }
+        cooldown.addToCooldown(sender.getUniqueId());
         if (MessageCommand.getConversations().get(sender.getUniqueId()) == null) {
             Utils.send(sender, "&cNo hay ninguna conversación abierta");
             return;

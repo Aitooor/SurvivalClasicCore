@@ -6,58 +6,46 @@ import co.aikar.commands.annotation.*;
 import net.eternaln.survivalclasiccore.SurvivalClasicCore;
 import net.eternaln.survivalclasiccore.data.configuration.Configuration;
 import net.eternaln.survivalclasiccore.data.configuration.MessagesFile;
-import net.eternaln.survivalclasiccore.managers.CooldownManager;
-import net.eternaln.survivalclasiccore.utils.CooldownOld;
+import net.eternaln.survivalclasiccore.utils.Cooldown;
 import net.eternaln.survivalclasiccore.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.Objects;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 @CommandAlias("hat|cabeza|gorro")
 @CommandPermission("survivalclasic.hat")
 public class HatCommand extends BaseCommand {
 
-    private Configuration config = SurvivalClasicCore.getInstance().getConfiguration();
     private MessagesFile messageFile = SurvivalClasicCore.getMessagesFile();
-    private CooldownManager cooldowns = SurvivalClasicCore.getInstance().getCooldowns();
-    private int cooldownConfig = config.cmdCooldown;
+    private Cooldown<UUID> cooldown = new Cooldown<>(SurvivalClasicCore.getConfiguration().getCmdCooldown(), TimeUnit.SECONDS);
 
 
     @CatchUnknown
     @HelpCommand("ayuda|help")
     public void help(Player sender, CommandHelp help) {
-        if (cooldowns.getCooldown(sender.getUniqueId()) == null) {
-            help.showHelp();
-            cooldowns.create(sender.getUniqueId(), new CooldownOld(TimeUnit.SECONDS.toMillis(cooldownConfig)));
+        if (!cooldown.isCooldownOver(sender.getUniqueId())) {
+            String cooldownTime = cooldown.getSecondsRemainingString(sender.getUniqueId());
+            Utils.send(sender, messageFile.cooldown.replace("%time%", cooldownTime));
             return;
         }
-        CooldownOld cooldownOld = cooldowns.getOrCreate(sender.getUniqueId(), TimeUnit.SECONDS.toMillis(cooldownConfig));
-        if (!cooldownOld.hasExpired()) {
-            Utils.send(sender, messageFile.cooldown.replace("%time%", String.valueOf(TimeUnit.MILLISECONDS.toSeconds(cooldownOld.getRemaining()))));
-            return;
-        }
-        cooldownOld.stop();
-        cooldowns.create(sender.getUniqueId(), new CooldownOld(TimeUnit.SECONDS.toMillis(cooldownConfig)));
+        cooldown.addToCooldown(sender.getUniqueId());
+
         help.showHelp();
     }
 
     @Default
     public void hat(Player sender) {
-        if (cooldowns.getCooldown(sender.getUniqueId()) == null) {
-            onHat(sender);
-            cooldowns.create(sender.getUniqueId(), new CooldownOld(TimeUnit.SECONDS.toMillis(cooldownConfig)));
+        if (!cooldown.isCooldownOver(sender.getUniqueId())) {
+            String cooldownTime = cooldown.getSecondsRemainingString(sender.getUniqueId());
+            Utils.send(sender, messageFile.cooldown.replace("%time%", cooldownTime));
             return;
         }
-        CooldownOld cooldownOld = cooldowns.getOrCreate(sender.getUniqueId(), TimeUnit.SECONDS.toMillis(cooldownConfig));
-        if (!cooldownOld.hasExpired()) {
-            Utils.send(sender, messageFile.cooldown.replace("%time%", String.valueOf(TimeUnit.MILLISECONDS.toSeconds(cooldownOld.getRemaining()))));
-            return;
-        }
-        cooldownOld.stop();
-        cooldowns.create(sender.getUniqueId(), new CooldownOld(TimeUnit.SECONDS.toMillis(cooldownConfig)));
+        cooldown.addToCooldown(sender.getUniqueId());
+
         onHat(sender);
     }
 
@@ -65,6 +53,13 @@ public class HatCommand extends BaseCommand {
     @CommandPermission("survivalclasic.hat.other")
     @CommandCompletion("@players")
     public void other(Player sender, String target) {
+        if (!cooldown.isCooldownOver(sender.getUniqueId())) {
+            String cooldownTime = cooldown.getSecondsRemainingString(sender.getUniqueId());
+            Utils.send(sender, messageFile.cooldown.replace("%time%", cooldownTime));
+            return;
+        }
+        cooldown.addToCooldown(sender.getUniqueId());
+
         Player targetPlayer = Bukkit.getPlayer(target);
         ItemStack x = targetPlayer.getInventory().getItemInMainHand();
         ItemStack y = targetPlayer.getInventory().getHelmet();

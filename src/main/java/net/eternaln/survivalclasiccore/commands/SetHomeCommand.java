@@ -3,45 +3,34 @@ package net.eternaln.survivalclasiccore.commands;
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.*;
 import net.eternaln.survivalclasiccore.SurvivalClasicCore;
-import net.eternaln.survivalclasiccore.data.configuration.Configuration;
-import net.eternaln.survivalclasiccore.data.configuration.MenusFile;
 import net.eternaln.survivalclasiccore.data.configuration.MessagesFile;
 import net.eternaln.survivalclasiccore.data.mongo.PlayerData;
-import net.eternaln.survivalclasiccore.managers.CooldownManager;
-import net.eternaln.survivalclasiccore.utils.CooldownOld;
+import net.eternaln.survivalclasiccore.utils.Cooldown;
 import net.eternaln.survivalclasiccore.utils.LocationUtil;
 import net.eternaln.survivalclasiccore.utils.Utils;
 import org.bukkit.entity.Player;
 import org.bukkit.permissions.PermissionAttachmentInfo;
 
 import java.util.ArrayList;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 @CommandAlias("setcasa|sethome|setcasas|sethomes")
 public class SetHomeCommand extends BaseCommand {
 
-    private Configuration config = SurvivalClasicCore.getInstance().getConfiguration();
     private MessagesFile messagesFile = SurvivalClasicCore.getMessagesFile();
-    private MenusFile menusFile = SurvivalClasicCore.getMenusFile();
-    private CooldownManager cooldowns = SurvivalClasicCore.getInstance().getCooldowns();
-    private int cooldownConfig = config.cmdCooldown;
-
+    private Cooldown<UUID> cooldown = new Cooldown<>(SurvivalClasicCore.getConfiguration().getCmdCooldown(), TimeUnit.SECONDS);
     @Default
     @CatchUnknown
     @CommandCompletion("@homes")
     public void onHome(Player sender, String name) {
-        if (cooldowns.getCooldown(sender.getUniqueId()) == null) {
-            onSetHome(sender, name);
-            cooldowns.create(sender.getUniqueId(), new CooldownOld(TimeUnit.SECONDS.toMillis(cooldownConfig)));
+        if (!cooldown.isCooldownOver(sender.getUniqueId())) {
+            String cooldownTime = cooldown.getSecondsRemainingString(sender.getUniqueId());
+            Utils.send(sender, messagesFile.cooldown.replace("%time%", cooldownTime));
             return;
         }
-        CooldownOld cooldownOld = cooldowns.getOrCreate(sender.getUniqueId(), TimeUnit.SECONDS.toMillis(cooldownConfig));
-        if (!cooldownOld.hasExpired()) {
-            Utils.send(sender, messagesFile.cooldown.replace("%time%", String.valueOf(TimeUnit.MILLISECONDS.toSeconds(cooldownOld.getRemaining()))));
-            return;
-        }
-        cooldownOld.stop();
-        cooldowns.create(sender.getUniqueId(), new CooldownOld(TimeUnit.SECONDS.toMillis(cooldownConfig)));
+        cooldown.addToCooldown(sender.getUniqueId());
+        onSetHome(sender, name);
     }
 
     public int getMaxInteger(Integer[] array) {

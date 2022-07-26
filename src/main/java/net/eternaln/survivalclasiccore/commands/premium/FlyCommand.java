@@ -5,42 +5,31 @@ import co.aikar.commands.annotation.*;
 import net.eternaln.survivalclasiccore.SurvivalClasicCore;
 import net.eternaln.survivalclasiccore.data.configuration.Configuration;
 import net.eternaln.survivalclasiccore.data.configuration.MessagesFile;
-import net.eternaln.survivalclasiccore.managers.CooldownManager;
 import net.eternaln.survivalclasiccore.objects.staff.Staff;
-import net.eternaln.survivalclasiccore.utils.CooldownOld;
+import net.eternaln.survivalclasiccore.utils.Cooldown;
 import net.eternaln.survivalclasiccore.utils.Utils;
 import org.bukkit.entity.Player;
 
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 @CommandAlias("fly|volar|vuelo")
 @CommandPermission("survivalclasic.fly")
 public class FlyCommand extends BaseCommand {
 
-    private Configuration config = SurvivalClasicCore.getInstance().getConfiguration();
     private MessagesFile messageFile = SurvivalClasicCore.getMessagesFile();
-    private CooldownManager cooldowns = SurvivalClasicCore.getInstance().getCooldowns();
-    private int cooldownConfig = config.cmdCooldown;
+    private Cooldown<UUID> cooldown = new Cooldown<>(SurvivalClasicCore.getConfiguration().getCmdCooldown(), TimeUnit.SECONDS);
 
     @Default
     public void fly(Player sender) {
         Staff staff = Staff.getStaff(sender.getUniqueId());
-        if (cooldowns.getCooldown(sender.getUniqueId()) == null) {
-            if (!staff.isFlying()) {
-                staff.enableFly(true);
-            } else {
-                staff.disableFly(true);
-            }
-            cooldowns.create(sender.getUniqueId(), new CooldownOld(TimeUnit.SECONDS.toMillis(cooldownConfig)));
+        if (!cooldown.isCooldownOver(sender.getUniqueId())) {
+            String cooldownTime = cooldown.getSecondsRemainingString(sender.getUniqueId());
+            Utils.send(sender, messageFile.cooldown.replace("%time%", cooldownTime));
             return;
         }
-        CooldownOld cooldownOld = cooldowns.getOrCreate(sender.getUniqueId(), TimeUnit.SECONDS.toMillis(cooldownConfig));
-        if (!cooldownOld.hasExpired()) {
-            Utils.send(sender, messageFile.cooldown.replace("%time%", String.valueOf(TimeUnit.MILLISECONDS.toSeconds(cooldownOld.getRemaining()))));
-            return;
-        }
-        cooldownOld.stop();
-        cooldowns.create(sender.getUniqueId(), new CooldownOld(TimeUnit.SECONDS.toMillis(cooldownConfig)));
+        cooldown.addToCooldown(sender.getUniqueId());
+
         if (!staff.isFlying()) {
             staff.enableFly(true);
         } else {
@@ -52,6 +41,13 @@ public class FlyCommand extends BaseCommand {
     @CommandPermission("survivalclasic.fly.other")
     @CommandCompletion("@players")
     public void other(Player sender, Player target) {
+        if (!cooldown.isCooldownOver(sender.getUniqueId())) {
+            String cooldownTime = cooldown.getSecondsRemainingString(sender.getUniqueId());
+            Utils.send(sender, messageFile.cooldown.replace("%time%", cooldownTime));
+            return;
+        }
+        cooldown.addToCooldown(sender.getUniqueId());
+
         Staff staff = Staff.getStaff(target.getUniqueId());
         if (!staff.isFlying()) {
             staff.enableFly(true);

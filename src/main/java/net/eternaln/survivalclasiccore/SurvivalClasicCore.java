@@ -4,7 +4,6 @@ import co.aikar.commands.Locales;
 import co.aikar.commands.PaperCommandManager;
 import com.google.common.collect.ImmutableList;
 import lombok.Getter;
-import net.eternaln.survivalclasiccore.managers.CooldownManager;
 import net.eternaln.survivalclasiccore.managers.annotations.RegisterExecutor;
 import net.eternaln.survivalclasiccore.data.configuration.*;
 import net.eternaln.survivalclasiccore.data.mongo.DataManager;
@@ -45,8 +44,6 @@ public final class SurvivalClasicCore extends JavaPlugin {
     @Getter
     private static DataManager dataManager;
 
-    @Getter
-    private CooldownManager cooldowns;
 
     @Override
     public void onEnable() {
@@ -64,8 +61,6 @@ public final class SurvivalClasicCore extends JavaPlugin {
             Utils.log("MongoDB not connected");
         }
         dataManager = new DataManager();
-
-        this.cooldowns = new CooldownManager();
 
         new MenuManager(this);
 

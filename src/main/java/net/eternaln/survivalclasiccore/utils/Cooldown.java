@@ -10,6 +10,7 @@ import java.util.concurrent.TimeUnit;
 public class Cooldown<T> {
 
     private final HashMap<T, Long> cooldowns = new HashMap<>();
+    private final HashMap<T, Long> cooldownsRepair = new HashMap<>();
     // Change time to how ever long you want
     private final long time;
 
@@ -34,6 +35,10 @@ public class Cooldown<T> {
         cooldowns.put(player, System.currentTimeMillis());
     }
 
+    public void addToCooldownRepair(T player) {
+        cooldownsRepair.put(player, System.currentTimeMillis());
+    }
+
     /**
      * Get the remaining time
      *
@@ -42,6 +47,10 @@ public class Cooldown<T> {
      */
     public float getTimeRemaining(T player) {
         return time - ((System.currentTimeMillis() - cooldowns.get(player)));
+    }
+
+    public float getTimeRemainingRepair(T player) {
+        return time - ((System.currentTimeMillis() - cooldownsRepair.get(player)));
     }
 
     /**
@@ -54,6 +63,10 @@ public class Cooldown<T> {
         return getTimeRemaining(player) / 1000;
     }
 
+    public float getSecondsRemainingRepair(T player) {
+        return getTimeRemainingRepair(player) / 1000;
+    }
+
     /**
      * Get the remaining time in a string
      * @param player
@@ -61,6 +74,10 @@ public class Cooldown<T> {
      */
     public String getSecondsRemainingString(T player) {
         return new DecimalFormat("#.#").format(getSecondsRemaining(player)) + "s";
+    }
+
+    public String getSecondsRemainingStringRepair(T player) {
+        return new DecimalFormat("#.#").format(getSecondsRemainingRepair(player)) + "s";
     }
 
     /**
@@ -72,6 +89,15 @@ public class Cooldown<T> {
     public boolean isCooldownOver(T player) {
         if (!cooldowns.containsKey(player) || (((System.currentTimeMillis() - cooldowns.get(player))) >= time)) {
             cooldowns.remove(player);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean isCooldownOverRepair(T player) {
+        if (!cooldownsRepair.containsKey(player) || (((System.currentTimeMillis() - cooldownsRepair.get(player))) >= time)) {
+            cooldownsRepair.remove(player);
             return true;
         } else {
             return false;

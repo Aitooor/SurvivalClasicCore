@@ -2,18 +2,31 @@ package net.eternaln.survivalclasiccore.commands.admin.staffmode;
 
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.*;
+import net.eternaln.survivalclasiccore.SurvivalClasicCore;
 import net.eternaln.survivalclasiccore.objects.staff.Staff;
+import net.eternaln.survivalclasiccore.utils.Cooldown;
 import net.eternaln.survivalclasiccore.utils.Utils;
 import org.bukkit.entity.Player;
+
+import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 @CommandAlias("vanish|v|invisible")
 @CommandPermission("survivalclasic.vanish")
 public class VanishCommand extends BaseCommand {
-
     
+    private Cooldown<UUID> cooldown = new Cooldown<>(SurvivalClasicCore.getConfiguration().getCmdCooldown(), TimeUnit.SECONDS);
 
     @Default
-    public void vanish(Player sender) {        Staff staff = Staff.getStaff(sender.getUniqueId());
+    public void vanish(Player sender) {
+        if (!cooldown.isCooldownOver(sender.getUniqueId())) {
+            String cooldownTime = cooldown.getSecondsRemainingString(sender.getUniqueId());
+            Utils.send(sender, SurvivalClasicCore.getMessagesFile().cooldown.replace("%time%", cooldownTime));
+            return;
+        }
+        cooldown.addToCooldown(sender.getUniqueId());
+        
+        Staff staff = Staff.getStaff(sender.getUniqueId());
         if(!staff.isStaffMode()) {
             if (staff.isVanished()) {
                 staff.disableVanish(true);
@@ -29,6 +42,13 @@ public class VanishCommand extends BaseCommand {
     @CommandPermission("survivalclasic.vanish.other")
     @CommandCompletion("@players")
     public void other(Player sender, Player target) {
+        if (!cooldown.isCooldownOver(sender.getUniqueId())) {
+            String cooldownTime = cooldown.getSecondsRemainingString(sender.getUniqueId());
+            Utils.send(sender, SurvivalClasicCore.getMessagesFile().cooldown.replace("%time%", cooldownTime));
+            return;
+        }
+        cooldown.addToCooldown(sender.getUniqueId());
+        
         Staff staff = Staff.getStaff(target.getUniqueId());
         if(!staff.isStaffMode()) {
             if (staff.isVanished()) {
