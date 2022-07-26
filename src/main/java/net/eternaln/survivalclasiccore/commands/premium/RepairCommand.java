@@ -27,22 +27,6 @@ public class RepairCommand extends BaseCommand {
 
     @Default
     public void repair(Player sender) {
-        if (cooldowns.getCooldown(sender.getUniqueId()) == null) {
-            onRepair(sender);
-            cooldowns.create(sender.getUniqueId(), new Cooldown(TimeUnit.MINUTES.toMillis(cooldownConfig)));
-            return;
-        }
-        Cooldown cooldown = cooldowns.getOrCreate(sender.getUniqueId(), TimeUnit.MINUTES.toMillis(cooldownConfig));
-        if (!cooldown.hasExpired()) {
-            Utils.send(sender, messageFile.cooldown.replace("%time%", String.valueOf(TimeUnit.MILLISECONDS.toMinutes(cooldown.getRemaining()))));
-            return;
-        }
-        cooldown.stop();
-        cooldowns.create(sender.getUniqueId(), new Cooldown(TimeUnit.MINUTES.toMillis(cooldownConfig)));
-        onRepair(sender);
-    }
-
-    private void onRepair(Player sender) {
         ItemStack item = sender.getInventory().getItemInMainHand();
         if (item == null || item.getType() == Material.AIR) {
             Utils.send(sender, "&cNo tienes nada en la mano");
@@ -59,10 +43,21 @@ public class RepairCommand extends BaseCommand {
                     Utils.send(sender, "&cYa esta reparado");
                     return;
                 } else {
-                    Damageable damageable = (Damageable) itemMeta;
-                    damageable.setDamage(0);
-                    item.setItemMeta(damageable);
-                    Utils.send(sender, "&aReparado");
+                    if (cooldowns.getCooldown(sender.getUniqueId()) == null) {
+                        Damageable damageable = (Damageable) itemMeta;
+                        damageable.setDamage(0);
+                        item.setItemMeta(damageable);
+                        Utils.send(sender, "&aReparado");
+                        cooldowns.create(sender.getUniqueId(), new Cooldown(TimeUnit.SECONDS.toMillis(cooldownConfig)));
+                        return;
+                    }
+                    Cooldown cooldown = cooldowns.getOrCreate(sender.getUniqueId(), TimeUnit.SECONDS.toMillis(cooldownConfig));
+                    if (!cooldown.hasExpired()) {
+                        Utils.send(sender, messageFile.cooldown.replace("%time%", String.valueOf(TimeUnit.MILLISECONDS.toSeconds(cooldown.getRemaining()))));
+                        return;
+                    }
+                    cooldown.stop();
+                    cooldowns.create(sender.getUniqueId(), new Cooldown(TimeUnit.SECONDS.toMillis(cooldownConfig)));
                     return;
                 }
             } else {
