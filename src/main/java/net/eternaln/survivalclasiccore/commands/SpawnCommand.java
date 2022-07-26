@@ -22,6 +22,7 @@ public class SpawnCommand extends BaseCommand {
 
     @Default
     public void spawn(Player sender) {
+        //TODO Player tp to correct location
         if (!cooldown.isCooldownOver(sender.getUniqueId())) {
             String cooldownTime = cooldown.getSecondsRemainingString(sender.getUniqueId());
             Utils.send(sender, messageFile.cooldown.replace("%time%", cooldownTime));
