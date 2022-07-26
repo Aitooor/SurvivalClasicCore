@@ -3,7 +3,10 @@ package net.eternaln.survivalclasiccore.commands;
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.*;
 import net.eternaln.survivalclasiccore.SurvivalClasicCore;
+import net.eternaln.survivalclasiccore.data.configuration.Configuration;
 import net.eternaln.survivalclasiccore.data.configuration.MessagesFile;
+import net.eternaln.survivalclasiccore.managers.CooldownManager;
+import net.eternaln.survivalclasiccore.utils.Cooldown;
 import net.eternaln.survivalclasiccore.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -13,11 +16,27 @@ import java.util.concurrent.TimeUnit;
 @CommandAlias("spawn|spawnpoint")
 public class SpawnCommand extends BaseCommand {
 
-    MessagesFile messageFile = SurvivalClasicCore.getMessagesFile();
+    private Configuration config = SurvivalClasicCore.getInstance().getConfiguration();
+    private MessagesFile messageFile = SurvivalClasicCore.getMessagesFile();
+    private CooldownManager cooldowns = SurvivalClasicCore.getInstance().getCooldowns();
+    private int cooldownConfig = config.cmdCooldown;
 
     @Default
     public void spawn(Player sender) {
-        sender.teleport(SurvivalClasicCore.getConfiguration().getSpawnLocation());
+        if (cooldowns.getCooldown(sender.getUniqueId()) == null) {
+            sender.teleport(config.spawnLocation);
+            Utils.send(sender, messageFile.tpSpawn);
+            cooldowns.create(sender.getUniqueId(), new Cooldown(TimeUnit.SECONDS.toMillis(cooldownConfig)));
+            return;
+        }
+        Cooldown cooldown = cooldowns.getOrCreate(sender.getUniqueId(), TimeUnit.SECONDS.toMillis(cooldownConfig));
+        if (!cooldown.hasExpired()) {
+            Utils.send(sender, messageFile.cooldown.replace("%time%", String.valueOf(TimeUnit.MILLISECONDS.toSeconds(cooldown.getRemaining()))));
+            return;
+        }
+        cooldown.stop();
+        cooldowns.create(sender.getUniqueId(), new Cooldown(TimeUnit.SECONDS.toMillis(cooldownConfig)));
+        sender.teleport(config.spawnLocation);
         Utils.send(sender, messageFile.tpSpawn);
     }
 

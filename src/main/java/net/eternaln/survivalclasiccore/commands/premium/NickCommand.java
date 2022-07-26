@@ -4,41 +4,59 @@ import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.*;
 import co.aikar.commands.bukkit.contexts.OnlinePlayer;
 import net.eternaln.survivalclasiccore.SurvivalClasicCore;
+import net.eternaln.survivalclasiccore.data.configuration.Configuration;
+import net.eternaln.survivalclasiccore.data.configuration.MessagesFile;
 import net.eternaln.survivalclasiccore.data.mongo.PlayerData;
+import net.eternaln.survivalclasiccore.managers.CooldownManager;
+import net.eternaln.survivalclasiccore.utils.Cooldown;
 import net.eternaln.survivalclasiccore.utils.Utils;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+
+import java.util.concurrent.TimeUnit;
 
 @CommandAlias("nick|apodo|nombre")
 @CommandPermission("survivalclasic.nick")
 public class NickCommand extends BaseCommand {
 
+    private Configuration config = SurvivalClasicCore.getInstance().getConfiguration();
+    private MessagesFile messageFile = SurvivalClasicCore.getMessagesFile();
+    private CooldownManager cooldowns = SurvivalClasicCore.getInstance().getCooldowns();
+    private int cooldownConfig = config.cmdCooldown;
+
     @Default
-    public void nick(Player sender, String string) {        if (Utils.checkNameLength(string)) {
-            PlayerData data = SurvivalClasicCore.getDataManager().getData(sender.getUniqueId());
-            sender.setDisplayName(string);
-            sender.setPlayerListName(Utils.ct(string));
-            data.setNickName(string);
-            data.save();
-            Utils.send(sender, "&fTu nombre ha sido cambiado a " + string);
-        } else {
-            Utils.send(sender, "&cNo puedes usar un nombre con mas de 16 caracteres");
+    public void nick(Player sender, String string) {
+        if (cooldowns.getCooldown(sender.getUniqueId()) == null) {
+            onNickCommand(sender, string);
+            cooldowns.create(sender.getUniqueId(), new Cooldown(TimeUnit.SECONDS.toMillis(cooldownConfig)));
+            return;
         }
+        Cooldown cooldown = cooldowns.getOrCreate(sender.getUniqueId(), TimeUnit.SECONDS.toMillis(cooldownConfig));
+        if (!cooldown.hasExpired()) {
+            Utils.send(sender, messageFile.cooldown.replace("%time%", String.valueOf(TimeUnit.MILLISECONDS.toSeconds(cooldown.getRemaining()))));
+            return;
+        }
+        cooldown.stop();
+        cooldowns.create(sender.getUniqueId(), new Cooldown(TimeUnit.SECONDS.toMillis(cooldownConfig)));
+        onNickCommand(sender, string);
     }
 
     @Subcommand("limpiar|clear|borrar")
     @CommandPermission("survivalclasic.nick")
     public void clear(Player sender) {
-        if (!sender.getDisplayName().equals(sender.getName())) {
-            PlayerData data = SurvivalClasicCore.getDataManager().getData(sender.getUniqueId());
-            sender.setDisplayName(sender.getName());
-            sender.setPlayerListName(sender.getName());
-            data.setNickName(null);
-            data.save();
-            Utils.send(sender, "&fTu nombre ha sido borrado");
-        } else {
-            Utils.send(sender, "&cTu nombre ya es tu nombre original");
+        if (cooldowns.getCooldown(sender.getUniqueId()) == null) {
+            onNickClearCommand(sender);
+            cooldowns.create(sender.getUniqueId(), new Cooldown(TimeUnit.SECONDS.toMillis(cooldownConfig)));
+            return;
         }
+        Cooldown cooldown = cooldowns.getOrCreate(sender.getUniqueId(), TimeUnit.SECONDS.toMillis(cooldownConfig));
+        if (!cooldown.hasExpired()) {
+            Utils.send(sender, messageFile.cooldown.replace("%time%", String.valueOf(TimeUnit.MILLISECONDS.toSeconds(cooldown.getRemaining()))));
+            return;
+        }
+        cooldown.stop();
+        cooldowns.create(sender.getUniqueId(), new Cooldown(TimeUnit.SECONDS.toMillis(cooldownConfig)));
+        onNickClearCommand(sender);
     }
 
     @Subcommand("clearother|clearo")
@@ -78,5 +96,29 @@ public class NickCommand extends BaseCommand {
         }
     }
 
+    private void onNickCommand(Player sender, String string) {
+        if (Utils.checkNameLength(string)) {
+            PlayerData data = SurvivalClasicCore.getDataManager().getData(sender.getUniqueId());
+            sender.setDisplayName(string);
+            sender.setPlayerListName(Utils.ct(string));
+            data.setNickName(string);
+            data.save();
+            Utils.send(sender, "&fTu nombre ha sido cambiado a " + string);
+        } else {
+            Utils.send(sender, "&cNo puedes usar un nombre con mas de 16 caracteres");
+        }
+    }
 
+    private void onNickClearCommand(Player sender) {
+        if (!sender.getDisplayName().equals(sender.getName())) {
+            PlayerData data = SurvivalClasicCore.getDataManager().getData(sender.getUniqueId());
+            sender.setDisplayName(sender.getName());
+            sender.setPlayerListName(sender.getName());
+            data.setNickName(null);
+            data.save();
+            Utils.send(sender, "&fTu nombre ha sido borrado");
+        } else {
+            Utils.send(sender, "&cTu nombre ya es tu nombre original");
+        }
+    }
 }

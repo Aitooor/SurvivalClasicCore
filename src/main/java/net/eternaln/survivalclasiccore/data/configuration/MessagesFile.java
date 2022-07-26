@@ -34,7 +34,7 @@ public class MessagesFile extends BukkitYamlConfiguration {
     public String noPermission = "&cNo tienes permisos para hacer eso";
     public String playerNotFound = "&cEl jugador no existe";
     public String noOnlinePlayer = "&fEl jugador &b%player% &fno esta online";
-    public String cooldown = "&cDebes esperar &b%time% &csegundos para hacer eso";
+    public String cooldown = "&cEspera &b%time% &cpara usar otro comando";
     public String reload = "&aConfig recargada";
     public String setSpawn = "&aSpawn establecido";
     public String helpCommand =
@@ -58,42 +58,42 @@ public class MessagesFile extends BukkitYamlConfiguration {
 
     @Comment({"", "Teleport"})
     public String tpSpawn = "&aTeletransportado al spawn";
-    public String tpSpawnOther = "&aTeletransportado al jugador &b%player%";
-    public String tpSpawnAll = "&aTeletransportado a todos los jugadores";
+    public String tpSpawnOther = "&fTeletransportado al jugador &b%player%";
+    public String tpSpawnAll = "&fTeletransportado a todos los jugadores";
     public String tpDeny = "&cHas denegado la peticion de &b%player%";
     public String tpDenyNoRequest = "&cNo tienes peticiones pendientes";
     public String tpAccept = "&aHas aceptado la peticion de &b%player%";
     public String tpAcceptTarget = "&fEl jugador &b%player% &fha aceptado tu peticion";
     public String tpAcceptNoRequest = "&cNo tienes peticiones pendientes";
-    public String tpaSender = "&aHas enviado solicitud de teletransporte a &b%player%";
-    public String tpaTarget = "&aHas recibido una solicitud de teletransporte de &b%player%\n&7Usa &b/tpaccept &7para aceptarla\n&7o &b/tpdeny &7para denegarla";
+    public String tpaSender = "&fHas enviado solicitud de teletransporte a &b%player%";
+    public String tpaTarget = "&fHas recibido una solicitud de teletransporte de &b%player%\n&7Usa &b/tpaccept &7para aceptarla\n&7o &b/tpdeny &7para denegarla\n";
     public String tpSelf = "&cNo puedes teletransportarte a ti mismo";
-    public String tpAll = "&aTeletransportado a &b%player%";
+    public String tpAll = "&fTeletransportado a &b%player%";
     public String tpAllSelf = "&cNo puedes teletransportarte a ti mismo";
     public String tpAllSender = "&fHas teletransportado a todos hacia &b%player%";
     public String tpTop = "&aHas sido teletransportado hacia el top";
     public String tpTopFail = "&cNo hay ningun bloque mas arriba";
-    public String tpPos = "&aHas sido teletransportado a la posicion &7X &b%x% &7Y &b%y% &7Z &b%z%";
+    public String tpPos = "&fHas sido teletransportado a la posicion &7X &b%x% &7Y &b%y% &7Z &b%z%";
     public String tpPosRealNumber = "&cLos datos deben ser numeros de cordenadas";
     public String tpPosWriteNumber = "&cEspecifica las cordenadas &7X, Y y Z";
-    public String tpHereSender = "&aHas teletransportado hacia ti a &b%player%";
-    public String tpHereTarget = "&aHas teletransportado a &b%player% &ahacia ti";
+    public String tpHereSender = "&fHas teletransportado hacia ti a &b%player%";
+    public String tpHereTarget = "&fHas teletransportado a &b%player% &fhacia ti";
 
     @Comment({"", "Home"})
     public String homeNotFound = "&cLa casa no existe";
     public String homeNotSet = "&cNo has establecido una casa";
-    public String homeSet = "&aHas establecido la casa &b%home%";
+    public String homeSet = "&fHas establecido la casa &b%home%";
     public String maxHomes = "&cYa tienes el máximo de casas";
     public String homeExists = "&cYa tienes una casa con ese nombre";
-    public String homeDeleted = "&aHas eliminado la casa &b%home%";
+    public String homeDeleted = "&fHas eliminado la casa &b%home%";
     public String homeNotExists = "&cNo tienes una casa con ese nombre";
-    public String homeTeleported = "&aHas teletransportado a la casa &b%home%";
+    public String homeTeleported = "&fHas teletransportado a la casa &b%home%";
 
     @Comment({"", "Warps"})
     public String warpNotFound = "&cEl warp no existe";
-    public String tpWarp = "&aTeletransportado al warp &b%warp%";
+    public String tpWarp = "&fTeletransportado al warp &b%warp%";
     public String alreadyExistWarp = "&cYa tienes un warp con el nombre &b%warp%";
-    public String warpSet = "&aWarp &b%warp% &aestablecido";
+    public String warpSet = "&fWarp &b%warp% &festablecido";
     public String warpRemoved = "&fWarp &c%warp% &fborrado";
 
     @Comment({"", "Gamemode"})

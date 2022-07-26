@@ -3,9 +3,12 @@ package net.eternaln.survivalclasiccore.commands;
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.*;
 import net.eternaln.survivalclasiccore.SurvivalClasicCore;
+import net.eternaln.survivalclasiccore.data.configuration.Configuration;
 import net.eternaln.survivalclasiccore.data.configuration.MenusFile;
 import net.eternaln.survivalclasiccore.data.configuration.MessagesFile;
+import net.eternaln.survivalclasiccore.managers.CooldownManager;
 import net.eternaln.survivalclasiccore.menus.WarpsMenu;
+import net.eternaln.survivalclasiccore.utils.Cooldown;
 import net.eternaln.survivalclasiccore.utils.LocationUtil;
 import net.eternaln.survivalclasiccore.utils.Utils;
 import org.bukkit.Bukkit;
@@ -13,32 +16,35 @@ import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.concurrent.TimeUnit;
+
 @CommandAlias("warp|warps")
 public class WarpsCommand extends BaseCommand {
 
-    MessagesFile messageFile = SurvivalClasicCore.getMessagesFile();
-    MenusFile menusFile = SurvivalClasicCore.getMenusFile();
+    private Configuration config = SurvivalClasicCore.getInstance().getConfiguration();
+    private MessagesFile messageFile = SurvivalClasicCore.getMessagesFile();
+    private MenusFile menusFile = SurvivalClasicCore.getMenusFile();
+    private CooldownManager cooldowns = SurvivalClasicCore.getInstance().getCooldowns();
+    private int cooldownConfig = config.cmdCooldown;
 
-    
 
     @Default
     @CatchUnknown
     @CommandCompletion("@warps")
-    public void onWarp(CommandSender sender, @Optional String name) {
-        Player player = (Player) sender;
-
-        if (name == null) {
-            new WarpsMenu(menusFile.warpsMenuTitle).openMenu(player);
+    public void onWarp(Player sender, @Optional String name) {
+        if (cooldowns.getCooldown(sender.getUniqueId()) == null) {
+            onWarpCommand(sender, name);
+            cooldowns.create(sender.getUniqueId(), new Cooldown(TimeUnit.SECONDS.toMillis(cooldownConfig)));
             return;
         }
-
-        if (SurvivalClasicCore.getWarpsFile().getConfig().contains("warps." + name)) {
-            String warp = SurvivalClasicCore.getWarpsFile().getConfig().getString("warps." + name);
-            player.teleport(LocationUtil.parseToLocation(warp));
-            Utils.send(sender, messageFile.tpWarp.replace("%warp%", name));
-        } else {
-            Utils.send(sender, messageFile.warpNotFound.replace("%warp%", name));
+        Cooldown cooldown = cooldowns.getOrCreate(sender.getUniqueId(), TimeUnit.SECONDS.toMillis(cooldownConfig));
+        if (!cooldown.hasExpired()) {
+            Utils.send(sender, messageFile.cooldown.replace("%time%", String.valueOf(TimeUnit.MILLISECONDS.toSeconds(cooldown.getRemaining()))));
+            return;
         }
+        cooldown.stop();
+        cooldowns.create(sender.getUniqueId(), new Cooldown(TimeUnit.SECONDS.toMillis(cooldownConfig)));
+        onWarpCommand(sender, name);
     }
 
     @Subcommand("set|establece|add|agregar")
@@ -68,6 +74,21 @@ public class WarpsCommand extends BaseCommand {
             Utils.send(sender, messageFile.warpRemoved.replace("%warp%", name));
         } else {
             Utils.send(sender, messageFile.warpNotFound.replace("%warp%", name));
+        }
+    }
+
+    public void onWarpCommand(Player sender, String warp) {
+        if (warp == null) {
+            new WarpsMenu(menusFile.warpsMenuTitle).openMenu(sender);
+            return;
+        }
+
+        if (SurvivalClasicCore.getWarpsFile().getConfig().contains("warps." + warp)) {
+            String warps = SurvivalClasicCore.getWarpsFile().getConfig().getString("warps." + warp);
+            sender.teleport(LocationUtil.parseToLocation(warps));
+            Utils.send(sender, messageFile.tpWarp.replace("%warp%", warp));
+        } else {
+            Utils.send(sender, messageFile.warpNotFound.replace("%warp%", warp));
         }
     }
 }

@@ -3,30 +3,42 @@ package net.eternaln.survivalclasiccore.commands;
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.*;
 import net.eternaln.survivalclasiccore.SurvivalClasicCore;
+import net.eternaln.survivalclasiccore.data.configuration.Configuration;
+import net.eternaln.survivalclasiccore.data.configuration.MenusFile;
 import net.eternaln.survivalclasiccore.data.configuration.MessagesFile;
 import net.eternaln.survivalclasiccore.data.mongo.PlayerData;
+import net.eternaln.survivalclasiccore.managers.CooldownManager;
+import net.eternaln.survivalclasiccore.utils.Cooldown;
 import net.eternaln.survivalclasiccore.utils.Utils;
 import org.bukkit.entity.Player;
+
+import java.util.concurrent.TimeUnit;
 
 @CommandAlias("borrarcasa|delhome|borrarcasas|delhomes|dhome|bcasa")
 public class DelHomeCommand extends BaseCommand {
 
-    MessagesFile messagesFile = SurvivalClasicCore.getMessagesFile();
+    private Configuration config = SurvivalClasicCore.getInstance().getConfiguration();
+    private MessagesFile messagesFile = SurvivalClasicCore.getMessagesFile();
+    private CooldownManager cooldowns = SurvivalClasicCore.getInstance().getCooldowns();
+    private int cooldownConfig = config.cmdCooldown;
 
     @Default
     @CatchUnknown
     @CommandCompletion("@homes")
     public void onHome(Player sender, String name) {
-        PlayerData data = SurvivalClasicCore.getDataManager().getData(sender);
-
-        if (!data.getHomes().containsKey(name)) {
-            Utils.send(sender, messagesFile.homeNotExists);
+        if (cooldowns.getCooldown(sender.getUniqueId()) == null) {
+            onDelHomeCommand(sender, name);
+            cooldowns.create(sender.getUniqueId(), new Cooldown(TimeUnit.SECONDS.toMillis(cooldownConfig)));
             return;
         }
-
-        data.getHomes().remove(name);
-        data.save();
-        Utils.send(sender, messagesFile.homeDeleted.replace("%home%", name));
+        Cooldown cooldown = cooldowns.getOrCreate(sender.getUniqueId(), TimeUnit.SECONDS.toMillis(cooldownConfig));
+        if (!cooldown.hasExpired()) {
+            Utils.send(sender, messagesFile.cooldown.replace("%time%", String.valueOf(TimeUnit.MILLISECONDS.toSeconds(cooldown.getRemaining()))));
+            return;
+        }
+        cooldown.stop();
+        cooldowns.create(sender.getUniqueId(), new Cooldown(TimeUnit.SECONDS.toMillis(cooldownConfig)));
+        onDelHomeCommand(sender, name);
     }
 
     public int getMaxInteger(Integer[] array) {
@@ -36,5 +48,18 @@ public class DelHomeCommand extends BaseCommand {
                 i = array[b];
         }
         return i;
+    }
+    
+    public void onDelHomeCommand(Player sender, String home) {
+        PlayerData data = SurvivalClasicCore.getDataManager().getData(sender);
+
+        if (!data.getHomes().containsKey(home)) {
+            Utils.send(sender, messagesFile.homeNotExists);
+            return;
+        }
+
+        data.getHomes().remove(home);
+        data.save();
+        Utils.send(sender, messagesFile.homeDeleted.replace("%home%", home));
     }
 }
