@@ -38,9 +38,9 @@ public class RepairCommand extends BaseCommand {
                 if (material.getMaxDurability() < 1) {
                     Utils.send(sender, "&cYa esta reparado");
                 } else {
+                    //TODO Send cooldown in minutes
                     if (!cooldown.isCooldownOverRepair(sender.getUniqueId())) {
                         String cooldowns = cooldown.getSecondsRemainingStringRepair(sender.getUniqueId());
-
                         Utils.send(sender, messageFile.cooldown.replace("%time%", cooldowns));
                         return;
                     }
