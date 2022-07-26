@@ -48,16 +48,16 @@ public class RepairCommand extends BaseCommand {
                         damageable.setDamage(0);
                         item.setItemMeta(damageable);
                         Utils.send(sender, "&aReparado");
-                        cooldowns.create(sender.getUniqueId(), new Cooldown(TimeUnit.SECONDS.toMillis(cooldownConfig)));
+                        cooldowns.create(sender.getUniqueId(), new Cooldown(TimeUnit.MINUTES.toMillis(cooldownConfig)));
                         return;
                     }
-                    Cooldown cooldown = cooldowns.getOrCreate(sender.getUniqueId(), TimeUnit.SECONDS.toMillis(cooldownConfig));
+                    Cooldown cooldown = cooldowns.getOrCreate(sender.getUniqueId(), TimeUnit.MINUTES.toMillis(cooldownConfig));
                     if (!cooldown.hasExpired()) {
-                        Utils.send(sender, messageFile.cooldown.replace("%time%", String.valueOf(TimeUnit.MILLISECONDS.toSeconds(cooldown.getRemaining()))));
+                        Utils.send(sender, messageFile.cooldown.replace("%time%", String.valueOf(TimeUnit.MILLISECONDS.toMinutes(cooldown.getRemaining()))));
                         return;
                     }
                     cooldown.stop();
-                    cooldowns.create(sender.getUniqueId(), new Cooldown(TimeUnit.SECONDS.toMillis(cooldownConfig)));
+                    cooldowns.create(sender.getUniqueId(), new Cooldown(TimeUnit.MINUTES.toMillis(cooldownConfig)));
                     return;
                 }
             } else {
