@@ -62,7 +62,23 @@ public class Cooldown<T> {
      * @return time remaining formatted
      */
     public String getFormattedRemainingString(T player) {
-        return new DecimalFormat("#.#").format(getFormattedRemaining(player));
+        long secs = TimeUnit.SECONDS.convert(getTimeRemaining(player), TimeUnit.MILLISECONDS);
+        long remainder = secs % 86400;
+
+        long days = secs / 86400;
+        long hours = remainder / 3600;
+        long minutes = (remainder / 60) - (hours * 60);
+        long seconds = (remainder % 3600) - (minutes * 60);
+
+        if (days > 0) {
+            return days + "d" + hours + "h" + minutes + "m";
+        } else if (hours > 0) {
+            return hours + "h" + minutes + "m";
+        } else if (minutes > 0) {
+            return minutes + "m";
+        } else {
+            return seconds + "s";
+        }
     }
 
     /**
