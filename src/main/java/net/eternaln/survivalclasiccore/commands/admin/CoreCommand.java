@@ -29,10 +29,10 @@ public class CoreCommand extends BaseCommand {
     @Subcommand("reload")
     @CommandPermission("survivalclasic.reload")
     public void reloadConfig(CommandSender sender) {
+        //TODO Add warp file reload
         SurvivalClasicCore.getConfiguration().load();
         SurvivalClasicCore.getMessagesFile().load();
         SurvivalClasicCore.getMenusFile().load();
-        SurvivalClasicCore.getWarpsFile().reloadConfig();
 
         sender.sendMessage(messageFile.reload);
         Utils.log(messageFile.reload);
