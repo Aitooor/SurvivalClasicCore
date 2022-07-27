@@ -7,7 +7,6 @@ import net.eternaln.survivalclasiccore.commands.admin.GodCommand;
 import net.eternaln.survivalclasiccore.commands.admin.SocialSpyCommand;
 import net.eternaln.survivalclasiccore.data.configuration.MessagesFile;
 import net.eternaln.survivalclasiccore.data.mongo.PlayerData;
-import net.eternaln.survivalclasiccore.objects.staff.Staff;
 import net.eternaln.survivalclasiccore.utils.CenteredMessage;
 import net.eternaln.survivalclasiccore.utils.Utils;
 import org.bukkit.Bukkit;
@@ -17,7 +16,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.*;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -44,16 +42,52 @@ public class PlayerListeners implements Listener {
     }
 
     @EventHandler
+    public void onLogin(PlayerLoginEvent event) {
+        String messages = messagesFile.joinMessage;
+        PlayerData data = SurvivalClasicCore.getDataManager().handleDataCreation(event.getPlayer().getUniqueId());
+
+        Bukkit.getScheduler().runTaskLaterAsynchronously(SurvivalClasicCore.getInstance(), () -> {
+            Player player = event.getPlayer();
+            if(player == null) {
+                return;
+            }
+
+            String rank = "%vault_prefix%&r ";
+            rank = PlaceholderAPI.setPlaceholders(event.getPlayer(), rank);
+
+            if (data.getNickName() != null) {
+                player.setDisplayName(data.getNickName());
+                player.setPlayerListName(Utils.ct(data.getNickName()));
+            }
+
+            if(data.getNickName() != null) {
+                if (rank != null) {
+                    for (String message : messages.split("\n")) {
+                        CenteredMessage.Chat.sendCenteredMessage(player, message.replace("%player%", rank + this.playerName(player)));
+                    }
+                } else {
+                    for (String message : messages.split("\n")) {
+                        CenteredMessage.Chat.sendCenteredMessage(player, message.replace("%player%", this.playerName(player)));
+                    }
+                }
+            } else {
+                if(rank != null) {
+                    for (String message : messages.split("\n")) {
+                        CenteredMessage.Chat.sendCenteredMessage(player, message.replace("%player%", rank + event.getPlayer().getName()));
+                    }
+                } else {
+                    for (String message : messages.split("\n")) {
+                        CenteredMessage.Chat.sendCenteredMessage(player, message.replace("%player%", event.getPlayer().getName()));
+                    }
+                }
+            }
+
+        }, 2);
+    }
+
+    @EventHandler
     public void onJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
-        Staff staff = Staff.getStaff(player.getUniqueId());;
-
-        PlayerData data = SurvivalClasicCore.getDataManager().handleDataCreation(player.getUniqueId());
-
-        if (data.getNickName() != null) {
-            player.setDisplayName(data.getNickName());
-            player.setPlayerListName(Utils.ct(data.getNickName()));
-        }
 
         player.setGameMode(GameMode.SURVIVAL);
 
@@ -66,34 +100,6 @@ public class PlayerListeners implements Listener {
         for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
             if (onlinePlayer.hasMetadata("survivalclasic.vanish") || onlinePlayer.hasPermission("survivalclasic.vanish.see")) {
                     player.hidePlayer(SurvivalClasicCore.getInstance(), onlinePlayer);
-            }
-        }
-
-        String name = player.getDisplayName();
-        String rank = "%vault_prefix%&r ";
-        rank = PlaceholderAPI.setPlaceholders(event.getPlayer(), rank);
-
-        String messages = messagesFile.joinMessage;
-
-        if(this.playerName(player) != null) {
-            if (rank != null) {
-                for (String message : messages.split("\n")) {
-                    CenteredMessage.Chat.sendCenteredMessage(player, message.replace("%player%", rank + this.playerName(player)));
-                }
-            } else {
-                for (String message : messages.split("\n")) {
-                    CenteredMessage.Chat.sendCenteredMessage(player, message.replace("%player%", this.playerName(player)));
-                }
-            }
-        } else {
-            if(rank != null) {
-                for (String message : messages.split("\n")) {
-                    CenteredMessage.Chat.sendCenteredMessage(player, message.replace("%player%", rank + name));
-                }
-            } else {
-                for (String message : messages.split("\n")) {
-                    CenteredMessage.Chat.sendCenteredMessage(player, message.replace("%player%", name));
-                }
             }
         }
     }
