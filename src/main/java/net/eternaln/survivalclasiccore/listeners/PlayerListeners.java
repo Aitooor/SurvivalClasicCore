@@ -132,14 +132,7 @@ public class PlayerListeners implements Listener {
     }
 
     public String playerName(Player sender) {
-        Player player = sender.getPlayer();
-        PlayerData data = SurvivalClasicCore.getDataManager().getData(player.getUniqueId());
-        if(data.getNickName() != null) {
-            String playerName = data.getNickName();
-            return playerName;
-        } else {
-            String playerName = player.getName();
-            return playerName;
-        }
+        PlayerData data = SurvivalClasicCore.getDataManager().getData(sender.getUniqueId());
+        return data.getNickName() != null ? data.getNickName() : sender.getName();
     }
 }
