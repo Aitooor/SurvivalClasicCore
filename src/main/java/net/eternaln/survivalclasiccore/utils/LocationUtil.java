@@ -8,9 +8,9 @@ public class LocationUtil {
 
     public static String parseToString(Location location) {
         String worldName = location.getWorld().getName();
-        int blockX = location.getBlockX();
-        int blockY = location.getBlockY();
-        int blockZ = location.getBlockZ();
+        double blockX = location.getX();
+        double blockY = location.getY();
+        double blockZ = location.getZ();
         float yaw = location.getYaw();
         float pitch = location.getPitch();
         return worldName + ";" + blockX + ";" + blockY + ";" + blockZ + ";" + yaw + ";" + pitch;
@@ -19,9 +19,9 @@ public class LocationUtil {
     public static Location parseToLocation(String s) {
         String[] split = s.split(";");
         World world = Bukkit.getWorld(split[0]);
-        int x = Integer.parseInt(split[1]);
-        int y = Integer.parseInt(split[2]);
-        int z = Integer.parseInt(split[3]);
+        double x = Double.parseDouble(split[1]);
+        double y = Double.parseDouble(split[2]);
+        double z = Double.parseDouble(split[3]);
         if (split.length > 4) {
             float yaw = Float.parseFloat(split[4]);
             float pitch = Float.parseFloat(split[5]);

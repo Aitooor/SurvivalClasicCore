@@ -17,17 +17,17 @@ import java.util.concurrent.TimeUnit;
 public class SpawnCommand extends BaseCommand {
 
     Configuration config = SurvivalClasicCore.getConfiguration();
-    private MessagesFile messageFile = SurvivalClasicCore.getMessagesFile();
-    private Cooldown<UUID> cooldown = new Cooldown<>(SurvivalClasicCore.getConfiguration().getCmdCooldown(), TimeUnit.SECONDS);
+    private final MessagesFile messageFile = SurvivalClasicCore.getMessagesFile();
+    private final Cooldown<UUID> cooldown = new Cooldown<>(SurvivalClasicCore.getConfiguration().getCmdCooldown(), TimeUnit.SECONDS);
 
     @Default
     public void spawn(Player sender) {
-        //TODO Player tp to correct location
         if (!cooldown.isCooldownOver(sender.getUniqueId())) {
-            String cooldownTime = cooldown.getSecondsRemainingString(sender.getUniqueId());
+            String cooldownTime = cooldown.getFormattedRemainingString(sender.getUniqueId());
             Utils.send(sender, messageFile.cooldown.replace("%time%", cooldownTime));
             return;
         }
+
         cooldown.addToCooldown(sender.getUniqueId());
         sender.teleport(config.spawnLocation);
         Utils.send(sender, messageFile.tpSpawn);
@@ -37,16 +37,18 @@ public class SpawnCommand extends BaseCommand {
     @CommandPermission("survivalclasic.spawn.other")
     @CommandCompletion("@players")
     public void spawnOther(Player sender, Player target) {
-        if (!(target == null || target == null)) {
-            if (!(target == sender)) {
-                target.teleport(SurvivalClasicCore.getConfiguration().getSpawnLocation());
-                Utils.send(target, messageFile.tpSpawn);
-            } else {
-                Utils.send(sender, messageFile.tpSelf);
-            }
-        } else {
+        if (target == null) {
             Utils.send(sender, messageFile.playerNotFound);
+            return;
         }
+
+        if (target == sender) {
+            Utils.send(sender, messageFile.tpSelf);
+            return;
+        }
+
+        target.teleport(SurvivalClasicCore.getConfiguration().getSpawnLocation());
+        Utils.send(target, messageFile.tpSpawn);
     }
 
     @Subcommand("all|todos")
@@ -58,6 +60,7 @@ public class SpawnCommand extends BaseCommand {
                 Utils.send(online, messageFile.tpSpawnOther);
             }
         }
+
         Utils.send(sender, messageFile.tpSpawnAll);
     }
 }

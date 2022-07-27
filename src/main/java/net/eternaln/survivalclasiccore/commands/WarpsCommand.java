@@ -29,7 +29,7 @@ public class WarpsCommand extends BaseCommand {
     @CommandCompletion("@warps")
     public void onWarp(Player sender, @Optional String name) {
         if (!cooldown.isCooldownOver(sender.getUniqueId())) {
-            String cooldownTime = cooldown.getSecondsRemainingString(sender.getUniqueId());
+            String cooldownTime = cooldown.getFormattedRemainingString(sender.getUniqueId());
             Utils.send(sender, messageFile.cooldown.replace("%time%", cooldownTime));
             return;
         }
@@ -41,11 +41,9 @@ public class WarpsCommand extends BaseCommand {
     @CommandPermission("survivalclasic.warps.set")
     @CommandCompletion("@warps")
     public void SetWarp(Player sender, String name) {
-        //TODO Player tp to correct location
         Location warpLocation = new Location(Bukkit.getWorld(sender.getWorld().getName()), sender.getLocation().getX(), sender.getLocation().getY(), sender.getLocation().getZ(), sender.getLocation().getYaw(), sender.getLocation().getPitch());
 
         if (!SurvivalClasicCore.getWarpsFile().getConfig().contains("warps." + name)) {
-
             SurvivalClasicCore.getWarpsFile().getConfig().set("warps." + name, LocationUtil.parseToString(warpLocation));
             SurvivalClasicCore.getWarpsFile().saveConfig();
             Utils.send(sender, messageFile.warpSet.replace("%warp%", name));
