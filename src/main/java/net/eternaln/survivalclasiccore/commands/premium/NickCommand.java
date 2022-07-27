@@ -25,7 +25,7 @@ public class NickCommand extends BaseCommand {
     @Default
     public void nick(Player sender, String string) {
         if (!cooldown.isCooldownOver(sender.getUniqueId())) {
-            String cooldownTime = cooldown.getSecondsRemainingString(sender.getUniqueId());
+            String cooldownTime = cooldown.getFormattedRemainingString(sender.getUniqueId());
             Utils.send(sender, messageFile.cooldown.replace("%time%", cooldownTime));
             return;
         }
@@ -38,7 +38,7 @@ public class NickCommand extends BaseCommand {
     @CommandPermission("survivalclasic.nick")
     public void clear(Player sender) {
         if (!cooldown.isCooldownOver(sender.getUniqueId())) {
-            String cooldownTime = cooldown.getSecondsRemainingString(sender.getUniqueId());
+            String cooldownTime = cooldown.getFormattedRemainingString(sender.getUniqueId());
             Utils.send(sender, messageFile.cooldown.replace("%time%", cooldownTime));
             return;
         }

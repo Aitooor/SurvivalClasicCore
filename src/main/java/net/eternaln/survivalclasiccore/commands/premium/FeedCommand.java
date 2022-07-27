@@ -23,7 +23,7 @@ public class FeedCommand extends BaseCommand {
     @Default
     public void heal(Player sender) {
         if (!cooldown.isCooldownOver(sender.getUniqueId())) {
-            String cooldownTime = cooldown.getSecondsRemainingString(sender.getUniqueId());
+            String cooldownTime = cooldown.getFormattedRemainingString(sender.getUniqueId());
             Utils.send(sender, messageFile.cooldown.replace("%time%", cooldownTime));
             return;
         }
@@ -37,7 +37,7 @@ public class FeedCommand extends BaseCommand {
     @CommandCompletion("@players")
     public void other(Player sender, String target) {
         if (!cooldown.isCooldownOver(sender.getUniqueId())) {
-            String cooldownTime = cooldown.getSecondsRemainingString(sender.getUniqueId());
+            String cooldownTime = cooldown.getFormattedRemainingString(sender.getUniqueId());
             Utils.send(sender, messageFile.cooldown.replace("%time%", cooldownTime));
             return;
         }

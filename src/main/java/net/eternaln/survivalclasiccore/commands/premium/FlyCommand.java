@@ -24,7 +24,7 @@ public class FlyCommand extends BaseCommand {
     public void fly(Player sender) {
         Staff staff = Staff.getStaff(sender.getUniqueId());
         if (!cooldown.isCooldownOver(sender.getUniqueId())) {
-            String cooldownTime = cooldown.getSecondsRemainingString(sender.getUniqueId());
+            String cooldownTime = cooldown.getFormattedRemainingString(sender.getUniqueId());
             Utils.send(sender, messageFile.cooldown.replace("%time%", cooldownTime));
             return;
         }
@@ -42,7 +42,7 @@ public class FlyCommand extends BaseCommand {
     @CommandCompletion("@players")
     public void other(Player sender, Player target) {
         if (!cooldown.isCooldownOver(sender.getUniqueId())) {
-            String cooldownTime = cooldown.getSecondsRemainingString(sender.getUniqueId());
+            String cooldownTime = cooldown.getFormattedRemainingString(sender.getUniqueId());
             Utils.send(sender, messageFile.cooldown.replace("%time%", cooldownTime));
             return;
         }

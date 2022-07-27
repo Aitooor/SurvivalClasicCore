@@ -32,7 +32,7 @@ public class CoreCommand extends BaseCommand {
         SurvivalClasicCore.getConfiguration().load();
         SurvivalClasicCore.getMessagesFile().load();
         SurvivalClasicCore.getMenusFile().load();
-        //TODO: Add Warps File
+        SurvivalClasicCore.getWarpsFile().reloadConfig();
 
         sender.sendMessage(messageFile.reload);
         Utils.log(messageFile.reload);

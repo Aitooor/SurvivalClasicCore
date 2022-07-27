@@ -22,7 +22,7 @@ public class TwitterCommand extends BaseCommand {
     @CatchUnknown
     public void twitterCommand(Player player) {
         if (!cooldown.isCooldownOver(player.getUniqueId())) {
-            String cooldownTime = cooldown.getSecondsRemainingString(player.getUniqueId());
+            String cooldownTime = cooldown.getFormattedRemainingString(player.getUniqueId());
             Utils.send(player, messagesFile.cooldown.replace("%time%", cooldownTime));
             return;
         }
@@ -35,7 +35,7 @@ public class TwitterCommand extends BaseCommand {
     @CommandCompletion("@players")
     public void otherCommand(Player sender, Player target) {
         if (!cooldown.isCooldownOver(sender.getUniqueId())) {
-            String cooldownTime = cooldown.getSecondsRemainingString(sender.getUniqueId());
+            String cooldownTime = cooldown.getFormattedRemainingString(sender.getUniqueId());
             Utils.send(sender, messagesFile.cooldown.replace("%time%", cooldownTime));
             return;
         }

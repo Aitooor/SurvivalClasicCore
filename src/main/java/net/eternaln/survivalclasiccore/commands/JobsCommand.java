@@ -20,7 +20,7 @@ public class JobsCommand extends BaseCommand {
     @Default
     public void jobsCommand(Player sender) {
         if (!cooldown.isCooldownOver(sender.getUniqueId())) {
-            String cooldownTime = cooldown.getSecondsRemainingString(sender.getUniqueId());
+            String cooldownTime = cooldown.getFormattedRemainingString(sender.getUniqueId());
             Utils.send(sender, messagesFile.cooldown.replace("%time%", cooldownTime));
             return;
         }
@@ -32,7 +32,7 @@ public class JobsCommand extends BaseCommand {
     @CatchUnknown
     public void help(Player sender) {
         if (!cooldown.isCooldownOver(sender.getUniqueId())) {
-            String cooldownTime = cooldown.getSecondsRemainingString(sender.getUniqueId());
+            String cooldownTime = cooldown.getFormattedRemainingString(sender.getUniqueId());
             Utils.send(sender, messagesFile.cooldown.replace("%time%", cooldownTime));
             return;
         }
@@ -43,7 +43,7 @@ public class JobsCommand extends BaseCommand {
     @Subcommand("lista|list|info|informacion")
     public void statsCommand(Player sender) {
         if (!cooldown.isCooldownOver(sender.getUniqueId())) {
-            String cooldownTime = cooldown.getSecondsRemainingString(sender.getUniqueId());
+            String cooldownTime = cooldown.getFormattedRemainingString(sender.getUniqueId());
             Utils.send(sender, messagesFile.cooldown.replace("%time%", cooldownTime));
             return;
         }

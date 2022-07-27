@@ -28,7 +28,7 @@ public class TpdenyCommand extends BaseCommand {
     @HelpCommand("ayuda|help")
     public void help(CommandHelp help, Player sender) {
         if (!cooldown.isCooldownOver(sender.getUniqueId())) {
-            String cooldownTime = cooldown.getSecondsRemainingString(sender.getUniqueId());
+            String cooldownTime = cooldown.getFormattedRemainingString(sender.getUniqueId());
             Utils.send(sender, messagesFile.cooldown.replace("%time%", cooldownTime));
             return;
         }
@@ -39,7 +39,7 @@ public class TpdenyCommand extends BaseCommand {
     @Default
     public void teleportDeny(Player sender) {
         if (!cooldown.isCooldownOver(sender.getUniqueId())) {
-            String cooldownTime = cooldown.getSecondsRemainingString(sender.getUniqueId());
+            String cooldownTime = cooldown.getFormattedRemainingString(sender.getUniqueId());
             Utils.send(sender, messagesFile.cooldown.replace("%time%", cooldownTime));
             return;
         }

@@ -31,7 +31,7 @@ public class TpaCommand extends BaseCommand {
     @HelpCommand("ayuda|help")
     public void help(CommandHelp help, Player sender) {
         if (!cooldown.isCooldownOver(sender.getUniqueId())) {
-            String cooldownTime = cooldown.getSecondsRemainingString(sender.getUniqueId());
+            String cooldownTime = cooldown.getFormattedRemainingString(sender.getUniqueId());
             Utils.send(sender, messagesFile.cooldown.replace("%time%", cooldownTime));
             return;
         }
@@ -42,7 +42,7 @@ public class TpaCommand extends BaseCommand {
     @Default
     public void teleport(Player sender, String target) {
         if (!cooldown.isCooldownOver(sender.getUniqueId())) {
-            String cooldownTime = cooldown.getSecondsRemainingString(sender.getUniqueId());
+            String cooldownTime = cooldown.getFormattedRemainingString(sender.getUniqueId());
             Utils.send(sender, messagesFile.cooldown.replace("%time%", cooldownTime));
             return;
         }

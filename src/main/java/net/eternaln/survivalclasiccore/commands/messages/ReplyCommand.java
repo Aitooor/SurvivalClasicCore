@@ -28,7 +28,7 @@ public class ReplyCommand extends BaseCommand {
     @HelpCommand("ayuda|help")
     public void help(Player sender, CommandHelp help) {
         if (!cooldown.isCooldownOver(sender.getUniqueId())) {
-            String cooldownTime = cooldown.getSecondsRemainingString(sender.getUniqueId());
+            String cooldownTime = cooldown.getFormattedRemainingString(sender.getUniqueId());
             Utils.send(sender, messageFile.cooldown.replace("%time%", cooldownTime));
             return;
         }
@@ -39,7 +39,7 @@ public class ReplyCommand extends BaseCommand {
     @CommandCompletion("@players")
     public void reply(Player sender, String message) {
         if (!cooldown.isCooldownOver(sender.getUniqueId())) {
-            String cooldownTime = cooldown.getSecondsRemainingString(sender.getUniqueId());
+            String cooldownTime = cooldown.getFormattedRemainingString(sender.getUniqueId());
             Utils.send(sender, messageFile.cooldown.replace("%time%", cooldownTime));
             return;
         }
@@ -49,7 +49,7 @@ public class ReplyCommand extends BaseCommand {
 
     private void onReply(Player sender, String message) {
         if (!cooldown.isCooldownOver(sender.getUniqueId())) {
-            String cooldownTime = cooldown.getSecondsRemainingString(sender.getUniqueId());
+            String cooldownTime = cooldown.getFormattedRemainingString(sender.getUniqueId());
             Utils.send(sender, messageFile.cooldown.replace("%time%", cooldownTime));
             return;
         }

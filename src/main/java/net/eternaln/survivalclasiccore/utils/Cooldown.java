@@ -10,9 +10,9 @@ import java.util.concurrent.TimeUnit;
 public class Cooldown<T> {
 
     private final HashMap<T, Long> cooldowns = new HashMap<>();
-    private final HashMap<T, Long> cooldownsRepair = new HashMap<>();
     // Change time to how ever long you want
     private final long time;
+    private final TimeUnit timeUnit;
 
     /**
      * Instantiates a new Cooldown. <br><br>
@@ -20,10 +20,11 @@ public class Cooldown<T> {
      * For example if you need a 10 seconds cooldown you have to instantiate it with: <b>new Cooldown(10, TimeUnit.SECONDS)</b>
      *
      * @param time the time
-     * @param sourceUnit The {@link TimeUnit TimeUnit} in which time is placed
+     * @param sourceUnit The {@link TimeUnit} in which time is placed
      */
     public Cooldown(long time, TimeUnit sourceUnit) {
         this.time = TimeUnit.MILLISECONDS.convert(time, sourceUnit);
+        this.timeUnit = sourceUnit;
     }
 
     /**
@@ -35,49 +36,33 @@ public class Cooldown<T> {
         cooldowns.put(player, System.currentTimeMillis());
     }
 
-    public void addToCooldownRepair(T player) {
-        cooldownsRepair.put(player, System.currentTimeMillis());
-    }
-
     /**
      * Get the remaining time
      *
      * @param player the player
      * @return time remaining
      */
-    public float getTimeRemaining(T player) {
+    public long getTimeRemaining(T player) {
         return time - ((System.currentTimeMillis() - cooldowns.get(player)));
     }
 
-    public float getTimeRemainingRepair(T player) {
-        return time - ((System.currentTimeMillis() - cooldownsRepair.get(player)));
-    }
-
     /**
-     * Get the remaining seconds
+     * Get the remaining time formatted to the initial {@link TimeUnit}
      *
      * @param player the player
      * @return time remaining
      */
-    public float getSecondsRemaining(T player) {
-        return getTimeRemaining(player) / 1000;
-    }
-
-    public float getSecondsRemainingRepair(T player) {
-        return getTimeRemainingRepair(player) / 1000;
+    public float getFormattedRemaining(T player) {
+        return timeUnit.convert(getTimeRemaining(player), TimeUnit.MILLISECONDS);
     }
 
     /**
      * Get the remaining time in a string
-     * @param player
+     * @param player the player
      * @return time remaining formatted
      */
-    public String getSecondsRemainingString(T player) {
-        return new DecimalFormat("#.#").format(getSecondsRemaining(player)) + "s";
-    }
-
-    public String getSecondsRemainingStringRepair(T player) {
-        return new DecimalFormat("#.#").format(getSecondsRemainingRepair(player)) + "s";
+    public String getFormattedRemainingString(T player) {
+        return new DecimalFormat("#.#").format(getFormattedRemaining(player));
     }
 
     /**
@@ -89,15 +74,6 @@ public class Cooldown<T> {
     public boolean isCooldownOver(T player) {
         if (!cooldowns.containsKey(player) || (((System.currentTimeMillis() - cooldowns.get(player))) >= time)) {
             cooldowns.remove(player);
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public boolean isCooldownOverRepair(T player) {
-        if (!cooldownsRepair.containsKey(player) || (((System.currentTimeMillis() - cooldownsRepair.get(player))) >= time)) {
-            cooldownsRepair.remove(player);
             return true;
         } else {
             return false;
