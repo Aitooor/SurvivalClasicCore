@@ -22,7 +22,7 @@ public class HealCommand extends BaseCommand {
 
     @Default
     public void heal(Player sender) {
-        if (!cooldown.isCooldownOver(sender.getUniqueId())) {
+        if (!cooldown.isCooldownOver(sender.getUniqueId()) && !sender.hasPermission("survivalclasic.cooldown.bypass")) {
             String cooldownTime = cooldown.getFormattedRemainingString(sender.getUniqueId());
             Utils.send(sender, messageFile.cooldown.replace("%time%", cooldownTime));
             return;
@@ -38,7 +38,7 @@ public class HealCommand extends BaseCommand {
     @CommandPermission("survivalclasic.heal.other")
     @CommandCompletion("@players")
     public void other(Player sender, Player target) {
-        if (!cooldown.isCooldownOver(sender.getUniqueId())) {
+        if (!cooldown.isCooldownOver(sender.getUniqueId()) && !sender.hasPermission("survivalclasic.cooldown.bypass")) {
             String cooldownTime = cooldown.getFormattedRemainingString(sender.getUniqueId());
             Utils.send(sender, messageFile.cooldown.replace("%time%", cooldownTime));
             return;
@@ -54,7 +54,7 @@ public class HealCommand extends BaseCommand {
     @CommandPermission("survivalclasic.heal.set")
     @CommandCompletion("@players")
     public void set(Player sender, Player target, int amount) {
-        if (!cooldown.isCooldownOver(sender.getUniqueId())) {
+        if (!cooldown.isCooldownOver(sender.getUniqueId()) && !sender.hasPermission("survivalclasic.cooldown.bypass")) {
             String cooldownTime = cooldown.getFormattedRemainingString(sender.getUniqueId());
             Utils.send(sender, messageFile.cooldown.replace("%time%", cooldownTime));
             return;

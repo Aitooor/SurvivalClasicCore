@@ -19,7 +19,7 @@ public class VanishCommand extends BaseCommand {
 
     @Default
     public void vanish(Player sender) {
-        if (!cooldown.isCooldownOver(sender.getUniqueId())) {
+        if (!cooldown.isCooldownOver(sender.getUniqueId()) && !sender.hasPermission("survivalclasic.cooldown.bypass")) {
             String cooldownTime = cooldown.getFormattedRemainingString(sender.getUniqueId());
             Utils.send(sender, SurvivalClasicCore.getMessagesFile().cooldown.replace("%time%", cooldownTime));
             return;
@@ -42,7 +42,7 @@ public class VanishCommand extends BaseCommand {
     @CommandPermission("survivalclasic.vanish.other")
     @CommandCompletion("@players")
     public void other(Player sender, Player target) {
-        if (!cooldown.isCooldownOver(sender.getUniqueId())) {
+        if (!cooldown.isCooldownOver(sender.getUniqueId()) && !sender.hasPermission("survivalclasic.cooldown.bypass")) {
             String cooldownTime = cooldown.getFormattedRemainingString(sender.getUniqueId());
             Utils.send(sender, SurvivalClasicCore.getMessagesFile().cooldown.replace("%time%", cooldownTime));
             return;

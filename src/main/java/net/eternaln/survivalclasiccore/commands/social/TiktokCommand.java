@@ -34,7 +34,7 @@ public class TiktokCommand extends BaseCommand {
     @CommandPermission("survivalclasic.menu.other")
     @CommandCompletion("@players")
     public void otherCommand(Player sender, Player target) {
-        if (!cooldown.isCooldownOver(sender.getUniqueId())) {
+        if (!cooldown.isCooldownOver(sender.getUniqueId()) && !sender.hasPermission("survivalclasic.cooldown.bypass")) {
             String cooldownTime = cooldown.getFormattedRemainingString(sender.getUniqueId());
             Utils.send(sender, messagesFile.cooldown.replace("%time%", cooldownTime));
             return;

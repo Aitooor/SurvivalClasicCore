@@ -24,7 +24,7 @@ public class SetHomeCommand extends BaseCommand {
     @CatchUnknown
     @CommandCompletion("@homes")
     public void onHome(Player sender, String name) {
-        if (!cooldown.isCooldownOver(sender.getUniqueId())) {
+        if (!cooldown.isCooldownOver(sender.getUniqueId()) && !sender.hasPermission("survivalclasic.cooldown.bypass")) {
             String cooldownTime = cooldown.getFormattedRemainingString(sender.getUniqueId());
             Utils.send(sender, messagesFile.cooldown.replace("%time%", cooldownTime));
             return;

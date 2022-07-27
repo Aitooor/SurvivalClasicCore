@@ -22,7 +22,7 @@ public class EnderchestCommand extends BaseCommand {
 
     @Default
     public void god(Player sender) {
-        if (!cooldown.isCooldownOver(sender.getUniqueId())) {
+        if (!cooldown.isCooldownOver(sender.getUniqueId()) && !sender.hasPermission("survivalclasic.cooldown.bypass")) {
             String cooldownTime = cooldown.getFormattedRemainingString(sender.getUniqueId());
             Utils.send(sender, messageFile.cooldown.replace("%time%", cooldownTime));
             return;
@@ -36,7 +36,7 @@ public class EnderchestCommand extends BaseCommand {
     @CommandPermission("survivalclasic.enderchest.other")
     @CommandCompletion("@players")
     public void other(Player sender, String target) {
-        if (!cooldown.isCooldownOver(sender.getUniqueId())) {
+        if (!cooldown.isCooldownOver(sender.getUniqueId()) && !sender.hasPermission("survivalclasic.cooldown.bypass")) {
             String cooldownTime = cooldown.getFormattedRemainingString(sender.getUniqueId());
             Utils.send(sender, messageFile.cooldown.replace("%time%", cooldownTime));
             return;

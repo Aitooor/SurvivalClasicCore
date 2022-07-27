@@ -7,6 +7,7 @@ import net.eternaln.survivalclasiccore.commands.admin.GodCommand;
 import net.eternaln.survivalclasiccore.commands.admin.SocialSpyCommand;
 import net.eternaln.survivalclasiccore.data.configuration.MessagesFile;
 import net.eternaln.survivalclasiccore.data.mongo.PlayerData;
+import net.eternaln.survivalclasiccore.objects.staff.Staff;
 import net.eternaln.survivalclasiccore.utils.CenteredMessage;
 import net.eternaln.survivalclasiccore.utils.Utils;
 import org.bukkit.Bukkit;
@@ -45,9 +46,10 @@ public class PlayerListeners implements Listener {
     public void onLogin(PlayerLoginEvent event) {
         String messages = messagesFile.joinMessage;
         PlayerData data = SurvivalClasicCore.getDataManager().handleDataCreation(event.getPlayer().getUniqueId());
+        Staff staff = Staff.getStaff(event.getPlayer().getUniqueId());
+        Player player = event.getPlayer();
 
         Bukkit.getScheduler().runTaskLaterAsynchronously(SurvivalClasicCore.getInstance(), () -> {
-            Player player = event.getPlayer();
             if(player == null) {
                 return;
             }
@@ -88,8 +90,6 @@ public class PlayerListeners implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
-
-        player.setGameMode(GameMode.SURVIVAL);
 
         if(!player.hasPlayedBefore()) {
             event.getPlayer().teleport(SurvivalClasicCore.getConfiguration().getSpawnLocation());

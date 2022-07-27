@@ -23,7 +23,7 @@ public class FlyCommand extends BaseCommand {
     @Default
     public void fly(Player sender) {
         Staff staff = Staff.getStaff(sender.getUniqueId());
-        if (!cooldown.isCooldownOver(sender.getUniqueId())) {
+        if (!cooldown.isCooldownOver(sender.getUniqueId()) && !sender.hasPermission("survivalclasic.cooldown.bypass")) {
             String cooldownTime = cooldown.getFormattedRemainingString(sender.getUniqueId());
             Utils.send(sender, messageFile.cooldown.replace("%time%", cooldownTime));
             return;
@@ -41,7 +41,7 @@ public class FlyCommand extends BaseCommand {
     @CommandPermission("survivalclasic.fly.other")
     @CommandCompletion("@players")
     public void other(Player sender, Player target) {
-        if (!cooldown.isCooldownOver(sender.getUniqueId())) {
+        if (!cooldown.isCooldownOver(sender.getUniqueId()) && !sender.hasPermission("survivalclasic.cooldown.bypass")) {
             String cooldownTime = cooldown.getFormattedRemainingString(sender.getUniqueId());
             Utils.send(sender, messageFile.cooldown.replace("%time%", cooldownTime));
             return;

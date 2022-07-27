@@ -94,12 +94,21 @@ public class TeleportCommand extends BaseCommand {
 
     @Subcommand("pos|position|posicion")
     @CommandPermission("survivalclasic.tppos")
-    public void teleportPosition(Player sender, String x, String y, String z) {
+    @CommandCompletion("X Y Z YAW PITCH")
+    public void teleportPosition(Player sender, String x, String y, String z, @Optional String yaw, @Optional String pitch) {
         if (!(x == null || y == null || z == null)) {
+            double xDouble = Double.parseDouble(x);
+            double yDouble = Double.parseDouble(y);
+            double zDouble = Double.parseDouble(z);
+            Location location = new Location(sender.getWorld(), xDouble, yDouble, zDouble);
+            if(yaw != null || pitch != null) {
+                float yawFloat = Float.parseFloat(yaw);
+                float pitchFloat = Float.parseFloat(pitch);
+                location = new Location(sender.getWorld(), xDouble, yDouble, zDouble, yawFloat, pitchFloat);
+            }
             try {
-                Location location = new Location(sender.getWorld(), Double.parseDouble(x), Double.parseDouble(y), Double.parseDouble(z));
                 sender.teleport(location);
-                Utils.send(sender, messagesFile.tpPos).replace("%x%", x).replace("%y%", y).replace("%z%", z);
+                Utils.send(sender, messagesFile.tpPos.replace("%x%", x).replace("%y%", y).replace("%z%", z));
             } catch (NumberFormatException e) {
                 Utils.send(sender, messagesFile.tpPosRealNumber);
             }

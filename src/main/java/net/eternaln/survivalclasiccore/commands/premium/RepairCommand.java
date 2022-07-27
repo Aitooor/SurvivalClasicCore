@@ -31,14 +31,14 @@ public class RepairCommand extends BaseCommand {
         }
         Material material = sender.getInventory().getItemInMainHand().getType();
         ItemMeta itemMeta = item.getItemMeta();
-        if(material.isBlock()) {
+        if(material.isBlock() && material.getMaxDurability() < 1) {
             Utils.send(sender, "&cNo se puede reparar");
         } else {
             if (itemMeta instanceof Damageable) {
-                if (material.getMaxDurability() < 1) {
+                if (material.getMaxDurability() >= 1) {
                     Utils.send(sender, "&cYa esta reparado");
                 } else {
-                    if (!cooldown.isCooldownOver(sender.getUniqueId())) {
+                    if (!cooldown.isCooldownOver(sender.getUniqueId()) && !sender.hasPermission("survivalclasic.cooldown.bypass.repair")) {
                         String timeRemaining = cooldown.getFormattedRemainingString(sender.getUniqueId());
                         Utils.send(sender, messageFile.cooldown.replace("%time%", timeRemaining));
                         return;

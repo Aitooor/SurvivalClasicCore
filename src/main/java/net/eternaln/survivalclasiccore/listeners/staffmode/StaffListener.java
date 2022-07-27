@@ -3,6 +3,8 @@ package net.eternaln.survivalclasiccore.listeners.staffmode;
 import net.eternaln.survivalclasiccore.SurvivalClasicCore;
 import net.eternaln.survivalclasiccore.managers.annotations.Register;
 import net.eternaln.survivalclasiccore.objects.staff.Staff;
+import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -21,10 +23,20 @@ public class StaffListener implements Listener {
     private void onStaffJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
 
-        if (player.hasPermission("survivalclasic.staffmode.onjoin")) {
+        Bukkit.getScheduler().runTaskLater(SurvivalClasicCore.getInstance(), () -> {
             Staff staff = new Staff(player.getUniqueId());
-            staff.enableStaffMode(true);
-        }
+
+            if(player == null) {
+                return;
+            }
+
+            if (!staff.isStaffMode() && player.hasPermission("survivalclasiccore.staff.staffmode")) {
+                staff.enableStaffMode(true);
+            }
+            if (staff.isStaffMode() && !player.hasPermission("survivalclasiccore.staff.staffmode")) {
+                staff.getPlayer().setGameMode(GameMode.SURVIVAL);
+            }
+        }, 20L);
 
         for (Staff staff : Staff.getStaffs().values()) {
             player.hidePlayer(SurvivalClasicCore.getInstance(), staff.getPlayer());

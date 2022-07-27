@@ -30,7 +30,7 @@ public class MessageCommand extends BaseCommand {
     @CatchUnknown
     @HelpCommand("ayuda|help")
     public void help(Player sender, CommandHelp help) {
-        if (!cooldown.isCooldownOver(sender.getUniqueId())) {
+        if (!cooldown.isCooldownOver(sender.getUniqueId()) && !sender.hasPermission("survivalclasic.cooldown.bypass")) {
             String cooldownTime = cooldown.getFormattedRemainingString(sender.getUniqueId());
             Utils.send(sender, messageFile.cooldown.replace("%time%", cooldownTime));
             return;
@@ -42,7 +42,7 @@ public class MessageCommand extends BaseCommand {
     @Default
     @CommandCompletion("@players @players")
     public void msg(Player sender, Player target, String message) {
-        if (!cooldown.isCooldownOver(sender.getUniqueId())) {
+        if (!cooldown.isCooldownOver(sender.getUniqueId()) && !sender.hasPermission("survivalclasic.cooldown.bypass")) {
             String cooldownTime = cooldown.getFormattedRemainingString(sender.getUniqueId());
             Utils.send(sender, messageFile.cooldown.replace("%time%", cooldownTime));
             return;
