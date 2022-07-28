@@ -1,8 +1,10 @@
 package net.eternaln.survivalclasiccore.listeners.staffmode;
 
 import net.eternaln.survivalclasiccore.SurvivalClasicCore;
+import net.eternaln.survivalclasiccore.commands.admin.GodCommand;
 import net.eternaln.survivalclasiccore.managers.annotations.Register;
 import net.eternaln.survivalclasiccore.objects.staff.Staff;
+import net.eternaln.survivalclasiccore.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
@@ -15,6 +17,9 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.*;
+
+import java.util.ArrayList;
+import java.util.UUID;
 
 @Register
 public class StaffListener implements Listener {
@@ -33,10 +38,8 @@ public class StaffListener implements Listener {
             if (!staff.isStaffMode() && player.hasPermission("survivalclasiccore.staff.staffmode")) {
                 staff.enableStaffMode(true);
             }
-            if (staff.isStaffMode() && !player.hasPermission("survivalclasiccore.staff.staffmode")) {
-                staff.getPlayer().setGameMode(GameMode.SURVIVAL);
-            }
-        }, 20L);
+
+        }, 5L);
 
         for (Staff staff : Staff.getStaffs().values()) {
             player.hidePlayer(SurvivalClasicCore.getInstance(), staff.getPlayer());
@@ -143,10 +146,26 @@ public class StaffListener implements Listener {
 
     @EventHandler
     private void onStaffChangeWorld(PlayerChangedWorldEvent event) {
-        Staff staff = Staff.getStaff(event.getPlayer().getUniqueId());
+        Player player = event.getPlayer();
+        Staff staff = Staff.getStaff(player.getUniqueId());
+
+        Bukkit.getScheduler().runTaskLater(SurvivalClasicCore.getInstance(), () -> {
+            if(player == null) {
+                return;
+            }
+
+            if (staff != null && staff.isStaffMode()) {
+                staff.getPlayer().setGameMode(GameMode.CREATIVE);
+            }
+
+            if (staff != null && staff.isFlying()) {
+                staff.setFlying(true);
+            }
+        }, 5L);
 
         if (staff != null && staff.isVanished()) {
-            staff.enableVanish(false);
+            staff.enableVanish(true);
         }
+
     }
 }

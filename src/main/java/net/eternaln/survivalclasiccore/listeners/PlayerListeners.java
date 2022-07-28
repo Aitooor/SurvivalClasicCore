@@ -11,7 +11,6 @@ import net.eternaln.survivalclasiccore.objects.staff.Staff;
 import net.eternaln.survivalclasiccore.utils.CenteredMessage;
 import net.eternaln.survivalclasiccore.utils.Utils;
 import org.bukkit.Bukkit;
-import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -95,13 +94,6 @@ public class PlayerListeners implements Listener {
             event.getPlayer().teleport(SurvivalClasicCore.getConfiguration().getSpawnLocation());
         }
         event.setJoinMessage(null);
-
-
-        for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
-            if (onlinePlayer.hasMetadata("survivalclasic.vanish") || onlinePlayer.hasPermission("survivalclasic.vanish.see")) {
-                    player.hidePlayer(SurvivalClasicCore.getInstance(), onlinePlayer);
-            }
-        }
     }
 
     @EventHandler

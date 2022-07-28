@@ -92,7 +92,7 @@ public class Staff {
         }
 
         if (message) {
-            Utils.send(player,"&aVanish Activado");
+            return;
         }
     }
 
@@ -106,7 +106,7 @@ public class Staff {
         }
 
         if (message) {
-            Utils.send(player, "&cVanish Desactivado");
+            return;
         }
     }
 
