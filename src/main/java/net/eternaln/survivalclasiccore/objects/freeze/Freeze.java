@@ -35,15 +35,14 @@ public class Freeze {
     }
 
     public void freezePlayer(boolean message) {
-        if (Staff.getStaff(uuid) != null) {
-            Player staffPlayer = staff.getPlayer();
-            staffPlayer.sendMessage(Utils.ct("&cNo puedes congelar a " + getName() + " por que es STAFF."));
-            return;
-        }
-
         setFrozen(true);
 
         Player player = getPlayer();
+
+        if (player.hasPermission("survivalclasic.staffmode") || player.isOp()) {
+            Utils.send(player, "&cNo puedes congelar a un staff");
+            return;
+        }
 
         setArmorContents(player.getInventory().getArmorContents());
 
@@ -60,12 +59,6 @@ public class Freeze {
     }
 
     public void unFreezePlayer(boolean message) {
-        if (Staff.getStaff(uuid) != null) {
-            Player staffPlayer = staff.getPlayer();
-            staffPlayer.sendMessage(Utils.ct("&cNo puedes descongelar a " + getName() + " por que es STAFF."));
-            return;
-        }
-
         setFrozen(false);
 
         Player player = getPlayer();

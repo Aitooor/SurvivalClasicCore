@@ -30,23 +30,7 @@ public class StaffItemsListener implements Listener {
                 Player target = (Player) event.getRightClicked();
 
                 if (StaffItems.FREEZE.canUse(staff.getPlayer().getItemInHand())) {
-                    Freeze freeze;
-
-                    if (Freeze.getFreezes().get(target.getUniqueId()) == null) {
-                        freeze = new Freeze(target.getUniqueId());
-                    }
-                    else {
-                        freeze = Freeze.getFreezes().get(target.getUniqueId());
-                    }
-
-                    freeze.setStaff(staff);
-
-                    if (freeze.isFrozen()) {
-                        freeze.unFreezePlayer(true);
-                    }
-                    else {
-                        freeze.freezePlayer(true);
-                    }
+                    staff.getPlayer().performCommand("freeze " + target.getName());
                 }
                 else if (StaffItems.INSPECTOR.canUse(staff.getPlayer().getItemInHand())) {
                     staff.getPlayer().openInventory(PlayerUtil.customPlayerInventory(target));
