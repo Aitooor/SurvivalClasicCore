@@ -39,11 +39,15 @@ public class StaffListener implements Listener {
                 staff.enableStaffMode(true);
             }
 
-        }, 5L);
+            for (Staff staffs : Staff.getStaffs().values()) {
+                player.hidePlayer(SurvivalClasicCore.getInstance(), staffs.getPlayer());
+            }
 
-        for (Staff staff : Staff.getStaffs().values()) {
-            player.hidePlayer(SurvivalClasicCore.getInstance(), staff.getPlayer());
-        }
+            for (Staff staffs : Staff.getStaffs().values()) {
+                staffs.getPlayer().showPlayer(SurvivalClasicCore.getInstance(), staffs.getPlayer());
+            }
+
+        }, 5L);
     }
 
     @EventHandler(priority = EventPriority.MONITOR)

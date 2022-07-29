@@ -83,11 +83,8 @@ public class Staff {
         Player player = getPlayer();
 
         for (Player online : Bukkit.getServer().getOnlinePlayers()) {
-            if (Staff.getStaff(online.getUniqueId()) != null) {
-                return;
-            }
-            else {
-                player.hidePlayer(SurvivalClasicCore.getInstance(), online);
+            if (Staff.getStaff(online.getUniqueId()) == null) {
+                online.hidePlayer(SurvivalClasicCore.getInstance(), player);
             }
         }
 
