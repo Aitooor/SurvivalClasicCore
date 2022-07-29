@@ -39,11 +39,6 @@ public class Freeze {
 
         Player player = getPlayer();
 
-        if (player.hasPermission("survivalclasic.staffmode") || player.isOp()) {
-            Utils.send(player, "&cNo puedes congelar a un staff");
-            return;
-        }
-
         setArmorContents(player.getInventory().getArmorContents());
 
         PlayerUtil.clear(player, true, false);
