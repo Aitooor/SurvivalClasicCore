@@ -35,7 +35,7 @@ public class StaffListener implements Listener {
                 return;
             }
 
-            if (!staff.isStaffMode() && player.hasPermission("survivalclasiccore.staff.staffmode")) {
+            if (!staff.isStaffMode() && player.hasPermission("survivalclasic.staffmode")) {
                 staff.enableStaffMode(true);
             }
 
