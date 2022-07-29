@@ -1,10 +1,8 @@
 package net.eternaln.survivalclasiccore.listeners.staffmode;
 
 import net.eternaln.survivalclasiccore.SurvivalClasicCore;
-import net.eternaln.survivalclasiccore.commands.admin.GodCommand;
 import net.eternaln.survivalclasiccore.managers.annotations.Register;
 import net.eternaln.survivalclasiccore.objects.staff.Staff;
-import net.eternaln.survivalclasiccore.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
@@ -17,9 +15,6 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.*;
-
-import java.util.ArrayList;
-import java.util.UUID;
 
 @Register
 public class StaffListener implements Listener {
@@ -35,19 +30,12 @@ public class StaffListener implements Listener {
                 return;
             }
 
-            if (!staff.isStaffMode() && player.hasPermission("survivalclasic.staffmode")) {
+
+            if (player.hasPermission("survivalclasic.staffmode")) {
                 staff.enableStaffMode(true);
             }
 
-            for (Staff staffs : Staff.getStaffs().values()) {
-                player.hidePlayer(SurvivalClasicCore.getInstance(), staffs.getPlayer());
-            }
-
-            for (Staff staffs : Staff.getStaffs().values()) {
-                staffs.getPlayer().showPlayer(SurvivalClasicCore.getInstance(), staffs.getPlayer());
-            }
-
-        }, 5L);
+        }, 2L);
     }
 
     @EventHandler(priority = EventPriority.MONITOR)

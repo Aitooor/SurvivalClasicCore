@@ -45,7 +45,6 @@ public class PlayerListeners implements Listener {
     public void onLogin(PlayerLoginEvent event) {
         String messages = messagesFile.joinMessage;
         PlayerData data = SurvivalClasicCore.getDataManager().handleDataCreation(event.getPlayer().getUniqueId());
-        Staff staff = Staff.getStaff(event.getPlayer().getUniqueId());
         Player player = event.getPlayer();
 
         Bukkit.getScheduler().runTaskLaterAsynchronously(SurvivalClasicCore.getInstance(), () -> {
@@ -89,6 +88,12 @@ public class PlayerListeners implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
+
+        for (Staff staff : Staff.getStaffs().values()) {
+            if (staff.isVanished()) {
+                player.hidePlayer(SurvivalClasicCore.getInstance(), staff.getPlayer());
+            }
+        }
 
         if(!player.hasPlayedBefore()) {
             event.getPlayer().teleport(SurvivalClasicCore.getConfiguration().getSpawnLocation());

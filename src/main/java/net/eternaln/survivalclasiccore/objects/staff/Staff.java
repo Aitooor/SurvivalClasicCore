@@ -82,8 +82,8 @@ public class Staff {
 
         Player player = getPlayer();
 
-        for (Player online : Bukkit.getServer().getOnlinePlayers()) {
-            if (Staff.getStaff(online.getUniqueId()) == null) {
+        for (Player online : Bukkit.getOnlinePlayers()) {
+            if (!online.hasPermission("survivalclasiccore.staffmode") || !online.hasPermission("survivalclasiccore.vanish")) {
                 online.hidePlayer(SurvivalClasicCore.getInstance(), player);
             }
         }
@@ -99,7 +99,7 @@ public class Staff {
         Player player = getPlayer();
 
         for (Player online : Bukkit.getServer().getOnlinePlayers()) {
-            player.showPlayer(SurvivalClasicCore.getInstance(), online);
+            online.showPlayer(SurvivalClasicCore.getInstance(), player);
         }
 
         if (message) {
