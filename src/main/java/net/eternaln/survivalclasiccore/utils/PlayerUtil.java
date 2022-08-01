@@ -53,15 +53,4 @@ public class PlayerUtil {
 
         return inventory;
     }
-
-    public List<Player> getOnlinePlayers() {
-        List<Player> playerList = new ArrayList<>();
-
-        for (Player online : Bukkit.getServer().getOnlinePlayers()) {
-            Staff staff = Staff.getStaff(online.getUniqueId());
-            if (staff == null) playerList.add(online);
-        }
-
-        return playerList;
-    }
 }

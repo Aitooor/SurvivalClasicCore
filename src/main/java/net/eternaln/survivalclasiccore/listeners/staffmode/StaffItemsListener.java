@@ -1,11 +1,11 @@
 package net.eternaln.survivalclasiccore.listeners.staffmode;
 
 import net.eternaln.survivalclasiccore.managers.annotations.Register;
-import net.eternaln.survivalclasiccore.objects.freeze.Freeze;
 import net.eternaln.survivalclasiccore.objects.staff.Staff;
 import net.eternaln.survivalclasiccore.objects.staff.StaffItems;
 import net.eternaln.survivalclasiccore.utils.PlayerUtil;
 import net.eternaln.survivalclasiccore.utils.Utils;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -14,8 +14,6 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
-
-import java.util.concurrent.ThreadLocalRandom;
 
 @Register
 public class StaffItemsListener implements Listener {
@@ -29,10 +27,10 @@ public class StaffItemsListener implements Listener {
             if (event.getRightClicked() instanceof Player) {
                 Player target = (Player) event.getRightClicked();
 
-                if (StaffItems.FREEZE.canUse(staff.getPlayer().getItemInHand())) {
+                if (StaffItems.FREEZE.canUse(staff.getPlayer().getInventory().getItemInMainHand())) {
                     staff.getPlayer().performCommand("freeze " + target.getName());
                 }
-                else if (StaffItems.INSPECTOR.canUse(staff.getPlayer().getItemInHand())) {
+                else if (StaffItems.INSPECTOR.canUse(staff.getPlayer().getInventory().getItemInMainHand())) {
                     staff.getPlayer().openInventory(PlayerUtil.customPlayerInventory(target));
                 }
             }
@@ -46,21 +44,23 @@ public class StaffItemsListener implements Listener {
         if (staff != null && staff.isStaffMode()) {
 
             if (event.getAction().equals(Action.RIGHT_CLICK_AIR) || event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
-                ItemStack item = staff.getPlayer().getInventory().getItemInHand();
+                ItemStack item = staff.getPlayer().getInventory().getItemInMainHand();
 
                 if (item == null || item.getType().equals(Material.AIR)) return;
 
                 if (StaffItems.RANDOM_TELEPORT.canUse(item)) {
-                    if (PlayerUtil.getOnlinePlayers().isEmpty()) {
-                        staff.getPlayer().sendMessage(Utils.ct("&cNo han sido encontrados jugadores."));
-                        return;
-                    }
+                    //TODO Need improvement
+                    Player target = Bukkit.getOnlinePlayers().stream()
+                            .filter(p -> !p.getUniqueId().equals(staff.getPlayer().getUniqueId()))
+                            .filter(p -> !p.getUniqueId().equals(staff.getUuid()))
+                            .findAny().orElse(null);
 
-                    Player randomPlayer = PlayerUtil.getOnlinePlayers().get(ThreadLocalRandom.current().nextInt(PlayerUtil.getOnlinePlayers().size()));
+                    if (target != null) {
+                        staff.getPlayer().teleport(target.getLocation());
 
-                    if (randomPlayer != null) {
-                        staff.getPlayer().teleport(randomPlayer);
-                        staff.getPlayer().sendMessage(Utils.ct("&eTeletransoportado hacia &f" + randomPlayer.getName() + "&e."));
+                        Utils.send(staff.getPlayer(), "&fTeletransportado a &b" + target.getName());
+                    } else {
+                        Utils.send(staff.getPlayer(), "&cNo hay jugadores online");
                     }
                 }
                 else if (StaffItems.VANISH_ON.canUse(item)) {
