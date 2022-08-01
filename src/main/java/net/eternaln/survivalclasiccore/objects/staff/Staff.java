@@ -44,7 +44,7 @@ public class Staff {
 
     public void enableStaffMode(boolean message) {
         setStaffMode(true);
-        enableVanish(false);
+        enableVanish(true);
 
         Player player = getPlayer();
         player.setGameMode(GameMode.CREATIVE);
@@ -62,7 +62,7 @@ public class Staff {
 
     public void disableStaffMode(boolean message) {
         setStaffMode(false);
-        disableVanish(false);
+        disableVanish(true);
 
         Player player = getPlayer();
         player.setGameMode(GameMode.SURVIVAL);
@@ -82,11 +82,8 @@ public class Staff {
 
         Player player = getPlayer();
 
-        for (Player online : Bukkit.getServer().getOnlinePlayers()) {
-            if (Staff.getStaff(online.getUniqueId()) != null) {
-                online.showPlayer(SurvivalClasicCore.getInstance(), player);
-            }
-            else {
+        for (Player online : Bukkit.getOnlinePlayers()) {
+            if (!online.hasPermission("survivalclasiccore.staffmode") || !online.hasPermission("survivalclasiccore.vanish")) {
                 online.hidePlayer(SurvivalClasicCore.getInstance(), player);
             }
         }
