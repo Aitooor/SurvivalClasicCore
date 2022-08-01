@@ -12,7 +12,7 @@ import net.eternaln.survivalclasiccore.data.mongo.PlayerData;
 import net.eternaln.survivalclasiccore.managers.menus.MenuManager;
 import net.eternaln.survivalclasiccore.objects.freeze.FreezeHandler;
 import net.eternaln.survivalclasiccore.objects.staff.StaffHandler;
-import net.eternaln.survivalclasiccore.placeholders.NickName;
+import net.eternaln.survivalclasiccore.data.Placeholders;
 import net.eternaln.survivalclasiccore.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -44,7 +44,7 @@ public final class SurvivalClasicCore extends JavaPlugin {
     private static MongoDB mongo;
     @Getter
     private static DataManager dataManager;
-    private NickName nickNamePlaceholder;
+    private Placeholders placeholders;
 
 
     @Override
@@ -68,8 +68,8 @@ public final class SurvivalClasicCore extends JavaPlugin {
 
         if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
             Utils.log("&7Initializing placeholders...");
-            nickNamePlaceholder = new NickName(this);
-            nickNamePlaceholder.register();
+            placeholders = new Placeholders(this);
+            placeholders.register();
             Utils.log("&aHooked to PlaceholderAPI.");
         } else {
             Utils.logError("&cCould not find PlaceholderAPI! This plugin is required.");
@@ -85,7 +85,7 @@ public final class SurvivalClasicCore extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        nickNamePlaceholder.unregister();
+        placeholders.unregister();
         StaffHandler.disable();
         FreezeHandler.disable();
         Utils.log("&cDisabled correctly");

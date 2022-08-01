@@ -1,4 +1,4 @@
-package net.eternaln.survivalclasiccore.placeholders;
+package net.eternaln.survivalclasiccore.data;
 
 import lombok.RequiredArgsConstructor;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 @RequiredArgsConstructor
-public class NickName extends PlaceholderExpansion {
+public class Placeholders extends PlaceholderExpansion {
 
     private final SurvivalClasicCore survivalClasicCore;
 
