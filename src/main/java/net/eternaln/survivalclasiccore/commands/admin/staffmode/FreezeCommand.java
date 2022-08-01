@@ -1,10 +1,7 @@
 package net.eternaln.survivalclasiccore.commands.admin.staffmode;
 
 import co.aikar.commands.BaseCommand;
-import co.aikar.commands.annotation.CatchUnknown;
-import co.aikar.commands.annotation.CommandAlias;
-import co.aikar.commands.annotation.CommandPermission;
-import co.aikar.commands.annotation.Default;
+import co.aikar.commands.annotation.*;
 import net.eternaln.survivalclasiccore.objects.freeze.Freeze;
 import net.eternaln.survivalclasiccore.objects.staff.Staff;
 import net.eternaln.survivalclasiccore.utils.Utils;
@@ -16,6 +13,7 @@ import org.bukkit.entity.Player;
 public class FreezeCommand extends BaseCommand {
 
     @Default
+    @CommandCompletion("@players")
     public void freeze(Player sender, String target) {
         Player targetPlayer = Bukkit.getPlayer(target);
         if (targetPlayer == null) {
