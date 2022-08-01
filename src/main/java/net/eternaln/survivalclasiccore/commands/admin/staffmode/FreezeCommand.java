@@ -8,6 +8,7 @@ import co.aikar.commands.annotation.Default;
 import net.eternaln.survivalclasiccore.objects.freeze.Freeze;
 import net.eternaln.survivalclasiccore.objects.staff.Staff;
 import net.eternaln.survivalclasiccore.utils.Utils;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 @CommandAlias("freeze|ss|congelar")
@@ -15,35 +16,36 @@ import org.bukkit.entity.Player;
 public class FreezeCommand extends BaseCommand {
 
     @Default
-    @CatchUnknown
-    public void freeze(Player sender, Player target) {
-        if (target == null) {
+    public void freeze(Player sender, String target) {
+        Player targetPlayer = Bukkit.getPlayer(target);
+        if (targetPlayer == null) {
             Utils.send(sender,"&cJugador " + target + " no encontrado");
+            return;
+        }
+
+        if (targetPlayer == sender) {
+            Utils.send(sender,"&cNo puedes congelarte a ti mismo");
             return;
         }
 
         Staff staff = Staff.getStaff(sender.getUniqueId());
 
-        if (staff != null) {
-            Freeze freeze;
+        Freeze freeze;
 
-            if (Freeze.getFreezes().get(target.getUniqueId()) == null) {
-                freeze = new Freeze(target.getUniqueId());
-            }
-            else {
-                freeze = Freeze.getFreezes().get(target.getUniqueId());
-            }
+        if (Freeze.getFreezes().get(targetPlayer.getUniqueId()) == null) {
+            freeze = new Freeze(targetPlayer.getUniqueId());
+        }
+        else {
+            freeze = Freeze.getFreezes().get(targetPlayer.getUniqueId());
+        }
 
-            freeze.setStaff(staff);
+        freeze.setStaff(staff);
 
-            if (freeze.isFrozen()) {
-                freeze.unFreezePlayer(true);
-            }
-            else {
-                freeze.freezePlayer(true);
-            }
-        } else {
-            Utils.send(sender,"&cNo eres del STAFF");
+        if (freeze.isFrozen()) {
+            freeze.unFreezePlayer(true);
+        }
+        else {
+            freeze.freezePlayer(true);
         }
     }
 
