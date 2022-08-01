@@ -1,12 +1,15 @@
 package net.eternaln.survivalclasiccore.utils;
 
 import net.eternaln.survivalclasiccore.SurvivalClasicCore;
+import net.eternaln.survivalclasiccore.objects.staff.Staff;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -81,5 +84,10 @@ public interface Utils {
                 run.run();
             }
         }.runTask(SurvivalClasicCore.getInstance());
+    }
+
+    static List<String> getOnlineStaff() {
+        Map<UUID, Staff> staff = Staff.getStaffs();
+        return staff.values().stream().filter(staff1 -> !staff1.isVanished()).map(Staff::getName).collect(Collectors.toList());
     }
 }
