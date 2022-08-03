@@ -23,6 +23,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.io.File;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public final class SurvivalClasicCore extends JavaPlugin {
@@ -98,7 +99,7 @@ public final class SurvivalClasicCore extends JavaPlugin {
         cmdManager.getCommandCompletions().registerCompletion("warps", c -> {
             if (getWarpsFile().getConfig().getConfigurationSection("warps") == null)
                 return ImmutableList.of();
-            return new ImmutableList.Builder<String>().addAll(getWarpsFile().getConfig().getConfigurationSection("warps").getValues(true).keySet()).build();
+            return new ImmutableList.Builder<String>().addAll(Objects.requireNonNull(getWarpsFile().getConfig().getConfigurationSection("warps")).getValues(true).keySet()).build();
         });
 
         List<String> materialNames = Arrays.stream(Material.values())
@@ -130,9 +131,6 @@ public final class SurvivalClasicCore extends JavaPlugin {
     }
 
     public void createMessageFolder() {
-        if (!instance.getDataFolder().exists()) {
-            instance.getDataFolder().mkdir();
-        }
         File messagesFolder = new File(instance.getDataFolder(), "messages");
         if(!messagesFolder.exists()) {
             messagesFolder.mkdirs();

@@ -84,10 +84,7 @@ public class FreezeListener implements Listener {
 
     @EventHandler
     private void onFrozenHit(EntityDamageByEntityEvent event) {
-        if (event.getEntity() instanceof Player && event.getDamager() instanceof Player) {
-
-            Player player = (Player) event.getEntity();
-            Player target = (Player) event.getDamager();
+        if (event.getEntity() instanceof Player player && event.getDamager() instanceof Player target) {
 
             Freeze playerFreeze = Freeze.getFreeze(player.getUniqueId());
             Freeze targetFreeze = Freeze.getFreeze(target.getUniqueId());

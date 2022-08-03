@@ -1,6 +1,5 @@
 package net.eternaln.survivalclasiccore.utils;
 
-import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 

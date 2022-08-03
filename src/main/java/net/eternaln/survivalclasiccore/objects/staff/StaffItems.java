@@ -17,7 +17,7 @@ public enum StaffItems {
     FLY_OFF("&bFly &c&lDESACTIVADO", new ItemStack(Material.GRAY_DYE), 3,1),
     FLY_ON("&bFly &a&lACTIVADO", new ItemStack(Material.LIME_DYE), 4, 1),
     INSPECTOR("&cInvsee", new ItemStack(Material.CHEST),0,2),
-    FREEZE("&cCongelar", new ItemStack(Material.ICE), 0,4),
+    ALTS("&cAlts", new ItemStack(Material.BLAZE_ROD), 0,4),
     RANDOM_TELEPORT("&bRPT a un User", new ItemStack(Material.BOOK), 0,6),
     COMPASS("&bBrújula", new ItemStack(Material.COMPASS),0 ,7),
     WORLD_EDIT("&bWorldEdit", new ItemStack(Material.WOODEN_AXE),0,8);

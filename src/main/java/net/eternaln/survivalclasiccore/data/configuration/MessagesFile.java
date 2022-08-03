@@ -14,7 +14,7 @@ public class MessagesFile extends BukkitYamlConfiguration {
     @Comment({"Use \\n for new lines", "Use %player% for player name" ,"" , "Join Message", "Use %player% for player name and prefix", "If prefix is empty, only player name will be used"})
     public String joinMessage =
             "\n&r" +
-                    "\n&6&lETERNAL &8| &bSúrvival Clásico &f1.19"+
+                    "\n&6&lETERNAL &8| &bSurvival Clásico &f1.19"+
                     "\n&r"+
                     "\n&aIP &7eternaln.net"+
                     "\n&aTIENDA &7https://tienda.eternaln.net"+

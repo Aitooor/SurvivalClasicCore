@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
 @CommandAlias("spawn|spawnpoint")
 public class SpawnCommand extends BaseCommand {
 
-    Configuration config = SurvivalClasicCore.getConfiguration();
+    private Configuration config = SurvivalClasicCore.getConfiguration();
     private final MessagesFile messageFile = SurvivalClasicCore.getMessagesFile();
     private final Cooldown<UUID> cooldown = new Cooldown<>(SurvivalClasicCore.getConfiguration().getCmdCooldown(), TimeUnit.SECONDS);
 

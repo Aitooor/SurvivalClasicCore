@@ -14,8 +14,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 
-import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.UUID;
 
 @Getter @Setter
@@ -135,7 +135,7 @@ public class Staff {
 
         for (ItemStack pieces : armorStaff) {
             LeatherArmorMeta leatherArmorMeta = (LeatherArmorMeta) pieces.getItemMeta();
-            leatherArmorMeta.setDisplayName(Utils.ct("&8StaffMode"));
+            Objects.requireNonNull(leatherArmorMeta).setDisplayName(Utils.ct("&8StaffMode"));
             leatherArmorMeta.setColor(Color.ORANGE);
             pieces.setItemMeta(leatherArmorMeta);
         }

@@ -13,6 +13,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 
 @Register
@@ -24,14 +25,16 @@ public class StaffItemsListener implements Listener {
 
         if (staff != null && staff.isStaffMode()) {
 
-            if (event.getRightClicked() instanceof Player) {
-                Player target = (Player) event.getRightClicked();
-
-                if (StaffItems.FREEZE.canUse(staff.getPlayer().getInventory().getItemInMainHand())) {
-                    staff.getPlayer().performCommand("freeze " + target.getName());
+            if (event.getRightClicked() instanceof Player target) {
+                if (event.getHand() == EquipmentSlot.OFF_HAND) {
+                    return; // off hand packet, ignore.
                 }
-                else if (StaffItems.INSPECTOR.canUse(staff.getPlayer().getInventory().getItemInMainHand())) {
+
+                if (StaffItems.INSPECTOR.canUse(staff.getPlayer().getInventory().getItemInMainHand())) {
                     staff.getPlayer().openInventory(PlayerUtil.customPlayerInventory(target));
+                }
+                else if (StaffItems.ALTS.canUse(staff.getPlayer().getInventory().getItemInMainHand())) {
+                    staff.getPlayer().performCommand("alts " + target.getName());
                 }
             }
         }
@@ -46,7 +49,7 @@ public class StaffItemsListener implements Listener {
             if (event.getAction().equals(Action.RIGHT_CLICK_AIR) || event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
                 ItemStack item = staff.getPlayer().getInventory().getItemInMainHand();
 
-                if (item == null || item.getType().equals(Material.AIR)) return;
+                if (item.getType().equals(Material.AIR)) return;
 
                 if (StaffItems.RANDOM_TELEPORT.canUse(item)) {
                     //TODO Need improvement

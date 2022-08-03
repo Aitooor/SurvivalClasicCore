@@ -48,6 +48,7 @@ public class MessageCommand extends BaseCommand {
             return;
         }
         cooldown.addToCooldown(sender.getUniqueId());
+
         onMsg(sender, target, message);
     }
 

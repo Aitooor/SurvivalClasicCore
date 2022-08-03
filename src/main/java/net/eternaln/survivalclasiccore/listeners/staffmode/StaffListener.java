@@ -13,6 +13,7 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntityPickupItemEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.*;
 
@@ -25,11 +26,6 @@ public class StaffListener implements Listener {
 
         Bukkit.getScheduler().runTaskLater(SurvivalClasicCore.getInstance(), () -> {
             Staff staff = new Staff(player.getUniqueId());
-
-            if(player == null) {
-                return;
-            }
-
 
             if (player.hasPermission("survivalclasic.staffmode")) {
                 staff.enableStaffMode(true);
@@ -117,8 +113,9 @@ public class StaffListener implements Listener {
     }
 
     @EventHandler
-    private void onStaffPickupItem(PlayerPickupItemEvent event) {
-        Staff staff = Staff.getStaff(event.getPlayer().getUniqueId());
+    private void onStaffPickupItem(EntityPickupItemEvent event) {
+        Player player = (Player) event.getEntity();
+        Staff staff = Staff.getStaff(player.getUniqueId());
 
         if (staff != null) {
             if (staff.isStaffMode() || staff.isVanished()) {
@@ -142,10 +139,6 @@ public class StaffListener implements Listener {
         Staff staff = Staff.getStaff(player.getUniqueId());
 
         Bukkit.getScheduler().runTaskLater(SurvivalClasicCore.getInstance(), () -> {
-            if(player == null) {
-                return;
-            }
-
             if (staff != null && staff.isStaffMode()) {
                 staff.getPlayer().setGameMode(GameMode.CREATIVE);
             }

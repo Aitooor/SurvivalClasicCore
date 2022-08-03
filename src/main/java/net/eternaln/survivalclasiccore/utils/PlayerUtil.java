@@ -1,23 +1,11 @@
 package net.eternaln.survivalclasiccore.utils;
 
 import lombok.experimental.UtilityClass;
-import net.eternaln.survivalclasiccore.objects.staff.Staff;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-
-import java.util.ArrayList;
-import java.util.List;
-
-/**
- * Created by Risas
- * Project: StaffMode
- * Date: 23-11-2021 - 2:09
- * Twitter: @RisasDev
- * GitHub: https://github.com/RisasDev
- */
 
 @UtilityClass
 public class PlayerUtil {

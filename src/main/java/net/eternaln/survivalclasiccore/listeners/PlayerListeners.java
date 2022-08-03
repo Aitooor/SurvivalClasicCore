@@ -2,11 +2,13 @@ package net.eternaln.survivalclasiccore.listeners;
 
 import me.clip.placeholderapi.PlaceholderAPI;
 import net.eternaln.survivalclasiccore.SurvivalClasicCore;
+import net.eternaln.survivalclasiccore.data.configuration.Configuration;
 import net.eternaln.survivalclasiccore.managers.annotations.Register;
 import net.eternaln.survivalclasiccore.commands.admin.GodCommand;
 import net.eternaln.survivalclasiccore.commands.admin.SocialSpyCommand;
 import net.eternaln.survivalclasiccore.data.configuration.MessagesFile;
 import net.eternaln.survivalclasiccore.data.mongo.PlayerData;
+import net.eternaln.survivalclasiccore.objects.freeze.Freeze;
 import net.eternaln.survivalclasiccore.objects.staff.Staff;
 import net.eternaln.survivalclasiccore.utils.CenteredMessage;
 import net.eternaln.survivalclasiccore.utils.Utils;
@@ -16,29 +18,54 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+
+import java.util.*;
 
 @Register
 public class PlayerListeners implements Listener {
 
-    MessagesFile messagesFile = SurvivalClasicCore.getMessagesFile();
+    private Configuration config = SurvivalClasicCore.getInstance().getConfiguration();
+    private MessagesFile messagesFile = SurvivalClasicCore.getMessagesFile();
 
     @EventHandler
     public void onChat(AsyncPlayerChatEvent event) {
         Player player = event.getPlayer();
+        Freeze freeze = Freeze.getFreeze(event.getPlayer().getUniqueId());
 
         event.getFormat();
 
         String rank = "%vault_prefix%&r ";
         rank = PlaceholderAPI.setPlaceholders(event.getPlayer(), rank);
 
-        if (rank.equals("")) {
-            event.setFormat(Utils.ct(messagesFile.chatFormat.replace("%player%", this.playerName(player)).replace("%message%", event.getMessage())));
+        if (freeze != null && freeze.isFrozen()) {
+            event.setCancelled(true);
+
+            freeze.getPlayer().sendMessage(Utils.ct("&cCHAT-CONGELADO &7" + freeze.getName() + ": &f" + event.getMessage()));
+
+            Staff staff = freeze.getStaff();
+
+            if (staff != null) {
+                staff.getPlayer().sendMessage(Utils.ct("&cCHAT-CONGELADO &7" + freeze.getName() + ": &f" + event.getMessage()));
+            }
         } else {
-            event.setFormat(Utils.ct(messagesFile.chatFormat.replace("%player%", rank + this.playerName(player)).replace("%message%", event.getMessage())));
+            if (rank.equals("")) {
+                event.setFormat(Utils.ct(messagesFile.chatFormat.replace("%player%", this.playerName(player)).replace("%message%", event.getMessage())));
+            } else {
+                event.setFormat(Utils.ct(messagesFile.chatFormat.replace("%player%", rank + this.playerName(player)).replace("%message%", event.getMessage())));
+            }
         }
+    }
+
+    @EventHandler
+    public void onPreLogin(AsyncPlayerPreLoginEvent event) {
+        UUID player = event.getUniqueId();
+        Player player1 = Bukkit.getPlayer(player);
+
+        Bukkit.getScheduler().runTaskLaterAsynchronously(SurvivalClasicCore.getInstance(), () -> {
+            if (!player1.hasPlayedBefore()) {
+                player1.teleport(config.spawnLocation);
+            }
+        }, 4L);
     }
 
     @EventHandler
@@ -48,10 +75,6 @@ public class PlayerListeners implements Listener {
         Player player = event.getPlayer();
 
         Bukkit.getScheduler().runTaskLaterAsynchronously(SurvivalClasicCore.getInstance(), () -> {
-            if(player == null) {
-                return;
-            }
-
             String rank = "%vault_prefix%&r ";
             rank = PlaceholderAPI.setPlaceholders(event.getPlayer(), rank);
 
@@ -89,15 +112,12 @@ public class PlayerListeners implements Listener {
     public void onJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
 
-        for (Staff staff : Staff.getStaffs().values()) {
-            if (staff.isVanished()) {
-                player.hidePlayer(SurvivalClasicCore.getInstance(), staff.getPlayer());
+        for (Staff staff2 : Staff.getStaffs().values()) {
+            if (staff2.isVanished() && !player.hasPermission("survivalclasic.vanish") && !player.hasPermission("survivalclasic.staffmode")) {
+                player.hidePlayer(SurvivalClasicCore.getInstance(), staff2.getPlayer());
             }
         }
 
-        if(!player.hasPlayedBefore()) {
-            event.getPlayer().teleport(SurvivalClasicCore.getConfiguration().getSpawnLocation());
-        }
         event.setJoinMessage(null);
     }
 
@@ -106,14 +126,10 @@ public class PlayerListeners implements Listener {
         event.setQuitMessage(null);
 
         ArrayList<UUID> gods = new GodCommand().getGods();
-        if(gods.contains(event.getPlayer().getUniqueId())) {
-            gods.remove(event.getPlayer().getUniqueId());
-        }
+        gods.remove(event.getPlayer().getUniqueId());
 
         List<UUID> socialSpy = SocialSpyCommand.getSocialSpyList();
-        if(socialSpy.contains(event.getPlayer().getUniqueId())) {
-            socialSpy.remove(event.getPlayer().getUniqueId());
-        }
+        socialSpy.remove(event.getPlayer().getUniqueId());
 
         if(event.getPlayer().hasMetadata("survivalclasic.vanish")) {
             event.getPlayer().removeMetadata("survivalclasic.vanish", SurvivalClasicCore.getInstance());
