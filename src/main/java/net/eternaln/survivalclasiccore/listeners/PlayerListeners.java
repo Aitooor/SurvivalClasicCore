@@ -34,7 +34,7 @@ public class PlayerListeners implements Listener {
 
         event.getFormat();
 
-        String rank = "%vault_prefix%&r ";
+        String rank = "%vault_prefix%";
         rank = PlaceholderAPI.setPlaceholders(event.getPlayer(), rank);
 
         if (freeze != null && freeze.isFrozen()) {
