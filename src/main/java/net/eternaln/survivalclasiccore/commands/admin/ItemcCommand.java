@@ -39,7 +39,7 @@ public class ItemcCommand extends BaseCommand {
                     } else {
                         if (sender.getInventory().firstEmpty() == -1) {
                             sender.getWorld().dropItem(sender.getLocation(), new ItemBuilder(SurvivalClasicCore.getConfiguration().getGoldCoin()).amount(amount).build());
-                            Utils.send(sender, "&fHas recibido &b" + amount + " &fde &a" + SurvivalClasicCore.getConfiguration().getGoldCoin());
+                            Utils.send(sender, "&fHas recibido &b" + amount + " &fde &a" + SurvivalClasicCore.getConfiguration().getGoldCoin().getItemMeta().getDisplayName());
                             Utils.send(sender, "&7Como tu inventario esta lleno, los items se han soltado en el suelo");
                         }
                     }
@@ -58,7 +58,7 @@ public class ItemcCommand extends BaseCommand {
                     } else {
                         if (sender.getInventory().firstEmpty() == -1) {
                             sender.getWorld().dropItem(sender.getLocation(), new ItemBuilder(SurvivalClasicCore.getConfiguration().getGoldFragment()).amount(amount).build());
-                            Utils.send(sender, "&fHas recibido &b" + amount + " &fde &a" + SurvivalClasicCore.getConfiguration().getGoldFragment());
+                            Utils.send(sender, "&fHas recibido &b" + amount + " &fde &a" + SurvivalClasicCore.getConfiguration().getGoldFragment().getItemMeta().getDisplayName());
                             Utils.send(sender, "&7Como tu inventario esta lleno, los items se han soltado en el suelo");
                         }
                     }
@@ -81,7 +81,7 @@ public class ItemcCommand extends BaseCommand {
                     } else {
                         if (sender.getInventory().firstEmpty() == -1) {
                             sender.getWorld().dropItem(sender.getLocation(), new ItemBuilder(SurvivalClasicCore.getConfiguration().getPlateCoin()).amount(amount).build());
-                            Utils.send(sender, "&fHas recibido &b" + amount + " &fde &a" + SurvivalClasicCore.getConfiguration().getPlateCoin());
+                            Utils.send(sender, "&fHas recibido &b" + amount + " &fde &a" + SurvivalClasicCore.getConfiguration().getPlateCoin().getItemMeta().getDisplayName());
                             Utils.send(sender, "&7Como tu inventario esta lleno, los items se han soltado en el suelo");
                         }
                     }
@@ -100,7 +100,7 @@ public class ItemcCommand extends BaseCommand {
                     } else {
                         if (sender.getInventory().firstEmpty() == -1) {
                             sender.getWorld().dropItem(sender.getLocation(), new ItemBuilder(SurvivalClasicCore.getConfiguration().getPlateFragment()).amount(amount).build());
-                            Utils.send(sender, "&fHas recibido &b" + amount + " &fde &a" + SurvivalClasicCore.getConfiguration().getPlateFragment());
+                            Utils.send(sender, "&fHas recibido &b" + amount + " &fde &a" + SurvivalClasicCore.getConfiguration().getPlateFragment().getItemMeta().getDisplayName());
                             Utils.send(sender, "&7Como tu inventario esta lleno, los items se han soltado en el suelo");
                         }
                     }
@@ -136,8 +136,8 @@ public class ItemcCommand extends BaseCommand {
                     } else {
                         if (targetPlayer.getInventory().firstEmpty() == -1) {
                             targetPlayer.getWorld().dropItem(targetPlayer.getLocation(), new ItemBuilder(SurvivalClasicCore.getConfiguration().getGoldCoin()).amount(amount).build());
-                            Utils.send(sender, "&fLe has dado &b" + amount + " &fde &a" + SurvivalClasicCore.getConfiguration().getGoldCoin() + " &fa &b" + targetPlayer.getName());
-                            Utils.send(targetPlayer, "&fHas recibido &b" + amount + " &fde &a" + SurvivalClasicCore.getConfiguration().getGoldCoin() + " &fde &b" + sender.getName());
+                            Utils.send(sender, "&fLe has dado &b" + amount + " &fde &a" + SurvivalClasicCore.getConfiguration().getGoldCoin().getItemMeta().getDisplayName() + " &fa &b" + targetPlayer.getName());
+                            Utils.send(targetPlayer, "&fHas recibido &b" + amount + " &fde &a" + SurvivalClasicCore.getConfiguration().getGoldCoin().getItemMeta().getDisplayName() + " &fde &b" + sender.getName());
                             Utils.send(targetPlayer, "&7Como tu inventario esta lleno, los items se han soltado en el suelo");
                         }
                     }
@@ -165,8 +165,8 @@ public class ItemcCommand extends BaseCommand {
                     } else {
                         if (targetPlayer.getInventory().firstEmpty() == -1) {
                             targetPlayer.getWorld().dropItem(targetPlayer.getLocation(), new ItemBuilder(SurvivalClasicCore.getConfiguration().getGoldFragment()).amount(amount).build());
-                            Utils.send(sender, "&fLe has dado &b" + amount + " &fde &a" + SurvivalClasicCore.getConfiguration().getGoldFragment() + " &fa &b" + targetPlayer.getName());
-                            Utils.send(targetPlayer, "&fHas recibido &b" + amount + " &fde &a" + SurvivalClasicCore.getConfiguration().getGoldFragment() + " &fde &b" + sender.getName());
+                            Utils.send(sender, "&fLe has dado &b" + amount + " &fde &a" + SurvivalClasicCore.getConfiguration().getGoldFragment().getItemMeta().getDisplayName() + " &fa &b" + targetPlayer.getName());
+                            Utils.send(targetPlayer, "&fHas recibido &b" + amount + " &fde &a" + SurvivalClasicCore.getConfiguration().getGoldFragment().getItemMeta().getDisplayName() + " &fde &b" + sender.getName());
                             Utils.send(targetPlayer, "&7Como tu inventario esta lleno, los items se han soltado en el suelo");
                         }
                     }
@@ -198,8 +198,8 @@ public class ItemcCommand extends BaseCommand {
                     } else {
                         if (targetPlayer.getInventory().firstEmpty() == -1) {
                             targetPlayer.getWorld().dropItem(targetPlayer.getLocation(), new ItemBuilder(SurvivalClasicCore.getConfiguration().getPlateCoin()).amount(amount).build());
-                            Utils.send(sender, "&fLe has dado &b" + amount + " &fde &a" + SurvivalClasicCore.getConfiguration().getPlateCoin() + " &fa &b" + targetPlayer.getName());
-                            Utils.send(targetPlayer, "&fHas recibido &b" + amount + " &fde &a" + SurvivalClasicCore.getConfiguration().getPlateCoin() + " &fde &b" + sender.getName());
+                            Utils.send(sender, "&fLe has dado &b" + amount + " &fde &a" + SurvivalClasicCore.getConfiguration().getPlateCoin().getItemMeta().getDisplayName() + " &fa &b" + targetPlayer.getName());
+                            Utils.send(targetPlayer, "&fHas recibido &b" + amount + " &fde &a" + SurvivalClasicCore.getConfiguration().getPlateCoin().getItemMeta().getDisplayName() + " &fde &b" + sender.getName());
                             Utils.send(targetPlayer, "&7Como tu inventario esta lleno, los items se han soltado en el suelo");
                         }
                     }
@@ -227,8 +227,8 @@ public class ItemcCommand extends BaseCommand {
                     } else {
                         if (targetPlayer.getInventory().firstEmpty() == -1) {
                             targetPlayer.getWorld().dropItem(targetPlayer.getLocation(), new ItemBuilder(SurvivalClasicCore.getConfiguration().getPlateFragment()).amount(amount).build());
-                            Utils.send(sender, "&fLe has dado &b" + amount + " &fde &a" + SurvivalClasicCore.getConfiguration().getPlateFragment() + " &fa &b" + targetPlayer.getName());
-                            Utils.send(targetPlayer, "&fHas recibido &b" + amount + " &fde &a" + SurvivalClasicCore.getConfiguration().getPlateFragment() + " &fde &b" + sender.getName());
+                            Utils.send(sender, "&fLe has dado &b" + amount + " &fde &a" + SurvivalClasicCore.getConfiguration().getPlateFragment().getItemMeta().getDisplayName() + " &fa &b" + targetPlayer.getName());
+                            Utils.send(targetPlayer, "&fHas recibido &b" + amount + " &fde &a" + SurvivalClasicCore.getConfiguration().getPlateFragment().getItemMeta().getDisplayName() + " &fde &b" + sender.getName());
                             Utils.send(targetPlayer, "&7Como tu inventario esta lleno, los items se han soltado en el suelo");
                         }
                     }
