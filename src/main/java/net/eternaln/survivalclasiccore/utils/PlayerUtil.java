@@ -4,6 +4,7 @@ import lombok.experimental.UtilityClass;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -40,5 +41,15 @@ public class PlayerUtil {
         inventory.setItem(48, target.getInventory().getBoots() == null ? null : target.getInventory().getBoots());
 
         return inventory;
+    }
+
+    public boolean hasAvaliableSlot(Player player){
+        Inventory inv = player.getInventory();
+        for (ItemStack item: inv.getContents()) {
+            if(item == null) {
+                return true;
+            }
+        }
+        return false;
     }
 }

@@ -61,11 +61,13 @@ public class PlayerListeners implements Listener {
         UUID player = event.getUniqueId();
         Player player1 = Bukkit.getPlayer(player);
 
-        Bukkit.getScheduler().runTaskLaterAsynchronously(SurvivalClasicCore.getInstance(), () -> {
-            if (!player1.hasPlayedBefore()) {
-                player1.teleport(config.spawnLocation);
-            }
-        }, 4L);
+        if (player1 != null) {
+            Bukkit.getScheduler().runTaskLaterAsynchronously(SurvivalClasicCore.getInstance(), () -> {
+                if (!player1.hasPlayedBefore()) {
+                    player1.teleport(config.spawnLocation);
+                }
+            }, 4L);
+        }
     }
 
     @EventHandler
