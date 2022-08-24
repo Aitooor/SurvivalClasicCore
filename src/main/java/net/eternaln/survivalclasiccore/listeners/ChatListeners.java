@@ -54,7 +54,7 @@ public class ChatListeners implements Listener {
 
         if (clan.equals("") && !rank.equals("")) {
             event.setFormat(Utils.ct(messagesFile.chatFormat
-                    .replace("%player%", rank + " " + this.playerName(player))
+                    .replace("%player%", rank + this.playerName(player))
                     .replace("%message%", event.getMessage())));
         }
 
@@ -66,7 +66,7 @@ public class ChatListeners implements Listener {
 
         if (!clan.equals("") && !rank.equals("")) {
             event.setFormat(Utils.ct(messagesFile.chatFormat
-                    .replace("%player%", clanTag + " " + rank + " " + this.playerName(player))
+                    .replace("%player%", clanTag + " " + rank + this.playerName(player))
                     .replace("%message%", event.getMessage())));
         }
     }
