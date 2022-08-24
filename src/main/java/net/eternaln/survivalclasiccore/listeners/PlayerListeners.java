@@ -8,7 +8,6 @@ import net.eternaln.survivalclasiccore.commands.admin.GodCommand;
 import net.eternaln.survivalclasiccore.commands.admin.SocialSpyCommand;
 import net.eternaln.survivalclasiccore.data.configuration.MessagesFile;
 import net.eternaln.survivalclasiccore.data.mongo.PlayerData;
-import net.eternaln.survivalclasiccore.objects.freeze.Freeze;
 import net.eternaln.survivalclasiccore.objects.staff.Staff;
 import net.eternaln.survivalclasiccore.utils.CenteredMessage;
 import net.eternaln.survivalclasiccore.utils.Utils;
@@ -26,35 +25,6 @@ public class PlayerListeners implements Listener {
 
     private Configuration config = SurvivalClasicCore.getInstance().getConfiguration();
     private MessagesFile messagesFile = SurvivalClasicCore.getMessagesFile();
-
-    @EventHandler
-    public void onChat(AsyncPlayerChatEvent event) {
-        Player player = event.getPlayer();
-        Freeze freeze = Freeze.getFreeze(event.getPlayer().getUniqueId());
-
-        event.getFormat();
-
-        String rank = "%vault_prefix%";
-        rank = PlaceholderAPI.setPlaceholders(event.getPlayer(), rank);
-
-        if (freeze != null && freeze.isFrozen()) {
-            event.setCancelled(true);
-
-            freeze.getPlayer().sendMessage(Utils.ct("&cCHAT-CONGELADO &7" + freeze.getName() + ": &f" + event.getMessage()));
-
-            Staff staff = freeze.getStaff();
-
-            if (staff != null) {
-                staff.getPlayer().sendMessage(Utils.ct("&cCHAT-CONGELADO &7" + freeze.getName() + ": &f" + event.getMessage()));
-            }
-        } else {
-            if (rank.equals("")) {
-                event.setFormat(Utils.ct(messagesFile.chatFormat.replace("%player%", this.playerName(player)).replace("%message%", event.getMessage())));
-            } else {
-                event.setFormat(Utils.ct(messagesFile.chatFormat.replace("%player%", rank + this.playerName(player)).replace("%message%", event.getMessage())));
-            }
-        }
-    }
 
     @EventHandler
     public void onPreLogin(AsyncPlayerPreLoginEvent event) {

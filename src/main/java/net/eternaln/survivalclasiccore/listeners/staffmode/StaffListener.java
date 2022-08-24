@@ -44,6 +44,16 @@ public class StaffListener implements Listener {
         }
     }
 
+    @EventHandler(priority = EventPriority.MONITOR)
+    public void onKick(PlayerKickEvent event) {
+        Staff staff = Staff.getStaff(event.getPlayer().getUniqueId());
+
+        if (staff != null) {
+            staff.disableStaffMode(true);
+            Staff.getStaffs().remove(event.getPlayer().getUniqueId());
+        }
+    }
+
     @EventHandler
     private void onStaffDamage(EntityDamageEvent event) {
         if (event.getEntity() instanceof Player) {
