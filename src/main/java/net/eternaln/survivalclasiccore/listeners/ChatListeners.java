@@ -46,23 +46,15 @@ public class ChatListeners implements Listener {
             }
         }
 
-        if (rank.equals("")) {
+        if (rank.equals("") && !clan.equals("")) {
             event.setFormat(Utils.ct(messagesFile.chatFormat
                     .replace("%player%", clanTag + " " + this.playerName(player))
                     .replace("%message%", event.getMessage())));
-        } else {
-            event.setFormat(Utils.ct(messagesFile.chatFormat
-                    .replace("%player%", clanTag + " " + rank + " " + this.playerName(player))
-                    .replace("%message%", event.getMessage())));
         }
 
-        if (clan.equals("")) {
+        if (clan.equals("") && !rank.equals("")) {
             event.setFormat(Utils.ct(messagesFile.chatFormat
                     .replace("%player%", rank + " " + this.playerName(player))
-                    .replace("%message%", event.getMessage())));
-        } else {
-            event.setFormat(Utils.ct(messagesFile.chatFormat
-                    .replace("%player%", clanTag + " " + rank + " " + this.playerName(player))
                     .replace("%message%", event.getMessage())));
         }
 
@@ -70,7 +62,9 @@ public class ChatListeners implements Listener {
             event.setFormat(Utils.ct(messagesFile.chatFormat
                     .replace("%player%", this.playerName(player))
                     .replace("%message%", event.getMessage())));
-        } else {
+        }
+
+        if (!clan.equals("") && !rank.equals("")) {
             event.setFormat(Utils.ct(messagesFile.chatFormat
                     .replace("%player%", clanTag + " " + rank + " " + this.playerName(player))
                     .replace("%message%", event.getMessage())));
