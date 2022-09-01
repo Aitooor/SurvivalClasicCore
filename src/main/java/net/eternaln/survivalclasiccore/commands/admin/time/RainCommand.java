@@ -18,14 +18,14 @@ public class RainCommand extends BaseCommand {
     @CommandCompletion("@worlds")
     public void rainCommand(Player sender, @Optional World world) {
         if(world != null) {
-            if(world.hasStorm()) {
+            if(!world.hasStorm()) {
                 world.setStorm(true);
             }
         }
         if(world == null) {
             world = Bukkit.getServer().getWorld(String.valueOf(sender.getWorld()));
 
-            if (world.hasStorm()) {
+            if (!world.hasStorm()) {
                 world.setStorm(true);
             }
         }

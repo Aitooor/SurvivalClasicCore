@@ -8,21 +8,28 @@ import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 
-@CommandAlias("night")
+@CommandAlias("clearweather")
 @CommandPermission("survivalclasic.time")
-public class NightCommand extends BaseCommand {
+public class ClearWeatherCommand extends BaseCommand {
 
     MessagesFile messageFile = SurvivalClasicCore.getMessagesFile();
 
     @Default
     @CommandCompletion("@worlds")
-    public void nightCommand(Player sender, @Optional World world) {
+    public void clearCommand(Player sender, @Optional World world) {
         if(world != null) {
-            world.setTime(20000);
+            if(world.hasStorm() || world.isThundering()) {
+                world.setStorm(false);
+                world.setThundering(false);
+            }
         }
         if(world == null) {
             world = Bukkit.getServer().getWorld(String.valueOf(sender.getWorld()));
-            world.setTime(20000);
+
+            if (world.hasStorm() || world.isThundering()) {
+                world.setStorm(false);
+                world.setThundering(false);
+            }
         }
     }
 }

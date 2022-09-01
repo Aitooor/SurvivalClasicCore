@@ -16,7 +16,7 @@ import java.util.Set;
 public class MainMenu extends Menu {
 
     public MainMenu(String title) {
-        super(title, 4);
+        super(title, 6);
 
         this.setFillEnabled(true);
 
@@ -73,6 +73,16 @@ public class MainMenu extends Menu {
 
         buttons.add(new ButtonItem(
                 32,
+                "protecciones",
+                SkullBuilder.newBuilder()
+                        .setDisplayName("&bProtecciones")
+                        .setLore("", "&fLista de protecciones que se pueden comprar", "","&7Clic para abrir")
+                        .setTexture("4e21d2ca9227fdc220b32a9990843a34c7e975eec595d0f137e250c14cd97246")
+                        .toItemStack()
+        ));
+
+        buttons.add(new ButtonItem(
+                50,
                 null,
                 SkullBuilder.newBuilder()
                         .setDisplayName("&cCerrar")
