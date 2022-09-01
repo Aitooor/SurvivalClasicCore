@@ -40,7 +40,7 @@ public class PlayerTimeCommand extends BaseCommand {
         }
     }
 
-    @Subcommand("rain")
+    @Subcommand("lluvia!rain")
     public void playerRain(Player sender) {
         if(sender.getPlayerWeather() == null) {
             sender.setPlayerWeather(WeatherType.DOWNFALL);
@@ -52,7 +52,7 @@ public class PlayerTimeCommand extends BaseCommand {
         }
     }
 
-    @Subcommand("clear")
+    @Subcommand("limpiar|clear")
     public void clear(Player sender) {
         if (sender.isPlayerTimeRelative()) {
             sender.resetPlayerTime();
