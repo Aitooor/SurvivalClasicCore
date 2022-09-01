@@ -10,7 +10,7 @@
 # Permissions
 
  - Provided by LuckPerms
- - Max homes --> survivalclasic.maxhomes.*
+ - Max homes --> survivalclasic.homes.max.* (Replace * with a number)
 
 # Placeholders
 
