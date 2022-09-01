@@ -56,7 +56,7 @@ public class MessageCommand extends BaseCommand {
             Utils.send(sender, "&cEl jugador no esta online");
             return;
         }
-        if(target == sender) {
+        if(target.equals(sender.getName())) {
             Utils.send(sender, "&cNo puedes enviar mensajes a ti mismo");
             return;
         }
