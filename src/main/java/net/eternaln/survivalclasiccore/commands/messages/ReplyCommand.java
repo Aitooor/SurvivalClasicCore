@@ -18,7 +18,6 @@ import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 @CommandAlias("reply|r|responder|contestar")
-@CommandPermission("survivalclasic.tpa")
 public class ReplyCommand extends BaseCommand {
 
     private MessagesFile messageFile = SurvivalClasicCore.getMessagesFile();

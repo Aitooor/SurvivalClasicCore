@@ -19,7 +19,6 @@ import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 @CommandAlias("msg|w|whisper|tell|hablar|pm|md")
-@CommandPermission("simple.message")
 public class MessageCommand extends BaseCommand {
     private MessagesFile messageFile = SurvivalClasicCore.getMessagesFile();
     private Cooldown<UUID> cooldown = new Cooldown<>(SurvivalClasicCore.getConfiguration().getCmdCooldown(), TimeUnit.SECONDS);

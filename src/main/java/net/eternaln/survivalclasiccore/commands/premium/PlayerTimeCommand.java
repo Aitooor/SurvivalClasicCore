@@ -11,7 +11,7 @@ import org.bukkit.World;
 import org.bukkit.entity.Player;
 
 @CommandAlias("playertime|ptime")
-@CommandPermission("survivalclasic.time")
+@CommandPermission("survivalclasic.ptime")
 public class PlayerTimeCommand extends BaseCommand {
 
     MessagesFile messageFile = SurvivalClasicCore.getMessagesFile();
