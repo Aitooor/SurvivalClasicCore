@@ -30,6 +30,7 @@ public class MenusFile extends BukkitYamlConfiguration {
 
     @Comment({"", "Social"})
     public String socialMenuTitle = "Redes Sociales";
+    public String protectionsMenuTitle = "Compra de Protecciones";
 
     public MenusFile() {
         super(
