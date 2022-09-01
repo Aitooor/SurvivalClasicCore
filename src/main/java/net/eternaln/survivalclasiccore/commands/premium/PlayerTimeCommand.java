@@ -18,11 +18,11 @@ public class PlayerTimeCommand extends BaseCommand {
 
     @Subcommand("dia|day")
     public void playerTimeDay(Player sender) {
-        if (!sender.isPlayerTimeRelative()) {
+        if (sender.isPlayerTimeRelative()) {
             sender.setPlayerTime(3600, true);
             Utils.send(sender, "&aTu tiempo ha sido modificado");
         }
-        if (sender.isPlayerTimeRelative()) {
+        if (!sender.isPlayerTimeRelative()) {
             sender.resetPlayerTime();
             Utils.send(sender, "&aTu tiempo ha sido reseteado");
         }
@@ -30,11 +30,11 @@ public class PlayerTimeCommand extends BaseCommand {
 
     @Subcommand("noche|night")
     public void playerTimeNight(Player sender) {
-        if (!sender.isPlayerTimeRelative()) {
+        if (sender.isPlayerTimeRelative()) {
             sender.setPlayerTime(20000, true);
             Utils.send(sender, "&aTu tiempo ha sido modificado");
         }
-        if (sender.isPlayerTimeRelative()) {
+        if (!sender.isPlayerTimeRelative()) {
             sender.resetPlayerTime();
             Utils.send(sender, "&aTu tiempo ha sido reseteado");
         }
