@@ -72,7 +72,7 @@ public class MainMenu extends Menu {
         ));
 
         buttons.add(new ButtonItem(
-                32,
+                46,
                 "protecciones",
                 SkullBuilder.newBuilder()
                         .setDisplayName("&bProtecciones")
