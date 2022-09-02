@@ -62,22 +62,22 @@ public class MainMenu extends Menu {
         ));
 
         buttons.add(new ButtonItem(
-                28,
-                "social",
-                SkullBuilder.newBuilder()
-                        .setDisplayName("&bSocial")
-                        .setLore("", "&fRedes Sociales", "","&7Clic para abrir")
-                        .setTexture("6ce2643d5d82ae23c5ecf7818483c4f81c7953de2aebe5ce1f8fe72fcfbc2a0e")
-                        .toItemStack()
-        ));
-
-        buttons.add(new ButtonItem(
-                46,
+                32,
                 "protecciones",
                 SkullBuilder.newBuilder()
                         .setDisplayName("&bProtecciones")
                         .setLore("", "&fLista de protecciones que se pueden comprar", "","&7Clic para abrir")
                         .setTexture("4e21d2ca9227fdc220b32a9990843a34c7e975eec595d0f137e250c14cd97246")
+                        .toItemStack()
+        ));
+
+        buttons.add(new ButtonItem(
+                46,
+                "social",
+                SkullBuilder.newBuilder()
+                        .setDisplayName("&bSocial")
+                        .setLore("", "&fRedes Sociales", "","&7Clic para abrir")
+                        .setTexture("6ce2643d5d82ae23c5ecf7818483c4f81c7953de2aebe5ce1f8fe72fcfbc2a0e")
                         .toItemStack()
         ));
 
