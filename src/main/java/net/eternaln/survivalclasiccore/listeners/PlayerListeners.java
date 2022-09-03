@@ -85,7 +85,9 @@ public class PlayerListeners implements Listener {
 
         for (Staff staff2 : Staff.getStaffs().values()) {
             if (staff2.isVanished() && !player.hasPermission("survivalclasic.vanish") && !player.hasPermission("survivalclasic.staffmode")) {
-                player.hidePlayer(SurvivalClasicCore.getInstance(), staff2.getPlayer());
+                if(staff2.getPlayer() != null) {
+                    player.hidePlayer(SurvivalClasicCore.getInstance(), staff2.getPlayer());
+                }
             }
         }
 
