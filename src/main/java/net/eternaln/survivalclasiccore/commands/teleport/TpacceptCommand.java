@@ -49,9 +49,9 @@ public class TpacceptCommand extends BaseCommand {
 
     private void onTeleportAccept(Player sender) {
         if (requests.containsKey(sender)) {
-            Utils.send(sender, messagesFile.tpAccept).replace("%player%", requests.get(sender).getName());
-            requests.get(sender).sendMessage(Utils.ct(messagesFile.tpAcceptTarget).replace("%player%", sender.getName()));
-            sender.teleport(requests.get(sender).getLocation());
+            Utils.send(sender, messagesFile.tpAccept.replace("%player%", requests.get(sender).getName()));
+            requests.get(sender).sendMessage(Utils.ct(messagesFile.tpAcceptTarget.replace("%player%", sender.getName())));
+            requests.get(sender).teleport(sender.getLocation());
         } else {
             Utils.send(sender, messagesFile.tpAcceptNoRequest);
         }

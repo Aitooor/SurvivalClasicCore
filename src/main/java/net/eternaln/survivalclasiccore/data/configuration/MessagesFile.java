@@ -61,6 +61,7 @@ public class MessagesFile extends BukkitYamlConfiguration {
     public String tpSpawnOther = "&fTeletransportado al jugador &b%player%";
     public String tpSpawnAll = "&fTeletransportado a todos los jugadores";
     public String tpDeny = "&cHas denegado la peticion de &b%player%";
+    public String tpDenyTarget = "&cHas denegado la peticion de &b%player%";
     public String tpDenyNoRequest = "&cNo tienes peticiones pendientes";
     public String tpAccept = "&aHas aceptado la peticion de &b%player%";
     public String tpAcceptTarget = "&fEl jugador &b%player% &fha aceptado tu peticion";

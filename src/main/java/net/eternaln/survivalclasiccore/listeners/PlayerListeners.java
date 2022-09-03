@@ -5,7 +5,6 @@ import net.eternaln.survivalclasiccore.SurvivalClasicCore;
 import net.eternaln.survivalclasiccore.data.configuration.Configuration;
 import net.eternaln.survivalclasiccore.managers.annotations.Register;
 import net.eternaln.survivalclasiccore.commands.admin.GodCommand;
-import net.eternaln.survivalclasiccore.commands.admin.SocialSpyCommand;
 import net.eternaln.survivalclasiccore.data.configuration.MessagesFile;
 import net.eternaln.survivalclasiccore.data.mongo.PlayerData;
 import net.eternaln.survivalclasiccore.objects.staff.Staff;
@@ -99,9 +98,6 @@ public class PlayerListeners implements Listener {
 
         ArrayList<UUID> gods = new GodCommand().getGods();
         gods.remove(event.getPlayer().getUniqueId());
-
-        List<UUID> socialSpy = SocialSpyCommand.getSocialSpyList();
-        socialSpy.remove(event.getPlayer().getUniqueId());
 
         if(event.getPlayer().hasMetadata("survivalclasic.vanish")) {
             event.getPlayer().removeMetadata("survivalclasic.vanish", SurvivalClasicCore.getInstance());

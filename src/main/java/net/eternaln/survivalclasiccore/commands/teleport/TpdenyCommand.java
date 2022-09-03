@@ -49,7 +49,8 @@ public class TpdenyCommand extends BaseCommand {
 
     private void onTeleportDeny(Player sender) {
         if (requests.containsKey(sender)) {
-            requests.get(sender).sendMessage(Utils.ct(messagesFile.tpDeny.replace("%player%", sender.getDisplayName())));
+            sender.sendMessage(Utils.ct(messagesFile.tpDeny.replace("%player%", sender.getDisplayName())));
+            requests.get(sender).sendMessage(Utils.ct(messagesFile.tpDenyTarget.replace("%player%", sender.getDisplayName())));
             requests.remove(sender);
         } else {
             Utils.send(sender, messagesFile.tpDenyNoRequest);

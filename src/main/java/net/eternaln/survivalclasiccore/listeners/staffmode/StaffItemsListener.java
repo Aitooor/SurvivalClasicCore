@@ -54,8 +54,8 @@ public class StaffItemsListener implements Listener {
                 if (StaffItems.RANDOM_TELEPORT.canUse(item)) {
                     //TODO Need improvement
                     Player target = Bukkit.getOnlinePlayers().stream()
-                            .filter(p -> !p.getUniqueId().equals(staff.getPlayer().getUniqueId()))
-                            .filter(p -> !p.getUniqueId().equals(staff.getUuid()))
+                            .filter(p -> p.getUniqueId().equals(staff.getPlayer().getUniqueId()))
+                            .filter(p -> p.getUniqueId().equals(staff.getUuid()))
                             .findAny().orElse(null);
 
                     if (target != null) {

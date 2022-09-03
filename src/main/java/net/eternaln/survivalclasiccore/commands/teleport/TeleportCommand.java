@@ -29,6 +29,7 @@ public class TeleportCommand extends BaseCommand {
 
     @Default
     @CommandPermission("survivalclasic.tp")
+    @CommandCompletion("@players")
     public void teleport(Player sender, String target) {
         Player targetPlayer = Bukkit.getPlayer(target);
 
@@ -45,20 +46,17 @@ public class TeleportCommand extends BaseCommand {
 
     @Subcommand("all|todos")
     @CommandPermission("survivalclasic.tpall")
-    @CommandCompletion("@players")
-    public void teleportAll(Player sender, String target) {
-        Player targetPlayer = Bukkit.getPlayer(target);
-
-        if (targetPlayer == null || target == null) {
-            for (Player online : Bukkit.getServer().getOnlinePlayers()) {
+    public void teleportAll(Player sender) {
+        for (Player online : Bukkit.getServer().getOnlinePlayers()) {
+            if (online == null) {
                 if (online != sender) {
-                    online.teleport(targetPlayer.getLocation());
-                    Utils.send(online, messagesFile.tpAll.replace("%player%", targetPlayer.getName()));
+                    online.teleport(sender.getLocation());
+                    Utils.send(sender, messagesFile.tpAllSender.replace("%player%", online.getName()));
+                    Utils.send(online, messagesFile.tpAll.replace("%player%", online.getName()));
                 } else {
                     Utils.send(sender, messagesFile.tpAllSelf);
                 }
             }
-            Utils.send(sender, messagesFile.tpAllSender.replace("%player%", targetPlayer.getName()));
         }
     }
 

@@ -2,10 +2,7 @@ package net.eternaln.survivalclasiccore.commands.teleport;
 
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.CommandHelp;
-import co.aikar.commands.annotation.CatchUnknown;
-import co.aikar.commands.annotation.CommandAlias;
-import co.aikar.commands.annotation.Default;
-import co.aikar.commands.annotation.HelpCommand;
+import co.aikar.commands.annotation.*;
 import lombok.Getter;
 import net.eternaln.survivalclasiccore.SurvivalClasicCore;
 import net.eternaln.survivalclasiccore.data.configuration.Configuration;
@@ -40,6 +37,7 @@ public class TpaCommand extends BaseCommand {
     }
 
     @Default
+    @CommandCompletion("@players")
     public void teleport(Player sender, String target) {
         if (!cooldown.isCooldownOver(sender.getUniqueId()) && !sender.hasPermission("survivalclasic.cooldown.bypass")) {
             String cooldownTime = cooldown.getFormattedRemainingString(sender.getUniqueId());
