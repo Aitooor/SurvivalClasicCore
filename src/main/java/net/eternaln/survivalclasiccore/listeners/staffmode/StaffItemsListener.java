@@ -6,6 +6,7 @@ import net.eternaln.survivalclasiccore.objects.staff.StaffItems;
 import net.eternaln.survivalclasiccore.utils.PlayerUtil;
 import net.eternaln.survivalclasiccore.utils.Utils;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -15,6 +16,8 @@ import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
+
+import java.util.*;
 
 @Register
 public class StaffItemsListener implements Listener {
@@ -43,6 +46,7 @@ public class StaffItemsListener implements Listener {
     @EventHandler
     private void onPlayerInteract(PlayerInteractEvent event) {
         Staff staff = Staff.getStaff(event.getPlayer().getUniqueId());
+        Map<UUID, Staff> staffs = Staff.getStaffs();
 
         if (staff != null && staff.isStaffMode()) {
 
@@ -52,18 +56,22 @@ public class StaffItemsListener implements Listener {
                 if (item.getType().equals(Material.AIR)) return;
 
                 if (StaffItems.RANDOM_TELEPORT.canUse(item)) {
-                    //TODO Need improvement
-                    Player target = Bukkit.getOnlinePlayers().stream()
+                    Random random = new Random();
+                    List<Player> players = (List<Player>) Bukkit.getOnlinePlayers().stream()
                             .filter(p -> p.getUniqueId().equals(staff.getPlayer().getUniqueId()))
                             .filter(p -> p.getUniqueId().equals(staff.getUuid()))
+                            .filter(p -> p.getUniqueId().equals(staffs.get(p.getUniqueId())))
                             .findAny().orElse(null);
 
-                    if (target != null) {
-                        staff.getPlayer().teleport(target.getLocation());
+                    if (players != null) {
+                        Player player = players.get(random.nextInt(players.size()));
+                        Player target = player.getPlayer();
+                        Location locationnew = player.getLocation();
 
+                        staff.getPlayer().teleport(locationnew);
                         Utils.send(staff.getPlayer(), "&fTeletransportado a &b" + target.getName());
                     } else {
-                        Utils.send(staff.getPlayer(), "&cNo hay jugadores online");
+                        Utils.send(staff.getPlayer(), "&cNo hay jugadores online aparte del staff");
                     }
                 }
                 else if (StaffItems.VANISH_ON.canUse(item)) {
