@@ -51,10 +51,10 @@ public class FlyCommand extends BaseCommand {
         Staff staff = Staff.getStaff(target.getUniqueId());
         if (!staff.isFlying()) {
             staff.enableFly(true);
-            Utils.send(sender, "&aHas activado el vuelo de &b" + target.getName());
+            Utils.send(sender, "&fHas activado el vuelo de &a" + target.getName());
         } else {
             staff.disableFly(true);
-            Utils.send(sender, "&aHas desactivado el vuelo de &b" + target.getName());
+            Utils.send(sender, "&fHas desactivado el vuelo de &c" + target.getName());
         }
     }
 }
