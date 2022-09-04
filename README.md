@@ -11,7 +11,10 @@
 
  - Provided by LuckPerms
  - Max homes --> survivalclasic.homes.max.* (Replace * with a number)
+ - CMD Cooldown bypass --> survivalclasic.cooldown.bypass
+ - Repair Cooldown bypass --> survivalclasic.cooldown.bypass.repair
 
 # Placeholders
 
  - Nickname of the player --> %survivalclasic_nick%
+ - Send placeholder if staff is vanished if not "" --> %survivalclasic_vanish%

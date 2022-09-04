@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import net.eternaln.survivalclasiccore.SurvivalClasicCore;
 import net.eternaln.survivalclasiccore.data.mongo.PlayerData;
+import net.eternaln.survivalclasiccore.objects.staff.Staff;
 import net.eternaln.survivalclasiccore.utils.Utils;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
@@ -16,12 +17,24 @@ public class Placeholders extends PlaceholderExpansion {
     @Override
     public String onPlaceholderRequest(Player player, @NotNull String params) {
         PlayerData data = SurvivalClasicCore.getDataManager().handleDataCreation(player.getUniqueId());
+        Staff staff = Staff.getStaff(player.getUniqueId());
 
+        // %survivalclasic_nick%
         if (params.equalsIgnoreCase("nick")) {
             if (data.getNickName() != null) {
                 return Utils.ct(data.getNickName());
             }
             return player.getName();
+        }
+
+        // %survivalclasic_vanish%
+        if (params.equalsIgnoreCase("vanish")) {
+            if (staff.isVanished()) {
+                return Utils.ct(" &7(Oculto)");
+            }
+            if (!staff.isVanished()) {
+                return "";
+            }
         }
 
         return "Placeholder not found";

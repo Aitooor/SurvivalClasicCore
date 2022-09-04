@@ -36,7 +36,7 @@ public class ProtectionsMenu extends Menu {
                 "ps get 16",
                 SkullBuilder.newBuilder()
                         .setDisplayName("&b16x16")
-                        .setLore("", "&fCompra una proteccion de 16x16","","&7Clic para comprar")
+                        .setLore("", "&6PRECIO &e5.000$", "", "&fCompra una proteccion de 16x16","","&7Clic para comprar")
                         .setTexture("caecf8d5a21b3c9fc8ce5a566021f3a2b0d98652dbc5daee45f7c63647ed141a")
                         .toItemStack()
         ));
@@ -46,7 +46,7 @@ public class ProtectionsMenu extends Menu {
                 "ps get 32",
                 SkullBuilder.newBuilder()
                         .setDisplayName("&b32x32")
-                        .setLore("", "&fCompra una proteccion de 32x32","","&7Clic para comprar")
+                        .setLore("", "&6PRECIO &e10.000$", "", "&fCompra una proteccion de 32x32","","&7Clic para comprar")
                         .setTexture("3f2d38efae1e0a581f258aa09ca610749d3efddf5865304f2fa18b7a1a0c3bcd")
                         .toItemStack()
         ));
@@ -56,7 +56,7 @@ public class ProtectionsMenu extends Menu {
                 "ps get 48",
                 SkullBuilder.newBuilder()
                         .setDisplayName("&b48x48")
-                        .setLore("", "&fCompra una proteccion de 48x48","","&7Clic para comprar")
+                        .setLore("", "&6PRECIO &e15.000$", "", "&fCompra una proteccion de 48x48","","&7Clic para comprar")
                         .setTexture("11350e0a606965f2ef09491ba54ee137915de58a8a28ab130a53fa8f416b28d5")
                         .toItemStack()
         ));
@@ -66,7 +66,7 @@ public class ProtectionsMenu extends Menu {
                 "ps get 64",
                 SkullBuilder.newBuilder()
                         .setDisplayName("&b64x64")
-                        .setLore("", "&fCompra una proteccion de 64x64","","&7Clic para comprar")
+                        .setLore("", "&6PRECIO &e20.000$", "", "&fCompra una proteccion de 64x64","","&7Clic para comprar")
                         .setTexture("11350e0a606965f2ef09491ba54ee137915de58a8a28ab130a53fa8f416b28d5")
                         .toItemStack()
         ));

@@ -111,8 +111,9 @@ public class PlayerListeners implements Listener {
         Player player = event.getEntity();
         Player killer = event.getEntity().getKiller();
 
-        if (killer != null)
+        if (killer != null) {
             event.setDeathMessage(Utils.ct(Utils.getPrefixGame() + "&fEl jugador &b" + player.getDisplayName() + " &fha sido asesinado por &c" + killer.getDisplayName()));
+        }
     }
 
     @EventHandler
