@@ -104,7 +104,7 @@ public class StaffListener implements Listener {
 
     @EventHandler
     private void onStaffPickupItem(EntityPickupItemEvent event) {
-        Player player = (Player) event.getEntity();
+        if (!(event.getEntity() instanceof Player player)) return;
         Staff staff = Staff.getStaff(player.getUniqueId());
 
         if (staff != null) {
