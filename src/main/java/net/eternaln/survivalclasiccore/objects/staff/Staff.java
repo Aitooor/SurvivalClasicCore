@@ -84,7 +84,7 @@ public class Staff {
         Player player = getPlayer();
 
         for (Player online : Bukkit.getOnlinePlayers()) {
-            if (!online.hasPermission("survivalclasiccore.staffmode") || !online.hasPermission("survivalclasiccore.vanish")) {
+            if (!online.hasPermission("survivalclasic.staffmode") || !online.hasPermission("survivalclasic.vanish")) {
                 online.hidePlayer(SurvivalClasicCore.getInstance(), player);
             }
         }
@@ -114,7 +114,7 @@ public class Staff {
             player.setAllowFlight(true);
             setFlying(true);
             if(message) {
-                Utils.send(player, "&aFly Activado");
+                return;
             }
         }
     }

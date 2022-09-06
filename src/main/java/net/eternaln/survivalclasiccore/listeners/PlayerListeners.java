@@ -124,6 +124,16 @@ public class PlayerListeners implements Listener {
         event.getPlayer().teleport(SurvivalClasicCore.getConfiguration().getSpawnLocation());
     }
 
+    @EventHandler
+    private void onPlayerChangeWorld(PlayerChangedWorldEvent event) {
+        Player player = event.getPlayer();
+        Staff staff = Staff.getStaff(player.getUniqueId());
+
+        if (player != null && staff.isFlying()) {
+            staff.enableFly(true);
+        }
+    }
+
     public String playerName(Player sender) {
         PlayerData data = SurvivalClasicCore.getDataManager().getData(sender.getUniqueId());
         return data.getNickName() != null ? data.getNickName() : sender.getName();

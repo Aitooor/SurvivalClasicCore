@@ -31,7 +31,7 @@ public class Configuration extends BukkitYamlConfiguration {
 
     @Comment({"", "Cooldown", "cmdCooldown = seconds || repairCooldown = minutes"})
     public int cmdCooldown = 1;
-    public int repairCooldown = 1440;
+    public int repairCooldown = 20;
 
     @Comment({"", "Items"})
     @Convert(ItemStackMapConverter.class)
