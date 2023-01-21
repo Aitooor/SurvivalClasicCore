@@ -25,12 +25,10 @@ public class StaffListener implements Listener {
         Player player = event.getPlayer();
 
         Bukkit.getScheduler().runTaskLater(SurvivalClasicCore.getInstance(), () -> {
-            Staff staff = new Staff(player.getUniqueId());
-
             if (player.hasPermission("survivalclasic.staffmode")) {
+                Staff staff = new Staff(player.getUniqueId());
                 staff.enableStaffMode(true);
             }
-
         }, 2L);
     }
 
@@ -49,6 +47,10 @@ public class StaffListener implements Listener {
 
     @EventHandler
     public void onStaffHit(EntityDamageByEntityEvent event) {
+        if (!(event.getEntity() instanceof Player)) {
+            event.setCancelled(true);
+            return;
+        }
         if (event.getEntity() instanceof Player && event.getDamager() instanceof Player) {
             Staff staff = Staff.getStaff(event.getDamager().getUniqueId());
 
