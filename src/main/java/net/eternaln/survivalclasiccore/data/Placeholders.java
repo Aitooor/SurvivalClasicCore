@@ -37,6 +37,15 @@ public class Placeholders extends PlaceholderExpansion {
             }
         }
 
+        // %survivalclasic_staffonline%
+        if (params.equalsIgnoreCase("staffonline")) {
+            if (Utils.getOnlineStaff().isEmpty()) {
+                return Utils.ct("&cNo hay staff online");
+            }
+
+            return String.valueOf(Utils.getOnlineStaff().size());
+        }
+
         return "Placeholder not found";
     }
 
