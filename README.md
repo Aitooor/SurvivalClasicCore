@@ -1,7 +1,7 @@
 ## SurvivalClasic Core
 
     
-    Simple 1.19 Survival Clasic core for Eternal Network
+    Simple 1.19 Survival Clasic core
 
 # Info
 
